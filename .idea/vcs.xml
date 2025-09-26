@@ -3,6 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/libs/RmlUi" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/libs/vcpkg" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libs/SDL" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libs/glew" vcs="Git" />
   </component>
 </project>

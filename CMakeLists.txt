@@ -7,6 +7,9 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(SOURCES
         src/main.cpp
+        src/Projector.cpp
+        src/Window.cpp
+
         ../libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp
         ../libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp
         ../libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp
@@ -54,4 +57,7 @@ add_custom_command(TARGET TCast POST_BUILD
         "${CMAKE_SOURCE_DIR}/libs/GLFW/lib/glfw3.dll"
         "C:/msys64/mingw64/bin/glew32.dll"
         $<TARGET_FILE_DIR:TCast>
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_SOURCE_DIR}/assets"
+        "$<TARGET_FILE_DIR:TCast>/assets"
 )

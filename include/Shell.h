@@ -38,13 +38,18 @@
  */
 namespace Shell {
 
+struct FontFace {
+    const char* filename;
+    bool fallback_face;
+};
+
 // Initializes and sets a custom file interface used for locating the included RmlUi asset files.
 bool Initialize();
 // Destroys all resources constructed by the shell.
 void Shutdown();
 
 // Loads the fonts included with the RmlUi samples.
-void LoadFonts();
+void LoadFonts(const std::vector<FontFace>& font_faces);
 
 // Process key down events to handle shortcuts common to all samples.
 // @return True if the event is still propagating, false if it was handled here.

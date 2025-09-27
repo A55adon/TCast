@@ -1,0 +1,26 @@
+/* General window */
+body.window {
+    width: 400dp;
+    height: 300dp;
+    margin: auto;
+    padding: 20dp;
+    background-color: #2c3e50;  /* dark bluish background */
+    font-family: "Comic Sans MS";
+    color: white;
+}
+
+/* Buttons */
+.button {
+    padding: 8dp 12dp;
+    font-size: 14dp;
+    background-color: #3498db; /* blue button */
+    color: white;
+    /*border: none;*/
+    border-radius: 4dp;
+    cursor: pointer;
+}
+
+/* Button hover effect */
+.button:hover {
+    background-color: #2980b9;
+}

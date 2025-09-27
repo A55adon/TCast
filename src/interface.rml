@@ -1,0 +1,11 @@
+<rml>
+<head>
+    <link type="text/css" href="interface.rcss"/>
+    <title>Text Input Example</title>
+</head>
+<body class="window">
+    <div class="container">
+        <button class="button" id="button">Button</button>
+    </div>
+</body>
+</rml>

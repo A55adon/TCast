@@ -1,59 +1,23 @@
-#include <RmlUi/Core.h>
-#include <RmlUi/Debugger.h>
-#include <RmlUi_Backend.h>
-#include <Shell.h>
 
-#include <RmlUi_Include_Windows.h>
-int APIENTRY WinMain(HINSTANCE /*instance_handle*/, HINSTANCE /*previous_instance_handle*/, char* /*command_line*/, int /*command_show*/)
-{
-	int window_width = 1024;
-	int window_height = 768;
+#include "Window.h"
 
-	if (!Shell::Initialize())
-		return -1;
+int main() {
+	Window window;
 
-	if (!Backend::Initialize("TCast", window_width, window_height, true))
-	{
-		Shell::Shutdown();
-		return -1;
-	}
+	// Add projectors on monitors 1 and 2 (if connected)
+	window.addProjector(0); // first monitor
+	window.addProjector(1); // second monitor
 
-	Rml::SetSystemInterface(Backend::GetSystemInterface());
-	Rml::SetRenderInterface(Backend::GetRenderInterface());
+	while (!window.shouldClose()) {
+		if( !window.running ) return -1;
 
-	Rml::Initialise();
+		window.running = Backend::ProcessEvents(window.context, &Shell::ProcessKeyDownShortcuts, true);
 
-	Rml::Context* context = Rml::CreateContext("main", Rml::Vector2i(window_width, window_height));
-	if (!context)
-	{
-		Rml::Shutdown();
-		Backend::Shutdown();
-		Shell::Shutdown();
-		return -1;
-	}
-
-	Rml::Debugger::Initialise(context);
-	Shell::LoadFonts();
-
-	// Load and show the tutorial document.
-	if (Rml::ElementDocument* document = context->LoadDocument("C:/Code/TCast/src/tutorial.rml"))
-		document->Show();
-
-	bool running = true;
-	while (running)
-	{
-		running = Backend::ProcessEvents(context, &Shell::ProcessKeyDownShortcuts, true);
-
-		context->Update();
+		window.context->Update();
 
 		Backend::BeginFrame();
-		context->Render();
+		window.context->Render();
 		Backend::PresentFrame();
+		window.update();
 	}
-
-	Rml::Shutdown();
-	Backend::Shutdown();
-	Shell::Shutdown();
-
-	return 0;
 }

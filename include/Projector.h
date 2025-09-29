@@ -1,24 +1,23 @@
+#pragma once
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <RmlUi/Core.h>
-#include <RmlUi/Debugger.h>
-#include <iostream>
 #include <string>
-#include <memory>
 
 class Projector {
 public:
-    GLFWwindow* window = nullptr;
-    Rml::Context* context = nullptr;
-    int width = 0, height = 0;
-
-    Projector(int monitor_index);
-
+    Projector(int monitor_index, const std::string& content_path = "", bool is_video = false);
     ~Projector();
-
     void update();
-
-    bool shouldClose() {
-        return glfwWindowShouldClose(window);
+    bool shouldClose();
+    GLFWwindow* getWindow() {
+        return window;
     }
+private:
+    GLFWwindow* window;
+    int width, height;
+    Rml::Context* context;
+    GLuint texture_id;
+    bool is_video;
+    std::string content_path;
 };

@@ -1,35 +1,26 @@
 #pragma once
-
-#include <GL/glew.h>          // MUST come first
-#include <GLFW/glfw3.h>       // After GLEW
-
-#include <memory>
-#include <vector>
-
 #include "Projector.h"
-#include "RmlUi_Backend.h"
 #include <RmlUi/Core.h>
-#include <Shell.h>
-
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <vector>
+#include <memory>
 
 class Window {
 public:
-    GLFWwindow* window = nullptr;
-    int width = 800, height = 600;
-
-    std::vector<std::unique_ptr<Projector>> projectors;
-
-    Window();
-
+    Window(int window_width, int window_height);
     ~Window();
 
-    void addProjector(int monitor_index);
-
+    void addProjector(int monitor_index, const std::string& content_path = "", bool is_video = false);
     void update();
 
-    bool shouldClose();
 
+    Rml::Context* context;
     bool running;
     Rml::ElementDocument* document;
-    Rml::Context* context;
+private:
+    GLFWwindow* window;
+    std::vector<std::unique_ptr<Projector>> projectors;
+    int width = 800;
+    int height = 600;
 };

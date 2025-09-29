@@ -29,6 +29,7 @@ Window::Window(int window_width, int window_height) {
     }
 
     Rml::Debugger::Initialise(context);
+
     std::vector<Shell::FontFace> font_faces = {
         {"LatoLatin-Regular.ttf", false},
         {"ComicSans-Regular.ttf", true}

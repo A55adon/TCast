@@ -1,33 +1,176 @@
-/* assets/interface.rcss */
-/* General window */
 body.window {
     width: 100%;
     height: 100%;
     margin: 0;
-    padding: 20dp;
-    background-color: #2c3e50;  /* dark bluish background */
+    padding: 0;
+    background-color: #2c3e50;
     font-family: "Comic Sans MS";
     color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* Buttons */
-button {
-    padding: 8dp 12dp;
-    font-size: 14dp;
-    background-color: #2c3e50; /* blue button */
-    color: white;
-    border-radius: 4dp;
-    cursor: pointer;
-    margin: 5dp;
-}
-
-/* Button hover effect */
-button:hover {
-    background-color: #1c2e40;
-}
-
-/* Heading */
 h1 {
-    font-size: 24dp;
-    margin-bottom: 20dp;
+    font-size: 28px;
+    margin: 20px 0;
+}
+
+.project-settings-div {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #3a4f63;
+    width: 620px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 8px;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 10px;
+    background-color: #2c3e50;
+    color: white;
+    border-radius: 6px 6px 0 0;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.tab-button.active {
+    background-color: #00aced;
+    font-weight: bold;
+}
+
+.tab-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: #34495e;
+    padding: 14px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.input-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+label {
+    width: 140px;
+    font-size: 14px;
+}
+
+input, textarea {
+    flex: 1;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #1f2d3a;
+    background-color: #2c3e50;
+    color: white;
+    font-size: 14px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 60px;
+    max-height: 150px;
+    line-height: 1.4;
+}
+
+.action-btn {
+    padding: 10px 14px;
+    font-size: 14px;
+    background: linear-gradient(180deg, #00aced, #0084b4);
+    color: white;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    background: linear-gradient(180deg, #33c6f3, #0099cc);
+}
+
+.load-area {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.sample-list {
+    flex: 1;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #2c3e50;
+    padding: 8px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.sample-project {
+    padding: 8px;
+    background-color: #3a4f63;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.sample-project:hover {
+    background-color: #00aced;
+}
+
+.sample-project.active {
+    background-color: #27ae60;
+    font-weight: bold;
+}
+
+.selected-panel {
+    width: 200px;
+    background-color: #2c3e50;
+    border-radius: 6px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+button {
+    background-color: #00aced;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover {
+    background-color: #0091c9;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+.tab-button {
+    flex: 1;
+    border-radius: 6px 6px 0 0;
+    background-color: #2c3e50;
+    font-weight: normal;
+}
+
+.tab-button.active {
+    background-color: #00aced;
+    font-weight: bold;
 }

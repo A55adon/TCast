@@ -1,3 +1,4 @@
 C:/Code/TCast/cmake-build-debug/CMakeFiles/TCast.dir
+C:/Code/TCast/cmake-build-debug/CMakeFiles/copy_assets.dir
 C:/Code/TCast/cmake-build-debug/CMakeFiles/edit_cache.dir
 C:/Code/TCast/cmake-build-debug/CMakeFiles/rebuild_cache.dir

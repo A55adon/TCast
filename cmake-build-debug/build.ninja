@@ -47,75 +47,75 @@ cmake_ninja_workdir = C$:/Code/TCast/cmake-build-debug/
 #############################################
 # Order-only phony target for TCast
 
-build cmake_object_order_depends_target_TCast: phony || .
+build cmake_object_order_depends_target_TCast: phony || copy_assets
 
 build CMakeFiles/TCast.dir/src/main.cpp.obj: CXX_COMPILER__TCast_unscanned_Debug C$:/Code/TCast/src/main.cpp || cmake_object_order_depends_target_TCast
   DEP_FILE = CMakeFiles\TCast.dir\src\main.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -IC:/Code/TCast/include -IC:/Code/TCast/include/stb -IC:/Code/TCast/libs/RmlUi/include -IC:/Code/TCast/libs/GLFW/include -IC:/Code/TCast/libs/glew-2.1.0/include -IC:/Code/TCast/libs/RmlUi/Backends -IC:/Code/TCast/libs/RmlUi/Samples/shell/include
+  INCLUDES = -IC:/Code/TCast/include -IC:/Code/TCast/include/stb -IC:/Code/TCast/libs/RmlUi/include -IC:/Code/TCast/libs/GLFW/include -IC:/Code/TCast/libs/glew-2.1.0/include -IC:/Code/TCast/libs/RmlUi/Backends -IC:/Code/TCast/libs/RmlUi/Samples/shell/include -IC:/Code/TCast/libs/glad/include
   OBJECT_DIR = CMakeFiles\TCast.dir
   OBJECT_FILE_DIR = CMakeFiles\TCast.dir\src
 
 build CMakeFiles/TCast.dir/src/Projector.cpp.obj: CXX_COMPILER__TCast_unscanned_Debug C$:/Code/TCast/src/Projector.cpp || cmake_object_order_depends_target_TCast
   DEP_FILE = CMakeFiles\TCast.dir\src\Projector.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -IC:/Code/TCast/include -IC:/Code/TCast/include/stb -IC:/Code/TCast/libs/RmlUi/include -IC:/Code/TCast/libs/GLFW/include -IC:/Code/TCast/libs/glew-2.1.0/include -IC:/Code/TCast/libs/RmlUi/Backends -IC:/Code/TCast/libs/RmlUi/Samples/shell/include
+  INCLUDES = -IC:/Code/TCast/include -IC:/Code/TCast/include/stb -IC:/Code/TCast/libs/RmlUi/include -IC:/Code/TCast/libs/GLFW/include -IC:/Code/TCast/libs/glew-2.1.0/include -IC:/Code/TCast/libs/RmlUi/Backends -IC:/Code/TCast/libs/RmlUi/Samples/shell/include -IC:/Code/TCast/libs/glad/include
   OBJECT_DIR = CMakeFiles\TCast.dir
   OBJECT_FILE_DIR = CMakeFiles\TCast.dir\src
 
 build CMakeFiles/TCast.dir/src/Window.cpp.obj: CXX_COMPILER__TCast_unscanned_Debug C$:/Code/TCast/src/Window.cpp || cmake_object_order_depends_target_TCast
   DEP_FILE = CMakeFiles\TCast.dir\src\Window.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -IC:/Code/TCast/include -IC:/Code/TCast/include/stb -IC:/Code/TCast/libs/RmlUi/include -IC:/Code/TCast/libs/GLFW/include -IC:/Code/TCast/libs/glew-2.1.0/include -IC:/Code/TCast/libs/RmlUi/Backends -IC:/Code/TCast/libs/RmlUi/Samples/shell/include
+  INCLUDES = -IC:/Code/TCast/include -IC:/Code/TCast/include/stb -IC:/Code/TCast/libs/RmlUi/include -IC:/Code/TCast/libs/GLFW/include -IC:/Code/TCast/libs/glew-2.1.0/include -IC:/Code/TCast/libs/RmlUi/Backends -IC:/Code/TCast/libs/RmlUi/Samples/shell/include -IC:/Code/TCast/libs/glad/include
   OBJECT_DIR = CMakeFiles\TCast.dir
   OBJECT_FILE_DIR = CMakeFiles\TCast.dir\src
 
 build CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp.obj: CXX_COMPILER__TCast_unscanned_Debug C$:/Code/TCast/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp || cmake_object_order_depends_target_TCast
   DEP_FILE = CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Platform_GLFW.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -IC:/Code/TCast/include -IC:/Code/TCast/include/stb -IC:/Code/TCast/libs/RmlUi/include -IC:/Code/TCast/libs/GLFW/include -IC:/Code/TCast/libs/glew-2.1.0/include -IC:/Code/TCast/libs/RmlUi/Backends -IC:/Code/TCast/libs/RmlUi/Samples/shell/include
+  INCLUDES = -IC:/Code/TCast/include -IC:/Code/TCast/include/stb -IC:/Code/TCast/libs/RmlUi/include -IC:/Code/TCast/libs/GLFW/include -IC:/Code/TCast/libs/glew-2.1.0/include -IC:/Code/TCast/libs/RmlUi/Backends -IC:/Code/TCast/libs/RmlUi/Samples/shell/include -IC:/Code/TCast/libs/glad/include
   OBJECT_DIR = CMakeFiles\TCast.dir
   OBJECT_FILE_DIR = CMakeFiles\TCast.dir\libs\RmlUi\Backends
 
 build CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp.obj: CXX_COMPILER__TCast_unscanned_Debug C$:/Code/TCast/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp || cmake_object_order_depends_target_TCast
   DEP_FILE = CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Renderer_GL3.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -IC:/Code/TCast/include -IC:/Code/TCast/include/stb -IC:/Code/TCast/libs/RmlUi/include -IC:/Code/TCast/libs/GLFW/include -IC:/Code/TCast/libs/glew-2.1.0/include -IC:/Code/TCast/libs/RmlUi/Backends -IC:/Code/TCast/libs/RmlUi/Samples/shell/include
+  INCLUDES = -IC:/Code/TCast/include -IC:/Code/TCast/include/stb -IC:/Code/TCast/libs/RmlUi/include -IC:/Code/TCast/libs/GLFW/include -IC:/Code/TCast/libs/glew-2.1.0/include -IC:/Code/TCast/libs/RmlUi/Backends -IC:/Code/TCast/libs/RmlUi/Samples/shell/include -IC:/Code/TCast/libs/glad/include
   OBJECT_DIR = CMakeFiles\TCast.dir
   OBJECT_FILE_DIR = CMakeFiles\TCast.dir\libs\RmlUi\Backends
 
 build CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj: CXX_COMPILER__TCast_unscanned_Debug C$:/Code/TCast/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp || cmake_object_order_depends_target_TCast
   DEP_FILE = CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Backend_GLFW_GL3.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -IC:/Code/TCast/include -IC:/Code/TCast/include/stb -IC:/Code/TCast/libs/RmlUi/include -IC:/Code/TCast/libs/GLFW/include -IC:/Code/TCast/libs/glew-2.1.0/include -IC:/Code/TCast/libs/RmlUi/Backends -IC:/Code/TCast/libs/RmlUi/Samples/shell/include
+  INCLUDES = -IC:/Code/TCast/include -IC:/Code/TCast/include/stb -IC:/Code/TCast/libs/RmlUi/include -IC:/Code/TCast/libs/GLFW/include -IC:/Code/TCast/libs/glew-2.1.0/include -IC:/Code/TCast/libs/RmlUi/Backends -IC:/Code/TCast/libs/RmlUi/Samples/shell/include -IC:/Code/TCast/libs/glad/include
   OBJECT_DIR = CMakeFiles\TCast.dir
   OBJECT_FILE_DIR = CMakeFiles\TCast.dir\libs\RmlUi\Backends
 
 build CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp.obj: CXX_COMPILER__TCast_unscanned_Debug C$:/Code/TCast/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp || cmake_object_order_depends_target_TCast
   DEP_FILE = CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\PlatformExtensions.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -IC:/Code/TCast/include -IC:/Code/TCast/include/stb -IC:/Code/TCast/libs/RmlUi/include -IC:/Code/TCast/libs/GLFW/include -IC:/Code/TCast/libs/glew-2.1.0/include -IC:/Code/TCast/libs/RmlUi/Backends -IC:/Code/TCast/libs/RmlUi/Samples/shell/include
+  INCLUDES = -IC:/Code/TCast/include -IC:/Code/TCast/include/stb -IC:/Code/TCast/libs/RmlUi/include -IC:/Code/TCast/libs/GLFW/include -IC:/Code/TCast/libs/glew-2.1.0/include -IC:/Code/TCast/libs/RmlUi/Backends -IC:/Code/TCast/libs/RmlUi/Samples/shell/include -IC:/Code/TCast/libs/glad/include
   OBJECT_DIR = CMakeFiles\TCast.dir
   OBJECT_FILE_DIR = CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src
 
 build CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/RendererExtensions.cpp.obj: CXX_COMPILER__TCast_unscanned_Debug C$:/Code/TCast/libs/RmlUi/Samples/shell/src/RendererExtensions.cpp || cmake_object_order_depends_target_TCast
   DEP_FILE = CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\RendererExtensions.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -IC:/Code/TCast/include -IC:/Code/TCast/include/stb -IC:/Code/TCast/libs/RmlUi/include -IC:/Code/TCast/libs/GLFW/include -IC:/Code/TCast/libs/glew-2.1.0/include -IC:/Code/TCast/libs/RmlUi/Backends -IC:/Code/TCast/libs/RmlUi/Samples/shell/include
+  INCLUDES = -IC:/Code/TCast/include -IC:/Code/TCast/include/stb -IC:/Code/TCast/libs/RmlUi/include -IC:/Code/TCast/libs/GLFW/include -IC:/Code/TCast/libs/glew-2.1.0/include -IC:/Code/TCast/libs/RmlUi/Backends -IC:/Code/TCast/libs/RmlUi/Samples/shell/include -IC:/Code/TCast/libs/glad/include
   OBJECT_DIR = CMakeFiles\TCast.dir
   OBJECT_FILE_DIR = CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src
 
 build CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.obj: CXX_COMPILER__TCast_unscanned_Debug C$:/Code/TCast/libs/RmlUi/Samples/shell/src/Shell.cpp || cmake_object_order_depends_target_TCast
   DEP_FILE = CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\Shell.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -IC:/Code/TCast/include -IC:/Code/TCast/include/stb -IC:/Code/TCast/libs/RmlUi/include -IC:/Code/TCast/libs/GLFW/include -IC:/Code/TCast/libs/glew-2.1.0/include -IC:/Code/TCast/libs/RmlUi/Backends -IC:/Code/TCast/libs/RmlUi/Samples/shell/include
+  INCLUDES = -IC:/Code/TCast/include -IC:/Code/TCast/include/stb -IC:/Code/TCast/libs/RmlUi/include -IC:/Code/TCast/libs/GLFW/include -IC:/Code/TCast/libs/glew-2.1.0/include -IC:/Code/TCast/libs/RmlUi/Backends -IC:/Code/TCast/libs/RmlUi/Samples/shell/include -IC:/Code/TCast/libs/glad/include
   OBJECT_DIR = CMakeFiles\TCast.dir
   OBJECT_FILE_DIR = CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src
 
 build CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj: CXX_COMPILER__TCast_unscanned_Debug C$:/Code/TCast/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp || cmake_object_order_depends_target_TCast
   DEP_FILE = CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\ShellFileInterface.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -IC:/Code/TCast/include -IC:/Code/TCast/include/stb -IC:/Code/TCast/libs/RmlUi/include -IC:/Code/TCast/libs/GLFW/include -IC:/Code/TCast/libs/glew-2.1.0/include -IC:/Code/TCast/libs/RmlUi/Backends -IC:/Code/TCast/libs/RmlUi/Samples/shell/include
+  INCLUDES = -IC:/Code/TCast/include -IC:/Code/TCast/include/stb -IC:/Code/TCast/libs/RmlUi/include -IC:/Code/TCast/libs/GLFW/include -IC:/Code/TCast/libs/glew-2.1.0/include -IC:/Code/TCast/libs/RmlUi/Backends -IC:/Code/TCast/libs/RmlUi/Samples/shell/include -IC:/Code/TCast/libs/glad/include
   OBJECT_DIR = CMakeFiles\TCast.dir
   OBJECT_FILE_DIR = CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src
 
@@ -127,15 +127,21 @@ build CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.o
 #############################################
 # Link the executable TCast.exe
 
-build TCast.exe: CXX_EXECUTABLE_LINKER__TCast_Debug CMakeFiles/TCast.dir/src/main.cpp.obj CMakeFiles/TCast.dir/src/Projector.cpp.obj CMakeFiles/TCast.dir/src/Window.cpp.obj CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp.obj CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp.obj CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp.obj CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/RendererExtensions.cpp.obj CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.obj CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj | C$:/Code/TCast/libs/RmlUi/build-mingw/librmlui.dll.a C$:/Code/TCast/libs/RmlUi/build-mingw/librmlui_debugger.dll.a C$:/Code/TCast/libs/GLFW/lib/libglfw3.dll.a C$:/Code/TCast/libs/glew-2.1.0/lib/Release/x64/glew32.lib
+build TCast.exe: CXX_EXECUTABLE_LINKER__TCast_Debug CMakeFiles/TCast.dir/src/main.cpp.obj CMakeFiles/TCast.dir/src/Projector.cpp.obj CMakeFiles/TCast.dir/src/Window.cpp.obj CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp.obj CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp.obj CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp.obj CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/RendererExtensions.cpp.obj CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.obj CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj | C$:/Code/TCast/libs/RmlUi/build-mingw/librmlui.dll.a C$:/Code/TCast/libs/RmlUi/build-mingw/librmlui_debugger.dll.a C$:/Code/TCast/libs/GLFW/lib/libglfw3.dll.a C$:/Code/TCast/libs/glew-2.1.0/lib/Release/x64/glew32.lib || copy_assets
   FLAGS = -g
   LINK_LIBRARIES = C:/Code/TCast/libs/RmlUi/build-mingw/librmlui.dll.a  C:/Code/TCast/libs/RmlUi/build-mingw/librmlui_debugger.dll.a  C:/Code/TCast/libs/GLFW/lib/libglfw3.dll.a  C:/Code/TCast/libs/glew-2.1.0/lib/Release/x64/glew32.lib  -lopengl32  -lShlwapi  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\TCast.dir
-  POST_BUILD = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Code\TCast\cmake-build-debug && C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Code/TCast/libs/RmlUi/build-mingw/librmlui.dll C:/Code/TCast/libs/RmlUi/build-mingw/librmlui_debugger.dll C:/Code/TCast/libs/GLFW/lib/glfw3.dll C:/msys64/mingw64/bin/glew32.dll C:/Code/TCast/cmake-build-debug && C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_directory C:/Code/TCast/assets C:/Code/TCast/cmake-build-debug/assets"
+  POST_BUILD = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Code\TCast\cmake-build-debug && C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Code/TCast/libs/RmlUi/build-mingw/librmlui.dll C:/Code/TCast/libs/RmlUi/build-mingw/librmlui_debugger.dll C:/Code/TCast/libs/GLFW/lib/glfw3.dll C:/msys64/mingw64/bin/glew32.dll C:/msys64/mingw64/bin/libstdc++-6.dll C:/msys64/mingw64/bin/libgcc_s_seh-1.dll C:/msys64/mingw64/bin/libwinpthread-1.dll C:/Code/TCast/cmake-build-debug"
   PRE_LINK = cd .
   TARGET_FILE = TCast.exe
   TARGET_IMPLIB = libTCast.dll.a
   TARGET_PDB = TCast.exe.dbg
+
+
+#############################################
+# Utility command for copy_assets
+
+build copy_assets: phony CMakeFiles/copy_assets
 
 
 #############################################
@@ -160,6 +166,14 @@ build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 
 build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
+
+#############################################
+# Custom command for CMakeFiles\copy_assets
+
+build CMakeFiles/copy_assets | ${cmake_ninja_workdir}CMakeFiles/copy_assets: CUSTOM_COMMAND C$:/Code/TCast/assets/ComicSans-Regular.ttf C$:/Code/TCast/assets/LatoLatin-Bold.ttf C$:/Code/TCast/assets/LatoLatin-Regular.ttf C$:/Code/TCast/assets/interface.rcss C$:/Code/TCast/assets/interface.rml C$:/Code/TCast/assets/rml.rcss C$:/Code/TCast/assets/test.jpg C$:/Code/TCast/assets/window.rml
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Code\TCast\cmake-build-debug && C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_directory C:/Code/TCast/assets C:/Code/TCast/cmake-build-debug/assets"
+  DESC = Copying assets...
+
 # =============================================================================
 # Target aliases.
 
@@ -173,7 +187,7 @@ build TCast: phony TCast.exe
 #############################################
 # Folder: C:/Code/TCast/cmake-build-debug
 
-build all: phony TCast.exe
+build all: phony TCast.exe copy_assets
 
 # =============================================================================
 # Built-in targets

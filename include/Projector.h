@@ -1,23 +1,36 @@
 #pragma once
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+
+#include <iostream>
+#include <glad/glad.h>
 #include <RmlUi/Core.h>
+#include <glad/glad.h>
 #include <string>
 
-class Projector {
+
+#include "GLFW/glfw3.h"
+#include "RmlUi_Backend.h"
+
+class Projector
+{
 public:
-    Projector(int monitor_index, const std::string& content_path = "", bool is_video = false);
+    Projector(int monitor_index);
     ~Projector();
-    void update();
-    bool shouldClose();
-    GLFWwindow* getWindow() {
-        return window;
-    }
+
+    void update() const;
+    bool shouldClose() const;
+
+    GLFWwindow* getWindow() const { return window; }
+
 private:
+    GLuint shaderProgram = 0;
+    GLuint VAO, VBO = 0;
+
     GLFWwindow* window;
     int width, height;
+
     Rml::Context* context;
-    GLuint texture_id;
-    bool is_video;
+    //GLuint texture_id;
+    //bool is_video;
     std::string content_path;
+    //bool texture_loaded = false;
 };

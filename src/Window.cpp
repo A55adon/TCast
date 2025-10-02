@@ -1,75 +1,89 @@
 #include "Window.h"
-#include "RmlUi/Debugger.h"
-#include "RmlUi_Backend.h"
-#include "Shell.h"
-#include <iostream>
 
-Window::Window(int window_width, int window_height) {
-    if (!Shell::Initialize())
+Window::Window(const int window_width, const int window_height): document(nullptr)
+{
+    if (!ShellRml::Initialize())
         exit(1);
 
-    if (!Backend::Initialize("TCast", window_width, window_height, true))
-    {
-        Shell::Shutdown();
+    if (!Backend::Initialize("TCast", window_width, window_height, true)) {
+        ShellRml::Shutdown();
         exit(1);
     }
 
     Rml::SetSystemInterface(Backend::GetSystemInterface());
     Rml::SetRenderInterface(Backend::GetRenderInterface());
-
     Rml::Initialise();
 
+    glfwInit();
+
     context = Rml::CreateContext("main", Rml::Vector2i(window_width, window_height));
-    if (!context)
-    {
+    if (!context) {
         Rml::Shutdown();
         Backend::Shutdown();
-        Shell::Shutdown();
+        ShellRml::Shutdown();
         exit(1);
     }
 
     Rml::Debugger::Initialise(context);
 
-    std::vector<Shell::FontFace> font_faces = {
+    const std::vector<ShellRml::FontFace> font_faces = {
         {"LatoLatin-Regular.ttf", false},
         {"ComicSans-Regular.ttf", true}
     };
-    Shell::LoadFonts(font_faces);
 
-    // Load and show the tutorial document.
-    if (document = context->LoadDocument("assets/interface.rml"))
-        document->Show();
+    ShellRml::LoadFonts(font_faces);
 
     running = true;
 }
 
-Window::~Window() {
+Window::~Window()
+{
     Rml::Shutdown();
     Backend::Shutdown();
-    Shell::Shutdown();
+    ShellRml::Shutdown();
 }
 
-void Window::addProjector(int monitor_index, const std::string& content_path, bool is_video) {
-    projectors.emplace_back(std::make_unique<Projector>(monitor_index, content_path, is_video));
+void Window::addProjector(int monitor_index, const std::string& content_path, bool is_video)
+{
+    projectors.emplace_back(std::make_unique<Projector>(monitor_index));
+    glfwMakeContextCurrent(Backend::GetWindow()); // Give the context back to the main window after creating a new projector window
 }
 
-void Window::update() {
+void Window::removeProjector(int index)
+{
+    if (index < 0 || static_cast<size_t>(index) >= projectors.size()) {
+        std::cerr << "Invalid projector index\n";
+        return;
+    }
+
+    if (const auto& projector = projectors[index]; projector && projector->getWindow()) {
+        glfwMakeContextCurrent(projector->getWindow());
+    }
+
+    projectors.erase(projectors.begin() + index);
+
     glfwMakeContextCurrent(Backend::GetWindow());
-    running = Backend::ProcessEvents(context, &Shell::ProcessKeyDownShortcuts, true);
+}
 
+void Window::update()
+{
+    // Update main window
+    glfwMakeContextCurrent(Backend::GetWindow());
+    running = Backend::ProcessEvents(context, &ShellRml::ProcessKeyDownShortcuts, true);
     context->Update();
-
     Backend::BeginFrame();
     context->Render();
     Backend::PresentFrame();
 
-    for (auto& projector : projectors) {
-        glfwMakeContextCurrent(projector->getWindow());
+    // Update projectors
+    for (const auto& projector : projectors)
+    {
+        if (!projector) continue;
         projector->update();
-        if (projector->shouldClose()) {
-            running = false;
-        }
-    }
-    glfwMakeContextCurrent(Backend::GetWindow());
 
+        if (projector->shouldClose())
+            running = false;
+    }
+
+    glfwMakeContextCurrent(Backend::GetWindow());
 }

@@ -36,7 +36,7 @@
 /**
     Provides common functionality required for the built-in RmlUi samples.
  */
-namespace Shell {
+namespace ShellRml {
 
 struct FontFace {
     const char* filename;

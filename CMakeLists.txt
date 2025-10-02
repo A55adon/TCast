@@ -3,7 +3,6 @@ project(TCast)
 
 set(CMAKE_CXX_STANDARD 17)
 
-# Define source files explicitly
 set(SOURCES
         src/main.cpp
         src/Projector.cpp
@@ -19,7 +18,6 @@ set(SOURCES
 
 add_executable(TCast ${SOURCES})
 
-# Include directories
 target_include_directories(TCast PRIVATE
         "${CMAKE_SOURCE_DIR}/include"
         "${CMAKE_SOURCE_DIR}/include/stb"
@@ -28,16 +26,15 @@ target_include_directories(TCast PRIVATE
         "${CMAKE_SOURCE_DIR}/libs/glew-2.1.0/include"
         "${CMAKE_SOURCE_DIR}/libs/RmlUi/Backends"
         "${CMAKE_SOURCE_DIR}/libs/RmlUi/Samples/shell/include"
+        "${CMAKE_SOURCE_DIR}/libs/glad/include"
 )
 
-# Library directories
 link_directories(
         "${CMAKE_SOURCE_DIR}/libs/RmlUi/build-mingw"
         "${CMAKE_SOURCE_DIR}/libs/GLFW/lib"
         "${CMAKE_SOURCE_DIR}/libs/glew-2.1.0/lib/Release/x64"
 )
 
-# Link against RmlUi, GLFW, GLEW, and OpenGL
 target_link_libraries(TCast
         "${CMAKE_SOURCE_DIR}/libs/RmlUi/build-mingw/librmlui.dll.a"
         "${CMAKE_SOURCE_DIR}/libs/RmlUi/build-mingw/librmlui_debugger.dll.a"
@@ -47,15 +44,28 @@ target_link_libraries(TCast
         Shlwapi
 )
 
-# Copy DLLs and assets after build
+# Copy DLLs when building TCast
 add_custom_command(TARGET TCast POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${CMAKE_SOURCE_DIR}/libs/RmlUi/build-mingw/librmlui.dll"
         "${CMAKE_SOURCE_DIR}/libs/RmlUi/build-mingw/librmlui_debugger.dll"
         "${CMAKE_SOURCE_DIR}/libs/GLFW/lib/glfw3.dll"
         "C:/msys64/mingw64/bin/glew32.dll"
+        "C:/msys64/mingw64/bin/libstdc++-6.dll"
+        "C:/msys64/mingw64/bin/libgcc_s_seh-1.dll"
+        "C:/msys64/mingw64/bin/libwinpthread-1.dll"
         $<TARGET_FILE_DIR:TCast>
+        COMMENT "Copying DLLs..."
+)
+
+# Always copy assets on build
+file(GLOB_RECURSE ASSET_FILES "${CMAKE_SOURCE_DIR}/assets/*")
+add_custom_target(copy_assets ALL
         COMMAND ${CMAKE_COMMAND} -E copy_directory
         "${CMAKE_SOURCE_DIR}/assets"
         "$<TARGET_FILE_DIR:TCast>/assets"
+        DEPENDS ${ASSET_FILES}
+        COMMENT "Copying assets..."
 )
+
+add_dependencies(TCast copy_assets)

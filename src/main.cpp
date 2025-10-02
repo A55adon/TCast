@@ -80,7 +80,7 @@ std::string GetSaveFolderPath() {
     std::filesystem::path exePath = GetExecutablePath();
     std::filesystem::path exeDir  = exePath.parent_path();      // ...\cmake-build-debug
     std::filesystem::path projectDir = exeDir.parent_path();    // ...\TCast
-    std::filesystem::path savePath = projectDir / "saves" / "foldersaves";
+    std::filesystem::path savePath = projectDir / "saves" / "folderSaves";
 
     // make sure directory exists
     std::filesystem::create_directories(savePath);
@@ -88,6 +88,12 @@ std::string GetSaveFolderPath() {
     return savePath.string();
 }
 
+
+std::string ToBackwardSlashes(const std::string& path) {
+    std::string fixed = path;
+    std::replace(fixed.begin(), fixed.end(), '/', '\\');
+    return fixed;
+}
 bool validateBeamerCount(const Rml::String& value, int& outCount) {
     static const std::set<std::string> validWords = {
         "eins","zwei","drei","vier","fuenf","fünf","sechs","sieben","acht","neun"
@@ -159,7 +165,6 @@ bool saveNewProject();
 Window window = Window(1920, 1080);
 
 int main() {
-    std::cout << GetSaveFolderPath() << std::endl;
 
     if ((window.document = window.context->LoadDocument("assets/interface.rml")))
         window.document->Show();
@@ -253,6 +258,11 @@ void setStartupInterfaceEventListeners() {
                                        }));
         }
     }
+    if (auto *el = window.document->GetElementById("project-dir-input")) {
+        if (auto *input = dynamic_cast<Rml::ElementFormControl *>(el)) {
+            input->SetValue(ToBackwardSlashes(GetSaveFolderPath()));
+        }
+    }
 }
 
 bool saveNewProject() {
@@ -302,36 +312,29 @@ bool saveNewProject() {
             saveData.description = value;
         }
     }
+
     if (auto *el = window.document->GetElementById("project-dir-input")) {
         if (auto *input = dynamic_cast<Rml::ElementFormControl *>(el)) {
             Rml::String value = input->GetValue();
 
-            //static const std::regex pattern("^[A-Za-z0-9äöüÄÖÜ_.\\-;,]+$");
-            //if (!std::regex_match(value, pattern)) {
-            //    if (auto *el = window.document->GetElementById("error-text")) {
-            //        el->SetInnerRML("Ungültige Zeichen! erlaubt ist: ^[A-Za-z0-9äöüÄÖÜ_.-;,]+$");
-            //    }
-            //    return false;
-            //}
-
             saveData.path = value;
-            path = value;
+            if (value == ToBackwardSlashes(GetSaveFolderPath())){
+                std::string forwardSlashpath = value + "/" + saveData.projectName + "/" + saveData.projectName + ".json";
+                path = ToBackwardSlashes(forwardSlashpath);
+            }
+            else
+                path = value;
+
+            std::cout << path << std::endl;
         }
-    } {
+    }
+
+        std::filesystem::path filePath = path;
+        std::filesystem::create_directories(filePath.parent_path());
         json j = saveData;
         std::ofstream file(path);
         file << j.dump(4);
-    }
+        file.close();
+
     return true;
-    //{
-    //    try {
-    //        std::ifstream file(path);
-    //        json j;
-    //        file >> j;
-    //        SaveData loaded = j.get<SaveData>();
-    //    } catch (const json::parse_error& e) {
-    //        std::cerr << "JSON parse error: " << e.what() << '\n';
-    //    }
-    //
-    //}
 }

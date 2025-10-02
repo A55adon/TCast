@@ -328,13 +328,39 @@ bool saveNewProject() {
             std::cout << path << std::endl;
         }
     }
+    std::filesystem::path filePath = path;
+    std::error_code ec;
 
-        std::filesystem::path filePath = path;
-        std::filesystem::create_directories(filePath.parent_path());
-        json j = saveData;
-        std::ofstream file(path);
-        file << j.dump(4);
-        file.close();
+    // Create parent directories
+    std::filesystem::create_directories(filePath.parent_path(), ec);
+    if (ec) {
+        if (auto *el = window.document->GetElementById("error-text")) {
+            el->SetInnerRML(("Ungültiger Pfad: " + ec.message()).c_str());
+        }
+        return false;
+    }
 
+    // write JSON to file
+    json j = saveData;
+    std::ofstream file(path);
+    if (!file.is_open()) {
+        if (auto *el = window.document->GetElementById("error-text")) {
+            el->SetInnerRML("Konnte Datei nicht erstellen – ungültiger Pfad oder Rechteproblem");
+        }
+        return false;
+    }
+    file << j.dump(4);
+    file.close();
+
+    // Check if the file actually exists
+    if (!std::filesystem::exists(filePath)) {
+        if (auto *el = window.document->GetElementById("error-text")) {
+            el->SetInnerRML("JSON-Datei wurde nicht erstellt!");
+        }
+        return false;
+    }
+
+    // Saved succesfully
     return true;
+
 }

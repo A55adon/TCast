@@ -29,7 +29,6 @@
 #ifndef RMLUI_SHELL_SHELL_H
 #define RMLUI_SHELL_SHELL_H
 
-#include <RmlUi/Core/Context.h>
 #include <RmlUi/Core/Input.h>
 #include <RmlUi/Core/Types.h>
 

@@ -1,4 +1,9 @@
 #include "Window.h"
+#include "Shell.h"
+#include "RmlUi/Debugger.h"
+#include "RmlUi_Backend.h"
+
+#include <iostream>
 
 Window::Window(const int window_width, const int window_height): document(nullptr)
 {

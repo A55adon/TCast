@@ -14,6 +14,7 @@ set(SOURCES
         libs/RmlUi/Samples/shell/src/RendererExtensions.cpp
         libs/RmlUi/Samples/shell/src/Shell.cpp
         libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp
+        include/Helper.h
 )
 
 add_executable(TCast ${SOURCES})

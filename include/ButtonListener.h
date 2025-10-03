@@ -2,11 +2,10 @@
 
 #include <RmlUi/Core.h>
 #include <functional>
-#include <iostream>
 
-class ButtonHandler : public Rml::EventListener {
+class ButtonHandler final : public Rml::EventListener {
 public:
-    ButtonHandler(std::function<void()> callback)
+    explicit ButtonHandler(std::function<void()> callback)
         : callback(std::move(callback)) {}
 
     void ProcessEvent(Rml::Event& event) override {

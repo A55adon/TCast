@@ -6,9 +6,6 @@
 
 #include "Projector.h"
 // Don't delete these are actually used
-#include "Shell.h"
-#include "RmlUi/Debugger.h"
-#include "RmlUi_Backend.h"
 
 class Window
 {

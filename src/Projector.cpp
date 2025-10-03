@@ -1,5 +1,10 @@
 #include "Projector.h"
 
+#include <glad/glad.h>
+#include <iostream>
+
+#include "RmlUi_Backend.h"
+
 // Simple vertex shader source
 auto vertexShaderSource = R"(
 #version 330 core
@@ -70,7 +75,7 @@ Projector::Projector(int monitor_index): context(nullptr)
     glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
     if (!success) {
         char infoLog[512];
-        glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
+        glGetShaderInfoLog(fragmentShader, 512, nullptr, infoLog);
         std::cerr << "Fragment shader compilation failed: " << infoLog << "\n";
         exit(EXIT_FAILURE);
     }
@@ -104,9 +109,9 @@ Projector::Projector(int monitor_index): context(nullptr)
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void *) 0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), static_cast<void *>(nullptr));
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void *) (2 * sizeof(float)));
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), reinterpret_cast<void *>(2 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);

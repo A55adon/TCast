@@ -75,30 +75,50 @@ bool saveNewProject() {
         }
     }
     std::filesystem::path filePath = path;
+    auto folderPath = filePath.parent_path();
     std::error_code ec;
 
-    // Create parent directories
-    std::filesystem::create_directories(filePath.parent_path(), ec);
-    if (ec) {
+    // Check if folder exists
+    if (std::filesystem::exists(folderPath)) {
+        if (!std::filesystem::is_directory(folderPath)) {
+            if (auto *el = window.document->GetElementById("error-text")) {
+                el->SetInnerRML("Pfad existiert, ist aber keine Ordnerstruktur!");
+            }
+            return false;
+        }
+    } else {
+        // Try to create missing directories
+        if (!std::filesystem::create_directories(folderPath, ec) || ec) {
+            if (auto *el = window.document->GetElementById("error-text")) {
+                el->SetInnerRML(("Konnte Ordner nicht erstellen: " + ec.message()).c_str());
+            }
+            return false;
+        }
+    }
+
+    // Prevent overwriting existing project file
+    if (std::filesystem::exists(filePath)) {
         if (auto *el = window.document->GetElementById("error-text")) {
-            el->SetInnerRML(("Ungültiger Pfad: " + ec.message()).c_str());
+            el->SetInnerRML("Projekt existiert bereits – bitte anderen Namen wählen!");
         }
         return false;
     }
 
-    // write JSON to file
+    // Open file for writing
     json j = saveData;
-    std::ofstream file(path);
+    std::ofstream file(filePath);
     if (!file.is_open()) {
         if (auto *el = window.document->GetElementById("error-text")) {
             el->SetInnerRML("Konnte Datei nicht erstellen – ungültiger Pfad oder Rechteproblem");
         }
         return false;
     }
+
+    // Write JSON
     file << j.dump(4);
     file.close();
 
-    // Check if the file actually exists
+    // Verify file exists
     if (!std::filesystem::exists(filePath)) {
         if (auto *el = window.document->GetElementById("error-text")) {
             el->SetInnerRML("JSON-Datei wurde nicht erstellt!");
@@ -106,7 +126,6 @@ bool saveNewProject() {
         return false;
     }
 
-    // Saved successfully
     return true;
 
 }

@@ -170,7 +170,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Custom command for CMakeFiles\copy_assets
 
-build CMakeFiles/copy_assets | ${cmake_ninja_workdir}CMakeFiles/copy_assets: CUSTOM_COMMAND C$:/Code/TCast/assets/ComicSans-Regular.ttf C$:/Code/TCast/assets/LatoLatin-Bold.ttf C$:/Code/TCast/assets/LatoLatin-Regular.ttf C$:/Code/TCast/assets/interface.rcss C$:/Code/TCast/assets/interface.rml C$:/Code/TCast/assets/rml.rcss C$:/Code/TCast/assets/test.jpg C$:/Code/TCast/assets/window.rml
+build CMakeFiles/copy_assets | ${cmake_ninja_workdir}CMakeFiles/copy_assets: CUSTOM_COMMAND
   COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Code\TCast\cmake-build-debug && C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_directory C:/Code/TCast/assets C:/Code/TCast/cmake-build-debug/assets"
   DESC = Copying assets...
 

@@ -1,0 +1,57 @@
+<rml>
+    <head>
+        <title>TCast</title>
+        <link type="text/rcss" href="startup.rcss"/>
+    </head>
+    <body class="window">
+    <h1>TCast - Start</h1>
+
+    <div class="project-settings-div">
+        <div class="tabs">
+            <button id="tab-new" class="tab-button active">Neues Projekt erstellen</button>
+            <button id="tab-load" class="tab-button">Projekt laden</button>
+        </div>
+
+        <!-- New Project -->
+        <div id="tab-new-div" class="tab-content" style="display:flex;">
+            <p id="error-text" style="color:red;"></p>
+            <div class="input-row">
+                <label for="project-name-input">Projekt Name</label>
+                <input id="project-name-input" type="text" maxlength="60"/>
+            </div>
+            <div class="input-row">
+                <label for="projector-count-input">Anzahl Beamer</label>
+                <input id="projector-count-input" type="number" maxlength="60"/>
+            </div>
+            <div class="input-row">
+                <label for="project-desc-input">Beschreibung</label>
+                <textarea id="project-desc-input" rows="3" maxlength="180"></textarea>
+            </div>
+            <div class="input-row">
+                <label for="project-dir-input">Speicher Pfad</label>
+                <input id="project-dir-input" type="text" />
+                <button id="browse-btn" class="action-btn">Ändern</button>
+            </div>
+            <button id="save-btn" class="action-btn">Weiter</button>
+        </div>
+
+        <!-- Load Project -->
+        <div id="tab-load-div" class="tab-content" style="display:none;">
+            <!-- Project list -->
+            <div class="sample-list" id="tab-folder-list"></div>
+            <div class="sample-list" id="tab-tct-list" style="display:none;"></div>
+
+            <!-- Path input with Ändern button -->
+            <div class="input-row">
+                <label for="load-dir-input">Pfad</label>
+                <input type="text" id="load-dir-input" class="load-dir-input"/>
+                <button id="browse-load-btn" class="action-btn">Ändern</button>
+            </div>
+
+            <!-- Load button at the bottom -->
+            <button id="load-btn" class="action-btn">Load</button>
+        </div>
+
+    </div>
+    </body>
+</rml>

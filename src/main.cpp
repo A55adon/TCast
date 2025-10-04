@@ -4,9 +4,12 @@
 #include <iostream>
 
 /*
- * - check if project name already exists
- * - load into new scene
+ *Known Bugs:
+ * - if amount of folderProjects is higher than 8 or fills up the height of the list they are unclickable and are squished to the lest
  *
+ * TODO:
+ * - load into new scene
+ * - message loaded/saved/created successfully
 */
 
 Window window = Window(1920, 1080);
@@ -64,16 +67,12 @@ bool saveNewProject() {
             Rml::String value = input->GetValue();
 
             saveData.path = value;
-            if (value == ToBackwardSlashes(GetSaveFolderPath())){
-                std::string forwardSlashpath = value + "/" + saveData.projectName + "/" + saveData.projectName + ".json";
-                path = ToBackwardSlashes(forwardSlashpath);
-            }
-            else
-                path = value;
-
+            std::string forwardSlashpath = value + "/" + saveData.projectName + "/" + saveData.projectName + ".json";
+            path = ToBackwardSlashes(forwardSlashpath);
             std::cout << path << std::endl;
         }
     }
+
     std::filesystem::path filePath = path;
     auto folderPath = filePath.parent_path();
     std::error_code ec;
@@ -153,21 +152,39 @@ void setStartupInterfaceEventListeners()
         }));
     }
 
-    if (auto *tabFolder = window.document->GetElementById("tab-folder")) {
-        tabFolder->AddEventListener(Rml::EventId::Click, new ButtonHandler([doc = window.document] {
-            doc->GetElementById("tab-folder-div")->SetAttribute("style", "display:flex");
-            doc->GetElementById("tab-tct-div")->SetAttribute("style", "display:none");
-            doc->GetElementById("tab-folder")->SetClass("active", true);
-            doc->GetElementById("tab-tct")->SetClass("active", false);
+    if (auto* tabFolder = window.document->GetElementById("tab-folder")) {
+        tabFolder->AddEventListener(Rml::EventId::Click, new ButtonHandler([tabFolder] {
+            if (auto* fDiv = window.document->GetElementById("tab-folder-div"))
+                fDiv->SetProperty("display", "flex");
+            if (auto* tDiv = window.document->GetElementById("tab-tct-div"))
+                tDiv->SetProperty("display", "none");
+
+            if (auto* bFolder = window.document->GetElementById("browse-folder-btn"))
+                bFolder->SetProperty("display", "block");
+            if (auto* bTct = window.document->GetElementById("browse-tct-btn"))
+                bTct->SetProperty("display", "none");
+
+            tabFolder->SetClassNames("tab-button active");
+            if (auto* tabTct = window.document->GetElementById("tab-tct"))
+                tabTct->SetClassNames("tab-button");
         }));
     }
 
-    if (auto *tabTct = window.document->GetElementById("tab-tct")) {
-        tabTct->AddEventListener(Rml::EventId::Click, new ButtonHandler([doc = window.document] {
-            doc->GetElementById("tab-folder-div")->SetAttribute("style", "display:none");
-            doc->GetElementById("tab-tct-div")->SetAttribute("style", "display:flex");
-            doc->GetElementById("tab-tct")->SetClass("active", true);
-            doc->GetElementById("tab-folder")->SetClass("active", false);
+    if (auto* tabTct = window.document->GetElementById("tab-tct")) {
+        tabTct->AddEventListener(Rml::EventId::Click, new ButtonHandler([tabTct] {
+            if (auto* fDiv = window.document->GetElementById("tab-folder-div"))
+                fDiv->SetProperty("display", "none");
+            if (auto* tDiv = window.document->GetElementById("tab-tct-div"))
+                tDiv->SetProperty("display", "flex");
+
+            if (auto* bFolder = window.document->GetElementById("browse-folder-btn"))
+                bFolder->SetProperty("display", "none");
+            if (auto* bTct = window.document->GetElementById("browse-tct-btn"))
+                bTct->SetProperty("display", "block");
+
+            tabTct->SetClassNames("tab-button active");
+            if (auto* tabFolder = window.document->GetElementById("tab-folder"))
+                tabFolder->SetClassNames("tab-button");
         }));
     }
 
@@ -175,7 +192,20 @@ void setStartupInterfaceEventListeners()
         browseFolderBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([doc = window.document] {
             std::string folder = BrowseFolder();
             if (!folder.empty()) {
-                SetSelectedProject(doc, folder);
+                if (auto* inputEl = doc->GetElementById("load-dir-input"))
+                    if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl))
+                        input->SetValue(ToBackwardSlashes(folder));
+                        std::cout << "clicked" << std::endl;
+            }
+        }));
+    }
+    if (auto *browseLoadBtn = window.document->GetElementById("browse-load-btn")) {
+        browseLoadBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([doc = window.document] {
+            std::string folder = BrowseFolder();
+            if (!folder.empty()) {
+                if (auto* inputEl = doc->GetElementById("load-dir-input"))
+                    if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl))
+                        input->SetValue(ToBackwardSlashes(folder));
             }
         }));
     }
@@ -184,7 +214,20 @@ void setStartupInterfaceEventListeners()
         browseTctBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([doc = window.document] {
             std::string file = BrowseTCTFile();
             if (!file.empty()) {
-                SetSelectedProject(doc, file);
+                if (auto* inputEl = doc->GetElementById("load-dir-input"))
+                    if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl))
+                        input->SetValue(ToBackwardSlashes(file));
+
+            }
+        }));
+    }
+
+    if (auto *browseDirBtn = window.document->GetElementById("browse-btn")) {
+        browseDirBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([doc = window.document] {
+            if (auto *el = doc->GetElementById("project-dir-input")) {
+                if (auto *input = dynamic_cast<Rml::ElementFormControl *>(el)) {
+                    input->SetValue(ToBackwardSlashes(BrowseFolder()));
+                }
             }
         }));
     }
@@ -219,10 +262,77 @@ void setStartupInterfaceEventListeners()
     }
 }
 
+void loadProjectsTCT(){}
+void loadProjectsFolder(){}
+void PopulateFolders(Rml::ElementDocument* doc, const std::string& path) {
+    namespace fs = std::filesystem;
+    Rml::Element* container = doc->GetElementById("tab-folder-list");
+    if (!container) return;
+    container->SetInnerRML("");
+
+    for (auto& entry : fs::directory_iterator(path)) {
+        if (entry.is_directory()) {
+            std::string folderName = entry.path().filename().string();
+            std::string fullPath = entry.path().string();
+
+            Rml::ElementPtr folderDiv = doc->CreateElement("div");
+            folderDiv->SetClassNames("sample-project");
+            folderDiv->SetId("folder-" + folderName);
+            folderDiv->SetInnerRML(folderName);
+
+            folderDiv->AddEventListener(Rml::EventId::Click, new ButtonHandler(
+                 [doc, fullPath, folderName] {
+                     if (auto* inputEl = doc->GetElementById("load-dir-input"))
+                         if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl))
+                             input->SetValue(ToBackwardSlashes(fullPath));
+                 }
+             ));
+
+            container->AppendChild(std::move(folderDiv));
+        }
+    }
+}
+
+void PopulateTCTFiles(Rml::ElementDocument* doc, const std::string& path) {
+    namespace fs = std::filesystem;
+    Rml::Element* container = doc->GetElementById("tab-tct-list");
+    if (!container) return;
+    container->SetInnerRML("");
+
+    for (auto& entry : fs::directory_iterator(path)) {
+        if (entry.path().extension() == ".tct") {
+            std::string fileName = entry.path().filename().string();
+            std::string fullPath = entry.path().string();
+
+            Rml::ElementPtr fileDiv = doc->CreateElement("div");
+            fileDiv->SetClassNames("sample-project");
+            fileDiv->SetId("tct-" + fileName);
+            fileDiv->SetInnerRML(fileName);
+
+            fileDiv->AddEventListener(Rml::EventId::Click, new ButtonHandler(
+                [doc, fullPath, fileName] {
+                    if (auto* inputEl = doc->GetElementById("load-dir-input"))
+                        if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl))
+                            input->SetValue(ToBackwardSlashes(fullPath));
+                }
+            ));
+            container->AppendChild(std::move(fileDiv));
+        }
+    }
+}
+
+SaveData openProject() {
+    SaveData sd;
+    return sd;
+}
+
 int main() {
 
-    if ((window.document = window.context->LoadDocument("assets/interface.rml")))
+    if ((window.document = window.context->LoadDocument("assets/startup.rml")))
         window.document->Show();
+
+    PopulateFolders(window.document, "../saves/folderSaves/");
+    PopulateTCTFiles(window.document, "../saves/tctSaves/");
 
     setStartupInterfaceEventListeners();
 
@@ -231,4 +341,3 @@ int main() {
     }
     return 0;
 }
-

@@ -50,7 +50,7 @@
             </div>
 
             <!-- Load button at the bottom -->
-            <button id="load-btn" class="action-btn">Load</button>
+            <button id="load-btn" class="action-btn">Laden</button>
         </div>
 
     </div>

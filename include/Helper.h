@@ -25,6 +25,8 @@ struct SaveData {
 inline SaveData saveData;
 inline Window window = Window(1920, 1080);
 
+
+
 inline void to_json(json &j, const SaveData &d) {
     j = json{
                 {"projectName", d.projectName},
@@ -163,6 +165,35 @@ inline bool validateBeamerCount(const Rml::String& value, int& outCount) {
     return false;
 }
 
+inline void PopulateFolders(Rml::ElementDocument* doc, const std::string& path) {
+    namespace fs = std::filesystem;
+    Rml::Element* container = doc->GetElementById("tab-folder-list");
+    if (!container) return;
+    container->SetInnerRML("");
+
+    for (auto& entry : fs::directory_iterator(path)) {
+        if (entry.is_directory()) {
+            std::string folderName = entry.path().filename().string();
+            std::string fullPath = entry.path().string();
+
+            Rml::ElementPtr folderDiv = doc->CreateElement("div");
+            folderDiv->SetClassNames("sample-project");
+            folderDiv->SetId("folder-" + folderName);
+            folderDiv->SetInnerRML(folderName);
+
+            folderDiv->AddEventListener(Rml::EventId::Click, new ButtonHandler(
+                 [doc, fullPath] {
+                     if (auto* inputEl = doc->GetElementById("load-dir-input"))
+                         if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl))
+                             input->SetValue(ToBackwardSlashes(fullPath));
+                 }
+             ));
+
+            container->AppendChild(std::move(folderDiv));
+        }
+    }
+}
+
 inline bool saveNewProject() {
     std::string path;
 
@@ -273,11 +304,17 @@ inline bool saveNewProject() {
         return false;
     }
 
+    if (!std::filesystem::exists("../saves/recent.path")) {
+        std::filesystem::create_directory("../saves/recent.path");
+        std::fstream fstream("../saves/recent.path", std::ios::binary);
+        fstream << path;
+        fstream.close();
+    }
     return true;
 
 }
 
-bool loadProject() {
+inline bool loadProject() {
     std::string path;
 
 
@@ -313,12 +350,18 @@ bool loadProject() {
         return false;
     }
 
+    if (!std::filesystem::exists("../saves/recent.path")) {
+        std::filesystem::create_directory("../saves/recent.path");
+        std::fstream fstream("../saves/recent.path", std::ios::binary);
+        fstream << path;
+        fstream.close();
+    }
 
     return true;
 }
 
 
-void setStartupInterfaceEventListeners()
+inline void setStartupInterfaceEventListeners()
 {
     auto *tabLoad = window.document->GetElementById("tab-load");
     auto *tabNew = window.document->GetElementById("tab-new");
@@ -458,36 +501,10 @@ void setStartupInterfaceEventListeners()
             input->SetValue(ToBackwardSlashes(GetSaveFolderPath()));
         }
     }
+
+    PopulateFolders(window.document, "../saves/folderSaves/");
 }
 
-void PopulateFolders(Rml::ElementDocument* doc, const std::string& path) {
-    namespace fs = std::filesystem;
-    Rml::Element* container = doc->GetElementById("tab-folder-list");
-    if (!container) return;
-    container->SetInnerRML("");
-
-    for (auto& entry : fs::directory_iterator(path)) {
-        if (entry.is_directory()) {
-            std::string folderName = entry.path().filename().string();
-            std::string fullPath = entry.path().string();
-
-            Rml::ElementPtr folderDiv = doc->CreateElement("div");
-            folderDiv->SetClassNames("sample-project");
-            folderDiv->SetId("folder-" + folderName);
-            folderDiv->SetInnerRML(folderName);
-
-            folderDiv->AddEventListener(Rml::EventId::Click, new ButtonHandler(
-                 [doc, fullPath, folderName] {
-                     if (auto* inputEl = doc->GetElementById("load-dir-input"))
-                         if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl))
-                             input->SetValue(ToBackwardSlashes(fullPath));
-                 }
-             ));
-
-            container->AppendChild(std::move(folderDiv));
-        }
-    }
-}
 
 
 

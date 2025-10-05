@@ -37,6 +37,7 @@
 
         <!-- Load Project -->
         <div id="tab-load-div" class="tab-content" style="display:none;">
+            <p id="load-error-text" style="color:red;"></p>
             <!-- Project list -->
             <div class="sample-list" id="tab-folder-list"></div>
             <div class="sample-list" id="tab-tct-list" style="display:none;"></div>

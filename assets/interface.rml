@@ -5,5 +5,93 @@
     </head>
     <body>
 
+    <div class="menu-bar">
+        <div class="menu-item">Datei
+            <div class="dropdown">
+                <button id="file-dropdown-newproject">Neues Projekt</button>
+                <button id="file-dropdown-loadproject">Projekt öffnen</button>
+                <button>Speichern</button>
+                <button>Speichern unter...</button>
+                <button>Importieren</button>
+                <button>Exportieren</button>
+                <button>Schließen</button>
+                <button>Beenden</button>
+            </div>
+        </div>
+        <div class="menu-item">Einstellungen
+            <div class="dropdown">
+                <button>Allgemein</button>
+                <button>Anzeige</button>
+                <button>Projektoren</button>
+                <button>Netzwerk</button>
+            </div>
+        </div>
+        <div class="menu-item">Ansicht
+            <div class="dropdown">
+                <button>Layout zurücksetzen</button>
+                <button>Dunkles Theme</button>
+                <button>Volle Bildschirmansicht</button>
+            </div>
+        </div>
+        <div class="menu-item">Hilfe
+            <div class="dropdown">
+                <button>Dokumentation</button>
+                <button>Support</button>
+                <button>Über</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="scene-panel">
+            <div class="scene-title">Szenen</div>
+            <div class="scene-list" id="sceneList">
+                <div class="scene-item">Szene 1</div>
+                <div class="scene-item">Szene 2</div>
+                <div class="scene-item">Szene 3</div>
+            </div>
+            <div class="scene-buttons">
+                <button>➕ Hinzufügen</button>
+                <button>❌ Löschen</button>
+                <button>✏️ Umbenennen</button>
+                <button>⮝ Hoch</button>
+                <button>⮟ Runter</button>
+                <button>🗑️ Alle löschen</button>
+            </div>
+        </div>
+
+        <div class="main-area">
+            <div class="logo-area">
+                <div class="logo">
+                    <img src="assets/logo.png" alt="Logo" />
+                    <span>TCast</span>
+                </div>
+                <div class="bottom-buttons">
+                    <button>Vorschau</button>
+                    <button>Anzeige starten</button>
+                    <button>Stop</button>
+                </div>
+            </div>
+
+            <div class="test-control">
+                <button id="addBeamerBtn">➕ Beamer hinzufügen</button>
+                <button id="removeBeamerBtn" class="remove-btn">➖ Beamer entfernen</button>
+                <span id="beamerCountLabel">Aktuell: 9 Beamer</span>
+            </div>
+
+            <div class="projector-grid" id="projectorGrid">
+                <div class="projector"><span>Beamer 1</span></div>
+                <div class="projector"><span>Beamer 2</span></div>
+                <div class="projector"><span>Beamer 3</span></div>
+                <div class="projector"><span>Beamer 4</span></div>
+                <div class="projector"><span>Beamer 5</span></div>
+                <div class="projector"><span>Beamer 6</span></div>
+                <div class="projector"><span>Beamer 7</span></div>
+                <div class="projector"><span>Beamer 8</span></div>
+                <div class="projector"><span>Beamer 9</span></div>
+            </div>
+        </div>
+    </div>
+
     </body>
 </rml>

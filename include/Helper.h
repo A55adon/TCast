@@ -25,7 +25,8 @@ struct SaveData {
 inline SaveData saveData;
 inline Window window = Window(1920, 1080);
 
-
+inline bool startupEventlistenersInitialized = false;
+inline bool interfaceEventlistenersInitialized = false;
 
 inline void to_json(json &j, const SaveData &d) {
     j = json{
@@ -35,13 +36,13 @@ inline void to_json(json &j, const SaveData &d) {
                 {"path", d.path}
     };
 }
+
 inline void from_json(const json &j, SaveData &d) {
     j.at("projectName").get_to(d.projectName);
     j.at("beamerCount").get_to(d.beamerCount);
     j.at("description").get_to(d.description);
     j.at("path").get_to(d.path);
 }
-
 
 inline void SetSelectedProject(Rml::ElementDocument *doc, const std::string &name) {
     if (auto *label = doc->GetElementById("selected-project-label")) {
@@ -304,12 +305,21 @@ inline bool saveNewProject() {
         return false;
     }
 
-    if (!std::filesystem::exists("../saves/recent.path")) {
-        std::filesystem::create_directory("../saves/recent.path");
-        std::fstream fstream("../saves/recent.path", std::ios::binary);
-        fstream << path;
-        fstream.close();
+
+    if (!std::filesystem::exists("../saves")) {
+        std::filesystem::create_directories("../saves"); // create directory if missing
     }
+    if (!std::filesystem::exists("../saves/recent.path")) {
+        std::ofstream filestream("../saves/recent.path", std::ios::out | std::ios::binary);
+        if (filestream) {
+            filestream << path;
+            filestream.close();
+            std::cout << "created recent.path with path " << path << std::endl;
+        } else {
+            std::cerr << "Failed to create recent.path" << std::endl;
+        }
+    }
+
     return true;
 
 }
@@ -350,19 +360,31 @@ inline bool loadProject() {
         return false;
     }
 
+    if (!std::filesystem::exists("../saves")) {
+        std::filesystem::create_directories("../saves"); // create directory if missing
+    }
     if (!std::filesystem::exists("../saves/recent.path")) {
-        std::filesystem::create_directory("../saves/recent.path");
-        std::fstream fstream("../saves/recent.path", std::ios::binary);
-        fstream << path;
-        fstream.close();
+        std::ofstream filestream("../saves/recent.path", std::ios::out | std::ios::binary);
+        if (filestream) {
+            filestream << path;
+            filestream.close();
+            std::cout << "created recent.path with path " << path << std::endl;
+        } else {
+            std::cerr << "Failed to create recent.path" << std::endl;
+        }
     }
 
     return true;
 }
 
-
 inline void setStartupInterfaceEventListeners()
 {
+    if (startupEventlistenersInitialized)
+        return;
+
+    if (!startupEventlistenersInitialized)
+        startupEventlistenersInitialized = true;
+
     auto *tabLoad = window.document->GetElementById("tab-load");
     auto *tabNew = window.document->GetElementById("tab-new");
 

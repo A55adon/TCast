@@ -25,8 +25,6 @@ struct SaveData {
 inline SaveData saveData;
 inline Window window = Window(1920, 1080);
 
-inline bool startupEventlistenersInitialized = false;
-inline bool interfaceEventlistenersInitialized = false;
 
 inline void to_json(json &j, const SaveData &d) {
     j = json{
@@ -379,11 +377,6 @@ inline bool loadProject() {
 
 inline void setStartupInterfaceEventListeners()
 {
-    if (startupEventlistenersInitialized)
-        return;
-
-    if (!startupEventlistenersInitialized)
-        startupEventlistenersInitialized = true;
 
     auto *tabLoad = window.document->GetElementById("tab-load");
     auto *tabNew = window.document->GetElementById("tab-new");
@@ -491,6 +484,7 @@ inline void setStartupInterfaceEventListeners()
                 doc->Hide();
                 std::cout << saveData.projectName << std::endl;
             }
+            //TODO: feedback
         }));
     }
     if (auto *loadProjectBtn = window.document->GetElementById("load-btn")) {
@@ -499,6 +493,7 @@ inline void setStartupInterfaceEventListeners()
                 doc->Hide();
                 std::cout << saveData.projectName << std::endl;
             }
+            //TODO: feedback
         }));
     }
 

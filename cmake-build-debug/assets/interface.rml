@@ -8,14 +8,14 @@
     <div class="menu-bar">
         <div class="menu-item">Datei
             <div class="dropdown">
-                <button id="file-dropdown-newproject">Neues Projekt</button>
-                <button id="file-dropdown-loadproject">Projekt öffnen</button>
+                <button id= "file-dropdown-newproject">Neues Projekt</button>
+                <button id= "file-dropdown-loadproject">Projekt öffnen</button>
                 <button>Speichern</button>
                 <button>Speichern unter...</button>
-                <button>Importieren</button>
-                <button>Exportieren</button>
-                <button>Schließen</button>
-                <button>Beenden</button>
+                <button>Importieren (tct)</button>
+                <button id= "file-dropdown-exportproject">Exportieren (tct)</button>
+                <button id= "file-dropdown-closeproject">Projekt Schließen</button>
+                <button id= "file-dropdown-closeprogramm">Beenden</button>
             </div>
         </div>
         <div class="menu-item">Einstellungen
@@ -39,6 +39,9 @@
                 <button>Support</button>
                 <button>Über</button>
             </div>
+        </div>
+        <div class="menu-item">
+            <p class=project-name"></p>
         </div>
     </div>
 

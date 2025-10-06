@@ -149,6 +149,8 @@ body {
 .projector {
     flex: 0 0 calc(33% - 10px);
     height: 100px;
+    width: 30%;
+    height: 30%;
     background-color: #34495e;
     border-radius: 6px;
     display: flex;

@@ -38,6 +38,9 @@ Window::Window(const int window_width, const int window_height): document(nullpt
 
     ShellRml::LoadFonts(font_faces);
 
+
+    glfwMaximizeWindow(Backend::GetWindow());
+
     running = true;
 }
 

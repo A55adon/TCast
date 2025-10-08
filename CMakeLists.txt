@@ -51,10 +51,11 @@ add_custom_command(TARGET TCast POST_BUILD
         "${CMAKE_SOURCE_DIR}/libs/RmlUi/build-mingw/librmlui.dll"
         "${CMAKE_SOURCE_DIR}/libs/RmlUi/build-mingw/librmlui_debugger.dll"
         "${CMAKE_SOURCE_DIR}/libs/GLFW/lib/glfw3.dll"
-        "C:/msys64/mingw64/bin/glew32.dll"
-        "C:/msys64/mingw64/bin/libstdc++-6.dll"
-        "C:/msys64/mingw64/bin/libgcc_s_seh-1.dll"
-        "C:/msys64/mingw64/bin/libwinpthread-1.dll"
+        "${CMAKE_SOURCE_DIR}/libs/freetype_x64-windows/bin/freetype.dll"
+        "${CMAKE_SOURCE_DIR}/libs/glew-2.1.0/bin/Release/Win32/glew32.dll"
+        "${CMAKE_SOURCE_DIR}/libs/default/libstdc++-6.dll"
+        "${CMAKE_SOURCE_DIR}/libs/default/libgcc_s_seh-1.dll"
+        "${CMAKE_SOURCE_DIR}/libs/default/libwinpthread-1.dll"
         $<TARGET_FILE_DIR:TCast>
         COMMENT "Copying DLLs..."
 )

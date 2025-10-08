@@ -19,10 +19,7 @@ void switchToStartup() {
 }
 
 void setInterfaceEventListeners() {
-    if (auto *projectname = window.document->GetElementById("project-name")) {
-        projectname->SetInnerRML(saveData.projectName);
-        std::cout << "test" << std::endl;
-    }
+#pragma region filedropdown
     if (auto *dropdownNewproject = window.document->GetElementById("file-dropdown-newproject")) {
         dropdownNewproject->AddEventListener(Rml::EventId::Click, new ButtonHandler([dropdownNewproject] {
             switchToStartup();
@@ -33,6 +30,7 @@ void setInterfaceEventListeners() {
             window.document->GetElementById("tab-load")->SetAttribute("style", "display:none");
         }));
     }
+
     if (auto *dropdownLoadproject = window.document->GetElementById("file-dropdown-loadproject")) {
         dropdownLoadproject->AddEventListener(Rml::EventId::Click, new ButtonHandler([dropdownLoadproject] {
             switchToStartup();
@@ -64,11 +62,19 @@ void setInterfaceEventListeners() {
 
                 std::filesystem::rename(fullPath + ".zip", fullPath + ".tct");
 
-                std::cout << "File " + saveData.projectName + ".tct exported successfully to: " + saveData.path << std::endl;
-
+                std::cout << "File " + saveData.projectName + ".tct exported successfully to: " + saveData.path <<
+                        std::endl;
             } catch (const std::filesystem::filesystem_error &e) {
                 std::cerr << "Filesystem error: " << e.what() << '\n';
             }
+            //TODO: feedback
+        }));
+    }
+
+    if (auto *filedropdownimportproject = window.document->GetElementById("file-dropdown-importproject")) {
+        filedropdownimportproject->AddEventListener(Rml::EventId::Click, new ButtonHandler([filedropdownimportproject] {
+            //TODO: import projects
+
             //TODO: feedback
         }));
     }
@@ -83,6 +89,59 @@ void setInterfaceEventListeners() {
         dropdowncloseprogramm->AddEventListener(Rml::EventId::Click, new ButtonHandler([dropdowncloseprogramm] {
             exit(EXIT_SUCCESS);
         }));
+    }
+
+#pragma endregion
+#pragma region settingsdropdown
+#pragma endregion
+#pragma region viewdropdown
+#pragma endregion
+#pragma region helpdropdown
+#pragma endregion
+
+    if (auto* projectorGrid = window.document->GetElementById("projectorGrid")) {
+        Rml::ElementList projectors;
+        projectorGrid->GetElementsByTagName(projectors, "div");
+
+        for (auto* projector : projectors) {
+            if (projector->IsClassSet("projector")) {
+                // Remove all existing children (spans)
+                auto child = projector->GetFirstChild();
+                while (child) {
+                    auto next = child->GetNextSibling();
+                    projector->RemoveChild(child);
+                    child = next;
+                }
+
+                // Force fixed height
+                projector->SetAttribute("style", "min-height:120px; flex-basis:30%; flex-grow:1; border-radius:12px; background-color:#00aced;");
+
+                projector->AddEventListener(Rml::EventId::Click, new ButtonHandler([projector] {
+                    // Check if img already exists
+                    Rml::Element* imgChild = nullptr;
+                    for (auto* child = projector->GetFirstChild(); child; child = child->GetNextSibling()) {
+                        if (child->GetTagName() == "img") {
+                            imgChild = child;
+                            break;
+                        }
+                    }
+
+                    if (imgChild) {
+                        projector->RemoveChild(imgChild); // toggle off
+                    } else {
+                        Rml::ElementPtr image = projector->GetOwnerDocument()->CreateElement("img");
+                        image->SetAttribute("src", "test_img.tga"); // must be TGA
+                        image->SetAttribute("style", "width:100%; height:100%; border-radius:12px;");
+                        projector->AppendChild(std::move(image));
+                    }
+                }));
+            }
+        }
+    }
+
+
+    if (auto *projectname = window.document->GetElementById("project-name")) {
+        projectname->SetInnerRML(saveData.projectName);
     }
 }
 

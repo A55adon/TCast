@@ -12,7 +12,7 @@
                 <button id= "file-dropdown-loadproject">Projekt öffnen</button>
                 <button>Speichern</button>
                 <button>Speichern unter...</button>
-                <button>Importieren (tct)</button>
+                <button id= "file-dropdown-importproject">Importieren (tct)</button>
                 <button id= "file-dropdown-exportproject">Exportieren (tct)</button>
                 <button id= "file-dropdown-closeproject">Projekt Schließen</button>
                 <button id= "file-dropdown-closeprogramm">Beenden</button>
@@ -40,9 +40,6 @@
                 <button>Über</button>
             </div>
         </div>
-        <div class="menu-item">
-            <p class=project-name"></p>
-        </div>
     </div>
 
     <div class="main-container">
@@ -64,12 +61,15 @@
         </div>
 
         <div class="main-area">
-            <div class="logo-area">
+            <div class="main-top-bar">
                 <div class="logo">
-                    <img src="assets/logo.png" alt="Logo" />
+                    <!-- <img src="assets/logo.png" alt="Logo" /> -->
                     <span>TCast</span>
                 </div>
-                <div class="bottom-buttons">
+
+                <h1 id="project-name" >Error-No-Project-Name-Found</h1>
+
+                <div class="top-right-buttons">
                     <button>Vorschau</button>
                     <button>Anzeige starten</button>
                     <button>Stop</button>

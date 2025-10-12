@@ -3,8 +3,7 @@
         <title>TCast</title>
         <link type="text/rcss" href="interface.rcss"/>
     </head>
-    <body>
-
+    <body class="window">
     <div class="menu-bar">
         <div class="menu-item">Datei
             <div class="dropdown">
@@ -63,7 +62,7 @@
         <div class="main-area">
             <div class="main-top-bar">
                 <div class="logo">
-                    <!-- <img src="assets/logo.png" alt="Logo" /> -->
+                     <!-- <img src="assets/logo.png" alt="Logo" /> -->
                     <span>TCast</span>
                 </div>
 
@@ -77,24 +76,12 @@
             </div>
 
             <div class="test-control">
-                <button id="addBeamerBtn">➕ Beamer hinzufügen</button>
-                <button id="removeBeamerBtn" class="remove-btn">➖ Beamer entfernen</button>
                 <span id="beamerCountLabel">Aktuell: 9 Beamer</span>
             </div>
 
             <div class="projector-grid" id="projectorGrid">
-                <div class="projector"><span>Beamer 1</span></div>
-                <div class="projector"><span>Beamer 2</span></div>
-                <div class="projector"><span>Beamer 3</span></div>
-                <div class="projector"><span>Beamer 4</span></div>
-                <div class="projector"><span>Beamer 5</span></div>
-                <div class="projector"><span>Beamer 6</span></div>
-                <div class="projector"><span>Beamer 7</span></div>
-                <div class="projector"><span>Beamer 8</span></div>
-                <div class="projector"><span>Beamer 9</span></div>
             </div>
         </div>
     </div>
-
     </body>
 </rml>

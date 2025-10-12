@@ -145,18 +145,19 @@ body {
     height: 100%;
     align-content: stretch; /* lets rows stretch to fill vertical space */
 }
-
 .projector {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-basis: 30%;   /* 3 per row initially */
+    flex-basis: 30%;
+    max-width: 33%;
     flex-grow: 1;
-    min-height: 80px;  /* optional minimum height */
+    min-height: 120px;
     background-color: #00aced;
     border-radius: 12px;
     color: white;
     font-size: 16px;
+    overflow: hidden;
 }
 
 

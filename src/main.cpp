@@ -1,11 +1,17 @@
 #include "Helper.h"
+#include "RmlUi_Backend.h"
 
 
 /*
  * Known Bugs:
  * - if the amount of folderProjects is higher than 8 or fills up the height of the list they are unclickable and are squished to the left
- * *
+ * - when creating a new project or loading a project from the dropdown of the main interface it does not switch to that project automatically
+ * - loading a project doesnt redirect to the interface screen
+
  * Todo:
+ *  - dont have a recentpath
+ *  - delete projects
+ *  - callbacks for exporting importing saving loading etc
  *  - if clicking on new project or loadproject have the ability to go back
  *  - Update Checking
 */
@@ -99,43 +105,18 @@ void setInterfaceEventListeners() {
 #pragma region helpdropdown
 #pragma endregion
 
-    if (auto* projectorGrid = window.document->GetElementById("projectorGrid")) {
-        Rml::ElementList projectors;
-        projectorGrid->GetElementsByTagName(projectors, "div");
+    if (auto* projectorgrid = window.document->GetElementById("projectorGrid")) {
+            std::cout << "[Info] Projectorcount: " << saveData.projectorCount << std::endl;
+        for (int i = 0; i < saveData.projectorCount; ++i) {
+            Rml::ElementPtr child = window.document->CreateElement("div");
+            child->SetClass("projector", true);
 
-        for (auto* projector : projectors) {
-            if (projector->IsClassSet("projector")) {
-                // Remove all existing children (spans)
-                auto child = projector->GetFirstChild();
-                while (child) {
-                    auto next = child->GetNextSibling();
-                    projector->RemoveChild(child);
-                    child = next;
-                }
+            Rml::ElementPtr span = window.document->CreateElement("span");
+            span->SetInnerRML("Beamer " + std::to_string(i + 1));
+            child->AppendChild(std::move(span));
 
-                // Force fixed height
-                projector->SetAttribute("style", "min-height:120px; flex-basis:30%; flex-grow:1; border-radius:12px; background-color:#00aced;");
 
-                projector->AddEventListener(Rml::EventId::Click, new ButtonHandler([projector] {
-                    // Check if img already exists
-                    Rml::Element* imgChild = nullptr;
-                    for (auto* child = projector->GetFirstChild(); child; child = child->GetNextSibling()) {
-                        if (child->GetTagName() == "img") {
-                            imgChild = child;
-                            break;
-                        }
-                    }
-
-                    if (imgChild) {
-                        projector->RemoveChild(imgChild); // toggle off
-                    } else {
-                        Rml::ElementPtr image = projector->GetOwnerDocument()->CreateElement("img");
-                        image->SetAttribute("src", "test_img.tga"); // must be TGA
-                        image->SetAttribute("style", "width:100%; height:100%; border-radius:12px;");
-                        projector->AppendChild(std::move(image));
-                    }
-                }));
-            }
+            projectorgrid->AppendChild(std::move(child));
         }
     }
 
@@ -178,6 +159,7 @@ int main() {
             window.document->Show();
         }
     }
+
 
     while (window.running) {
         window.update();

@@ -17,7 +17,7 @@ using json = nlohmann::json;
 
 struct SaveData {
     std::string projectName;
-    Rml::String beamerCount{};
+    int projectorCount;
     std::string description;
     std::string path;
 };
@@ -29,7 +29,7 @@ inline Window window = Window(1920, 1080);
 inline void to_json(json &j, const SaveData &d) {
     j = json{
                 {"projectName", d.projectName},
-                {"beamerCount", d.beamerCount},
+                {"projectorCount", d.projectorCount},
                 {"description", d.description},
                 {"path", d.path}
     };
@@ -37,7 +37,7 @@ inline void to_json(json &j, const SaveData &d) {
 
 inline void from_json(const json &j, SaveData &d) {
     j.at("projectName").get_to(d.projectName);
-    j.at("beamerCount").get_to(d.beamerCount);
+    j.at("projectorCount").get_to(d.projectorCount);
     j.at("description").get_to(d.description);
     j.at("path").get_to(d.path);
 }
@@ -131,7 +131,7 @@ inline std::string ToBackwardSlashes(const std::string& path) {
     return fixed;
 }
 
-inline bool validateBeamerCount(const Rml::String& value, int& outCount) {
+inline bool validateBeamerCount(const std::string& value, int& outCount) {
     static const std::set<std::string> validWords = {
         "eins","zwei","drei","vier","fuenf","fünf","sechs","sieben","acht","neun"
     };
@@ -213,7 +213,7 @@ inline bool saveNewProject() {
     }
     if (auto *el = window.document->GetElementById("projector-count-input")) {
         if (auto *input = dynamic_cast<Rml::ElementFormControl*>(el)) {
-            Rml::String value = input->GetValue();
+            std::string value = input->GetValue();
             int count = 0;
             if (!validateBeamerCount(value, count)) {
                 if (auto *err = window.document->GetElementById("error-text")) {
@@ -221,12 +221,12 @@ inline bool saveNewProject() {
                 }
                 return false;
             }
-            saveData.beamerCount = count;
+            saveData.projectorCount = count;
         }
     }
     if (auto *el = window.document->GetElementById("project-desc-input")) {
         if (auto *input = dynamic_cast<Rml::ElementFormControl *>(el)) {
-            Rml::String value = input->GetValue();
+            std::string value = input->GetValue();
 
             static const std::regex pattern("^[A-Za-z0-9äöüÄÖÜ _.\\-;,]+$");
             if (!std::regex_match(value, pattern)) {
@@ -242,7 +242,7 @@ inline bool saveNewProject() {
 
     if (auto *el = window.document->GetElementById("project-dir-input")) {
         if (auto *input = dynamic_cast<Rml::ElementFormControl *>(el)) {
-            Rml::String value = input->GetValue();
+            std::string value = input->GetValue();
 
             saveData.path = value;
             std::string forwardSlashpath = value + "/" + saveData.projectName + "/" + "projectData" + ".json";

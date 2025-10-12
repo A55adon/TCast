@@ -43,26 +43,27 @@
 
     <div class="main-container">
         <div class="scene-panel">
-            <div class="scene-title">Szenen</div>
+            <div class="scene-header">
+                <div class="scene-title">Szenen</div>
+                <button id="add-scene-btn">+ Hinzufügen</button>
+            </div>
+
             <div class="scene-list" id="sceneList">
                 <div class="scene-item">Szene 1</div>
                 <div class="scene-item">Szene 2</div>
                 <div class="scene-item">Szene 3</div>
             </div>
+
             <div class="scene-buttons">
-                <button>➕ Hinzufügen</button>
-                <button>❌ Löschen</button>
-                <button>✏️ Umbenennen</button>
                 <button>⮝ Hoch</button>
                 <button>⮟ Runter</button>
                 <button>🗑️ Alle löschen</button>
             </div>
         </div>
-
         <div class="main-area">
             <div class="main-top-bar">
                 <div class="logo">
-                     <!-- <img src="assets/logo.png" alt="Logo" /> -->
+                      <!--<img src="test.jpg" alt="Logo" /> -->
                     <span>TCast</span>
                 </div>
 
@@ -80,6 +81,7 @@
             </div>
 
             <div class="projector-grid" id="projectorGrid">
+                <div class="projector" id="projector-test"></div>
             </div>
         </div>
     </div>

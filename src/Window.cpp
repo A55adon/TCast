@@ -41,6 +41,7 @@ Window::Window(const int window_width, const int window_height): document(nullpt
 
     glfwMaximizeWindow(Backend::GetWindow());
 
+
     running = true;
 }
 

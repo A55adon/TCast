@@ -101,11 +101,30 @@ body {
     flex-direction: column;
     gap: 4px;
 }
+.scene-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.scene-header button {
+    background-color: #00aced;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 10px;
+    cursor: pointer;
+}
+
+.scene-header button:hover {
+    background-color: #0091c9;
+}
 
 .scene-item {
     background-color: #34495e;
     border-radius: 4px;
-    padding: 6px 10px;
+    padding: 10px 12px;
+    font-size: 18px;
 }
 
 .scene-item:hover {
@@ -145,6 +164,12 @@ body {
     height: 100%;
     align-content: stretch; /* lets rows stretch to fill vertical space */
 }
+
+#projector-test
+{
+    decorator: image("test.jpg" fill)
+}
+
 .projector {
     display: flex;
     align-items: center;

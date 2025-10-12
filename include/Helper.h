@@ -17,21 +17,44 @@ using json = nlohmann::json;
 
 struct SaveData {
     std::string projectName;
-    int projectorCount;
+    int projectorCount{};
     std::string description;
     std::string path;
 };
 
-inline SaveData saveData;
-inline Window window = Window(1920, 1080);
+struct SceneData {
+    std::string sceneName;
+    std::vector<std::string> sources;
+};
 
+struct SceneManager {
+    std::vector<SceneData> scenes;
+};
+
+inline SaveData saveData;
+inline SceneManager sceneManager;
+inline Window window = Window(1920, 1080);
+inline bool createRecentPath = false;
 
 inline void to_json(json &j, const SaveData &d) {
     j = json{
-                {"projectName", d.projectName},
-                {"projectorCount", d.projectorCount},
-                {"description", d.description},
-                {"path", d.path}
+        {"projectName", d.projectName},
+        {"projectorCount", d.projectorCount},
+        {"description", d.description},
+        {"path", d.path}
+    };
+}
+
+inline void to_json(json &j, const SceneData &s) {
+    j = json{
+        {"sceneName", s.sceneName},
+        {"sources", s.sources}
+    };
+}
+
+inline void to_json(json &j, const SceneManager &m) {
+    j = json{
+        {"scenes", m.scenes}
     };
 }
 
@@ -40,6 +63,15 @@ inline void from_json(const json &j, SaveData &d) {
     j.at("projectorCount").get_to(d.projectorCount);
     j.at("description").get_to(d.description);
     j.at("path").get_to(d.path);
+}
+
+inline void from_json(const json &j, SceneData &s) {
+    j.at("sceneName").get_to(s.sceneName);
+    j.at("sources").get_to(s.sources);
+}
+
+inline void from_json(const json &j, SceneManager &m) {
+    j.at("scenes").get_to(m.scenes);
 }
 
 inline void SetSelectedProject(Rml::ElementDocument *doc, const std::string &name) {
@@ -115,8 +147,8 @@ inline std::string GetExecutablePath() {
 
 inline std::string GetSaveFolderPath() {
     std::filesystem::path exePath = GetExecutablePath();
-    std::filesystem::path exeDir  = exePath.parent_path();      // ...\cmake-build-debug (build directory)
-    std::filesystem::path projectDir = exeDir.parent_path();    // ...\TCast
+    std::filesystem::path exeDir = exePath.parent_path(); // ...\cmake-build-debug (build directory)
+    std::filesystem::path projectDir = exeDir.parent_path(); // ...\TCast
     std::filesystem::path savePath = projectDir / "saves" / "folderSaves";
 
     // make sure directory exists
@@ -125,15 +157,16 @@ inline std::string GetSaveFolderPath() {
     return savePath.string();
 }
 
-inline std::string ToBackwardSlashes(const std::string& path) {
+inline std::string ToBackwardSlashes(const std::string &path) {
     std::string fixed = path;
     std::replace(fixed.begin(), fixed.end(), '/', '\\');
     return fixed;
 }
 
-inline bool validateBeamerCount(const std::string& value, int& outCount) {
+
+inline bool validateBeamerCount(const std::string &value, int &outCount) {
     static const std::set<std::string> validWords = {
-        "eins","zwei","drei","vier","fuenf","fünf","sechs","sieben","acht","neun"
+        "eins", "zwei", "drei", "vier", "fuenf", "fünf", "sechs", "sieben", "acht", "neun"
     };
 
     //numbers as letters
@@ -145,32 +178,32 @@ inline bool validateBeamerCount(const std::string& value, int& outCount) {
     // big/small letters
     std::string lower = value;
     std::transform(lower.begin(), lower.end(), lower.begin(),
-                   [](unsigned char c){ return std::tolower(c); });
+                   [](unsigned char c) { return std::tolower(c); });
 
     auto it = validWords.find(lower);
     if (it != validWords.end()) {
-        if (lower == "eins")   outCount = 1;
-        else if (lower == "zwei")  outCount = 2;
-        else if (lower == "drei")  outCount = 3;
-        else if (lower == "vier")  outCount = 4;
+        if (lower == "eins") outCount = 1;
+        else if (lower == "zwei") outCount = 2;
+        else if (lower == "drei") outCount = 3;
+        else if (lower == "vier") outCount = 4;
         else if (lower == "fünf" || lower == "fuenf") outCount = 5;
         else if (lower == "sechs") outCount = 6;
         else if (lower == "sieben") outCount = 7;
-        else if (lower == "acht")   outCount = 8;
-        else if (lower == "neun")   outCount = 9;
+        else if (lower == "acht") outCount = 8;
+        else if (lower == "neun") outCount = 9;
         return true;
     }
 
     return false;
 }
 
-inline void PopulateFolders(Rml::ElementDocument* doc, const std::string& path) {
+inline void PopulateFolders(Rml::ElementDocument *doc, const std::string &path) {
     namespace fs = std::filesystem;
-    Rml::Element* container = doc->GetElementById("tab-folder-list");
+    Rml::Element *container = doc->GetElementById("tab-folder-list");
     if (!container) return;
     container->SetInnerRML("");
 
-    for (auto& entry : fs::directory_iterator(path)) {
+    for (auto &entry: fs::directory_iterator(path)) {
         if (entry.is_directory()) {
             std::string folderName = entry.path().filename().string();
             std::string fullPath = entry.path().string();
@@ -181,12 +214,12 @@ inline void PopulateFolders(Rml::ElementDocument* doc, const std::string& path) 
             folderDiv->SetInnerRML(folderName);
 
             folderDiv->AddEventListener(Rml::EventId::Click, new ButtonHandler(
-                 [doc, fullPath] {
-                     if (auto* inputEl = doc->GetElementById("load-dir-input"))
-                         if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl))
-                             input->SetValue(ToBackwardSlashes(fullPath));
-                 }
-             ));
+                                            [doc, fullPath] {
+                                                if (auto *inputEl = doc->GetElementById("load-dir-input"))
+                                                    if (auto *input = dynamic_cast<Rml::ElementFormControl *>(inputEl))
+                                                        input->SetValue(ToBackwardSlashes(fullPath));
+                                            }
+                                        ));
 
             container->AppendChild(std::move(folderDiv));
         }
@@ -212,7 +245,7 @@ inline bool saveNewProject() {
         }
     }
     if (auto *el = window.document->GetElementById("projector-count-input")) {
-        if (auto *input = dynamic_cast<Rml::ElementFormControl*>(el)) {
+        if (auto *input = dynamic_cast<Rml::ElementFormControl *>(el)) {
             std::string value = input->GetValue();
             int count = 0;
             if (!validateBeamerCount(value, count)) {
@@ -279,24 +312,43 @@ inline bool saveNewProject() {
             el->SetInnerRML("Projekt existiert bereits – bitte anderen Namen wählen!");
         }
         return false;
-    }
-
-    // Open file for writing
-    json j = saveData;
-    std::ofstream file(filePath);
-    if (!file.is_open()) {
-        if (auto *el = window.document->GetElementById("error-text")) {
-            el->SetInnerRML("Konnte Datei nicht erstellen – ungültiger Pfad oder Rechteproblem");
+    } {
+        // Open file for writing
+        json j = saveData;
+        std::ofstream file(filePath);
+        std::cout << filePath << std::endl;
+        if (!file.is_open()) {
+            if (auto *el = window.document->GetElementById("error-text")) {
+                el->SetInnerRML("Konnte Datei nicht erstellen – ungültiger Pfad oder Rechteproblem");
+            }
+            return false;
         }
-        return false;
+        // Write JSON
+        file << j.dump(4);
+        file.close();
+    }
+    std::string scenePath = ToBackwardSlashes(saveData.path + "/" + saveData.projectName + "/" + "scenesData.json"); {
+        SceneData defaultScene;
+        defaultScene.sceneName = saveData.projectName;
+        defaultScene.sources.emplace_back("test");
+        sceneManager.scenes.push_back(defaultScene);
+
+        // Create SceneManager and give it a Default scene
+        json j = sceneManager;
+        std::ofstream file(scenePath);
+        if (!file.is_open()) {
+            if (auto *el = window.document->GetElementById("error-text")) {
+                el->SetInnerRML("Konnte Datei nicht erstellen – ungültiger Pfad oder Rechteproblem");
+            }
+            return false;
+        }
+        file << j.dump(4);
+        file.close();
     }
 
-    // Write JSON
-    file << j.dump(4);
-    file.close();
 
     // Verify file exists
-    if (!std::filesystem::exists(filePath)) {
+    if (!std::filesystem::exists(filePath) || !std::filesystem::exists(scenePath)) {
         if (auto *el = window.document->GetElementById("error-text")) {
             el->SetInnerRML("JSON-Datei wurde nicht erstellt!");
         }
@@ -307,23 +359,25 @@ inline bool saveNewProject() {
     if (!std::filesystem::exists("../saves")) {
         std::filesystem::create_directories("../saves"); // create directory if missing
     }
-    if (!std::filesystem::exists("../saves/recent.path")) {
-        std::ofstream filestream("../saves/recent.path", std::ios::out | std::ios::binary);
-        if (filestream) {
-            filestream << path;
-            filestream.close();
-            std::cout << "created recent.path with path " << path << std::endl;
-        } else {
-            std::cerr << "Failed to create recent.path" << std::endl;
+    if (createRecentPath) {
+        if (!std::filesystem::exists("../saves/recent.path")) {
+            std::ofstream filestream("../saves/recent.path", std::ios::out | std::ios::binary);
+            if (filestream) {
+                filestream << path;
+                filestream.close();
+                std::cout << "created recent.path with path " << path << std::endl;
+            } else {
+                std::cerr << "Failed to create recent.path" << std::endl;
+            }
         }
     }
 
     return true;
-
 }
 
 inline bool loadProject() {
     std::string path;
+    std::string scenesPath;
 
 
     auto *errEl = window.document->GetElementById("load-error-text");
@@ -335,7 +389,9 @@ inline bool loadProject() {
             path = input->GetValue();
         }
     }
+    scenesPath = ToBackwardSlashes(path + "/" + saveData.projectName + "/" + "scenesData.json");
     path = path + "/" + "projectData" + ".json";
+
     std::cout << path << std::endl;
 
     if (path.empty()) {
@@ -354,30 +410,160 @@ inline bool loadProject() {
         file >> j;
         saveData = j.get<SaveData>();
     } catch (const std::exception &e) {
-        if (errEl) errEl->SetInnerRML(std::string("Fehler beim Lesen der JSON-Datei: ") + e.what());
+        if (errEl) errEl->SetInnerRML(std::string("[1] Fehler beim Lesen der JSON-Datei: ") + e.what());
+        return false;
+    }
+
+    std::ifstream fileScenes(scenesPath);
+    if (!fileScenes.is_open()) {
+        if (errEl) errEl->SetInnerRML("Datei konnte nicht geöffnet werden: " + path);
+        return false;
+    }
+
+    try {
+        json j;
+        fileScenes >> j;
+        sceneManager = j.get<SceneManager>();
+    } catch (const std::exception &e) {
+        if (errEl) errEl->SetInnerRML(std::string("[2] Fehler beim Lesen der JSON-Datei: ") + e.what());
         return false;
     }
 
     if (!std::filesystem::exists("../saves")) {
         std::filesystem::create_directories("../saves"); // create directory if missing
     }
-    if (!std::filesystem::exists("../saves/recent.path")) {
-        std::ofstream filestream("../saves/recent.path", std::ios::out | std::ios::binary);
-        if (filestream) {
-            filestream << path;
-            filestream.close();
-            std::cout << "created recent.path with path " << path << std::endl;
-        } else {
-            std::cerr << "Failed to create recent.path" << std::endl;
+    if (createRecentPath) {
+        if (!std::filesystem::exists("../saves/recent.path")) {
+            std::ofstream filestream("../saves/recent.path", std::ios::out | std::ios::binary);
+            if (filestream) {
+                filestream << path;
+                filestream.close();
+                std::cout << "created recent.path with path " << path << std::endl;
+            } else {
+                std::cerr << "Failed to create recent.path" << std::endl;
+            }
         }
     }
 
     return true;
 }
 
-inline void setStartupInterfaceEventListeners()
-{
 
+inline void switchToStartup();
+
+inline void setInterfaceEventListeners() {
+#pragma region filedropdown
+    if (auto *dropdownNewproject = window.document->GetElementById("file-dropdown-newproject")) {
+        dropdownNewproject->AddEventListener(Rml::EventId::Click, new ButtonHandler([dropdownNewproject] {
+            switchToStartup();
+            window.document->GetElementById("tab-load-div")->SetAttribute("style", "display:none");
+            window.document->GetElementById("tab-new-div")->SetAttribute("style", "display:flex");
+            window.document->GetElementById("tab-new")->SetClass("active", true);
+            window.document->GetElementById("tab-load")->SetClass("active", false);
+            window.document->GetElementById("tab-load")->SetAttribute("style", "display:none");
+        }));
+    }
+
+    if (auto *dropdownLoadproject = window.document->GetElementById("file-dropdown-loadproject")) {
+        dropdownLoadproject->AddEventListener(Rml::EventId::Click, new ButtonHandler([dropdownLoadproject] {
+            switchToStartup();
+            window.document->GetElementById("tab-load-div")->SetAttribute("style", "display:flex");
+            window.document->GetElementById("tab-new-div")->SetAttribute("style", "display:none");
+            window.document->GetElementById("tab-load")->SetClass("active", true);
+            window.document->GetElementById("tab-new")->SetClass("active", false);
+            window.document->GetElementById("tab-new")->SetAttribute("style", "display:none");
+        }));
+    }
+
+    if (auto *filedropdownexportproject = window.document->GetElementById("file-dropdown-exportproject")) {
+        filedropdownexportproject->AddEventListener(Rml::EventId::Click, new ButtonHandler([filedropdownexportproject] {
+            try {
+                std::string fullPath = saveData.path + "\\" + saveData.projectName;
+
+                if (std::filesystem::exists(fullPath + ".tct")) {
+                    std::filesystem::remove_all(fullPath + ".tct");
+                }
+
+                std::string command = "powershell Compress-Archive -Path \"" + fullPath +
+                                      "\\*\" -DestinationPath \"" + fullPath + ".zip\" -Force";
+                int result = std::system(command.c_str());
+
+                if (result == 0)
+                    std::cout << "Folder zipped successfully.\n";
+                else
+                    std::cerr << "Failed to zip folder. Exit code: " << result << '\n';
+
+                std::filesystem::rename(fullPath + ".zip", fullPath + ".tct");
+
+                std::cout << "File " + saveData.projectName + ".tct exported successfully to: " + saveData.path <<
+                        std::endl;
+            } catch (const std::filesystem::filesystem_error &e) {
+                std::cerr << "Filesystem error: " << e.what() << '\n';
+            }
+            //TODO: feedback
+        }));
+    }
+
+    if (auto *filedropdownimportproject = window.document->GetElementById("file-dropdown-importproject")) {
+        filedropdownimportproject->AddEventListener(Rml::EventId::Click, new ButtonHandler([filedropdownimportproject] {
+            //TODO: import projects
+
+            //TODO: feedback
+        }));
+    }
+
+    if (auto *dropdowncloseproject = window.document->GetElementById("file-dropdown-closeproject")) {
+        dropdowncloseproject->AddEventListener(Rml::EventId::Click, new ButtonHandler([dropdowncloseproject] {
+            switchToStartup();
+        }));
+    }
+
+    if (auto *dropdowncloseprogramm = window.document->GetElementById("file-dropdown-closeprogramm")) {
+        dropdowncloseprogramm->AddEventListener(Rml::EventId::Click, new ButtonHandler([dropdowncloseprogramm] {
+            exit(EXIT_SUCCESS);
+        }));
+    }
+
+#pragma endregion
+#pragma region settingsdropdown
+#pragma endregion
+#pragma region viewdropdown
+#pragma endregion
+#pragma region helpdropdown
+#pragma endregion
+
+
+    if (auto *projectorgrid = window.document->GetElementById("projectorGrid")) {
+        std::cout << "[Info] Projectorcount: " << saveData.projectorCount << std::endl;
+        for (int i = 0; i < saveData.projectorCount; ++i) {
+            Rml::ElementPtr child = window.document->CreateElement("div");
+            child->SetClass("projector", true);
+
+            Rml::ElementPtr span = window.document->CreateElement("span");
+            span->SetInnerRML("Beamer " + std::to_string(i + 1));
+            child->AppendChild(std::move(span));
+
+
+            projectorgrid->AppendChild(std::move(child));
+        }
+    }
+
+    if (auto *sceneList = window.document->GetElementById("sceneList")) {
+        std::cout << "[Info] Scenescount: " << sceneManager.scenes.size() << std::endl;
+        for(int i = 0; i < sceneManager.scenes.size(); ++i) {
+            Rml::ElementPtr child = window.document->CreateElement("div");
+            child->SetClass("scene-item", true);
+            child->SetInnerRML(std::to_string(sceneManager.scenes.size()));
+            sceneList->AppendChild(std::move(child));
+        }
+    }
+
+    if (auto *projectname = window.document->GetElementById("project-name")) {
+        projectname->SetInnerRML(saveData.projectName);
+    }
+}
+
+inline void setStartupInterfaceEventListeners() {
     auto *tabLoad = window.document->GetElementById("tab-load");
     auto *tabNew = window.document->GetElementById("tab-new");
 
@@ -399,38 +585,38 @@ inline void setStartupInterfaceEventListeners()
         }));
     }
 
-    if (auto* tabFolder = window.document->GetElementById("tab-folder")) {
+    if (auto *tabFolder = window.document->GetElementById("tab-folder")) {
         tabFolder->AddEventListener(Rml::EventId::Click, new ButtonHandler([tabFolder] {
-            if (auto* fDiv = window.document->GetElementById("tab-folder-div"))
+            if (auto *fDiv = window.document->GetElementById("tab-folder-div"))
                 fDiv->SetProperty("display", "flex");
-            if (auto* tDiv = window.document->GetElementById("tab-tct-div"))
+            if (auto *tDiv = window.document->GetElementById("tab-tct-div"))
                 tDiv->SetProperty("display", "none");
 
-            if (auto* bFolder = window.document->GetElementById("browse-folder-btn"))
+            if (auto *bFolder = window.document->GetElementById("browse-folder-btn"))
                 bFolder->SetProperty("display", "block");
-            if (auto* bTct = window.document->GetElementById("browse-tct-btn"))
+            if (auto *bTct = window.document->GetElementById("browse-tct-btn"))
                 bTct->SetProperty("display", "none");
 
             tabFolder->SetClassNames("tab-button active");
-            if (auto* tabTct = window.document->GetElementById("tab-tct"))
+            if (auto *tabTct = window.document->GetElementById("tab-tct"))
                 tabTct->SetClassNames("tab-button");
         }));
     }
 
-    if (auto* tabTct = window.document->GetElementById("tab-tct")) {
+    if (auto *tabTct = window.document->GetElementById("tab-tct")) {
         tabTct->AddEventListener(Rml::EventId::Click, new ButtonHandler([tabTct] {
-            if (auto* fDiv = window.document->GetElementById("tab-folder-div"))
+            if (auto *fDiv = window.document->GetElementById("tab-folder-div"))
                 fDiv->SetProperty("display", "none");
-            if (auto* tDiv = window.document->GetElementById("tab-tct-div"))
+            if (auto *tDiv = window.document->GetElementById("tab-tct-div"))
                 tDiv->SetProperty("display", "flex");
 
-            if (auto* bFolder = window.document->GetElementById("browse-folder-btn"))
+            if (auto *bFolder = window.document->GetElementById("browse-folder-btn"))
                 bFolder->SetProperty("display", "none");
-            if (auto* bTct = window.document->GetElementById("browse-tct-btn"))
+            if (auto *bTct = window.document->GetElementById("browse-tct-btn"))
                 bTct->SetProperty("display", "block");
 
             tabTct->SetClassNames("tab-button active");
-            if (auto* tabFolder = window.document->GetElementById("tab-folder"))
+            if (auto *tabFolder = window.document->GetElementById("tab-folder"))
                 tabFolder->SetClassNames("tab-button");
         }));
     }
@@ -439,10 +625,10 @@ inline void setStartupInterfaceEventListeners()
         browseFolderBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([doc = window.document] {
             std::string folder = BrowseFolder();
             if (!folder.empty()) {
-                if (auto* inputEl = doc->GetElementById("load-dir-input"))
-                    if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl))
+                if (auto *inputEl = doc->GetElementById("load-dir-input"))
+                    if (auto *input = dynamic_cast<Rml::ElementFormControl *>(inputEl))
                         input->SetValue(ToBackwardSlashes(folder));
-                        std::cout << "clicked" << std::endl;
+                std::cout << "clicked" << std::endl;
             }
         }));
     }
@@ -450,8 +636,8 @@ inline void setStartupInterfaceEventListeners()
         browseLoadBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([doc = window.document] {
             std::string folder = BrowseFolder();
             if (!folder.empty()) {
-                if (auto* inputEl = doc->GetElementById("load-dir-input"))
-                    if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl))
+                if (auto *inputEl = doc->GetElementById("load-dir-input"))
+                    if (auto *input = dynamic_cast<Rml::ElementFormControl *>(inputEl))
                         input->SetValue(ToBackwardSlashes(folder));
             }
         }));
@@ -461,10 +647,9 @@ inline void setStartupInterfaceEventListeners()
         browseTctBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([doc = window.document] {
             std::string file = BrowseTCTFile();
             if (!file.empty()) {
-                if (auto* inputEl = doc->GetElementById("load-dir-input"))
-                    if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl))
+                if (auto *inputEl = doc->GetElementById("load-dir-input"))
+                    if (auto *input = dynamic_cast<Rml::ElementFormControl *>(inputEl))
                         input->SetValue(ToBackwardSlashes(file));
-
             }
         }));
     }
@@ -483,6 +668,10 @@ inline void setStartupInterfaceEventListeners()
             if (saveNewProject()) {
                 doc->Hide();
                 std::cout << saveData.projectName << std::endl;
+                if ((window.document = window.context->LoadDocument("assets/interface.rml")))
+                    window.document->Show();
+
+                setInterfaceEventListeners();
             }
             //TODO: feedback
         }));
@@ -492,6 +681,10 @@ inline void setStartupInterfaceEventListeners()
             if (loadProject()) {
                 doc->Hide();
                 std::cout << saveData.projectName << std::endl;
+                if ((window.document = window.context->LoadDocument("assets/interface.rml")))
+                    window.document->Show();
+
+                setInterfaceEventListeners();
             }
             //TODO: feedback
         }));
@@ -522,6 +715,9 @@ inline void setStartupInterfaceEventListeners()
     PopulateFolders(window.document, "../saves/folderSaves/");
 }
 
-
-
-
+inline void switchToStartup() {
+    if ((window.document = window.context->LoadDocument("assets/startup.rml"))) {
+        setStartupInterfaceEventListeners();
+        window.document->Show();
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "scenes": [
+        {
+            "sceneName": "unterwasserwelt 9",
+            "sources": [
+                "test"
+            ]
+        },
+        {
+            "sceneName": "unterwasserwelt 19",
+            "sources": [
+                "test"
+            ]
+        },
+        {
+            "sceneName": "unterwasserwelt 119",
+            "sources": [
+                "test"
+            ]
+        }
+    ]
+}

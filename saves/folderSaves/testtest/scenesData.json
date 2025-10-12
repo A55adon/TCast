@@ -1,0 +1,10 @@
+{
+    "scenes": [
+        {
+            "sceneName": "testtest",
+            "sources": [
+                "test"
+            ]
+        }
+    ]
+}

@@ -76,10 +76,6 @@
                 </div>
             </div>
 
-            <div class="test-control">
-                <span id="beamerCountLabel">Aktuell: 9 Beamer</span>
-            </div>
-
             <div class="projector-grid" id="projectorGrid">
                 <div class="projector" id="projector-test"></div>
             </div>

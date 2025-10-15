@@ -7,19 +7,27 @@
 
 Window::Window(const int window_width, const int window_height): document(nullptr)
 {
+    std::cout << "[Window] Initializing" << std::endl;
     if (!ShellRml::Initialize())
         exit(1);
 
+    std::cout << "[Window] shellInit" << std::endl;
+
     if (!Backend::Initialize("TCast", window_width, window_height, true)) {
+        std::cout << "[Window] backendShutdown" << std::endl;
         ShellRml::Shutdown();
         exit(1);
     }
+    std::cout << "[Window] backendInit" << std::endl;
 
     Rml::SetSystemInterface(Backend::GetSystemInterface());
     Rml::SetRenderInterface(Backend::GetRenderInterface());
     Rml::Initialise();
 
+    std::cout << "[Window] renderinterfaceInit" << std::endl;
+
     glfwInit();
+    std::cout << "[Window] glfwInit" << std::endl;
 
     context = Rml::CreateContext("main", Rml::Vector2i(window_width, window_height));
     if (!context) {
@@ -36,10 +44,14 @@ Window::Window(const int window_width, const int window_height): document(nullpt
         {"ComicSans-Regular.ttf", true}
     };
 
+
     ShellRml::LoadFonts(font_faces);
+    std::cout << "[Window] loadFonts" << std::endl;
 
 
     glfwMaximizeWindow(Backend::GetWindow());
+
+    std::cout << "[Window] maximize" << std::endl;
 
 
     running = true;

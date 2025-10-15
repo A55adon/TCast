@@ -1,7 +1,3 @@
-#include "Helper.h"
-#include "RmlUi_Backend.h"
-
-
 /*
  * Info:
  * - Render interface is in RmlUi_Renderer_GL3.cpp and can do all stib_image file formats
@@ -19,6 +15,9 @@
  *  - Update Checking
 */
 
+#include <iostream>
+
+#include "helper.h"
 
 int main() {
     if (std::filesystem::exists("../saves/recent.path")) {
@@ -54,6 +53,7 @@ int main() {
     }
 
 
+    std::cout << "Project at: " << projectPath << std::endl;
     while (window.running) {
         window.update();
     }

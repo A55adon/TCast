@@ -1,0 +1,85 @@
+<rml>
+    <head>
+        <title>TCast</title>
+        <link type="text/rcss" href="interface.rcss"/>
+    </head>
+    <body class="window">
+    <div class="menu-bar">
+        <div class="menu-item">Datei
+            <div class="dropdown">
+                <button id= "file-dropdown-newproject">Neues Projekt</button>
+                <button id= "file-dropdown-loadproject">Projekt öffnen</button>
+                <button>Speichern</button>
+                <button>Speichern unter...</button>
+                <button id= "file-dropdown-importproject">Importieren (tct)</button>
+                <button id= "file-dropdown-exportproject">Exportieren (tct)</button>
+                <button id= "file-dropdown-closeproject">Projekt Schließen</button>
+                <button id= "file-dropdown-closeprogramm">Beenden</button>
+            </div>
+        </div>
+        <div class="menu-item">Einstellungen
+            <div class="dropdown">
+                <button>Allgemein</button>
+                <button>Anzeige</button>
+                <button>Projektoren</button>
+                <button>Netzwerk</button>
+            </div>
+        </div>
+        <div class="menu-item">Ansicht
+            <div class="dropdown">
+                <button>Layout zurücksetzen</button>
+                <button>Dunkles Theme</button>
+                <button>Volle Bildschirmansicht</button>
+            </div>
+        </div>
+        <div class="menu-item">Hilfe
+            <div class="dropdown">
+                <button>Dokumentation</button>
+                <button>Support</button>
+                <button>Über</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="scene-panel">
+            <div class="scene-header">
+                <div class="scene-title">Szenen</div>
+                <button id="add-scene-btn">+ Hinzufügen</button>
+            </div>
+
+            <div class="scene-list" id="sceneList">
+                <div class="scene-item">Szene 1</div>
+                <div class="scene-item">Szene 2</div>
+                <div class="scene-item">Szene 3</div>
+            </div>
+
+            <div class="scene-buttons">
+                <button>⮝ Hoch</button>
+                <button>⮟ Runter</button>
+                <button>🗑️ Alle löschen</button>
+            </div>
+        </div>
+        <div class="main-area">
+            <div class="main-top-bar">
+                <div class="logo">
+                      <!--<img src="test.jpg" alt="Logo" /> -->
+                    <span>TCast</span>
+                </div>
+
+                <h1 id="project-name" >Error-No-Project-Name-Found</h1>
+
+                <div class="top-right-buttons">
+                    <button>Vorschau</button>
+                    <button>Anzeige starten</button>
+                    <button>Stop</button>
+                </div>
+            </div>
+
+            <div class="projector-grid" id="projectorGrid">
+                <div class="projector" id="projector-test"></div>
+            </div>
+        </div>
+    </div>
+    </body>
+</rml>

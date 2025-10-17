@@ -52,7 +52,6 @@ int main() {
         }
     }
 
-
     std::cout << "Project at: " << projectPath << std::endl;
     while (window.running) {
         window.update();

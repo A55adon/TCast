@@ -53,7 +53,7 @@ add_custom_command(TARGET TCast POST_BUILD
         "${CMAKE_SOURCE_DIR}/libs/RmlUi/build-mingw/librmlui.dll"
         "${CMAKE_SOURCE_DIR}/libs/RmlUi/build-mingw/librmlui_debugger.dll"
         "${CMAKE_SOURCE_DIR}/libs/GLFW/lib/glfw3.dll"
-        "${CMAKE_SOURCE_DIR}/libs/freetype_x64-windows/bin/freetype.dll"
+        "${CMAKE_SOURCE_DIR}/libs/freetype_x64-windows/libfreetype-6.dll"
         "${CMAKE_SOURCE_DIR}/libs/glew-2.1.0/bin/Release/Win32/glew32.dll"
         "${CMAKE_SOURCE_DIR}/libs/default/libstdc++-6.dll"
         "${CMAKE_SOURCE_DIR}/libs/default/libgcc_s_seh-1.dll"

@@ -62,6 +62,7 @@ add_custom_command(TARGET TCast POST_BUILD
         "${CMAKE_SOURCE_DIR}/libs/default/libharfbuzz-0.dll"
         "${CMAKE_SOURCE_DIR}/libs/default/libpng16-16.dll"
         "${CMAKE_SOURCE_DIR}/libs/default/zlib1.dll"
+        "${CMAKE_SOURCE_DIR}/libs/default/libbz2-1.dll"
         $<TARGET_FILE_DIR:TCast>
         COMMENT "Copying DLLs..."
 )

@@ -1,15 +1,15 @@
 # ninja log v6
 95	4349	7819128413953696	CMakeFiles/TCast.dir/src/Projector.cpp.obj	78b3b896781b9c9b
 99	9269	7822410574717793	CMakeFiles/TCast.dir/src/Helper.cpp.obj	be8c5b7cadaf33e9
-15	129	7824241681287502	CMakeFiles/copy_assets	7f4e254f88f1bff1
-15	1023	7824249777539226	build.ninja	d1016084891d5548
+16	96	7824249828959151	CMakeFiles/copy_assets	7f4e254f88f1bff1
+15	1023	7824251513544816	build.ninja	d1016084891d5548
 111	3401	7819128414104790	CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp.obj	26c1b0ee2006f8a2
-15	129	7824241681287502	C:/Code/TCast/cmake-build-debug/CMakeFiles/copy_assets	7f4e254f88f1bff1
+16	96	7824249828959151	C:/Code/TCast/cmake-build-debug/CMakeFiles/copy_assets	7f4e254f88f1bff1
 101	1481	7822421806816170	CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj	6a2b842ff19430f6
 151	3163	7819128414514969	CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/RendererExtensions.cpp.obj	41e43dac21c6ee61
 161	3568	7819128414610298	CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.obj	2fc5603632abfdd
 172	3250	7819128414719709	CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj	8e52185b3f9f7d06
-13621	14582	7824241817344730	TCast.exe	9010f6479f66ff31
+136	1098	7824249801772206	TCast.exe	e1719ea8b37268d1
 90	1659	7822415070272348	CMakeFiles/TCast.dir/src/Window.cpp.obj	d0181e1b501effe4
 140	5291	7819128414404573	CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp.obj	ead1f10edb938b4a
 123	5481	7820016074910668	CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp.obj	72ae9740b2f13417
@@ -18,8 +18,3 @@
 120	10508	7822462442214447	CMakeFiles/TCast.dir/src/ProjectManager.cpp.obj	59db407dfed71f72
 99	3193	7822502076670538	CMakeFiles/TCast.dir/src/Data.cpp.obj	f7e64f7e7db13b2f
 194	6822	7822498696117176	CMakeFiles/TCast.dir/src/PathUtils.cpp.obj	ea4b4197b97ce0ab
-31	135	7824249800729976	CMakeFiles/copy_assets	7f4e254f88f1bff1
-31	135	7824249800729976	C:/Code/TCast/cmake-build-debug/CMakeFiles/copy_assets	7f4e254f88f1bff1
-136	1098	7824249801772206	TCast.exe	e1719ea8b37268d1
-16	96	7824249828959151	CMakeFiles/copy_assets	7f4e254f88f1bff1
-16	96	7824249828959151	C:/Code/TCast/cmake-build-debug/CMakeFiles/copy_assets	7f4e254f88f1bff1

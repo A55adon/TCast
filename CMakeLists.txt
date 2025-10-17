@@ -58,6 +58,7 @@ add_custom_command(TARGET TCast POST_BUILD
         "${CMAKE_SOURCE_DIR}/libs/default/libstdc++-6.dll"
         "${CMAKE_SOURCE_DIR}/libs/default/libgcc_s_seh-1.dll"
         "${CMAKE_SOURCE_DIR}/libs/default/libwinpthread-1.dll"
+        "${CMAKE_SOURCE_DIR}/libs/default/libbrotlidec.dll"
         $<TARGET_FILE_DIR:TCast>
         COMMENT "Copying DLLs..."
 )

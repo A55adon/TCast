@@ -64,8 +64,20 @@ add_custom_command(TARGET TCast POST_BUILD
         "${CMAKE_SOURCE_DIR}/libs/default/zlib1.dll"
         "${CMAKE_SOURCE_DIR}/libs/default/libbz2-1.dll"
         $<TARGET_FILE_DIR:TCast>
-        COMMENT "Copying DLLs..."
+        COMMENT "Copying DLLs..."#
 )
+
+# Copy only .dll files from libs/bin to the build output directory
+file(GLOB DLL_FILES "${CMAKE_SOURCE_DIR}/libs/bin/*.dll")
+
+add_custom_command(TARGET TCast POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E echo "Copying DLLs to build folder..."
+        COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:TCast>"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${DLL_FILES}
+        "$<TARGET_FILE_DIR:TCast>"
+)
+
 
 # Always copy assets on build
 #file(GLOB_RECURSE ASSET_FILES "${CMAKE_SOURCE_DIR}/assets/*")

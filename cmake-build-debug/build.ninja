@@ -131,7 +131,7 @@ build TCast.exe: CXX_EXECUTABLE_LINKER__TCast_Debug CMakeFiles/TCast.dir/src/mai
   FLAGS = -g
   LINK_LIBRARIES = C:/Code/TCast/libs/RmlUi/build-mingw/librmlui.dll.a  C:/Code/TCast/libs/RmlUi/build-mingw/librmlui_debugger.dll.a  C:/Code/TCast/libs/GLFW/lib/libglfw3.dll.a  C:/Code/TCast/libs/glew-2.1.0/lib/Release/x64/glew32.lib  -lopengl32  -lShlwapi  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\TCast.dir
-  POST_BUILD = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Code\TCast\cmake-build-debug && C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Code/TCast/libs/RmlUi/build-mingw/librmlui.dll C:/Code/TCast/libs/RmlUi/build-mingw/librmlui_debugger.dll C:/Code/TCast/libs/GLFW/lib/glfw3.dll C:/Code/TCast/libs/freetype_x64-windows/libfreetype-6.dll C:/Code/TCast/libs/glew-2.1.0/bin/Release/Win32/glew32.dll C:/Code/TCast/libs/default/libstdc++-6.dll C:/Code/TCast/libs/default/libgcc_s_seh-1.dll C:/Code/TCast/libs/default/libwinpthread-1.dll C:/Code/TCast/libs/default/libbrotlidec.dll C:/Code/TCast/libs/default/libharfbuzz-0.dll C:/Code/TCast/libs/default/libpng16-16.dll C:/Code/TCast/libs/default/zlib1.dll C:/Code/TCast/libs/default/libbz2-1.dll C:/Code/TCast/cmake-build-debug"
+  POST_BUILD = CMakeFiles\TCast.dir\post-build.bat 19046779dcef6f86
   PRE_LINK = cd .
   TARGET_FILE = TCast.exe
   TARGET_IMPLIB = libTCast.dll.a

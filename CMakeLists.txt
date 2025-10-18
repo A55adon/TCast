@@ -68,7 +68,7 @@ add_custom_command(TARGET TCast POST_BUILD
 )
 
 # Copy only .dll files from libs/bin to the build output directory
-file(GLOB DLL_FILES "${CMAKE_SOURCE_DIR}/libs/bin/*.dll")
+file(GLOB DLL_FILES "${CMAKE_SOURCE_DIR}/libs/other/*.dll")
 foreach(dll ${DLL_FILES})
     add_custom_command(TARGET TCast POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_if_different

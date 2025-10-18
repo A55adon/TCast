@@ -1,0 +1,1 @@
+-IC:/Code/TCast/include -IC:/Code/TCast/include/stb -IC:/Code/TCast/libs/RmlUi/include -IC:/Code/TCast/libs/GLFW/include -I"C:/Code/TCast/libs/glew-2.1.0/include" -IC:/Code/TCast/libs/RmlUi/Backends -IC:/Code/TCast/libs/RmlUi/Samples/shell/include -IC:/Code/TCast/libs/glad/include

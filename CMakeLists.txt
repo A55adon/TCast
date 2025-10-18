@@ -69,14 +69,13 @@ add_custom_command(TARGET TCast POST_BUILD
 
 # Copy only .dll files from libs/bin to the build output directory
 file(GLOB DLL_FILES "${CMAKE_SOURCE_DIR}/libs/bin/*.dll")
-
-add_custom_command(TARGET TCast POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E echo "Copying DLLs to build folder..."
-        COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:TCast>"
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        ${DLL_FILES}
-        "$<TARGET_FILE_DIR:TCast>"
-)
+foreach(dll ${DLL_FILES})
+    add_custom_command(TARGET TCast POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${dll}"
+            "$<TARGET_FILE_DIR:TCast>"
+    )
+endforeach()
 
 
 # Always copy assets on build
@@ -88,5 +87,6 @@ add_custom_target(copy_assets ALL
         DEPENDS ${ASSET_FILES}
         COMMENT "Copying assets..."
 )
+
 
 add_dependencies(TCast copy_assets)

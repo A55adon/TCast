@@ -19,27 +19,32 @@
 
 #include "helper.h"
 
-int main() {
+std::filesystem::path getRecentPath() {
     if (std::filesystem::exists("../saves/recent.path")) {
         std::fstream pFile("../saves/recent.path");
         std::stringstream path;
         path << pFile.rdbuf();
         pFile.close();
-        std::cout << "Found recent path" << path.str() << '\n';
-        if (!std::filesystem::exists(path.str())) {
-            std::cout << "Path was not found - going to startup" << path.str() << '\n';
-            if ((window.document = window.context->LoadDocument("assets/startup.rml"))) {
-                setStartupInterfaceEventListeners();
-                window.document->Show();
-            }
+        std::filesystem::path pathfilesystem(path.str());
+
+        if (!std::filesystem::exists(pathfilesystem)) {
+            std::cout << "Path does not exist - going to startup: " << path.str() << '\n';
         }
-        std::ifstream jFile(path.str());
+        return pathfilesystem;
+    }
+    return "";
+}
+
+int main() {
+    std::filesystem::path path = getRecentPath();
+    if (path != "") {
+        projectPath = path.parent_path();
+        std::ifstream jFile(path);
         nlohmann::json j;
         jFile >> j;
 
         from_json(j, saveData);
         std::cout << saveData.path << std::endl;
-
 
         if ((window.document = window.context->LoadDocument("assets/interface.rml")))
             window.document->Show();
@@ -51,8 +56,8 @@ int main() {
             window.document->Show();
         }
     }
-
     std::cout << "Project at: " << projectPath << std::endl;
+
     while (window.running) {
         window.update();
     }

@@ -1,16 +1,22 @@
 {
     "scenes": [
         {
-            "sceneName": "Szene 1",
-            "sources": []
+            "sceneName": "unterwasserwelt 9",
+            "sources": [
+                "test"
+            ]
         },
         {
-            "sceneName": "Szene 2",
-            "sources": []
+            "sceneName": "unterwasserwelt 19",
+            "sources": [
+                "test"
+            ]
         },
         {
-            "sceneName": "Szene 3",
-            "sources": []
+            "sceneName": "unterwasserwelt 119",
+            "sources": [
+                "test"
+            ]
         },
         {
             "sceneName": "Szene 4",
@@ -18,14 +24,6 @@
         },
         {
             "sceneName": "Szene 5",
-            "sources": []
-        },
-        {
-            "sceneName": "Szene 6",
-            "sources": []
-        },
-        {
-            "sceneName": "Szene 7",
             "sources": []
         }
     ]

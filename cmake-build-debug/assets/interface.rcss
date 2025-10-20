@@ -110,7 +110,6 @@ body {
 .scene-header button {
     background-color: #00aced;
     color: white;
-    border: none;
     border-radius: 6px;
     padding: 6px 10px;
     cursor: pointer;

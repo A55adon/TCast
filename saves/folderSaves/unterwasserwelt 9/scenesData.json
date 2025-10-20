@@ -17,6 +17,14 @@
             "sources": [
                 "test"
             ]
+        },
+        {
+            "sceneName": "Szene 4",
+            "sources": []
+        },
+        {
+            "sceneName": "Szene 5",
+            "sources": []
         }
     ]
 }

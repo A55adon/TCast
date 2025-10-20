@@ -391,7 +391,6 @@ TCast.exe: CMakeFiles/TCast.dir/link.txt
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Code/TCast/libs/other/libwinpthread-1.dll C:/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Code/TCast/libs/other/libxml2-2.dll C:/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Code/TCast/libs/other/libzstd.dll C:/Code/TCast/cmake-build-debug
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Code/TCast/libs/other/opengl32.dll C:/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Code/TCast/libs/other/vulkan-1.dll C:/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Code/TCast/libs/other/zlib1.dll C:/Code/TCast/cmake-build-debug
 

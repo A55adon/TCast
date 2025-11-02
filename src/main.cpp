@@ -8,51 +8,35 @@
  * - loading a project doesnt redirect to the interface screen
 
  * Todo:
- *  - dont have a recentpath
+ *  - settings
+ *  - dont have a recentpath as a setting
  *  - delete projects
  *  - callbacks for exporting importing saving loading etc
  *  - if clicking on new project or loadproject have the ability to go back
  *  - Update Checking
 */
 
-#include <iostream>
-
 #include "helper.h"
 
-std::filesystem::path getRecentPath() {
-    if (std::filesystem::exists("../saves/recent.path")) {
-        std::fstream pFile("../saves/recent.path");
-        std::stringstream path;
-        path << pFile.rdbuf();
-        pFile.close();
-        std::filesystem::path pathfilesystem(path.str());
-
-        if (!std::filesystem::exists(pathfilesystem)) {
-            std::cout << "Path does not exist - going to startup: " << path.str() << '\n';
-        }
-        return pathfilesystem;
-    }
-    return "";
-}
-
 int main() {
-    std::filesystem::path path = getRecentPath();
+    std::filesystem::path path = Utilities::getRecentPath();
     if (path != "") {
         projectPath = path.parent_path();
-        std::ifstream jFile(path);
+        std::ifstream jFile(path / "saveData.json");
         nlohmann::json j;
         jFile >> j;
 
         from_json(j, saveData);
         std::cout << saveData.path << std::endl;
 
-        if ((window.document = window.context->LoadDocument("assets/interface.rml")))
+        if ((window.document = window.context->LoadDocument("assets/interface.rml"))) {
+            setInterfaceEventListeners();
             window.document->Show();
+        }
 
-        setInterfaceEventListeners();
     } else {
         if ((window.document = window.context->LoadDocument("assets/startup.rml"))) {
-            setStartupInterfaceEventListeners();
+            setStartupEventListeners();
             window.document->Show();
         }
     }

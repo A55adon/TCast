@@ -164,10 +164,6 @@ body {
     align-content: stretch; /* lets rows stretch to fill vertical space */
 }
 
-#projector-test
-{
-    decorator: image("test.jpg" fill)
-}
 
 .projector {
     display: flex;

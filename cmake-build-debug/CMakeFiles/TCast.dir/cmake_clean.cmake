@@ -15,6 +15,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj.d"
   "CMakeFiles/TCast.dir/src/Projector.cpp.obj"
   "CMakeFiles/TCast.dir/src/Projector.cpp.obj.d"
+  "CMakeFiles/TCast.dir/src/Utilities.cpp.obj"
+  "CMakeFiles/TCast.dir/src/Utilities.cpp.obj.d"
   "CMakeFiles/TCast.dir/src/Window.cpp.obj"
   "CMakeFiles/TCast.dir/src/Window.cpp.obj.d"
   "CMakeFiles/TCast.dir/src/main.cpp.obj"

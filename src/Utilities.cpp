@@ -1,29 +1,7 @@
-#pragma once
+#include "Utilities.h"
 
-using json = nlohmann::json;
-
-struct SaveData {
-    std::string projectName;
-    int projectorCount{};
-    std::string description;
-    std::string path;
-};
-
-struct SceneData {
-    std::string sceneName;
-    std::vector<std::string> sources;
-
-    SceneData(){}
-
-    SceneData(const std::string& name, std::vector<std::string> src)
-        : sceneName(name), sources(std::move(src)) {}
-};
-
-struct SceneManager {
-    std::vector<SceneData> scenes;
-};
-
-inline void to_json(json &j, const SaveData &d) {
+// JSON serialization implementations
+void to_json(json &j, const SaveData &d) {
     j = json{
             {"projectName", d.projectName},
             {"projectorCount", d.projectorCount},
@@ -32,36 +10,37 @@ inline void to_json(json &j, const SaveData &d) {
     };
 }
 
-inline void to_json(json &j, const SceneData &s) {
+void to_json(json &j, const SceneData &s) {
     j = json{
             {"sceneName", s.sceneName},
             {"sources", s.sources}
     };
 }
 
-inline void to_json(json &j, const SceneManager &m) {
+void to_json(json &j, const SceneManager &m) {
     j = json{
             {"scenes", m.scenes}
     };
 }
 
-inline void from_json(const json &j, SaveData &d) {
+void from_json(const json &j, SaveData &d) {
     j.at("projectName").get_to(d.projectName);
     j.at("projectorCount").get_to(d.projectorCount);
     j.at("description").get_to(d.description);
     j.at("path").get_to(d.path);
 }
 
-inline void from_json(const json &j, SceneData &s) {
+void from_json(const json &j, SceneData &s) {
     j.at("sceneName").get_to(s.sceneName);
     j.at("sources").get_to(s.sources);
 }
 
-inline void from_json(const json &j, SceneManager &m) {
+void from_json(const json &j, SceneManager &m) {
     j.at("scenes").get_to(m.scenes);
 }
 
-inline std::string BrowseFolder() {
+// Utilities class implementations
+std::string Utilities::browseFolder() {
     std::string result;
     IFileDialog *pfd = nullptr;
     if (SUCCEEDED(CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&pfd)))) {
@@ -87,7 +66,7 @@ inline std::string BrowseFolder() {
     return result;
 }
 
-inline std::string BrowseTCTFile() {
+std::string Utilities::browseTCTFile() {
     std::string result;
     IFileDialog *pfd = nullptr;
     if (SUCCEEDED(CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&pfd)))) {
@@ -117,8 +96,7 @@ inline std::string BrowseTCTFile() {
     return result;
 }
 
-
-inline std::string GetExecutablePath() {
+std::string Utilities::getExecutablePath() {
     char buffer[MAX_PATH];
     DWORD len = GetModuleFileNameA(nullptr, buffer, MAX_PATH);
     if (len == 0 || len == MAX_PATH) {
@@ -127,8 +105,8 @@ inline std::string GetExecutablePath() {
     return std::string(buffer, len);
 }
 
-inline std::string GetSaveFolderPath() {
-    std::filesystem::path exePath = GetExecutablePath();
+std::string Utilities::getSaveFolderPath() {
+    std::filesystem::path exePath = getExecutablePath();
     std::filesystem::path exeDir = exePath.parent_path(); // ...\cmake-build-debug (build directory)
     std::filesystem::path projectDir = exeDir.parent_path(); // ...\TCast
     std::filesystem::path savePath = projectDir / "saves" / "folderSaves";
@@ -139,9 +117,43 @@ inline std::string GetSaveFolderPath() {
     return savePath.string();
 }
 
-inline std::string ToBackwardSlashes(const std::string &path) {
+std::string Utilities::toBackwardSlashes(const std::string &path) {
     std::string fixed = path;
     std::replace(fixed.begin(), fixed.end(), '/', '\\');
     return fixed;
 }
 
+std::filesystem::path Utilities::getRecentPath() {
+    static const std::filesystem::path recentFilePath = "../saves/recent.path";
+
+    // Check if recent.path exists
+    if (!std::filesystem::exists(recentFilePath)) {
+        return std::filesystem::path{};
+    }
+
+    // Read the path from recent.path
+    std::ifstream file(recentFilePath);
+    if (!file.is_open()) {
+        std::cerr << "Unable to open recent file: " << recentFilePath << '\n';
+        return std::filesystem::path{};
+    }
+
+    std::string line;
+    std::getline(file, line);
+    file.close();
+
+    // Trim whitespace
+    const auto first = line.find_first_not_of(" \t\r\n");
+    if (first == std::string::npos) {
+        return std::filesystem::path{};
+    }
+    const auto last = line.find_last_not_of(" \t\r\n");
+    std::string pathStr = line.substr(first, last - first + 1);
+
+    std::filesystem::path result{ pathStr };
+    if (!std::filesystem::exists(result)) {
+        std::cout << "Path does not exist - going to startup: " << pathStr << '\n';
+    }
+    std::cout << "Found recent: " <<  pathStr << std::endl;
+    return result;
+}

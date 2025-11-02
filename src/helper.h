@@ -13,7 +13,7 @@
 #include "ButtonListener.h"
 #include <fstream>
 #include <iostream>
-#include "Utils.h"
+#include "Utilities.h"
 
 // Global variables
 inline SaveData saveData;
@@ -22,10 +22,9 @@ inline Window window(1920, 1080);
 inline bool createRecentPath = true;
 inline std::filesystem::path projectPath;
 
+
 // Forward declarations
 void switchToStartup();
-void setInterfaceEventListeners();
-void setStartupInterfaceEventListeners();
 bool saveProject(const std::filesystem::path& projectPath);
 bool loadProject();
 bool saveNewProject();
@@ -86,7 +85,7 @@ inline void populateFolders(Rml::ElementDocument* doc, const std::string& path) 
                 [doc, fullPath] {
                     if (auto* inputEl = doc->GetElementById("load-dir-input")) {
                         if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl)) {
-                            input->SetValue(ToBackwardSlashes(fullPath));
+                            input->SetValue(Utilities::toBackwardSlashes(fullPath));
                         }
                     }
                 }
@@ -410,7 +409,47 @@ inline bool loadProject() {
 
 // ============ EVENT LISTENER SETUP METHODS ============
 
-inline void setupFileDropdownListeners() {
+
+// ============ SCENE MANAGEMENT ============
+
+
+inline void setupFileDropdownListeners();
+inline void setupProjectorGrid();
+inline void setupSceneManagement();
+inline void setupTabListeners();
+inline void setupBrowseButtons();
+inline void setupProjectActions();
+inline void setupProjectSelection();
+
+
+void setStartupEventListeners() {
+    setupTabListeners();
+    setupBrowseButtons();
+    setupProjectActions();
+    setupProjectSelection();
+
+    // Set default directory
+    if (auto* el = window.document->GetElementById("project-dir-input")) {
+        if (auto* input = dynamic_cast<Rml::ElementFormControl*>(el)) {
+            input->SetValue(Utilities::toBackwardSlashes(Utilities::getSaveFolderPath()));
+        }
+    }
+
+    populateFolders(window.document, "../saves/folderSaves/");
+}
+
+void setInterfaceEventListeners() {
+    if (!loadScenesData(projectPath)) {
+        std::cerr << "Failed to load scenesData" << std::endl;
+    }
+
+    setupFileDropdownListeners();
+    setupProjectorGrid();
+    setupSceneManagement();
+}
+
+
+void setupFileDropdownListeners() {
     // New Project
     if (auto* dropdownNewproject = window.document->GetElementById("file-dropdown-newproject")) {
         dropdownNewproject->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
@@ -488,7 +527,7 @@ inline void setupFileDropdownListeners() {
     }
 }
 
-inline void setupProjectorGrid() {
+void setupProjectorGrid() {
     if (auto* projectorgrid = window.document->GetElementById("projectorGrid")) {
         std::cout << "[Info] Projector count: " << saveData.projectorCount << std::endl;
         for (int i = 0; i < saveData.projectorCount; ++i) {
@@ -504,7 +543,8 @@ inline void setupProjectorGrid() {
     }
 }
 
-inline void setupSceneManagement() {
+
+void setupSceneManagement() {
     if (auto* addSceneButton = window.document->GetElementById("add-scene-btn")) {
         addSceneButton->AddEventListener(Rml::EventId::Click,
             new ButtonHandler([]() {
@@ -527,17 +567,7 @@ inline void setupSceneManagement() {
     }
 }
 
-inline void setInterfaceEventListeners() {
-    if (!loadScenesData(projectPath)) {
-        std::cerr << "Failed to load scenesData" << std::endl;
-    }
-
-    setupFileDropdownListeners();
-    setupProjectorGrid();
-    setupSceneManagement();
-}
-
-inline void setupTabListeners() {
+void setupTabListeners() {
     // Main tabs (Load/New)
     if (auto* tabLoad = window.document->GetElementById("tab-load")) {
         tabLoad->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
@@ -581,15 +611,15 @@ inline void setupTabListeners() {
     }
 }
 
-inline void setupBrowseButtons() {
+ void setupBrowseButtons() {
     // Folder browse buttons
     if (auto* browseFolderBtn = window.document->GetElementById("browse-folder-btn")) {
         browseFolderBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
-            std::string folder = BrowseFolder();
+            std::string folder = Utilities::browseFolder();
             if (!folder.empty()) {
                 if (auto* inputEl = window.document->GetElementById("load-dir-input")) {
                     if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl)) {
-                        input->SetValue(ToBackwardSlashes(folder));
+                        input->SetValue(Utilities::toBackwardSlashes(folder));
                     }
                 }
             }
@@ -598,11 +628,11 @@ inline void setupBrowseButtons() {
 
     if (auto* browseLoadBtn = window.document->GetElementById("browse-load-btn")) {
         browseLoadBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
-            std::string folder = BrowseFolder();
+            std::string folder = Utilities::browseFolder();
             if (!folder.empty()) {
                 if (auto* inputEl = window.document->GetElementById("load-dir-input")) {
                     if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl)) {
-                        input->SetValue(ToBackwardSlashes(folder));
+                        input->SetValue(Utilities::toBackwardSlashes(folder));
                     }
                 }
             }
@@ -612,11 +642,11 @@ inline void setupBrowseButtons() {
     // TCT file browse button
     if (auto* browseTctBtn = window.document->GetElementById("browse-tct-btn")) {
         browseTctBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
-            std::string file = BrowseTCTFile();
+            std::string file = Utilities::browseTCTFile();
             if (!file.empty()) {
                 if (auto* inputEl = window.document->GetElementById("load-dir-input")) {
                     if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl)) {
-                        input->SetValue(ToBackwardSlashes(file));
+                        input->SetValue(Utilities::toBackwardSlashes(file));
                     }
                 }
             }
@@ -628,14 +658,14 @@ inline void setupBrowseButtons() {
         browseDirBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
             if (auto* el = window.document->GetElementById("project-dir-input")) {
                 if (auto* input = dynamic_cast<Rml::ElementFormControl*>(el)) {
-                    input->SetValue(ToBackwardSlashes(BrowseFolder()));
+                    input->SetValue(Utilities::toBackwardSlashes(Utilities::browseFolder()));
                 }
             }
         }));
     }
 }
 
-inline void setupProjectActions() {
+void setupProjectActions() {
     // Save new project
     if (auto* saveNewProjectBtn = window.document->GetElementById("save-btn")) {
         saveNewProjectBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
@@ -667,7 +697,7 @@ inline void setupProjectActions() {
     }
 }
 
-inline void setupProjectSelection() {
+void setupProjectSelection() {
     for (int i = 1; i <= 5; i++) {
         std::string id = "folder-proj-" + std::to_string(i);
         if (auto* proj = window.document->GetElementById(id)) {
@@ -687,27 +717,9 @@ inline void setupProjectSelection() {
     }
 }
 
-inline void setStartupInterfaceEventListeners() {
-    setupTabListeners();
-    setupBrowseButtons();
-    setupProjectActions();
-    setupProjectSelection();
-
-    // Set default directory
-    if (auto* el = window.document->GetElementById("project-dir-input")) {
-        if (auto* input = dynamic_cast<Rml::ElementFormControl*>(el)) {
-            input->SetValue(ToBackwardSlashes(GetSaveFolderPath()));
-        }
-    }
-
-    populateFolders(window.document, "../saves/folderSaves/");
-}
-
-// ============ SCENE MANAGEMENT ============
-
-inline void switchToStartup() {
+void switchToStartup() {
     if ((window.document = window.context->LoadDocument("assets/startup.rml"))) {
-        setStartupInterfaceEventListeners();
+        setStartupEventListeners();
         window.document->Show();
     }
 }

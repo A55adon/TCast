@@ -16,6 +16,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Code/TCast/libs/RmlUi/Samples/shell/src/Shell.cpp" "CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.obj" "gcc" "CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.obj.d"
   "C:/Code/TCast/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp" "CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj" "gcc" "CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj.d"
   "C:/Code/TCast/src/Projector.cpp" "CMakeFiles/TCast.dir/src/Projector.cpp.obj" "gcc" "CMakeFiles/TCast.dir/src/Projector.cpp.obj.d"
+  "C:/Code/TCast/src/Utilities.cpp" "CMakeFiles/TCast.dir/src/Utilities.cpp.obj" "gcc" "CMakeFiles/TCast.dir/src/Utilities.cpp.obj.d"
   "C:/Code/TCast/src/Window.cpp" "CMakeFiles/TCast.dir/src/Window.cpp.obj" "gcc" "CMakeFiles/TCast.dir/src/Window.cpp.obj.d"
   "C:/Code/TCast/src/main.cpp" "CMakeFiles/TCast.dir/src/main.cpp.obj" "gcc" "CMakeFiles/TCast.dir/src/main.cpp.obj.d"
   )

@@ -3,7 +3,7 @@
         <title>TCast</title>
         <link type="text/rcss" href="interface.rcss"/>
     </head>
-    <body class="window">
+    <body id="body" class="window">
     <div class="menu-bar">
         <div class="menu-item">Datei
             <div class="dropdown">
@@ -73,12 +73,22 @@
                     <button>Stop</button>
                 </div>
             </div>
-
-            <div class="projector-grid" id="projectorGrid">
+            <div class=main-body" id="main-body">
+                <div class="projector-grid" id="projectorGrid">
+                </div>
+                <div class="resizable-container">
+                    <div class="left-panel" id="left-panel">
+                        Left Content
+                    </div>
+                    <div class="resize-handle" id="resize-handle"></div>
+                    <div class="right-panel" id="right-panel">
+                        Right Content
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div id="sceneContextMenu" class="context-menu" style="display: none; position: absolute; background: #34495e; border: 1px solid #00aced; border-radius: 4px; padding: 4px; z-index: 1000;">
+    <div id="sceneContextMenu" class="context-menu" style="display: none; position: absolute;">
         <button id="context-rename" class="context-menu-item">Rename</button>
         <button id="context-delete" class="context-menu-item">Delete</button>
         <button id="context-duplicate" class="context-menu-item">Duplicate</button>

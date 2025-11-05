@@ -1,23 +1,7 @@
 {
     "scenes": [
         {
-            "sceneName": "Szene 1",
-            "sources": []
-        },
-        {
-            "sceneName": "Szene 2",
-            "sources": []
-        },
-        {
-            "sceneName": "Szene 3",
-            "sources": []
-        },
-        {
-            "sceneName": "Szene 4",
-            "sources": []
-        },
-        {
-            "sceneName": "Szene 5",
+            "sceneName": "test2",
             "sources": []
         }
     ]

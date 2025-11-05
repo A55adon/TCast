@@ -13,7 +13,7 @@
 #include "ButtonListener.h"
 #include <fstream>
 #include <iostream>
-#include "../include/Utilities.h"
+#include "Utilities.h"
 #include "SceneEventListener.h"
 
 // ============ GLOBAL VARIABLES ============
@@ -69,6 +69,123 @@ inline void setSelectedProject(Rml::ElementDocument* doc, const std::string& nam
     }
 }
 
+inline void showRenameDialog(int sceneIndex) {
+
+    if (sceneIndex < 0 || sceneIndex >= (int)sceneManager.scenes.size()) {
+        std::cerr << "[Error] Invalid scene index for rename: " << sceneIndex << std::endl;
+        return;
+    }
+
+    // Get the scene item element
+    std::string sceneItemId = "scene-item-" + std::to_string(sceneIndex);
+    if (auto* sceneItem = window.document->GetElementById(sceneItemId)) {
+        // Store the current name for potential cancellation
+        std::string currentName = sceneManager.scenes[sceneIndex].sceneName;
+
+        // Replace the scene item content with a container
+        sceneItem->SetInnerRML("");
+        sceneItem->SetClass("renaming", true);
+
+        // Create container for input and button
+        Rml::ElementPtr container = window.document->CreateElement("div");
+        container->SetClass("rename-container", true);
+
+        // Create input field
+        Rml::ElementPtr input = window.document->CreateElement("input");
+        input->SetAttribute("type", "text");
+        input->SetAttribute("value", currentName);
+        input->SetId("rename-input-" + std::to_string(sceneIndex));
+        input->SetClass("rename-input", true);
+
+        // Stop propagation for input field clicks
+        input->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
+            //std::cout << "Input field click - propagation stopped" << std::endl;
+        }, true)); // The true parameter will stop propagation
+
+        input->AddEventListener(Rml::EventId::Mouseup, new ButtonHandler([] {
+            //std::cout << "Input field mouseup - propagation stopped" << std::endl;
+        }, true));
+
+        // Create OK button
+        Rml::ElementPtr okButton = window.document->CreateElement("button");
+        okButton->SetInnerRML("OK");
+        okButton->SetId("rename-ok-" + std::to_string(sceneIndex));
+        okButton->SetClass("rename-ok-button", true);
+
+        // Stop propagation for OK button clicks
+        okButton->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
+            //std::cout << "OK button click - propagation stopped" << std::endl;
+        }, true));
+
+        okButton->AddEventListener(Rml::EventId::Mouseup, new ButtonHandler([] {
+            //std::cout << "OK button mouseup - propagation stopped" << std::endl;
+        }, true));
+
+        // Add event listener for Enter key in input field
+        input->AddEventListener(Rml::EventId::Keydown, new KeyEventHandler([sceneIndex, currentName](Rml::Event& event) {
+            if (event.GetParameter<int>("key_identifier", 0) == Rml::Input::KI_RETURN) {
+                //std::cout << "Enter key pressed in rename input" << std::endl;
+                event.StopPropagation(); // Stop the Enter key from propagating
+
+                // Simulate OK button click when Enter is pressed
+                if (auto* okButton = window.document->GetElementById("rename-ok-" + std::to_string(sceneIndex))) {
+                    okButton->Click();
+                }
+            }
+        }));
+
+        // Add event listener for OK button functionality
+        okButton->AddEventListener(Rml::EventId::Click, new ButtonHandler([sceneIndex, currentName] {
+            //std::cout << "OK button clicked for scene: " << sceneIndex << std::endl;
+            if (auto* inputEl = window.document->GetElementById("rename-input-" + std::to_string(sceneIndex))) {
+                if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl)) {
+                    std::string newName = input->GetValue();
+
+                    // Validate the new name
+                    if (!newName.empty() && validateInputField(newName, "Szenenname")) {
+                        // Update the scene name
+                        sceneManager.scenes[sceneIndex].sceneName = newName;
+
+                        // Save the project
+                        std::filesystem::path fullProjectPath = std::filesystem::path(saveData.path) / saveData.projectName;
+                        saveProject(fullProjectPath);
+
+                        //std::cout << "Scene renamed to: " << newName << std::endl;
+                    } else {
+                        // If invalid, restore original name
+                        sceneManager.scenes[sceneIndex].sceneName = currentName;
+                        std::cout << "[Error] Rename cancelled or invalid name" << std::endl;
+                    }
+
+                    // Always refresh to show the updated name
+                    refreshScenes();
+                }
+            }
+        }));
+
+        // Also stop propagation on the container itself
+        container->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
+            std::cout << "Container click - propagation stopped" << std::endl;
+        }, true));
+
+        container->AddEventListener(Rml::EventId::Mouseup, new ButtonHandler([] {
+            std::cout << "Container mouseup - propagation stopped" << std::endl;
+        }, true));
+
+        // Append input and button to container, then container to scene item
+        container->AppendChild(std::move(input));
+        container->AppendChild(std::move(okButton));
+        sceneItem->AppendChild(std::move(container));
+
+        // Focus the input field
+        if (auto* inputEl = window.document->GetElementById("rename-input-" + std::to_string(sceneIndex))) {
+            if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl)) {
+                input->Focus();
+            }
+        }
+    }
+}
+
 inline void refreshScenes() {
     if (auto* sceneList = window.document->GetElementById("sceneList")) {
         for (int i = sceneList->GetNumChildren() - 1; i >= 0; --i) {
@@ -79,6 +196,7 @@ inline void refreshScenes() {
         for (int i = 0; i < (int)sceneManager.scenes.size(); ++i) {
             Rml::ElementPtr child = window.document->CreateElement("div");
             child->SetClass("scene-item", true);
+            child->SetId("scene-item-" + std::to_string(i)); // Add ID for targeting
 
             // Add active class if this is the selected scene
             if (i == activeSceneIndex) {
@@ -88,14 +206,14 @@ inline void refreshScenes() {
             child->SetAttribute("data-scene-index", std::to_string(i));
             child->SetInnerRML(sceneManager.scenes[i].sceneName);
 
-            // Add both event listeners
+            // Add event listener
             child->AddEventListener(Rml::EventId::Mouseup, new SceneItemHandler(window.document, i));
-            child->AddEventListener(Rml::EventId::Click, new SceneItemHandler(window.document, i, false));
 
             sceneList->AppendChild(std::move(child));
         }
     }
 }
+
 inline void renameScene(int index) {
     std::cout << "Rename scene: " << index << std::endl;
     // TODO: Implement rename dialog/input
@@ -135,8 +253,9 @@ inline void duplicateScene(int index) {
 }
 
 inline void selectScene(int index) {
-    std::cout << "Select scene: " << index << std::endl;
+    std::cout << "Selecting scene: " << index << " (previously: " << activeSceneIndex << ")" << std::endl;
     activeSceneIndex = index;
+    std::cout << "Active scene index set to: " << activeSceneIndex << std::endl;
     refreshScenes(); // This will update the visual highlighting
 }
 
@@ -416,6 +535,8 @@ inline bool saveNewProject() {
         return false;
     }
 
+    projectPath = fullProjectPath;
+
     // Save project data
     if (!saveProject(fullProjectPath)) {
         return false;
@@ -445,6 +566,8 @@ inline bool loadProject() {
         if (errEl) errEl->SetInnerRML("Bitte einen Pfad eingeben.");
         return false;
     }
+
+    projectPath = path;
 
     // Load saveData.json
     std::filesystem::path saveDataPath = path + "/saveData.json";
@@ -786,7 +909,6 @@ void setInterfaceEventListeners() {
     // Add context menu event listeners
     setupSceneContextMenu(); // Add this line
 }
-
 void setupSceneContextMenu() {
     // Rename button in context menu
     if (auto* contextRename = window.document->GetElementById("context-rename")) {
@@ -804,15 +926,23 @@ void setupSceneContextMenu() {
     }
 
     // Close context menu when clicking elsewhere
-    if (auto* documentElement = window.document->GetElementById("document")) {
-        documentElement->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
+    if (auto* body = window.document->GetElementById("body")) {
+        body->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
             if (auto* contextMenu = window.document->GetElementById("sceneContextMenu")) {
                 contextMenu->SetProperty("display", "none");
             }
         }));
     }
-}
 
+    // Also close context menu when pressing escape - FIXED VERSION
+    window.document->AddEventListener(Rml::EventId::Keydown, new KeyEventHandler([](Rml::Event& event) {
+        if (event.GetParameter<int>("key_identifier", 0) == Rml::Input::KI_ESCAPE) {
+            if (auto* contextMenu = window.document->GetElementById("sceneContextMenu")) {
+                contextMenu->SetProperty("display", "none");
+            }
+        }
+    }));
+}
 // ============ SCENE MANAGEMENT ============
 
 void switchToStartup() {
@@ -821,12 +951,4 @@ void switchToStartup() {
         window.document->Show();
     }
 }
-
-
-//////////////////////////////////////////////////////////////
-///
-///
-///
-///#
-
 

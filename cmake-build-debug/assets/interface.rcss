@@ -238,24 +238,153 @@ body {
 .test-control .remove-btn {
     background-color: #c0392b;
 }
+.scene-item {
+    background-color: #34495e;
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-size: 18px;
+}
+
+.scene-item:hover {
+    background-color: #0091c9;
+}
 
 .scene-item.active {
-    background-color: #00aced !important;
-    border: 2px solid #ffffff;
+    background-color: #00aced;
+    border-top: 2px #3a4f63;
+    border-right: 2px #3a4f63;
+    border-bottom: 2px #3a4f63;
+    border-left: 2px #3a4f63;
+    border-radius: 4px;
 }
 
 .context-menu-item {
     display: block;
-    width: 100%;
-    background: transparent;
-    border: none;
+    width: 100%; /* This makes it fill the container */
+    background-color: transparent;
     color: white;
-    padding: 8px 12px;
+    padding: 12px 20px; /* Increased horizontal padding */
     text-align: left;
     cursor: pointer;
-    border-radius: 2px;
+    border-radius: 0; /* Remove border radius from items */
+    font-size: 16px;
+    box-sizing: border-box; /* Include padding in width calculation */
+    border: none; /* Remove any default borders */
+    margin: 0; /* Remove any margins */
+}
+
+.context-menu-item:first-child {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.context-menu-item:last-child {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
 
 .context-menu-item:hover {
+    background-color: #3a4f63;
+    width: 100%;
+}
+
+/* Context menu styling - bigger with border */
+.context-menu {
+    background-color: #34495e;
+    /* RmlUi border syntax for all sides */
+    border-top: 5px #2c3e50;
+    border-right: 5px #2c3e50;
+    border-bottom: 5px #2c3e50;
+    border-left: 5px #2c3e50;
+    border-radius: 6px; /* Slightly larger border radius */
+    padding: 8px 0; /* More padding to make it bigger */
+    width: auto;
+    z-index: 1000;
+    min-width: 150px; /* Minimum width to make it bigger */
+}
+.scene-item.renaming {
+    background-color: #2c3e50 !important;
+}
+
+.rename-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 5px;
+}
+
+.rename-input {
+    flex: 1;
+    padding: 4px 8px;
+    background-color: #34495e;
+    color: white;
+    border: 1px solid #00aced;
+    border-radius: 3px;
+}
+
+.rename-ok-button {
+    padding: 4px 12px;
     background-color: #00aced;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.rename-ok-button:hover {
+    background-color: #0091c9;
+}
+
+.scene-item.renaming {
+    background-color: #2c3e50 !important;
+    pointer-events: none; /* Disable pointer events on the scene item */
+}
+
+.rename-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 5px;
+    pointer-events: auto; /* Re-enable pointer events for the container */
+}
+
+.rename-input, .rename-ok-button {
+    pointer-events: auto; /* Ensure input and button are clickable */
+}
+/*-------------------------------------------------*/
+
+.resizable-container {
+    display: flex;
+    width: 100%;
+    height: 400px;
+}
+
+.left-panel {
+    flex: 1;
+    background-color: #34495e;
+    min-width: 100px;
+    max-width: 80%;
+}
+
+.right-panel {
+    flex: 1;
+    background-color: #3a4f63;
+    min-width: 100px;
+    max-width: 80%;
+}
+
+.resize-handle {
+    width: 8px;
+    background-color: #00aced;
+    cursor: col-resize;
+    transition: background-color 0.2s;
+}
+
+.resize-handle:hover {
+    background-color: #0091c9;
+}
+
+.resize-handle.dragging {
+    background-color: #ffffff;
 }

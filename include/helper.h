@@ -13,28 +13,53 @@
 #include "ButtonListener.h"
 #include <fstream>
 #include <iostream>
-#include "Utilities.h"
+#include "../include/Utilities.h"
+#include "SceneEventListener.h"
 
-// Global variables
+// ============ GLOBAL VARIABLES ============
+
 inline SaveData saveData;
 inline SceneManager sceneManager;
 inline Window window(1920, 1080);
 inline bool createRecentPath = true;
 inline std::filesystem::path projectPath;
+inline int activeSceneIndex = -1; // -1 means no scene selected
 
+// ============ FORWARD DECLARATIONS ============
 
-// Forward declarations
+// Project Management
 void switchToStartup();
 bool saveProject(const std::filesystem::path& projectPath);
 bool loadProject();
 bool saveNewProject();
+void setStartupEventListeners();
+void setInterfaceEventListeners();
+void setupSceneContextMenu();
+
+// UI Helper Methods
 void refreshScenes();
 void populateFolders(Rml::ElementDocument* doc, const std::string& path);
+void setSelectedProject(Rml::ElementDocument* doc, const std::string& name);
+
+// Validation Methods
+bool validateBeamerCount(const std::string& value, int& outCount);
+bool validateInputField(const std::string& value, const std::string& fieldName);
+
+// File System Methods
 bool verifyFolderStructure(const std::filesystem::path& projectPath);
 void fixFolderStructure(const std::filesystem::path& projectPath);
 bool loadScenesData(const std::filesystem::path& projectPath);
-bool validateBeamerCount(const std::string& value, int& outCount);
-void setSelectedProject(Rml::ElementDocument* doc, const std::string& name);
+bool saveJsonToFile(const std::filesystem::path& filePath, const json& data, const std::string& errorContext);
+bool createRecentPathFile(const std::filesystem::path& path);
+
+// Event Listener Setup Methods
+void setupFileDropdownListeners();
+void setupProjectorGrid();
+void setupSceneManagement();
+void setupTabListeners();
+void setupBrowseButtons();
+void setupProjectActions();
+void setupProjectSelection();
 
 // ============ UI HELPER METHODS ============
 
@@ -46,22 +71,73 @@ inline void setSelectedProject(Rml::ElementDocument* doc, const std::string& nam
 
 inline void refreshScenes() {
     if (auto* sceneList = window.document->GetElementById("sceneList")) {
-        std::cout << "[Info] Scenes count: " << sceneManager.scenes.size() << std::endl;
-
-        // Remove all existing scenes from the list
-        for (int i = sceneList->GetNumChildren() - 1; i >= 0; i--) {
+        for (int i = sceneList->GetNumChildren() - 1; i >= 0; --i) {
             Rml::Element* child = sceneList->GetChild(i);
             sceneList->RemoveChild(child);
         }
 
-        // Recreate scene entries
-        for (int i = 0; i < sceneManager.scenes.size(); ++i) {
+        for (int i = 0; i < (int)sceneManager.scenes.size(); ++i) {
             Rml::ElementPtr child = window.document->CreateElement("div");
             child->SetClass("scene-item", true);
-            child->SetInnerRML("Szene " + std::to_string(i + 1));
+
+            // Add active class if this is the selected scene
+            if (i == activeSceneIndex) {
+                child->SetClass("active", true);
+            }
+
+            child->SetAttribute("data-scene-index", std::to_string(i));
+            child->SetInnerRML(sceneManager.scenes[i].sceneName);
+
+            // Add both event listeners
+            child->AddEventListener(Rml::EventId::Mouseup, new SceneItemHandler(window.document, i));
+            child->AddEventListener(Rml::EventId::Click, new SceneItemHandler(window.document, i, false));
+
             sceneList->AppendChild(std::move(child));
         }
     }
+}
+inline void renameScene(int index) {
+    std::cout << "Rename scene: " << index << std::endl;
+    // TODO: Implement rename dialog/input
+}
+
+inline void deleteScene(int index) {
+    std::cout << "Delete scene: " << index << std::endl;
+    if (index >= 0 && index < (int)sceneManager.scenes.size()) {
+        sceneManager.scenes.erase(sceneManager.scenes.begin() + index);
+
+        // Update active scene index
+        if (activeSceneIndex == index) {
+            activeSceneIndex = -1; // No scene selected
+        } else if (activeSceneIndex > index) {
+            activeSceneIndex--; // Adjust index after deletion
+        }
+
+        // Save changes and refresh UI
+        std::filesystem::path fullProjectPath = std::filesystem::path(saveData.path) / saveData.projectName;
+        saveProject(fullProjectPath);
+        refreshScenes();
+    }
+}
+
+inline void duplicateScene(int index) {
+    std::cout << "Duplicate scene: " << index << std::endl;
+    if (index >= 0 && index < (int)sceneManager.scenes.size()) {
+        SceneData newScene = sceneManager.scenes[index];
+        newScene.sceneName = newScene.sceneName + " (Copy)";
+        sceneManager.scenes.insert(sceneManager.scenes.begin() + index + 1, newScene);
+
+        // Save changes and refresh UI
+        std::filesystem::path fullProjectPath = std::filesystem::path(saveData.path) / saveData.projectName;
+        saveProject(fullProjectPath);
+        refreshScenes();
+    }
+}
+
+inline void selectScene(int index) {
+    std::cout << "Select scene: " << index << std::endl;
+    activeSceneIndex = index;
+    refreshScenes(); // This will update the visual highlighting
 }
 
 inline void populateFolders(Rml::ElementDocument* doc, const std::string& path) {
@@ -224,7 +300,10 @@ inline bool loadScenesData(const std::filesystem::path& projectPath) {
     std::cout << "[Helper][loadScenesData] Loading scenes data" << std::endl;
 
     std::ifstream file(projectPath / "scenesData.json");
-    if (!file.is_open()) return false;
+    if (!file.is_open()) {
+        std::cerr << "[loadScenes] Couldn't open " << projectPath / "scensesData.json" << std::endl;
+        return false;
+    }
 
     sceneManager.scenes.clear();
 
@@ -409,46 +488,6 @@ inline bool loadProject() {
 
 // ============ EVENT LISTENER SETUP METHODS ============
 
-
-// ============ SCENE MANAGEMENT ============
-
-
-inline void setupFileDropdownListeners();
-inline void setupProjectorGrid();
-inline void setupSceneManagement();
-inline void setupTabListeners();
-inline void setupBrowseButtons();
-inline void setupProjectActions();
-inline void setupProjectSelection();
-
-
-void setStartupEventListeners() {
-    setupTabListeners();
-    setupBrowseButtons();
-    setupProjectActions();
-    setupProjectSelection();
-
-    // Set default directory
-    if (auto* el = window.document->GetElementById("project-dir-input")) {
-        if (auto* input = dynamic_cast<Rml::ElementFormControl*>(el)) {
-            input->SetValue(Utilities::toBackwardSlashes(Utilities::getSaveFolderPath()));
-        }
-    }
-
-    populateFolders(window.document, "../saves/folderSaves/");
-}
-
-void setInterfaceEventListeners() {
-    if (!loadScenesData(projectPath)) {
-        std::cerr << "Failed to load scenesData" << std::endl;
-    }
-
-    setupFileDropdownListeners();
-    setupProjectorGrid();
-    setupSceneManagement();
-}
-
-
 void setupFileDropdownListeners() {
     // New Project
     if (auto* dropdownNewproject = window.document->GetElementById("file-dropdown-newproject")) {
@@ -543,8 +582,9 @@ void setupProjectorGrid() {
     }
 }
 
-
 void setupSceneManagement() {
+    refreshScenes();
+
     if (auto* addSceneButton = window.document->GetElementById("add-scene-btn")) {
         addSceneButton->AddEventListener(Rml::EventId::Click,
             new ButtonHandler([]() {
@@ -561,10 +601,6 @@ void setupSceneManagement() {
     }
 
     std::cout << "Scenes count: " << sceneManager.scenes.size() << std::endl;
-
-    if (auto* projectname = window.document->GetElementById("project-name")) {
-        projectname->SetInnerRML(saveData.projectName);
-    }
 }
 
 void setupTabListeners() {
@@ -611,7 +647,7 @@ void setupTabListeners() {
     }
 }
 
- void setupBrowseButtons() {
+void setupBrowseButtons() {
     // Folder browse buttons
     if (auto* browseFolderBtn = window.document->GetElementById("browse-folder-btn")) {
         browseFolderBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
@@ -717,9 +753,80 @@ void setupProjectSelection() {
     }
 }
 
+// ============ MAIN EVENT LISTENER SETUP ============
+
+void setStartupEventListeners() {
+    setupTabListeners();
+    setupBrowseButtons();
+    setupProjectActions();
+    setupProjectSelection();
+
+    // Set default directory
+    if (auto* el = window.document->GetElementById("project-dir-input")) {
+        if (auto* input = dynamic_cast<Rml::ElementFormControl*>(el)) {
+            input->SetValue(Utilities::toBackwardSlashes(Utilities::getSaveFolderPath()));
+        }
+    }
+
+    populateFolders(window.document, "../saves/folderSaves/");
+}
+
+void setInterfaceEventListeners() {
+    if (!loadScenesData(projectPath)) {
+        std::cerr << "Failed to load scenesData" << std::endl;
+    }
+    if (auto* projectname = window.document->GetElementById("project-name")) {
+        std::cout << "[Info] Setting project name: " << saveData.projectName << std::endl;
+        projectname->SetInnerRML(saveData.projectName);
+    }
+    setupFileDropdownListeners();
+    setupProjectorGrid();
+    setupSceneManagement();
+
+    // Add context menu event listeners
+    setupSceneContextMenu(); // Add this line
+}
+
+void setupSceneContextMenu() {
+    // Rename button in context menu
+    if (auto* contextRename = window.document->GetElementById("context-rename")) {
+        contextRename->AddEventListener(Rml::EventId::Click, new SceneContextMenuHandler(window.document, "rename"));
+    }
+
+    // Delete button in context menu
+    if (auto* contextDelete = window.document->GetElementById("context-delete")) {
+        contextDelete->AddEventListener(Rml::EventId::Click, new SceneContextMenuHandler(window.document, "delete"));
+    }
+
+    // Duplicate button in context menu
+    if (auto* contextDuplicate = window.document->GetElementById("context-duplicate")) {
+        contextDuplicate->AddEventListener(Rml::EventId::Click, new SceneContextMenuHandler(window.document, "duplicate"));
+    }
+
+    // Close context menu when clicking elsewhere
+    if (auto* documentElement = window.document->GetElementById("document")) {
+        documentElement->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
+            if (auto* contextMenu = window.document->GetElementById("sceneContextMenu")) {
+                contextMenu->SetProperty("display", "none");
+            }
+        }));
+    }
+}
+
+// ============ SCENE MANAGEMENT ============
+
 void switchToStartup() {
     if ((window.document = window.context->LoadDocument("assets/startup.rml"))) {
         setStartupEventListeners();
         window.document->Show();
     }
 }
+
+
+//////////////////////////////////////////////////////////////
+///
+///
+///
+///#
+
+

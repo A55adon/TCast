@@ -51,6 +51,7 @@
             <div class="scene-list" id="sceneList">
             </div>
 
+
             <div class="scene-buttons">
                 <button>⮝ Hoch</button>
                 <button>⮟ Runter</button>
@@ -76,6 +77,11 @@
             <div class="projector-grid" id="projectorGrid">
             </div>
         </div>
+    </div>
+    <div id="sceneContextMenu" class="context-menu" style="display: none; position: absolute; background: #34495e; border: 1px solid #00aced; border-radius: 4px; padding: 4px; z-index: 1000;">
+        <button id="context-rename" class="context-menu-item">Rename</button>
+        <button id="context-delete" class="context-menu-item">Delete</button>
+        <button id="context-duplicate" class="context-menu-item">Duplicate</button>
     </div>
     </body>
 </rml>

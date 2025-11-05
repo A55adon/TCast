@@ -238,3 +238,24 @@ body {
 .test-control .remove-btn {
     background-color: #c0392b;
 }
+
+.scene-item.active {
+    background-color: #00aced !important;
+    border: 2px solid #ffffff;
+}
+
+.context-menu-item {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.context-menu-item:hover {
+    background-color: #00aced;
+}

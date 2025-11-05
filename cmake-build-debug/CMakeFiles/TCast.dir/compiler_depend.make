@@ -2444,6 +2444,7 @@ CMakeFiles/TCast.dir/src/Projector.cpp.obj: C:/Code/TCast/src/Projector.cpp \
   C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/syslimits.h
 
 CMakeFiles/TCast.dir/src/Utilities.cpp.obj: C:/Code/TCast/src/Utilities.cpp \
+  C:/Code/TCast/include/Utilities.h \
   C:/Code/TCast/include/nlohmann/json.hpp \
   C:/msys64/mingw64/include/_bsd_types.h \
   C:/msys64/mingw64/include/_mingw.h \
@@ -2978,8 +2979,7 @@ CMakeFiles/TCast.dir/src/Utilities.cpp.obj: C:/Code/TCast/src/Utilities.cpp \
   C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/xsaveintrin.h \
   C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/xsaveoptintrin.h \
   C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/xsavesintrin.h \
-  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/xtestintrin.h \
-  C:/Code/TCast/src/Utilities.h
+  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/xtestintrin.h
 
 CMakeFiles/TCast.dir/src/Window.cpp.obj: C:/Code/TCast/src/Window.cpp \
   C:/Code/TCast/include/Projector.h \
@@ -3330,8 +3330,12 @@ CMakeFiles/TCast.dir/src/Window.cpp.obj: C:/Code/TCast/src/Window.cpp \
 CMakeFiles/TCast.dir/src/main.cpp.obj: C:/Code/TCast/src/main.cpp \
   C:/Code/TCast/include/ButtonListener.h \
   C:/Code/TCast/include/Projector.h \
+  C:/Code/TCast/include/SceneEditActions.h \
+  C:/Code/TCast/include/SceneEventListener.h \
   C:/Code/TCast/include/Shell.h \
+  C:/Code/TCast/include/Utilities.h \
   C:/Code/TCast/include/Window.h \
+  C:/Code/TCast/include/helper.h \
   C:/Code/TCast/include/nlohmann/json.hpp \
   C:/Code/TCast/libs/GLFW/include/GLFW/glfw3.h \
   C:/Code/TCast/libs/RmlUi/Include/RmlUi/Config/Config.h \
@@ -4024,9 +4028,7 @@ CMakeFiles/TCast.dir/src/main.cpp.obj: C:/Code/TCast/src/main.cpp \
   C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/xsaveintrin.h \
   C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/xsaveoptintrin.h \
   C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/xsavesintrin.h \
-  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/xtestintrin.h \
-  C:/Code/TCast/src/Utilities.h \
-  C:/Code/TCast/src/helper.h
+  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/xtestintrin.h
 
 
 C:/Code/TCast/libs/RmlUi/Include/RmlUi/Core/Spritesheet.h:
@@ -4739,6 +4741,8 @@ C:/msys64/mingw64/include/c++/15.1.0/x86_64-w64-mingw32/bits/os_defines.h:
 
 C:/msys64/mingw64/include/corecrt.h:
 
+C:/Code/TCast/include/Utilities.h:
+
 C:/msys64/mingw64/include/corecrt_startup.h:
 
 C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/bmi2intrin.h:
@@ -4884,6 +4888,8 @@ C:/Code/TCast/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp:
 C:/Code/TCast/include/stb_image.h:
 
 C:/Code/TCast/libs/RmlUi/include/RmlUi/Core/Core.h:
+
+C:/Code/TCast/include/SceneEventListener.h:
 
 C:/Code/TCast/libs/RmlUi/include/RmlUi/Core/TransformPrimitive.h:
 
@@ -5325,6 +5331,8 @@ C:/Code/TCast/include/Projector.h:
 
 C:/Code/TCast/libs/RmlUi/Include/RmlUi/Core/Element.h:
 
+C:/Code/TCast/include/helper.h:
+
 C:/msys64/mingw64/include/c++/15.1.0/ctime:
 
 C:/Code/TCast/libs/RmlUi/Include/RmlUi/Core/Header.h:
@@ -5463,13 +5471,13 @@ C:/msys64/mingw64/include/sherrors.h:
 
 C:/msys64/mingw64/include/structuredquerycondition.h:
 
-C:/Code/TCast/src/Utilities.h:
-
 C:/Code/TCast/src/Window.cpp:
 
 C:/Code/TCast/include/Window.h:
 
 C:/Code/TCast/include/ButtonListener.h:
+
+C:/Code/TCast/include/SceneEditActions.h:
 
 C:/msys64/mingw64/include/c++/15.1.0/bits/regex.tcc:
 
@@ -5488,5 +5496,3 @@ C:/msys64/mingw64/include/exdisp.h:
 C:/msys64/mingw64/include/knownfolders.h:
 
 C:/msys64/mingw64/include/shlguid.h:
-
-C:/Code/TCast/src/helper.h:

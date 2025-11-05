@@ -8,6 +8,7 @@
  * - loading a project doesnt redirect to the interface screen
 
  * Todo:
+ *  - slider for beamercount
  *  - settings
  *  - dont have a recentpath as a setting
  *  - delete projects
@@ -16,12 +17,12 @@
  *  - Update Checking
 */
 
-#include "helper.h"
+#include "../include/helper.h"
 
 int main() {
     std::filesystem::path path = Utilities::getRecentPath();
     if (path != "") {
-        projectPath = path.parent_path();
+        projectPath = path;
         std::ifstream jFile(path / "saveData.json");
         nlohmann::json j;
         jFile >> j;

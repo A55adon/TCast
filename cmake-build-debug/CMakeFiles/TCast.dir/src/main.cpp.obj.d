@@ -1,5 +1,5 @@
 CMakeFiles/TCast.dir/src/main.cpp.obj: C:\Code\TCast\src\main.cpp \
- C:\Code\TCast\src\helper.h C:/msys64/mingw64/include/shobjidl.h \
+ C:/Code/TCast/include/helper.h C:/msys64/mingw64/include/shobjidl.h \
  C:/msys64/mingw64/include/rpc.h C:/msys64/mingw64/include/_mingw.h \
  C:/msys64/mingw64/include/_mingw_mac.h \
  C:/msys64/mingw64/include/_mingw_secapi.h \
@@ -700,4 +700,8 @@ CMakeFiles/TCast.dir/src/main.cpp.obj: C:\Code\TCast\src\main.cpp \
  C:/msys64/mingw64/include/c++/15.1.0/x86_64-w64-mingw32/bits/c++io.h \
  C:/msys64/mingw64/include/c++/15.1.0/bits/fstream.tcc \
  C:/msys64/mingw64/include/c++/15.1.0/iostream \
- C:\Code\TCast\src\Utilities.h
+ C:/Code/TCast/include/Utilities.h \
+ C:/Code/TCast/include/SceneEventListener.h \
+ C:/Code/TCast/libs/RmlUi/include/RmlUi/Core/EventListener.h \
+ C:/Code/TCast/libs/RmlUi/include/RmlUi/Core/ElementDocument.h \
+ C:/Code/TCast/include/SceneEditActions.h

@@ -14,9 +14,11 @@ set(SOURCES
         libs/RmlUi/Samples/shell/src/RendererExtensions.cpp
         libs/RmlUi/Samples/shell/src/Shell.cpp
         libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp
-        src/helper.h
+        include/helper.h
         src/Utilities.cpp
-        src/Utilities.h
+        include/Utilities.h
+        include/SceneEventListener.h
+        include/SceneEditActions.h
 )
 
 add_executable(TCast ${SOURCES})

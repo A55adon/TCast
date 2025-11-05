@@ -2453,6 +2453,7 @@ CMakeFiles/TCast.dir/src/Projector.cpp.obj
 
 CMakeFiles/TCast.dir/src/Utilities.cpp.obj
  C:/Code/TCast/src/Utilities.cpp
+ C:/Code/TCast/include/Utilities.h
  C:/Code/TCast/include/nlohmann/json.hpp
  C:/msys64/mingw64/include/_bsd_types.h
  C:/msys64/mingw64/include/_mingw.h
@@ -2988,7 +2989,6 @@ CMakeFiles/TCast.dir/src/Utilities.cpp.obj
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/xsaveoptintrin.h
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/xsavesintrin.h
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/xtestintrin.h
- C:/Code/TCast/src/Utilities.h
 
 CMakeFiles/TCast.dir/src/Window.cpp.obj
  C:/Code/TCast/src/Window.cpp
@@ -3341,8 +3341,12 @@ CMakeFiles/TCast.dir/src/main.cpp.obj
  C:/Code/TCast/src/main.cpp
  C:/Code/TCast/include/ButtonListener.h
  C:/Code/TCast/include/Projector.h
+ C:/Code/TCast/include/SceneEditActions.h
+ C:/Code/TCast/include/SceneEventListener.h
  C:/Code/TCast/include/Shell.h
+ C:/Code/TCast/include/Utilities.h
  C:/Code/TCast/include/Window.h
+ C:/Code/TCast/include/helper.h
  C:/Code/TCast/include/nlohmann/json.hpp
  C:/Code/TCast/libs/GLFW/include/GLFW/glfw3.h
  C:/Code/TCast/libs/RmlUi/Include/RmlUi/Config/Config.h
@@ -4036,6 +4040,4 @@ CMakeFiles/TCast.dir/src/main.cpp.obj
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/xsaveoptintrin.h
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/xsavesintrin.h
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/xtestintrin.h
- C:/Code/TCast/src/Utilities.h
- C:/Code/TCast/src/helper.h
 

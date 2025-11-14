@@ -2,15 +2,7 @@
 
 #include "global.h"
 
-#include <nlohmann/json.hpp>
-#include <string>
-#include <vector>
-#include <filesystem>
-#include <fstream>
-#include <iostream>
-#include <algorithm>
-#include <shobjidl.h>
-#include <windows.h>
+using json = nlohmann::json;
 
 
 

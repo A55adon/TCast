@@ -3,6 +3,7 @@
 #include <RmlUi/Core/ElementDocument.h>
 #include <string>
 #include "SceneEditActions.h"
+#include "global.h"
 
 class SceneContextMenuHandler : public Rml::EventListener {
     Rml::ElementDocument* document;

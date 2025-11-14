@@ -1,4 +1,4 @@
-#include "../include/Utilities.h"
+#include "Utilities.h"
 
 // JSON serialization implementations
 void to_json(json &j, const SaveData &d) {

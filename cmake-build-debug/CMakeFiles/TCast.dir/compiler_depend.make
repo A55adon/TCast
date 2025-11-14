@@ -2444,7 +2444,9 @@ CMakeFiles/TCast.dir/src/Projector.cpp.obj: C:/Code/TCast/src/Projector.cpp \
   C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/syslimits.h
 
 CMakeFiles/TCast.dir/src/Utilities.cpp.obj: C:/Code/TCast/src/Utilities.cpp \
+  C:/Code/TCast/include/ButtonListener.h \
   C:/Code/TCast/include/Projector.h \
+  C:/Code/TCast/include/Shell.h \
   C:/Code/TCast/include/Utilities.h \
   C:/Code/TCast/include/Window.h \
   C:/Code/TCast/include/global.h \
@@ -2661,6 +2663,18 @@ CMakeFiles/TCast.dir/src/Utilities.cpp.obj: C:/Code/TCast/src/Utilities.cpp \
   C:/msys64/mingw64/include/c++/15.1.0/bits/quoted_string.h \
   C:/msys64/mingw64/include/c++/15.1.0/bits/range_access.h \
   C:/msys64/mingw64/include/c++/15.1.0/bits/refwrap.h \
+  C:/msys64/mingw64/include/c++/15.1.0/bits/regex.h \
+  C:/msys64/mingw64/include/c++/15.1.0/bits/regex.tcc \
+  C:/msys64/mingw64/include/c++/15.1.0/bits/regex_automaton.h \
+  C:/msys64/mingw64/include/c++/15.1.0/bits/regex_automaton.tcc \
+  C:/msys64/mingw64/include/c++/15.1.0/bits/regex_compiler.h \
+  C:/msys64/mingw64/include/c++/15.1.0/bits/regex_compiler.tcc \
+  C:/msys64/mingw64/include/c++/15.1.0/bits/regex_constants.h \
+  C:/msys64/mingw64/include/c++/15.1.0/bits/regex_error.h \
+  C:/msys64/mingw64/include/c++/15.1.0/bits/regex_executor.h \
+  C:/msys64/mingw64/include/c++/15.1.0/bits/regex_executor.tcc \
+  C:/msys64/mingw64/include/c++/15.1.0/bits/regex_scanner.h \
+  C:/msys64/mingw64/include/c++/15.1.0/bits/regex_scanner.tcc \
   C:/msys64/mingw64/include/c++/15.1.0/bits/requires_hosted.h \
   C:/msys64/mingw64/include/c++/15.1.0/bits/shared_ptr.h \
   C:/msys64/mingw64/include/c++/15.1.0/bits/shared_ptr_atomic.h \
@@ -2683,11 +2697,13 @@ CMakeFiles/TCast.dir/src/Utilities.cpp.obj: C:/Code/TCast/src/Utilities.cpp \
   C:/msys64/mingw64/include/c++/15.1.0/bits/stl_list.h \
   C:/msys64/mingw64/include/c++/15.1.0/bits/stl_map.h \
   C:/msys64/mingw64/include/c++/15.1.0/bits/stl_multimap.h \
+  C:/msys64/mingw64/include/c++/15.1.0/bits/stl_multiset.h \
   C:/msys64/mingw64/include/c++/15.1.0/bits/stl_numeric.h \
   C:/msys64/mingw64/include/c++/15.1.0/bits/stl_pair.h \
   C:/msys64/mingw64/include/c++/15.1.0/bits/stl_queue.h \
   C:/msys64/mingw64/include/c++/15.1.0/bits/stl_raw_storage_iter.h \
   C:/msys64/mingw64/include/c++/15.1.0/bits/stl_relops.h \
+  C:/msys64/mingw64/include/c++/15.1.0/bits/stl_set.h \
   C:/msys64/mingw64/include/c++/15.1.0/bits/stl_stack.h \
   C:/msys64/mingw64/include/c++/15.1.0/bits/stl_tempbuf.h \
   C:/msys64/mingw64/include/c++/15.1.0/bits/stl_tree.h \
@@ -2766,6 +2782,8 @@ CMakeFiles/TCast.dir/src/Utilities.cpp.obj: C:/Code/TCast/src/Utilities.cpp \
   C:/msys64/mingw64/include/c++/15.1.0/pstl/pstl_config.h \
   C:/msys64/mingw64/include/c++/15.1.0/queue \
   C:/msys64/mingw64/include/c++/15.1.0/ratio \
+  C:/msys64/mingw64/include/c++/15.1.0/regex \
+  C:/msys64/mingw64/include/c++/15.1.0/set \
   C:/msys64/mingw64/include/c++/15.1.0/sstream \
   C:/msys64/mingw64/include/c++/15.1.0/stack \
   C:/msys64/mingw64/include/c++/15.1.0/stdexcept \
@@ -2837,6 +2855,7 @@ CMakeFiles/TCast.dir/src/Utilities.cpp.obj: C:/Code/TCast/src/Utilities.cpp \
   C:/msys64/mingw64/include/errhandlingapi.h \
   C:/msys64/mingw64/include/errno.h \
   C:/msys64/mingw64/include/excpt.h \
+  C:/msys64/mingw64/include/exdisp.h \
   C:/msys64/mingw64/include/fibersapi.h \
   C:/msys64/mingw64/include/fileapi.h \
   C:/msys64/mingw64/include/float.h \
@@ -2848,8 +2867,10 @@ CMakeFiles/TCast.dir/src/Utilities.cpp.obj: C:/Code/TCast/src/Utilities.cpp \
   C:/msys64/mingw64/include/inaddr.h \
   C:/msys64/mingw64/include/interlockedapi.h \
   C:/msys64/mingw64/include/ioapiset.h \
+  C:/msys64/mingw64/include/isguids.h \
   C:/msys64/mingw64/include/jobapi.h \
   C:/msys64/mingw64/include/joystickapi.h \
+  C:/msys64/mingw64/include/knownfolders.h \
   C:/msys64/mingw64/include/ktmtypes.h \
   C:/msys64/mingw64/include/libloaderapi.h \
   C:/msys64/mingw64/include/limits.h \
@@ -2935,6 +2956,9 @@ CMakeFiles/TCast.dir/src/Utilities.cpp.obj: C:/Code/TCast/src/Utilities.cpp \
   C:/msys64/mingw64/include/servprov.h \
   C:/msys64/mingw64/include/shellapi.h \
   C:/msys64/mingw64/include/sherrors.h \
+  C:/msys64/mingw64/include/shldisp.h \
+  C:/msys64/mingw64/include/shlguid.h \
+  C:/msys64/mingw64/include/shlobj.h \
   C:/msys64/mingw64/include/shobjidl.h \
   C:/msys64/mingw64/include/shtypes.h \
   C:/msys64/mingw64/include/signal.h \
@@ -5553,6 +5577,8 @@ C:/msys64/mingw64/include/c++/15.1.0/iterator:
 
 C:/msys64/mingw64/include/float.h:
 
+C:/Code/TCast/include/ButtonListener.h:
+
 C:/Code/TCast/include/Window.h:
 
 C:/Code/TCast/include/global.h:
@@ -5577,9 +5603,17 @@ C:/msys64/mingw64/include/c++/15.1.0/bits/parse_numbers.h:
 
 C:/msys64/mingw64/include/c++/15.1.0/bits/quoted_string.h:
 
-C:/msys64/mingw64/include/c++/15.1.0/bits/regex_compiler.tcc:
+C:/msys64/mingw64/include/c++/15.1.0/bits/regex.tcc:
+
+C:/msys64/mingw64/include/c++/15.1.0/bits/regex_automaton.tcc:
 
 C:/msys64/mingw64/include/c++/15.1.0/bits/stl_numeric.h:
+
+C:/msys64/mingw64/include/c++/15.1.0/bits/regex_compiler.tcc:
+
+C:/msys64/mingw64/include/c++/15.1.0/bits/regex_constants.h:
+
+C:/msys64/mingw64/include/c++/15.1.0/bits/stl_multiset.h:
 
 C:/msys64/mingw64/include/c++/15.1.0/bits/valarray_before.h:
 
@@ -5597,6 +5631,10 @@ C:/msys64/mingw64/include/c++/15.1.0/pstl/glue_numeric_defs.h:
 
 C:/msys64/mingw64/include/c++/15.1.0/ratio:
 
+C:/msys64/mingw64/include/c++/15.1.0/regex:
+
+C:/msys64/mingw64/include/c++/15.1.0/set:
+
 C:/msys64/mingw64/include/c++/15.1.0/sstream:
 
 C:/msys64/mingw64/include/c++/15.1.0/valarray:
@@ -5607,34 +5645,20 @@ C:/msys64/mingw64/include/comcat.h:
 
 C:/msys64/mingw64/include/commctrl.h:
 
+C:/msys64/mingw64/include/exdisp.h:
+
+C:/msys64/mingw64/include/knownfolders.h:
+
 C:/msys64/mingw64/include/objectarray.h:
 
 C:/msys64/mingw64/include/propsys.h:
 
 C:/msys64/mingw64/include/sherrors.h:
 
+C:/msys64/mingw64/include/shlguid.h:
+
 C:/msys64/mingw64/include/structuredquerycondition.h:
 
 C:/Code/TCast/src/Window.cpp:
 
-C:/Code/TCast/include/ButtonListener.h:
-
 C:/Code/TCast/include/SceneEditActions.h:
-
-C:/msys64/mingw64/include/c++/15.1.0/bits/regex.tcc:
-
-C:/msys64/mingw64/include/c++/15.1.0/bits/regex_automaton.tcc:
-
-C:/msys64/mingw64/include/c++/15.1.0/bits/regex_constants.h:
-
-C:/msys64/mingw64/include/c++/15.1.0/bits/stl_multiset.h:
-
-C:/msys64/mingw64/include/c++/15.1.0/regex:
-
-C:/msys64/mingw64/include/c++/15.1.0/set:
-
-C:/msys64/mingw64/include/exdisp.h:
-
-C:/msys64/mingw64/include/knownfolders.h:
-
-C:/msys64/mingw64/include/shlguid.h:

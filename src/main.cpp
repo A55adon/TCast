@@ -32,21 +32,21 @@ int main() {
         from_json(j, saveData);
         std::cout << saveData.path << std::endl;
 
-        if ((window.document = window.context->LoadDocument("assets/interface.rml"))) {
+        if ((getWindow().document = getWindow().context->LoadDocument("assets/interface.rml"))) {
             setInterfaceEventListeners();
-            window.document->Show();
+            getWindow().document->Show();
         }
 
     } else {
-        if ((window.document = window.context->LoadDocument("assets/startup.rml"))) {
+        if ((getWindow().document = getWindow().context->LoadDocument("assets/startup.rml"))) {
             setStartupEventListeners();
-            window.document->Show();
+            getWindow().document->Show();
         }
     }
     std::cout << "Project at: " << projectPath << std::endl;
 
-    while (window.running) {
-        window.update();
+    while (getWindow().running) {
+        getWindow().update();
     }
     return 0;
 }

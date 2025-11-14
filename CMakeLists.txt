@@ -17,9 +17,6 @@ set(SOURCES
         include/helper.h
         src/Utilities.cpp
         include/Utilities.h
-        include/SceneEventListener.h
-        include/SceneEditActions.h
-        include/ButtonListener.h
         include/global.h
         src/UISetup.cpp
         include/UISetup.h

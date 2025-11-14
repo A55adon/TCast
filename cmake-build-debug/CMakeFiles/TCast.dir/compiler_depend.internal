@@ -2112,7 +2112,6 @@ CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj
 
 CMakeFiles/TCast.dir/src/EventListener.cpp.obj
  C:/Code/TCast/src/EventListener.cpp
- C:/Code/TCast/include/ButtonListener.h
  C:/Code/TCast/include/EventListener.h
  C:/Code/TCast/include/Projector.h
  C:/Code/TCast/include/Shell.h
@@ -3155,7 +3154,6 @@ CMakeFiles/TCast.dir/src/Projector.cpp.obj
 
 CMakeFiles/TCast.dir/src/UIManager.cpp.obj
  C:/Code/TCast/src/UIManager.cpp
- C:/Code/TCast/include/ButtonListener.h
  C:/Code/TCast/include/EventListener.h
  C:/Code/TCast/include/Projector.h
  C:/Code/TCast/include/Shell.h
@@ -3859,7 +3857,6 @@ CMakeFiles/TCast.dir/src/UIManager.cpp.obj
 
 CMakeFiles/TCast.dir/src/UISetup.cpp.obj
  C:/Code/TCast/src/UISetup.cpp
- C:/Code/TCast/include/ButtonListener.h
  C:/Code/TCast/include/EventListener.h
  C:/Code/TCast/include/Projector.h
  C:/Code/TCast/include/Shell.h
@@ -4564,7 +4561,6 @@ CMakeFiles/TCast.dir/src/UISetup.cpp.obj
 
 CMakeFiles/TCast.dir/src/Utilities.cpp.obj
  C:/Code/TCast/src/Utilities.cpp
- C:/Code/TCast/include/ButtonListener.h
  C:/Code/TCast/include/Projector.h
  C:/Code/TCast/include/Shell.h
  C:/Code/TCast/include/Utilities.h
@@ -5613,10 +5609,8 @@ CMakeFiles/TCast.dir/src/Window.cpp.obj
 
 CMakeFiles/TCast.dir/src/main.cpp.obj
  C:/Code/TCast/src/main.cpp
- C:/Code/TCast/include/ButtonListener.h
+ C:/Code/TCast/include/EventListener.h
  C:/Code/TCast/include/Projector.h
- C:/Code/TCast/include/SceneEditActions.h
- C:/Code/TCast/include/SceneEventListener.h
  C:/Code/TCast/include/Shell.h
  C:/Code/TCast/include/Utilities.h
  C:/Code/TCast/include/Window.h

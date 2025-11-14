@@ -15,7 +15,7 @@ public:
 
 // LoadFunction + helpers (createRecentPath())
     static bool loadProject();
-    static bool loadProject(std::filesystem::path loadPath);
+    static bool loadProject(const std::filesystem::path& loadPath);
 
 // CreateFunction + helpers
     static bool createProject();
@@ -25,17 +25,17 @@ public:
     static bool createRecentPathFile(const std::filesystem::path &savePath);
 
 // Other
-    void refreshScenes();
-    void setSelectedProject();
-    void populateFolders();
-    void loadScenesData();
-    void switchToStartup();
-    void selectScene(int index);
+    static void refreshScenes();
+    static void setSelectedProject(const std::string &name);
+    static void populateFolders(const std::string &path);
+    static bool loadScenesData();
+    static void switchToStartup();
+    static void selectScene(int index);
 
 // Scene Contextmenu
-    void showRenameDialog();
-    void renameScene();
-    void deleteScene();
-    void duplicateScene();
+    static void showRenameDialog();
+    static void renameScene();
+    static void deleteScene();
+    static void duplicateScene();
 
 };

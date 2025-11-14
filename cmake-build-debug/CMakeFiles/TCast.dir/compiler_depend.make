@@ -2104,7 +2104,6 @@ CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj: C:
   C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/syslimits.h
 
 CMakeFiles/TCast.dir/src/EventListener.cpp.obj: C:/Code/TCast/src/EventListener.cpp \
-  C:/Code/TCast/include/ButtonListener.h \
   C:/Code/TCast/include/EventListener.h \
   C:/Code/TCast/include/Projector.h \
   C:/Code/TCast/include/Shell.h \
@@ -3145,7 +3144,6 @@ CMakeFiles/TCast.dir/src/Projector.cpp.obj: C:/Code/TCast/src/Projector.cpp \
   C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/syslimits.h
 
 CMakeFiles/TCast.dir/src/UIManager.cpp.obj: C:/Code/TCast/src/UIManager.cpp \
-  C:/Code/TCast/include/ButtonListener.h \
   C:/Code/TCast/include/EventListener.h \
   C:/Code/TCast/include/Projector.h \
   C:/Code/TCast/include/Shell.h \
@@ -3848,7 +3846,6 @@ CMakeFiles/TCast.dir/src/UIManager.cpp.obj: C:/Code/TCast/src/UIManager.cpp \
   C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/xtestintrin.h
 
 CMakeFiles/TCast.dir/src/UISetup.cpp.obj: C:/Code/TCast/src/UISetup.cpp \
-  C:/Code/TCast/include/ButtonListener.h \
   C:/Code/TCast/include/EventListener.h \
   C:/Code/TCast/include/Projector.h \
   C:/Code/TCast/include/Shell.h \
@@ -4552,7 +4549,6 @@ CMakeFiles/TCast.dir/src/UISetup.cpp.obj: C:/Code/TCast/src/UISetup.cpp \
   C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/xtestintrin.h
 
 CMakeFiles/TCast.dir/src/Utilities.cpp.obj: C:/Code/TCast/src/Utilities.cpp \
-  C:/Code/TCast/include/ButtonListener.h \
   C:/Code/TCast/include/Projector.h \
   C:/Code/TCast/include/Shell.h \
   C:/Code/TCast/include/Utilities.h \
@@ -5599,10 +5595,8 @@ CMakeFiles/TCast.dir/src/Window.cpp.obj: C:/Code/TCast/src/Window.cpp \
   C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/syslimits.h
 
 CMakeFiles/TCast.dir/src/main.cpp.obj: C:/Code/TCast/src/main.cpp \
-  C:/Code/TCast/include/ButtonListener.h \
+  C:/Code/TCast/include/EventListener.h \
   C:/Code/TCast/include/Projector.h \
-  C:/Code/TCast/include/SceneEditActions.h \
-  C:/Code/TCast/include/SceneEventListener.h \
   C:/Code/TCast/include/Shell.h \
   C:/Code/TCast/include/Utilities.h \
   C:/Code/TCast/include/Window.h \
@@ -7161,8 +7155,6 @@ C:/Code/TCast/include/stb_image.h:
 
 C:/Code/TCast/libs/RmlUi/include/RmlUi/Core/Core.h:
 
-C:/Code/TCast/include/SceneEventListener.h:
-
 C:/Code/TCast/libs/RmlUi/include/RmlUi/Core/TransformPrimitive.h:
 
 C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/avx512vlbwintrin.h:
@@ -7603,8 +7595,6 @@ C:/Code/TCast/libs/RmlUi/include/RmlUi/Debugger.h:
 
 C:/Code/TCast/src/EventListener.cpp:
 
-C:/Code/TCast/include/ButtonListener.h:
-
 C:/Code/TCast/include/EventListener.h:
 
 C:/Code/TCast/include/Projector.h:
@@ -7780,5 +7770,3 @@ C:/Code/TCast/include/UIManager.h:
 C:/Code/TCast/src/UISetup.cpp:
 
 C:/Code/TCast/src/Window.cpp:
-
-C:/Code/TCast/include/SceneEditActions.h:

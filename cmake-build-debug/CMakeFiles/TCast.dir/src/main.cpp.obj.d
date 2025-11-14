@@ -552,7 +552,7 @@ CMakeFiles/TCast.dir/src/main.cpp.obj: C:\Code\TCast\src\main.cpp \
  C:/Code/TCast/libs/RmlUi/include/RmlUi/Core/Vector2.h \
  C:/Code/TCast/libs/RmlUi/include/RmlUi/Core/Vector2.inl \
  C:/Code/TCast/libs/RmlUi/include/RmlUi/Core/Span.h \
- C:/Code/TCast/include/ButtonListener.h \
+ C:/Code/TCast/include/Window.h \
  C:/Code/TCast/libs/RmlUi/include/RmlUi/Core.h \
  C:/Code/TCast/libs/RmlUi/include/RmlUi/Core/Animation.h \
  C:/Code/TCast/libs/RmlUi/include/RmlUi/Core/ID.h \
@@ -696,12 +696,10 @@ CMakeFiles/TCast.dir/src/main.cpp.obj: C:\Code\TCast\src\main.cpp \
  C:/Code/TCast/libs/RmlUi/Include/RmlUi/Core/Spritesheet.h \
  C:/Code/TCast/libs/RmlUi/Include/RmlUi/Core/Texture.h \
  C:/Code/TCast/libs/RmlUi/include/RmlUi/Core/Elements/ElementTabSet.h \
- C:/Code/TCast/include/Window.h C:/Code/TCast/include/Projector.h \
+ C:/Code/TCast/include/Projector.h \
  C:/Code/TCast/libs/glad/include/glad/glad.h \
  C:/Code/TCast/libs/glad/include/KHR/khrplatform.h \
  C:/Code/TCast/libs/GLFW/include/GLFW/glfw3.h \
- C:/Code/TCast/include/Utilities.h \
- C:/Code/TCast/include/SceneEventListener.h \
+ C:/Code/TCast/include/Utilities.h C:/Code/TCast/include/EventListener.h \
  C:/Code/TCast/libs/RmlUi/include/RmlUi/Core/EventListener.h \
- C:/Code/TCast/libs/RmlUi/include/RmlUi/Core/ElementDocument.h \
- C:/Code/TCast/include/SceneEditActions.h
+ C:/Code/TCast/libs/RmlUi/include/RmlUi/Core/ElementDocument.h

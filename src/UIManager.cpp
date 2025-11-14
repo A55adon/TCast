@@ -190,7 +190,7 @@ bool UIManager::loadProject() {
 }
 
 // Loads from specified path
-bool UIManager::loadProject(std::filesystem::path loadPath) {
+bool UIManager::loadProject(const std::filesystem::path& loadPath) {
 
     if (!std::filesystem::exists(loadPath)) {
         Utilities::showError("Pfad: " + loadPath.string() + " existiert nicht.");
@@ -326,7 +326,6 @@ std::optional<int> UIManager::validateProjectorCount(const std::string &value) {
     }
     return std::nullopt;
 }
-
 std::string* UIManager::validateInputField(std::string &value, const std::string &fieldName) {
     if (Utilities::validateString(value)) {
         return &value;
@@ -336,7 +335,6 @@ std::string* UIManager::validateInputField(std::string &value, const std::string
     }
 
 }
-
 bool UIManager::createRecentPathFile(const std::filesystem::path &savePath) {
 
     std::filesystem::path saveDir = "../saves";
@@ -353,3 +351,121 @@ bool UIManager::createRecentPathFile(const std::filesystem::path &savePath) {
     std::cout << "Created " << recentFile << " with path: " << savePath << "\n";
     return true;
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//Other helpers
+
+void UIManager::refreshScenes() {
+    if (auto *sceneList = getEl("sceneList")) {
+        for (int i = sceneList->GetNumChildren() - 1; i >= 0; --i) {
+            Rml::Element *child = sceneList->GetChild(i);
+            sceneList->RemoveChild(child);
+        }
+
+        for (int i = 0; i < sceneManager.scenes.size(); ++i) {
+            Rml::ElementPtr child = getWindow().document->CreateElement("div");
+            child->SetClass("scene-item", true);
+            child->SetId("scene-item-" + std::to_string(i)); // Add ID for targeting
+
+            // Add active class if this is the selected scene
+            if (i == activeSceneIndex) {
+                child->SetClass("active", true);
+            }
+
+            child->SetAttribute("data-scene-index", std::to_string(i));
+            child->SetInnerRML(sceneManager.scenes[i].sceneName);
+
+            // Add event listener
+            child->AddEventListener(Rml::EventId::Mouseup, new SceneItemHandler(getWindow().document, i));
+
+            sceneList->AppendChild(std::move(child));
+        }
+    }
+}
+void UIManager::setSelectedProject(const std::string &name) {
+    if (auto *label = getEl("selected-project-label")) {
+        label->SetInnerRML(name);
+    }
+}
+void UIManager::populateFolders(const std::string &path) {
+    Rml::Element *container = getEl("tab-folder-list");
+
+    container->SetInnerRML("");
+
+    for (auto &entry: std::filesystem::directory_iterator(path)) {
+        if (entry.is_directory()) {
+            std::string folderName = entry.path().filename().string();
+            std::string fullPath = entry.path().string();
+
+            Rml::ElementPtr folderDiv = getWindow().document->CreateElement("div");
+            folderDiv->SetClassNames("sample-project");
+            folderDiv->SetId("folder-" + folderName);
+            folderDiv->SetInnerRML(folderName);
+
+            folderDiv->AddEventListener(Rml::EventId::Click, new ButtonHandler(
+                                            [fullPath] {
+                                                if (auto *inputEl = getWindow().document->GetElementById("load-dir-input")) {
+                                                    if (auto *input = dynamic_cast<Rml::ElementFormControl *>(
+                                                        inputEl)) {
+                                                        input->SetValue(Utilities::toBackwardSlashes(fullPath));
+                                                    }
+                                                }
+                                            }
+                                        ));
+
+            container->AppendChild(std::move(folderDiv));
+        }
+    }
+}
+
+bool UIManager::loadScenesData() {
+    std::cout << "[Info] Loading scenes data" << std::endl;
+
+    std::ifstream file(projectPath / "scenesData.json");
+    if (!file.is_open()) {
+        std::cerr << "[Info] Couldn't open " << projectPath / "scensesData.json" << std::endl;
+        return false;
+    }
+
+    sceneManager.scenes.clear();
+
+    try {
+        json j;
+        file >> j;
+
+        if (j.contains("scenes")) {
+            for (const auto &sceneJson: j["scenes"]) {
+                SceneData scene;
+                scene.sceneName = sceneJson.value("sceneName", "Unnamed Scene");
+                if (sceneJson.contains("sources")) {
+                    for (const auto &src: sceneJson["sources"])
+                        scene.sources.push_back(src.get<std::string>());
+                }
+                sceneManager.scenes.push_back(scene);
+            }
+        }
+    } catch (const std::exception &e) {
+        std::cerr << "[Helper] Error parsing JSON: " << e.what() << std::endl;
+        return false;
+    }
+
+    std::cout << "[Helper] Loaded " << sceneManager.scenes.size() << " scenes" << std::endl;
+    refreshScenes();
+    return true;
+}
+
+void UIManager::switchToStartup() {
+    if ((getWindow().document = getWindow().context->LoadDocument("assets/startup.rml"))) {
+        setStartupEventListeners();
+        getWindow().document->Show();
+    }
+}
+
+void UIManager::selectScene(const int index) {
+    std::cout << "Selecting scene: " << index << " (previously: " << activeSceneIndex << ")" << std::endl;
+    activeSceneIndex = index;
+    refreshScenes();
+}
+
+
+

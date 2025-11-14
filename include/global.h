@@ -17,7 +17,6 @@
 #include <iostream>
 
 #include "Shell.h"
-#include "ButtonListener.h"
 #include "Window.h"
 
 
@@ -57,10 +56,16 @@ void duplicateScene(int index);
 void selectScene(int index);
 void showRenameDialog(int index);
 
+// For switching in UI helper functions
+void setStartupEventListeners();
+void setStartupEventListeners();
+
 // Global Variables
 inline SaveData saveData;
 inline SceneManager sceneManager;
 inline bool createRecentPath = true;
 inline std::filesystem::path projectPath;
 inline int activeSceneIndex = -1; // -1 means no scene selected
+
+
 

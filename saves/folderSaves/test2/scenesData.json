@@ -1,11 +1,7 @@
 {
     "scenes": [
         {
-            "sceneName": "test2",
-            "sources": []
-        },
-        {
-            "sceneName": "Szene 2 (Copy)",
+            "sceneName": "Szene 1",
             "sources": []
         },
         {
@@ -14,10 +10,6 @@
         },
         {
             "sceneName": "Szene 3",
-            "sources": []
-        },
-        {
-            "sceneName": "Szene 5",
             "sources": []
         }
     ]

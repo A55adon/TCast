@@ -2,7 +2,7 @@
 
 #include "global.h"
 #include "Utilities.h"
-#include "SceneEventListener.h"
+#include "EventListener.h"
 
 // ============ FORWARD DECLARATIONS ============
 
@@ -423,38 +423,38 @@ inline bool saveProject(const std::filesystem::path &projectPath) {
 }
 
 inline bool loadScenesData(const std::filesystem::path &projectPath) {
-    std::cout << "[Helper][loadScenesData] Loading scenes data" << std::endl;
+   std::cout << "[Helper][loadScenesData] Loading scenes data" << std::endl;
 
-    std::ifstream file(projectPath / "scenesData.json");
-    if (!file.is_open()) {
-        std::cerr << "[loadScenes] Couldn't open " << projectPath / "scensesData.json" << std::endl;
-        return false;
-    }
+   std::ifstream file(projectPath / "scenesData.json");
+   if (!file.is_open()) {
+       std::cerr << "[loadScenes] Couldn't open " << projectPath / "scensesData.json" << std::endl;
+       return false;
+   }
 
-    sceneManager.scenes.clear();
+   sceneManager.scenes.clear();
 
-    try {
-        json j;
-        file >> j;
+   try {
+       json j;
+       file >> j;
 
-        if (j.contains("scenes")) {
-            for (const auto &sceneJson: j["scenes"]) {
-                SceneData scene;
-                scene.sceneName = sceneJson.value("sceneName", "Unnamed Scene");
-                if (sceneJson.contains("sources")) {
-                    for (const auto &src: sceneJson["sources"])
-                        scene.sources.push_back(src.get<std::string>());
-                }
-                sceneManager.scenes.push_back(scene);
-            }
-        }
-    } catch (const std::exception &e) {
-        std::cerr << "[Helper][loadScenesData] Error parsing JSON: " << e.what() << std::endl;
-        return false;
-    }
+       if (j.contains("scenes")) {
+           for (const auto &sceneJson: j["scenes"]) {
+               SceneData scene;
+               scene.sceneName = sceneJson.value("sceneName", "Unnamed Scene");
+               if (sceneJson.contains("sources")) {
+                   for (const auto &src: sceneJson["sources"])
+                       scene.sources.push_back(src.get<std::string>());
+               }
+               sceneManager.scenes.push_back(scene);
+           }
+       }
+   } catch (const std::exception &e) {
+       std::cerr << "[Helper][loadScenesData] Error parsing JSON: " << e.what() << std::endl;
+       return false;
+   }
 
-    std::cout << "[Helper][loadScenesData] Loaded " << sceneManager.scenes.size() << " scenes" << std::endl;
-    refreshScenes();
+   std::cout << "[Helper][loadScenesData] Loaded " << sceneManager.scenes.size() << " scenes" << std::endl;
+   refreshScenes();
     return true;
 }
 

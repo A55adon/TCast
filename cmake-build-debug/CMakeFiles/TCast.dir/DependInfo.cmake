@@ -8,7 +8,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Code/TCast/include/UIManager.cpp" "CMakeFiles/TCast.dir/include/UIManager.cpp.obj" "gcc" "CMakeFiles/TCast.dir/include/UIManager.cpp.obj.d"
   "C:/Code/TCast/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp" "CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj" "gcc" "CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj.d"
   "C:/Code/TCast/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp" "CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp.obj" "gcc" "CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp.obj.d"
   "C:/Code/TCast/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp" "CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp.obj" "gcc" "CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp.obj.d"
@@ -18,6 +17,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Code/TCast/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp" "CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj" "gcc" "CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj.d"
   "C:/Code/TCast/src/EventListener.cpp" "CMakeFiles/TCast.dir/src/EventListener.cpp.obj" "gcc" "CMakeFiles/TCast.dir/src/EventListener.cpp.obj.d"
   "C:/Code/TCast/src/Projector.cpp" "CMakeFiles/TCast.dir/src/Projector.cpp.obj" "gcc" "CMakeFiles/TCast.dir/src/Projector.cpp.obj.d"
+  "C:/Code/TCast/src/UIManager.cpp" "CMakeFiles/TCast.dir/src/UIManager.cpp.obj" "gcc" "CMakeFiles/TCast.dir/src/UIManager.cpp.obj.d"
   "C:/Code/TCast/src/UISetup.cpp" "CMakeFiles/TCast.dir/src/UISetup.cpp.obj" "gcc" "CMakeFiles/TCast.dir/src/UISetup.cpp.obj.d"
   "C:/Code/TCast/src/Utilities.cpp" "CMakeFiles/TCast.dir/src/Utilities.cpp.obj" "gcc" "CMakeFiles/TCast.dir/src/Utilities.cpp.obj.d"
   "C:/Code/TCast/src/Window.cpp" "CMakeFiles/TCast.dir/src/Window.cpp.obj" "gcc" "CMakeFiles/TCast.dir/src/Window.cpp.obj.d"

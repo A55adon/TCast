@@ -9,13 +9,15 @@
 
  * Todo:
  *  - installer
- *  - slider for beamercount
+ *  - slider projector count
  *  - settings
- *  - dont have a recentpath as a setting
+ *  - dont have a recent path as a setting
  *  - delete projects
+ *  - resources panel, upload, delete
  *  - callbacks for exporting importing saving loading etc
  *  - if clicking on new project or loadproject have the ability to go back
  *  - Update Checking
+ *  - warn of invalid folder structure when loading a project and offer to fix it
  *
 */
 

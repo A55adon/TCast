@@ -27,7 +27,7 @@ struct SaveData {
     std::string projectName;
     int projectorCount{};
     std::string description;
-    std::string path;
+    std::filesystem::path path;
 };
 
 struct SceneData {

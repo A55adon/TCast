@@ -251,20 +251,20 @@ CMakeFiles/TCast.dir/src/UISetup.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/src/UISetup.cpp.s"
 	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Code\TCast\src\UISetup.cpp -o CMakeFiles\TCast.dir\src\UISetup.cpp.s
 
-CMakeFiles/TCast.dir/include/UIManager.cpp.obj: CMakeFiles/TCast.dir/flags.make
-CMakeFiles/TCast.dir/include/UIManager.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
-CMakeFiles/TCast.dir/include/UIManager.cpp.obj: C:/Code/TCast/include/UIManager.cpp
-CMakeFiles/TCast.dir/include/UIManager.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/TCast.dir/include/UIManager.cpp.obj"
-	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/include/UIManager.cpp.obj -MF CMakeFiles\TCast.dir\include\UIManager.cpp.obj.d -o CMakeFiles\TCast.dir\include\UIManager.cpp.obj -c C:\Code\TCast\include\UIManager.cpp
+CMakeFiles/TCast.dir/src/UIManager.cpp.obj: CMakeFiles/TCast.dir/flags.make
+CMakeFiles/TCast.dir/src/UIManager.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
+CMakeFiles/TCast.dir/src/UIManager.cpp.obj: C:/Code/TCast/src/UIManager.cpp
+CMakeFiles/TCast.dir/src/UIManager.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/TCast.dir/src/UIManager.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/src/UIManager.cpp.obj -MF CMakeFiles\TCast.dir\src\UIManager.cpp.obj.d -o CMakeFiles\TCast.dir\src\UIManager.cpp.obj -c C:\Code\TCast\src\UIManager.cpp
 
-CMakeFiles/TCast.dir/include/UIManager.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/include/UIManager.cpp.i"
-	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Code\TCast\include\UIManager.cpp > CMakeFiles\TCast.dir\include\UIManager.cpp.i
+CMakeFiles/TCast.dir/src/UIManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/src/UIManager.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Code\TCast\src\UIManager.cpp > CMakeFiles\TCast.dir\src\UIManager.cpp.i
 
-CMakeFiles/TCast.dir/include/UIManager.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/include/UIManager.cpp.s"
-	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Code\TCast\include\UIManager.cpp -o CMakeFiles\TCast.dir\include\UIManager.cpp.s
+CMakeFiles/TCast.dir/src/UIManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/src/UIManager.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Code\TCast\src\UIManager.cpp -o CMakeFiles\TCast.dir\src\UIManager.cpp.s
 
 CMakeFiles/TCast.dir/src/EventListener.cpp.obj: CMakeFiles/TCast.dir/flags.make
 CMakeFiles/TCast.dir/src/EventListener.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
@@ -295,7 +295,7 @@ TCast_OBJECTS = \
 "CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj" \
 "CMakeFiles/TCast.dir/src/Utilities.cpp.obj" \
 "CMakeFiles/TCast.dir/src/UISetup.cpp.obj" \
-"CMakeFiles/TCast.dir/include/UIManager.cpp.obj" \
+"CMakeFiles/TCast.dir/src/UIManager.cpp.obj" \
 "CMakeFiles/TCast.dir/src/EventListener.cpp.obj"
 
 # External object files for target TCast
@@ -313,7 +313,7 @@ TCast.exe: CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.obj
 TCast.exe: CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj
 TCast.exe: CMakeFiles/TCast.dir/src/Utilities.cpp.obj
 TCast.exe: CMakeFiles/TCast.dir/src/UISetup.cpp.obj
-TCast.exe: CMakeFiles/TCast.dir/include/UIManager.cpp.obj
+TCast.exe: CMakeFiles/TCast.dir/src/UIManager.cpp.obj
 TCast.exe: CMakeFiles/TCast.dir/src/EventListener.cpp.obj
 TCast.exe: CMakeFiles/TCast.dir/build.make
 TCast.exe: C:/Code/TCast/libs/RmlUi/build-mingw/librmlui.dll.a

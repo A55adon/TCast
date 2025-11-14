@@ -1,6 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/TCast.dir/include/UIManager.cpp.obj"
-  "CMakeFiles/TCast.dir/include/UIManager.cpp.obj.d"
   "CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj"
   "CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj.d"
   "CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp.obj"
@@ -19,6 +17,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/TCast.dir/src/EventListener.cpp.obj.d"
   "CMakeFiles/TCast.dir/src/Projector.cpp.obj"
   "CMakeFiles/TCast.dir/src/Projector.cpp.obj.d"
+  "CMakeFiles/TCast.dir/src/UIManager.cpp.obj"
+  "CMakeFiles/TCast.dir/src/UIManager.cpp.obj.d"
   "CMakeFiles/TCast.dir/src/UISetup.cpp.obj"
   "CMakeFiles/TCast.dir/src/UISetup.cpp.obj.d"
   "CMakeFiles/TCast.dir/src/Utilities.cpp.obj"

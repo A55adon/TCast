@@ -6,21 +6,23 @@
 class UIManager {
 public:
 // SaveFunction + helpers
-    void saveProject();
+    static bool saveProject();
+    static bool saveProject(const std::filesystem::path &savePath);
 
-    void verifyFolderStructure();
-    void fixFolderStructure();
-    void saveJsonToFile();
+    static bool verifyFolderStructure(const std::filesystem::path &projectPath);
+    static void fixFolderStructure(const std::filesystem::path &savePath);
+    static bool saveJsonToFile(const std::filesystem::path &savePath, const json &data);
 
 // LoadFunction + helpers (createRecentPath())
-    void loadProject();
+    static bool loadProject();
+    static bool loadProject(std::filesystem::path loadPath);
 
 // CreateFunction + helpers
-    void createProject();
+    static bool createProject();
 
-    void validateProjectorCount();
-    void validateInputField();
-    void createRecentPathFile();
+    static std::optional<int> validateProjectorCount(const std::string &value);
+    static std::string* validateInputField(std::string &value, const std::string &fieldName);
+    static bool createRecentPathFile(const std::filesystem::path &savePath);
 
 // Other
     void refreshScenes();

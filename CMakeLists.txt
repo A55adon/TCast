@@ -23,7 +23,7 @@ set(SOURCES
         include/global.h
         src/UISetup.cpp
         include/UISetup.h
-        include/UIManager.cpp
+        src/UIManager.cpp
         include/UIManager.h
         src/EventListener.cpp
         include/EventListener.h

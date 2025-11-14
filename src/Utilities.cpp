@@ -158,7 +158,23 @@ std::filesystem::path Utilities::getRecentPath() {
     return result;
 }
 
-Rml::Element* Utilities::getEl(const std::string& str) {
+bool Utilities::validateString(std::string &value) {
+    static const std::regex pattern("^[A-Za-z0-9äöüÄÖÜ _.\\-;,]+$");
+    if (std::regex_match(value, pattern)) {
+        return true;  // return pointer to the original string
+    }
+    return false;     // invalid input
+}
+
+void Utilities::showError(const std::string & msg) {
+    std::cerr << msg << std::endl;
+}
+
+void Utilities::showInfo(std::string msg) {
+}
+
+
+Rml::Element* getEl(const std::string& str) {
     if (Rml::Element* temp = getWindow().document->GetElementById(str))
         return temp;
     return nullptr;

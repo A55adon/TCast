@@ -647,7 +647,7 @@ void setupFileDropdownListeners() {
     if (auto *filedropdownexportproject = getWindow().document->GetElementById("file-dropdown-exportproject")) {
         filedropdownexportproject->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
             try {
-                std::string fullPath = saveData.path + "\\" + saveData.projectName;
+                std::string fullPath = saveData.path.string() + "\\" + saveData.projectName;
 
                 if (std::filesystem::exists(fullPath + ".tct")) {
                     std::filesystem::remove_all(fullPath + ".tct");
@@ -665,7 +665,7 @@ void setupFileDropdownListeners() {
                 }
 
                 std::filesystem::rename(fullPath + ".zip", fullPath + ".tct");
-                std::cout << "File " + saveData.projectName + ".tct exported successfully to: " + saveData.path <<
+                std::cout << "File " + saveData.projectName + ".tct exported successfully to: " + saveData.path.string() <<
                         std::endl;
             } catch (const std::filesystem::filesystem_error &e) {
                 std::cerr << "Filesystem error: " << e.what() << '\n';

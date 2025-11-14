@@ -23,6 +23,11 @@ public:
     static std::string toBackwardSlashes(const std::string &path);
     static std::filesystem::path getRecentPath();
 
-    static Rml::Element* getEl(const std::string &str);
+
+    static bool validateString(std::string &value);
+    static void showError(const std::string & msg);
+    static void showInfo(std::string msg);
+
 };
 
+Rml::Element* getEl(const std::string &str);

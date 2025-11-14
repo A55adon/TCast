@@ -141,30 +141,6 @@ copy_assets/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\copy_assets.dir\build.make CMakeFiles/copy_assets.dir/build
 .PHONY : copy_assets/fast
 
-include/UIManager.obj: include/UIManager.cpp.obj
-.PHONY : include/UIManager.obj
-
-# target to build an object file
-include/UIManager.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/include/UIManager.cpp.obj
-.PHONY : include/UIManager.cpp.obj
-
-include/UIManager.i: include/UIManager.cpp.i
-.PHONY : include/UIManager.i
-
-# target to preprocess a source file
-include/UIManager.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/include/UIManager.cpp.i
-.PHONY : include/UIManager.cpp.i
-
-include/UIManager.s: include/UIManager.cpp.s
-.PHONY : include/UIManager.s
-
-# target to generate assembly for a file
-include/UIManager.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/include/UIManager.cpp.s
-.PHONY : include/UIManager.cpp.s
-
 libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.obj: libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj
 .PHONY : libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.obj
 
@@ -381,6 +357,30 @@ src/Projector.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/src/Projector.cpp.s
 .PHONY : src/Projector.cpp.s
 
+src/UIManager.obj: src/UIManager.cpp.obj
+.PHONY : src/UIManager.obj
+
+# target to build an object file
+src/UIManager.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/src/UIManager.cpp.obj
+.PHONY : src/UIManager.cpp.obj
+
+src/UIManager.i: src/UIManager.cpp.i
+.PHONY : src/UIManager.i
+
+# target to preprocess a source file
+src/UIManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/src/UIManager.cpp.i
+.PHONY : src/UIManager.cpp.i
+
+src/UIManager.s: src/UIManager.cpp.s
+.PHONY : src/UIManager.s
+
+# target to generate assembly for a file
+src/UIManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/src/UIManager.cpp.s
+.PHONY : src/UIManager.cpp.s
+
 src/UISetup.obj: src/UISetup.cpp.obj
 .PHONY : src/UISetup.obj
 
@@ -487,9 +487,6 @@ help:
 	@echo ... rebuild_cache
 	@echo ... copy_assets
 	@echo ... TCast
-	@echo ... include/UIManager.obj
-	@echo ... include/UIManager.i
-	@echo ... include/UIManager.s
 	@echo ... libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.obj
 	@echo ... libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.i
 	@echo ... libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.s
@@ -517,6 +514,9 @@ help:
 	@echo ... src/Projector.obj
 	@echo ... src/Projector.i
 	@echo ... src/Projector.s
+	@echo ... src/UIManager.obj
+	@echo ... src/UIManager.i
+	@echo ... src/UIManager.s
 	@echo ... src/UISetup.obj
 	@echo ... src/UISetup.i
 	@echo ... src/UISetup.s

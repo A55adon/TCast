@@ -159,7 +159,7 @@ std::filesystem::path Utilities::getRecentPath() {
 }
 
 Rml::Element* Utilities::getEl(const std::string& str) {
-    //if (Rml::Element* temp = window.document->GetElementById(str))
-    //    return temp;
+    if (Rml::Element* temp = getWindow().document->GetElementById(str))
+        return temp;
     return nullptr;
 }

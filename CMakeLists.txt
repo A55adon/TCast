@@ -21,6 +21,12 @@ set(SOURCES
         include/SceneEditActions.h
         include/ButtonListener.h
         include/global.h
+        src/UISetup.cpp
+        include/UISetup.h
+        include/UIManager.cpp
+        include/UIManager.h
+        src/EventListener.cpp
+        include/EventListener.h
 )
 
 add_executable(TCast ${SOURCES})

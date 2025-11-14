@@ -236,6 +236,51 @@ CMakeFiles/TCast.dir/src/Utilities.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/src/Utilities.cpp.s"
 	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Code\TCast\src\Utilities.cpp -o CMakeFiles\TCast.dir\src\Utilities.cpp.s
 
+CMakeFiles/TCast.dir/src/UISetup.cpp.obj: CMakeFiles/TCast.dir/flags.make
+CMakeFiles/TCast.dir/src/UISetup.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
+CMakeFiles/TCast.dir/src/UISetup.cpp.obj: C:/Code/TCast/src/UISetup.cpp
+CMakeFiles/TCast.dir/src/UISetup.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/TCast.dir/src/UISetup.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/src/UISetup.cpp.obj -MF CMakeFiles\TCast.dir\src\UISetup.cpp.obj.d -o CMakeFiles\TCast.dir\src\UISetup.cpp.obj -c C:\Code\TCast\src\UISetup.cpp
+
+CMakeFiles/TCast.dir/src/UISetup.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/src/UISetup.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Code\TCast\src\UISetup.cpp > CMakeFiles\TCast.dir\src\UISetup.cpp.i
+
+CMakeFiles/TCast.dir/src/UISetup.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/src/UISetup.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Code\TCast\src\UISetup.cpp -o CMakeFiles\TCast.dir\src\UISetup.cpp.s
+
+CMakeFiles/TCast.dir/include/UIManager.cpp.obj: CMakeFiles/TCast.dir/flags.make
+CMakeFiles/TCast.dir/include/UIManager.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
+CMakeFiles/TCast.dir/include/UIManager.cpp.obj: C:/Code/TCast/include/UIManager.cpp
+CMakeFiles/TCast.dir/include/UIManager.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/TCast.dir/include/UIManager.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/include/UIManager.cpp.obj -MF CMakeFiles\TCast.dir\include\UIManager.cpp.obj.d -o CMakeFiles\TCast.dir\include\UIManager.cpp.obj -c C:\Code\TCast\include\UIManager.cpp
+
+CMakeFiles/TCast.dir/include/UIManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/include/UIManager.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Code\TCast\include\UIManager.cpp > CMakeFiles\TCast.dir\include\UIManager.cpp.i
+
+CMakeFiles/TCast.dir/include/UIManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/include/UIManager.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Code\TCast\include\UIManager.cpp -o CMakeFiles\TCast.dir\include\UIManager.cpp.s
+
+CMakeFiles/TCast.dir/src/EventListener.cpp.obj: CMakeFiles/TCast.dir/flags.make
+CMakeFiles/TCast.dir/src/EventListener.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
+CMakeFiles/TCast.dir/src/EventListener.cpp.obj: C:/Code/TCast/src/EventListener.cpp
+CMakeFiles/TCast.dir/src/EventListener.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/TCast.dir/src/EventListener.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/src/EventListener.cpp.obj -MF CMakeFiles\TCast.dir\src\EventListener.cpp.obj.d -o CMakeFiles\TCast.dir\src\EventListener.cpp.obj -c C:\Code\TCast\src\EventListener.cpp
+
+CMakeFiles/TCast.dir/src/EventListener.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/src/EventListener.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Code\TCast\src\EventListener.cpp > CMakeFiles\TCast.dir\src\EventListener.cpp.i
+
+CMakeFiles/TCast.dir/src/EventListener.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/src/EventListener.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Code\TCast\src\EventListener.cpp -o CMakeFiles\TCast.dir\src\EventListener.cpp.s
+
 # Object files for target TCast
 TCast_OBJECTS = \
 "CMakeFiles/TCast.dir/src/main.cpp.obj" \
@@ -248,7 +293,10 @@ TCast_OBJECTS = \
 "CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/RendererExtensions.cpp.obj" \
 "CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.obj" \
 "CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj" \
-"CMakeFiles/TCast.dir/src/Utilities.cpp.obj"
+"CMakeFiles/TCast.dir/src/Utilities.cpp.obj" \
+"CMakeFiles/TCast.dir/src/UISetup.cpp.obj" \
+"CMakeFiles/TCast.dir/include/UIManager.cpp.obj" \
+"CMakeFiles/TCast.dir/src/EventListener.cpp.obj"
 
 # External object files for target TCast
 TCast_EXTERNAL_OBJECTS =
@@ -264,6 +312,9 @@ TCast.exe: CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/RendererExtensions.
 TCast.exe: CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.obj
 TCast.exe: CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj
 TCast.exe: CMakeFiles/TCast.dir/src/Utilities.cpp.obj
+TCast.exe: CMakeFiles/TCast.dir/src/UISetup.cpp.obj
+TCast.exe: CMakeFiles/TCast.dir/include/UIManager.cpp.obj
+TCast.exe: CMakeFiles/TCast.dir/src/EventListener.cpp.obj
 TCast.exe: CMakeFiles/TCast.dir/build.make
 TCast.exe: C:/Code/TCast/libs/RmlUi/build-mingw/librmlui.dll.a
 TCast.exe: C:/Code/TCast/libs/RmlUi/build-mingw/librmlui_debugger.dll.a
@@ -272,7 +323,7 @@ TCast.exe: C:/Code/TCast/libs/glew-2.1.0/lib/Release/x64/glew32.lib
 TCast.exe: CMakeFiles/TCast.dir/linkLibs.rsp
 TCast.exe: CMakeFiles/TCast.dir/objects1.rsp
 TCast.exe: CMakeFiles/TCast.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable TCast.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable TCast.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\TCast.dir\link.txt --verbose=$(VERBOSE)
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold "Copying DLLs..."
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Code/TCast/libs/RmlUi/build-mingw/librmlui.dll C:/Code/TCast/libs/RmlUi/build-mingw/librmlui_debugger.dll C:/Code/TCast/libs/GLFW/lib/glfw3.dll C:/Code/TCast/libs/freetype_x64-windows/libfreetype-6.dll C:/Code/TCast/libs/glew-2.1.0/bin/Release/Win32/glew32.dll C:/Code/TCast/libs/default/libstdc++-6.dll C:/Code/TCast/libs/default/libgcc_s_seh-1.dll C:/Code/TCast/libs/default/libwinpthread-1.dll C:/Code/TCast/libs/default/libbrotlidec.dll C:/Code/TCast/libs/default/libharfbuzz-0.dll C:/Code/TCast/libs/default/libpng16-16.dll C:/Code/TCast/libs/default/zlib1.dll C:/Code/TCast/libs/default/libbz2-1.dll C:/Code/TCast/cmake-build-debug

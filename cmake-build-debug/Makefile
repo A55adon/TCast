@@ -141,6 +141,30 @@ copy_assets/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\copy_assets.dir\build.make CMakeFiles/copy_assets.dir/build
 .PHONY : copy_assets/fast
 
+include/UIManager.obj: include/UIManager.cpp.obj
+.PHONY : include/UIManager.obj
+
+# target to build an object file
+include/UIManager.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/include/UIManager.cpp.obj
+.PHONY : include/UIManager.cpp.obj
+
+include/UIManager.i: include/UIManager.cpp.i
+.PHONY : include/UIManager.i
+
+# target to preprocess a source file
+include/UIManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/include/UIManager.cpp.i
+.PHONY : include/UIManager.cpp.i
+
+include/UIManager.s: include/UIManager.cpp.s
+.PHONY : include/UIManager.s
+
+# target to generate assembly for a file
+include/UIManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/include/UIManager.cpp.s
+.PHONY : include/UIManager.cpp.s
+
 libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.obj: libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj
 .PHONY : libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.obj
 
@@ -309,6 +333,30 @@ libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.s
 .PHONY : libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.s
 
+src/EventListener.obj: src/EventListener.cpp.obj
+.PHONY : src/EventListener.obj
+
+# target to build an object file
+src/EventListener.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/src/EventListener.cpp.obj
+.PHONY : src/EventListener.cpp.obj
+
+src/EventListener.i: src/EventListener.cpp.i
+.PHONY : src/EventListener.i
+
+# target to preprocess a source file
+src/EventListener.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/src/EventListener.cpp.i
+.PHONY : src/EventListener.cpp.i
+
+src/EventListener.s: src/EventListener.cpp.s
+.PHONY : src/EventListener.s
+
+# target to generate assembly for a file
+src/EventListener.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/src/EventListener.cpp.s
+.PHONY : src/EventListener.cpp.s
+
 src/Projector.obj: src/Projector.cpp.obj
 .PHONY : src/Projector.obj
 
@@ -332,6 +380,30 @@ src/Projector.s: src/Projector.cpp.s
 src/Projector.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/src/Projector.cpp.s
 .PHONY : src/Projector.cpp.s
+
+src/UISetup.obj: src/UISetup.cpp.obj
+.PHONY : src/UISetup.obj
+
+# target to build an object file
+src/UISetup.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/src/UISetup.cpp.obj
+.PHONY : src/UISetup.cpp.obj
+
+src/UISetup.i: src/UISetup.cpp.i
+.PHONY : src/UISetup.i
+
+# target to preprocess a source file
+src/UISetup.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/src/UISetup.cpp.i
+.PHONY : src/UISetup.cpp.i
+
+src/UISetup.s: src/UISetup.cpp.s
+.PHONY : src/UISetup.s
+
+# target to generate assembly for a file
+src/UISetup.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/src/UISetup.cpp.s
+.PHONY : src/UISetup.cpp.s
 
 src/Utilities.obj: src/Utilities.cpp.obj
 .PHONY : src/Utilities.obj
@@ -415,6 +487,9 @@ help:
 	@echo ... rebuild_cache
 	@echo ... copy_assets
 	@echo ... TCast
+	@echo ... include/UIManager.obj
+	@echo ... include/UIManager.i
+	@echo ... include/UIManager.s
 	@echo ... libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.obj
 	@echo ... libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.i
 	@echo ... libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.s
@@ -436,9 +511,15 @@ help:
 	@echo ... libs/RmlUi/Samples/shell/src/ShellFileInterface.obj
 	@echo ... libs/RmlUi/Samples/shell/src/ShellFileInterface.i
 	@echo ... libs/RmlUi/Samples/shell/src/ShellFileInterface.s
+	@echo ... src/EventListener.obj
+	@echo ... src/EventListener.i
+	@echo ... src/EventListener.s
 	@echo ... src/Projector.obj
 	@echo ... src/Projector.i
 	@echo ... src/Projector.s
+	@echo ... src/UISetup.obj
+	@echo ... src/UISetup.i
+	@echo ... src/UISetup.s
 	@echo ... src/Utilities.obj
 	@echo ... src/Utilities.i
 	@echo ... src/Utilities.s

@@ -156,15 +156,6 @@ body {
     gap: 15px;
 }
 
-.projector-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    height: 100%;
-    align-content: stretch; /* lets rows stretch to fill vertical space */
-}
-
-
 .projector {
     display: flex;
     align-items: center;
@@ -351,4 +342,109 @@ body {
 
 .rename-input, .rename-ok-button {
     pointer-events: auto; /* Ensure input and button are clickable */
+}
+
+/* === Resource Area Styles === */
+/* === Resource Area Styles === */
+/* === Resource Area Styles === */
+.main-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-height: 0;
+}
+
+.projector-grid {
+    flex: 4;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-content: stretch;
+    min-height: 0;
+}
+
+.resource-area {
+    flex: 1;
+    background-color: #2c3e50;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    max-height: 100%;
+}
+
+.resource-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #34495e;
+    border-radius: 8px 8px 0 0;
+    flex-shrink: 0;
+}
+
+.resource-header h2 {
+    margin: 0;
+    font-size: 18px;
+    color: white;
+}
+
+#add-resource-btn {
+    background-color: #00aced;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#add-resource-btn:hover {
+    background-color: #0091c9;
+}
+
+.resource-list {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    overflow-y: auto;
+    align-content: flex-start;
+    align-items: flex-start;
+    min-height: 0;
+    /* Force proper width calculation */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.resource-item {
+    width: 89px;
+    height: 50px;
+    background-color: #34495e;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    /* Prevent flex items from growing/shrinking */
+    flex: 0 0 auto;
+}
+
+.resource-item:hover {
+    background-color: #00aced;
+}
+
+.resource-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.resource-item.active {
+    background-color: #00aced;
+    border: 2px solid #3a4f63;
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "global.h"
 #include <shobjidl.h>
 #include <string>
 #include <nlohmann/json.hpp>
@@ -25,60 +26,85 @@ inline bool createRecentPath = true;
 inline std::filesystem::path projectPath;
 inline int activeSceneIndex = -1; // -1 means no scene selected
 
+
 // ============ FORWARD DECLARATIONS ============
 
 // Project Management
 void switchToStartup();
-bool saveProject(const std::filesystem::path& projectPath);
+
+bool saveProject(const std::filesystem::path &projectPath);
+
 bool loadProject();
-bool saveNewProject();
+
+bool createProject();
+
 void setStartupEventListeners();
+
 void setInterfaceEventListeners();
+
 void setupSceneContextMenu();
 
 // UI Helper Methods
 void refreshScenes();
-void populateFolders(Rml::ElementDocument* doc, const std::string& path);
-void setSelectedProject(Rml::ElementDocument* doc, const std::string& name);
+
+void populateFolders(Rml::ElementDocument *doc, const std::string &path);
+
+void setSelectedProject(Rml::ElementDocument *doc, const std::string &name);
 
 // Validation Methods
-bool validateBeamerCount(const std::string& value, int& outCount);
-bool validateInputField(const std::string& value, const std::string& fieldName);
+bool validateProjectorCount(const std::string &value, int &outCount);
+
+bool validateInputField(const std::string &value, const std::string &fieldName);
 
 // File System Methods
-bool verifyFolderStructure(const std::filesystem::path& projectPath);
-void fixFolderStructure(const std::filesystem::path& projectPath);
-bool loadScenesData(const std::filesystem::path& projectPath);
-bool saveJsonToFile(const std::filesystem::path& filePath, const json& data, const std::string& errorContext);
-bool createRecentPathFile(const std::filesystem::path& path);
+bool verifyFolderStructure(const std::filesystem::path &projectPath);
+
+void fixFolderStructure(const std::filesystem::path &projectPath);
+
+bool loadScenesData(const std::filesystem::path &projectPath);
+
+bool saveJsonToFile(const std::filesystem::path &filePath, const json &data, const std::string &errorContext);
+
+bool createRecentPathFile(const std::filesystem::path &path);
 
 // Event Listener Setup Methods
+
 void setupFileDropdownListeners();
+void setupDropdownListeners() {
+    setupFileDropdownListeners();
+}
+
 void setupProjectorGrid();
+
 void setupSceneManagement();
+
 void setupTabListeners();
+
 void setupBrowseButtons();
+
 void setupProjectActions();
+
 void setupProjectSelection();
 
 // ============ UI HELPER METHODS ============
 
-inline void setSelectedProject(Rml::ElementDocument* doc, const std::string& name) {
-    if (auto* label = doc->GetElementById("selected-project-label")) {
+
+
+inline void setSelectedProject(Rml::ElementDocument *doc, const std::string &name) {
+    if (auto *label = doc->GetElementById("selected-project-label")) {
         label->SetInnerRML(name);
     }
 }
 
 inline void showRenameDialog(int sceneIndex) {
-
-    if (sceneIndex < 0 || sceneIndex >= (int)sceneManager.scenes.size()) {
+    if (sceneIndex < 0 || sceneIndex >= (int) sceneManager.scenes.size()) {
         std::cerr << "[Error] Invalid scene index for rename: " << sceneIndex << std::endl;
         return;
     }
 
     // Get the scene item element
     std::string sceneItemId = "scene-item-" + std::to_string(sceneIndex);
-    if (auto* sceneItem = window.document->GetElementById(sceneItemId)) {
+    if (auto *sceneItem = window.document->GetElementById(sceneItemId)) {
         // Store the current name for potential cancellation
         std::string currentName = sceneManager.scenes[sceneIndex].sceneName;
 
@@ -122,23 +148,25 @@ inline void showRenameDialog(int sceneIndex) {
         }, true));
 
         // Add event listener for Enter key in input field
-        input->AddEventListener(Rml::EventId::Keydown, new KeyEventHandler([sceneIndex, currentName](Rml::Event& event) {
-            if (event.GetParameter<int>("key_identifier", 0) == Rml::Input::KI_RETURN) {
-                //std::cout << "Enter key pressed in rename input" << std::endl;
-                event.StopPropagation(); // Stop the Enter key from propagating
+        input->AddEventListener(Rml::EventId::Keydown, new KeyEventHandler(
+                                    [sceneIndex, currentName](Rml::Event &event) {
+                                        if (event.GetParameter<int>("key_identifier", 0) == Rml::Input::KI_RETURN) {
+                                            //std::cout << "Enter key pressed in rename input" << std::endl;
+                                            event.StopPropagation(); // Stop the Enter key from propagating
 
-                // Simulate OK button click when Enter is pressed
-                if (auto* okButton = window.document->GetElementById("rename-ok-" + std::to_string(sceneIndex))) {
-                    okButton->Click();
-                }
-            }
-        }));
+                                            // Simulate OK button click when Enter is pressed
+                                            if (auto *okButton = window.document->GetElementById(
+                                                "rename-ok-" + std::to_string(sceneIndex))) {
+                                                okButton->Click();
+                                            }
+                                        }
+                                    }));
 
         // Add event listener for OK button functionality
         okButton->AddEventListener(Rml::EventId::Click, new ButtonHandler([sceneIndex, currentName] {
             //std::cout << "OK button clicked for scene: " << sceneIndex << std::endl;
-            if (auto* inputEl = window.document->GetElementById("rename-input-" + std::to_string(sceneIndex))) {
-                if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl)) {
+            if (auto *inputEl = window.document->GetElementById("rename-input-" + std::to_string(sceneIndex))) {
+                if (auto *input = dynamic_cast<Rml::ElementFormControl *>(inputEl)) {
                     std::string newName = input->GetValue();
 
                     // Validate the new name
@@ -147,7 +175,8 @@ inline void showRenameDialog(int sceneIndex) {
                         sceneManager.scenes[sceneIndex].sceneName = newName;
 
                         // Save the project
-                        std::filesystem::path fullProjectPath = std::filesystem::path(saveData.path) / saveData.projectName;
+                        std::filesystem::path fullProjectPath =
+                                std::filesystem::path(saveData.path) / saveData.projectName;
                         saveProject(fullProjectPath);
 
                         //std::cout << "Scene renamed to: " << newName << std::endl;
@@ -178,8 +207,8 @@ inline void showRenameDialog(int sceneIndex) {
         sceneItem->AppendChild(std::move(container));
 
         // Focus the input field
-        if (auto* inputEl = window.document->GetElementById("rename-input-" + std::to_string(sceneIndex))) {
-            if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl)) {
+        if (auto *inputEl = window.document->GetElementById("rename-input-" + std::to_string(sceneIndex))) {
+            if (auto *input = dynamic_cast<Rml::ElementFormControl *>(inputEl)) {
                 input->Focus();
             }
         }
@@ -187,13 +216,13 @@ inline void showRenameDialog(int sceneIndex) {
 }
 
 inline void refreshScenes() {
-    if (auto* sceneList = window.document->GetElementById("sceneList")) {
+    if (auto *sceneList = window.document->GetElementById("sceneList")) {
         for (int i = sceneList->GetNumChildren() - 1; i >= 0; --i) {
-            Rml::Element* child = sceneList->GetChild(i);
+            Rml::Element *child = sceneList->GetChild(i);
             sceneList->RemoveChild(child);
         }
 
-        for (int i = 0; i < (int)sceneManager.scenes.size(); ++i) {
+        for (int i = 0; i < (int) sceneManager.scenes.size(); ++i) {
             Rml::ElementPtr child = window.document->CreateElement("div");
             child->SetClass("scene-item", true);
             child->SetId("scene-item-" + std::to_string(i)); // Add ID for targeting
@@ -221,7 +250,7 @@ inline void renameScene(int index) {
 
 inline void deleteScene(int index) {
     std::cout << "Delete scene: " << index << std::endl;
-    if (index >= 0 && index < (int)sceneManager.scenes.size()) {
+    if (index >= 0 && index < (int) sceneManager.scenes.size()) {
         sceneManager.scenes.erase(sceneManager.scenes.begin() + index);
 
         // Update active scene index
@@ -240,7 +269,7 @@ inline void deleteScene(int index) {
 
 inline void duplicateScene(int index) {
     std::cout << "Duplicate scene: " << index << std::endl;
-    if (index >= 0 && index < (int)sceneManager.scenes.size()) {
+    if (index >= 0 && index < (int) sceneManager.scenes.size()) {
         SceneData newScene = sceneManager.scenes[index];
         newScene.sceneName = newScene.sceneName + " (Copy)";
         sceneManager.scenes.insert(sceneManager.scenes.begin() + index + 1, newScene);
@@ -259,14 +288,14 @@ inline void selectScene(int index) {
     refreshScenes(); // This will update the visual highlighting
 }
 
-inline void populateFolders(Rml::ElementDocument* doc, const std::string& path) {
+inline void populateFolders(Rml::ElementDocument *doc, const std::string &path) {
     namespace fs = std::filesystem;
-    Rml::Element* container = doc->GetElementById("tab-folder-list");
+    Rml::Element *container = doc->GetElementById("tab-folder-list");
     if (!container) return;
 
     container->SetInnerRML("");
 
-    for (auto& entry : fs::directory_iterator(path)) {
+    for (auto &entry: fs::directory_iterator(path)) {
         if (entry.is_directory()) {
             std::string folderName = entry.path().filename().string();
             std::string fullPath = entry.path().string();
@@ -277,14 +306,15 @@ inline void populateFolders(Rml::ElementDocument* doc, const std::string& path) 
             folderDiv->SetInnerRML(folderName);
 
             folderDiv->AddEventListener(Rml::EventId::Click, new ButtonHandler(
-                [doc, fullPath] {
-                    if (auto* inputEl = doc->GetElementById("load-dir-input")) {
-                        if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl)) {
-                            input->SetValue(Utilities::toBackwardSlashes(fullPath));
-                        }
-                    }
-                }
-            ));
+                                            [doc, fullPath] {
+                                                if (auto *inputEl = doc->GetElementById("load-dir-input")) {
+                                                    if (auto *input = dynamic_cast<Rml::ElementFormControl *>(
+                                                        inputEl)) {
+                                                        input->SetValue(Utilities::toBackwardSlashes(fullPath));
+                                                    }
+                                                }
+                                            }
+                                        ));
 
             container->AppendChild(std::move(folderDiv));
         }
@@ -293,7 +323,7 @@ inline void populateFolders(Rml::ElementDocument* doc, const std::string& path) 
 
 // ============ VALIDATION METHODS ============
 
-inline bool validateBeamerCount(const std::string& value, int& outCount) {
+inline bool validateProjectorCount(const std::string &value, int &outCount) {
     static const std::set<std::string> validWords = {
         "eins", "zwei", "drei", "vier", "fuenf", "fünf", "sechs", "sieben", "acht", "neun"
     };
@@ -323,10 +353,10 @@ inline bool validateBeamerCount(const std::string& value, int& outCount) {
     return false;
 }
 
-inline bool validateInputField(const std::string& value, const std::string& fieldName) {
+inline bool validateInputField(const std::string &value, const std::string &fieldName) {
     static const std::regex pattern("^[A-Za-z0-9äöüÄÖÜ _.\\-;,]+$");
     if (!std::regex_match(value, pattern)) {
-        if (auto* err = window.document->GetElementById("error-text")) {
+        if (auto *err = window.document->GetElementById("error-text")) {
             err->SetInnerRML("Ungültige Zeichen in " + fieldName + "! Erlaubt ist: ^[A-Za-z0-9äöüÄÖÜ _.-;,]+$");
         }
         return false;
@@ -336,7 +366,7 @@ inline bool validateInputField(const std::string& value, const std::string& fiel
 
 // ============ FILE SYSTEM METHODS ============
 
-inline bool verifyFolderStructure(const std::filesystem::path& projectPath) {
+inline bool verifyFolderStructure(const std::filesystem::path &projectPath) {
     if (!std::filesystem::exists(projectPath)) return false;
     if (!std::filesystem::is_directory(projectPath)) return false;
     if (!std::filesystem::exists(projectPath / "saveData.json")) return false;
@@ -345,7 +375,7 @@ inline bool verifyFolderStructure(const std::filesystem::path& projectPath) {
     return true;
 }
 
-inline void fixFolderStructure(const std::filesystem::path& projectPath) {
+inline void fixFolderStructure(const std::filesystem::path &projectPath) {
     if (!std::filesystem::exists(projectPath)) {
         std::filesystem::create_directories(projectPath);
     }
@@ -362,10 +392,10 @@ inline void fixFolderStructure(const std::filesystem::path& projectPath) {
     }
 }
 
-inline bool saveJsonToFile(const std::filesystem::path& filePath, const json& data, const std::string& errorContext) {
+inline bool saveJsonToFile(const std::filesystem::path &filePath, const json &data, const std::string &errorContext) {
     std::ofstream file(filePath);
     if (!file.is_open()) {
-        if (auto* el = window.document->GetElementById("error-text")) {
+        if (auto *el = window.document->GetElementById("error-text")) {
             el->SetInnerRML("Konnte nicht Speichern – " + errorContext);
         }
         return false;
@@ -375,7 +405,7 @@ inline bool saveJsonToFile(const std::filesystem::path& filePath, const json& da
     file.close();
 
     if (!std::filesystem::exists(filePath)) {
-        if (auto* el = window.document->GetElementById("error-text")) {
+        if (auto *el = window.document->GetElementById("error-text")) {
             el->SetInnerRML("JSON-Datei wurde nicht erstellt: " + errorContext);
         }
         return false;
@@ -384,7 +414,7 @@ inline bool saveJsonToFile(const std::filesystem::path& filePath, const json& da
     return true;
 }
 
-inline bool saveProject(const std::filesystem::path& projectPath) {
+inline bool saveProject(const std::filesystem::path &projectPath) {
     if (!verifyFolderStructure(projectPath)) {
         fixFolderStructure(projectPath);
     }
@@ -415,7 +445,7 @@ inline bool saveProject(const std::filesystem::path& projectPath) {
     return true;
 }
 
-inline bool loadScenesData(const std::filesystem::path& projectPath) {
+inline bool loadScenesData(const std::filesystem::path &projectPath) {
     std::cout << "[Helper][loadScenesData] Loading scenes data" << std::endl;
 
     std::ifstream file(projectPath / "scenesData.json");
@@ -431,17 +461,17 @@ inline bool loadScenesData(const std::filesystem::path& projectPath) {
         file >> j;
 
         if (j.contains("scenes")) {
-            for (const auto& sceneJson : j["scenes"]) {
+            for (const auto &sceneJson: j["scenes"]) {
                 SceneData scene;
                 scene.sceneName = sceneJson.value("sceneName", "Unnamed Scene");
                 if (sceneJson.contains("sources")) {
-                    for (const auto& src : sceneJson["sources"])
+                    for (const auto &src: sceneJson["sources"])
                         scene.sources.push_back(src.get<std::string>());
                 }
                 sceneManager.scenes.push_back(scene);
             }
         }
-    } catch (const std::exception& e) {
+    } catch (const std::exception &e) {
         std::cerr << "[Helper][loadScenesData] Error parsing JSON: " << e.what() << std::endl;
         return false;
     }
@@ -451,7 +481,7 @@ inline bool loadScenesData(const std::filesystem::path& projectPath) {
     return true;
 }
 
-inline bool createRecentPathFile(const std::filesystem::path& path) {
+inline bool createRecentPathFile(const std::filesystem::path &path) {
     if (!createRecentPath) return true;
 
     if (!std::filesystem::exists("../saves")) {
@@ -471,10 +501,10 @@ inline bool createRecentPathFile(const std::filesystem::path& path) {
 
 // ============ PROJECT MANAGEMENT METHODS ============
 
-inline bool saveNewProject() {
+inline bool createProject() {
     // Validate and get project name
-    if (auto* el = window.document->GetElementById("project-name-input")) {
-        if (auto* input = dynamic_cast<Rml::ElementFormControl*>(el)) {
+    if (auto *el = window.document->GetElementById("project-name-input")) {
+        if (auto *input = dynamic_cast<Rml::ElementFormControl *>(el)) {
             std::string value = input->GetValue();
             if (!validateInputField(value, "Projektname")) return false;
             saveData.projectName = value;
@@ -482,12 +512,12 @@ inline bool saveNewProject() {
     }
 
     // Validate and get projector count
-    if (auto* el = window.document->GetElementById("projector-count-input")) {
-        if (auto* input = dynamic_cast<Rml::ElementFormControl*>(el)) {
+    if (auto *el = window.document->GetElementById("projector-count-input")) {
+        if (auto *input = dynamic_cast<Rml::ElementFormControl *>(el)) {
             std::string value = input->GetValue();
             int count = 0;
-            if (!validateBeamerCount(value, count)) {
-                if (auto* err = window.document->GetElementById("error-text")) {
+            if (!validateProjectorCount(value, count)) {
+                if (auto *err = window.document->GetElementById("error-text")) {
                     err->SetInnerRML("Nur Zahlen 1-9 erlaubt!");
                 }
                 return false;
@@ -497,8 +527,8 @@ inline bool saveNewProject() {
     }
 
     // Validate and get project description
-    if (auto* el = window.document->GetElementById("project-desc-input")) {
-        if (auto* input = dynamic_cast<Rml::ElementFormControl*>(el)) {
+    if (auto *el = window.document->GetElementById("project-desc-input")) {
+        if (auto *input = dynamic_cast<Rml::ElementFormControl *>(el)) {
             std::string value = input->GetValue();
             if (!validateInputField(value, "Beschreibung")) return false;
             saveData.description = value;
@@ -507,8 +537,8 @@ inline bool saveNewProject() {
 
     // Get project directory
     std::filesystem::path basePath;
-    if (auto* el = window.document->GetElementById("project-dir-input")) {
-        if (auto* input = dynamic_cast<Rml::ElementFormControl*>(el)) {
+    if (auto *el = window.document->GetElementById("project-dir-input")) {
+        if (auto *input = dynamic_cast<Rml::ElementFormControl *>(el)) {
             std::string value = input->GetValue();
             saveData.path = value;
             basePath = value;
@@ -520,7 +550,7 @@ inline bool saveNewProject() {
 
     // Prevent overwriting existing project
     if (std::filesystem::exists(fullProjectPath)) {
-        if (auto* el = window.document->GetElementById("error-text")) {
+        if (auto *el = window.document->GetElementById("error-text")) {
             el->SetInnerRML("Projekt existiert bereits – bitte anderen Namen wählen!");
         }
         return false;
@@ -529,7 +559,7 @@ inline bool saveNewProject() {
     // Create project directory
     std::error_code ec;
     if (!std::filesystem::create_directories(fullProjectPath, ec) || ec) {
-        if (auto* el = window.document->GetElementById("error-text")) {
+        if (auto *el = window.document->GetElementById("error-text")) {
             el->SetInnerRML("Konnte Ordner nicht erstellen: " + ec.message());
         }
         return false;
@@ -549,15 +579,15 @@ inline bool saveNewProject() {
 }
 
 inline bool loadProject() {
-    auto* errEl = window.document->GetElementById("load-error-text");
+    auto *errEl = window.document->GetElementById("load-error-text");
     if (errEl) {
         errEl->SetInnerRML(""); // Clear old errors
     }
 
     // Get project path
     std::string path;
-    if (auto* el = window.document->GetElementById("load-dir-input")) {
-        if (auto* input = dynamic_cast<Rml::ElementFormControl*>(el)) {
+    if (auto *el = window.document->GetElementById("load-dir-input")) {
+        if (auto *input = dynamic_cast<Rml::ElementFormControl *>(el)) {
             path = input->GetValue();
         }
     }
@@ -581,7 +611,7 @@ inline bool loadProject() {
         json j;
         file >> j;
         saveData = j.get<SaveData>();
-    } catch (const std::exception& e) {
+    } catch (const std::exception &e) {
         if (errEl) errEl->SetInnerRML(std::string("Fehler beim Lesen der saveData.json: ") + e.what());
         return false;
     }
@@ -598,7 +628,7 @@ inline bool loadProject() {
         json j;
         scenesFile >> j;
         sceneManager = j.get<SceneManager>();
-    } catch (const std::exception& e) {
+    } catch (const std::exception &e) {
         if (errEl) errEl->SetInnerRML(std::string("Fehler beim Lesen der scenesData.json: ") + e.what());
         return false;
     }
@@ -613,7 +643,7 @@ inline bool loadProject() {
 
 void setupFileDropdownListeners() {
     // New Project
-    if (auto* dropdownNewproject = window.document->GetElementById("file-dropdown-newproject")) {
+    if (auto *dropdownNewproject = window.document->GetElementById("file-dropdown-newproject")) {
         dropdownNewproject->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
             switchToStartup();
             window.document->GetElementById("tab-load-div")->SetAttribute("style", "display:none");
@@ -625,7 +655,7 @@ void setupFileDropdownListeners() {
     }
 
     // Load Project
-    if (auto* dropdownLoadproject = window.document->GetElementById("file-dropdown-loadproject")) {
+    if (auto *dropdownLoadproject = window.document->GetElementById("file-dropdown-loadproject")) {
         dropdownLoadproject->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
             switchToStartup();
             window.document->GetElementById("tab-load-div")->SetAttribute("style", "display:flex");
@@ -637,7 +667,7 @@ void setupFileDropdownListeners() {
     }
 
     // Export Project
-    if (auto* filedropdownexportproject = window.document->GetElementById("file-dropdown-exportproject")) {
+    if (auto *filedropdownexportproject = window.document->GetElementById("file-dropdown-exportproject")) {
         filedropdownexportproject->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
             try {
                 std::string fullPath = saveData.path + "\\" + saveData.projectName;
@@ -658,8 +688,9 @@ void setupFileDropdownListeners() {
                 }
 
                 std::filesystem::rename(fullPath + ".zip", fullPath + ".tct");
-                std::cout << "File " + saveData.projectName + ".tct exported successfully to: " + saveData.path << std::endl;
-            } catch (const std::filesystem::filesystem_error& e) {
+                std::cout << "File " + saveData.projectName + ".tct exported successfully to: " + saveData.path <<
+                        std::endl;
+            } catch (const std::filesystem::filesystem_error &e) {
                 std::cerr << "Filesystem error: " << e.what() << '\n';
             }
             // TODO: Add user feedback
@@ -667,7 +698,7 @@ void setupFileDropdownListeners() {
     }
 
     // Import Project
-    if (auto* filedropdownimportproject = window.document->GetElementById("file-dropdown-importproject")) {
+    if (auto *filedropdownimportproject = window.document->GetElementById("file-dropdown-importproject")) {
         filedropdownimportproject->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
             // TODO: Implement project import functionality
             // TODO: Add user feedback
@@ -675,14 +706,14 @@ void setupFileDropdownListeners() {
     }
 
     // Close Project
-    if (auto* dropdowncloseproject = window.document->GetElementById("file-dropdown-closeproject")) {
+    if (auto *dropdowncloseproject = window.document->GetElementById("file-dropdown-closeproject")) {
         dropdowncloseproject->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
             switchToStartup();
         }));
     }
 
     // Close Program
-    if (auto* dropdowncloseprogramm = window.document->GetElementById("file-dropdown-closeprogramm")) {
+    if (auto *dropdowncloseprogramm = window.document->GetElementById("file-dropdown-closeprogramm")) {
         dropdowncloseprogramm->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
             exit(EXIT_SUCCESS);
         }));
@@ -690,7 +721,7 @@ void setupFileDropdownListeners() {
 }
 
 void setupProjectorGrid() {
-    if (auto* projectorgrid = window.document->GetElementById("projectorGrid")) {
+    if (auto *projectorgrid = window.document->GetElementById("projectorGrid")) {
         std::cout << "[Info] Projector count: " << saveData.projectorCount << std::endl;
         for (int i = 0; i < saveData.projectorCount; ++i) {
             Rml::ElementPtr child = window.document->CreateElement("div");
@@ -708,27 +739,64 @@ void setupProjectorGrid() {
 void setupSceneManagement() {
     refreshScenes();
 
-    if (auto* addSceneButton = window.document->GetElementById("add-scene-btn")) {
+    if (auto *addSceneButton = window.document->GetElementById("add-scene-btn")) {
         addSceneButton->AddEventListener(Rml::EventId::Click,
-            new ButtonHandler([]() {
-                sceneManager.scenes.emplace_back(SceneData{
-                    "Szene " + std::to_string(sceneManager.scenes.size() + 1),
-                    {}
-                });
-                std::filesystem::path fullProjectPath = std::filesystem::path(saveData.path) / saveData.projectName;
-                saveProject(fullProjectPath);
+                                         new ButtonHandler([]() {
+                                             sceneManager.scenes.emplace_back(SceneData{
+                                                 "Szene " + std::to_string(sceneManager.scenes.size() + 1),
+                                                 {}
+                                             });
+                                             saveProject(projectPath);
 
-                refreshScenes();
+                                             refreshScenes();
+                                         })
+        );
+    }
+    //auto sceneButtonsArrowUp = Utilities::getEl("scene-buttons-arrow-up");
+    //    sceneButtonsArrowUp->AddEventListener(Rml::EventId::Click,
+    //        new ButtonHandler([]() {
+    //            if (activeSceneIndex != -1 && activeSceneIndex != 0) {
+    //                SceneData temp = sceneManager.scenes[activeSceneIndex - 1];
+    //                sceneManager.scenes[activeSceneIndex - 1] = sceneManager.scenes[activeSceneIndex];
+    //                sceneManager.scenes[activeSceneIndex] = temp;
+    //                activeSceneIndex--;
+    //                saveProject(projectPath);
+//
+    //                refreshScenes();
+    //            }
+    //        })
+    //    );
+    if (auto *sceneButtonArrowDown = window.document->GetElementById("scene-buttons-arrow-down")) {
+        std::cout << activeSceneIndex << std::endl;
+
+        sceneButtonArrowDown->AddEventListener(Rml::EventId::Click,
+            new ButtonHandler([]() {
+                if (activeSceneIndex != -1) {
+                    SceneData temp = sceneManager.scenes[activeSceneIndex + 1];
+                    std::cout << "Swapping scene " << activeSceneIndex << " with " << (
+                        activeSceneIndex + 1) << std::endl;
+                    sceneManager.scenes[activeSceneIndex + 1] = sceneManager.scenes[
+                        activeSceneIndex];
+                    sceneManager.scenes[activeSceneIndex] = temp;
+                    activeSceneIndex--;
+                    std::filesystem::path fullProjectPath =
+                            std::filesystem::path(saveData.path) / saveData.
+                            projectName;
+                    saveProject(fullProjectPath);
+
+                    refreshScenes();
+                }
             })
         );
     }
-
     std::cout << "Scenes count: " << sceneManager.scenes.size() << std::endl;
-}
 
+
+}
+//
 void setupTabListeners() {
     // Main tabs (Load/New)
-    if (auto* tabLoad = window.document->GetElementById("tab-load")) {
+    if (auto *tabLoad = window.document->GetElementById("tab-load")) {
         tabLoad->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
             window.document->GetElementById("tab-load-div")->SetAttribute("style", "display:flex");
             window.document->GetElementById("tab-new-div")->SetAttribute("style", "display:none");
@@ -737,7 +805,7 @@ void setupTabListeners() {
         }));
     }
 
-    if (auto* tabNew = window.document->GetElementById("tab-new")) {
+    if (auto *tabNew = window.document->GetElementById("tab-new")) {
         tabNew->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
             window.document->GetElementById("tab-load-div")->SetAttribute("style", "display:none");
             window.document->GetElementById("tab-new-div")->SetAttribute("style", "display:flex");
@@ -747,7 +815,7 @@ void setupTabListeners() {
     }
 
     // Sub-tabs (Folder/TCT)
-    if (auto* tabFolder = window.document->GetElementById("tab-folder")) {
+    if (auto *tabFolder = window.document->GetElementById("tab-folder")) {
         tabFolder->AddEventListener(Rml::EventId::Click, new ButtonHandler([tabFolder] {
             window.document->GetElementById("tab-folder-div")->SetProperty("display", "flex");
             window.document->GetElementById("tab-tct-div")->SetProperty("display", "none");
@@ -758,7 +826,7 @@ void setupTabListeners() {
         }));
     }
 
-    if (auto* tabTct = window.document->GetElementById("tab-tct")) {
+    if (auto *tabTct = window.document->GetElementById("tab-tct")) {
         tabTct->AddEventListener(Rml::EventId::Click, new ButtonHandler([tabTct] {
             window.document->GetElementById("tab-folder-div")->SetProperty("display", "none");
             window.document->GetElementById("tab-tct-div")->SetProperty("display", "flex");
@@ -769,15 +837,15 @@ void setupTabListeners() {
         }));
     }
 }
-
+//
 void setupBrowseButtons() {
     // Folder browse buttons
-    if (auto* browseFolderBtn = window.document->GetElementById("browse-folder-btn")) {
+    if (auto *browseFolderBtn = window.document->GetElementById("browse-folder-btn")) {
         browseFolderBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
             std::string folder = Utilities::browseFolder();
             if (!folder.empty()) {
-                if (auto* inputEl = window.document->GetElementById("load-dir-input")) {
-                    if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl)) {
+                if (auto *inputEl = window.document->GetElementById("load-dir-input")) {
+                    if (auto *input = dynamic_cast<Rml::ElementFormControl *>(inputEl)) {
                         input->SetValue(Utilities::toBackwardSlashes(folder));
                     }
                 }
@@ -785,12 +853,12 @@ void setupBrowseButtons() {
         }));
     }
 
-    if (auto* browseLoadBtn = window.document->GetElementById("browse-load-btn")) {
+    if (auto *browseLoadBtn = window.document->GetElementById("browse-load-btn")) {
         browseLoadBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
             std::string folder = Utilities::browseFolder();
             if (!folder.empty()) {
-                if (auto* inputEl = window.document->GetElementById("load-dir-input")) {
-                    if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl)) {
+                if (auto *inputEl = window.document->GetElementById("load-dir-input")) {
+                    if (auto *input = dynamic_cast<Rml::ElementFormControl *>(inputEl)) {
                         input->SetValue(Utilities::toBackwardSlashes(folder));
                     }
                 }
@@ -799,12 +867,12 @@ void setupBrowseButtons() {
     }
 
     // TCT file browse button
-    if (auto* browseTctBtn = window.document->GetElementById("browse-tct-btn")) {
+    if (auto *browseTctBtn = window.document->GetElementById("browse-tct-btn")) {
         browseTctBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
             std::string file = Utilities::browseTCTFile();
             if (!file.empty()) {
-                if (auto* inputEl = window.document->GetElementById("load-dir-input")) {
-                    if (auto* input = dynamic_cast<Rml::ElementFormControl*>(inputEl)) {
+                if (auto *inputEl = window.document->GetElementById("load-dir-input")) {
+                    if (auto *input = dynamic_cast<Rml::ElementFormControl *>(inputEl)) {
                         input->SetValue(Utilities::toBackwardSlashes(file));
                     }
                 }
@@ -813,22 +881,22 @@ void setupBrowseButtons() {
     }
 
     // Project directory browse button
-    if (auto* browseDirBtn = window.document->GetElementById("browse-btn")) {
+    if (auto *browseDirBtn = window.document->GetElementById("browse-btn")) {
         browseDirBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
-            if (auto* el = window.document->GetElementById("project-dir-input")) {
-                if (auto* input = dynamic_cast<Rml::ElementFormControl*>(el)) {
+            if (auto *el = window.document->GetElementById("project-dir-input")) {
+                if (auto *input = dynamic_cast<Rml::ElementFormControl *>(el)) {
                     input->SetValue(Utilities::toBackwardSlashes(Utilities::browseFolder()));
                 }
             }
         }));
     }
 }
-
+//
 void setupProjectActions() {
     // Save new project
-    if (auto* saveNewProjectBtn = window.document->GetElementById("save-btn")) {
+    if (auto *saveNewProjectBtn = window.document->GetElementById("save-btn")) {
         saveNewProjectBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
-            if (saveNewProject()) {
+            if (createProject()) {
                 window.document->Hide();
                 std::cout << "Project created: " << saveData.projectName << std::endl;
                 if ((window.document = window.context->LoadDocument("assets/interface.rml"))) {
@@ -841,7 +909,7 @@ void setupProjectActions() {
     }
 
     // Load project
-    if (auto* loadProjectBtn = window.document->GetElementById("load-btn")) {
+    if (auto *loadProjectBtn = window.document->GetElementById("load-btn")) {
         loadProjectBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
             if (loadProject()) {
                 window.document->Hide();
@@ -855,29 +923,29 @@ void setupProjectActions() {
         }));
     }
 }
-
+//
 void setupProjectSelection() {
     for (int i = 1; i <= 5; i++) {
         std::string id = "folder-proj-" + std::to_string(i);
-        if (auto* proj = window.document->GetElementById(id)) {
+        if (auto *proj = window.document->GetElementById(id)) {
             proj->AddEventListener(Rml::EventId::Click, new ButtonHandler(
-                [name = proj->GetInnerRML()] {
-                    setSelectedProject(window.document, name);
-                }));
+                                       [name = proj->GetInnerRML()] {
+                                           setSelectedProject(window.document, name);
+                                       }));
         }
 
         id = "tct-proj-" + std::to_string(i);
-        if (auto* proj = window.document->GetElementById(id)) {
+        if (auto *proj = window.document->GetElementById(id)) {
             proj->AddEventListener(Rml::EventId::Click, new ButtonHandler(
-                [name = proj->GetInnerRML()] {
-                    setSelectedProject(window.document, name);
-                }));
+                                       [name = proj->GetInnerRML()] {
+                                           setSelectedProject(window.document, name);
+                                       }));
         }
     }
 }
 
 // ============ MAIN EVENT LISTENER SETUP ============
-
+//
 void setStartupEventListeners() {
     setupTabListeners();
     setupBrowseButtons();
@@ -885,8 +953,8 @@ void setStartupEventListeners() {
     setupProjectSelection();
 
     // Set default directory
-    if (auto* el = window.document->GetElementById("project-dir-input")) {
-        if (auto* input = dynamic_cast<Rml::ElementFormControl*>(el)) {
+    if (auto *el = window.document->GetElementById("project-dir-input")) {
+        if (auto *input = dynamic_cast<Rml::ElementFormControl *>(el)) {
             input->SetValue(Utilities::toBackwardSlashes(Utilities::getSaveFolderPath()));
         }
     }
@@ -898,51 +966,49 @@ void setInterfaceEventListeners() {
     if (!loadScenesData(projectPath)) {
         std::cerr << "Failed to load scenesData" << std::endl;
     }
-    if (auto* projectname = window.document->GetElementById("project-name")) {
+    if (auto *projectname = window.document->GetElementById("project-name")) {
         std::cout << "[Info] Setting project name: " << saveData.projectName << std::endl;
         projectname->SetInnerRML(saveData.projectName);
     }
-    setupFileDropdownListeners();
+    setupDropdownListeners();
     setupProjectorGrid();
     setupSceneManagement();
 
-    // Add context menu event listeners
-    setupSceneContextMenu(); // Add this line
+    setupSceneContextMenu();
 }
+
 void setupSceneContextMenu() {
     // Rename button in context menu
-    if (auto* contextRename = window.document->GetElementById("context-rename")) {
+    if (auto *contextRename = window.document->GetElementById("context-rename")) {
         contextRename->AddEventListener(Rml::EventId::Click, new SceneContextMenuHandler(window.document, "rename"));
     }
 
-    // Delete button in context menu
-    if (auto* contextDelete = window.document->GetElementById("context-delete")) {
+    if (auto *contextDelete = window.document->GetElementById("context-delete")) {
         contextDelete->AddEventListener(Rml::EventId::Click, new SceneContextMenuHandler(window.document, "delete"));
     }
 
-    // Duplicate button in context menu
-    if (auto* contextDuplicate = window.document->GetElementById("context-duplicate")) {
-        contextDuplicate->AddEventListener(Rml::EventId::Click, new SceneContextMenuHandler(window.document, "duplicate"));
+    if (auto *contextDuplicate = window.document->GetElementById("context-duplicate")) {
+        contextDuplicate->AddEventListener(Rml::EventId::Click,
+                                           new SceneContextMenuHandler(window.document, "duplicate"));
     }
 
-    // Close context menu when clicking elsewhere
-    if (auto* body = window.document->GetElementById("body")) {
+    if (auto *body = window.document->GetElementById("body")) {
         body->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
-            if (auto* contextMenu = window.document->GetElementById("sceneContextMenu")) {
+            if (auto *contextMenu = window.document->GetElementById("sceneContextMenu")) {
                 contextMenu->SetProperty("display", "none");
             }
         }));
     }
 
-    // Also close context menu when pressing escape - FIXED VERSION
-    window.document->AddEventListener(Rml::EventId::Keydown, new KeyEventHandler([](Rml::Event& event) {
+    window.document->AddEventListener(Rml::EventId::Keydown, new KeyEventHandler([](Rml::Event &event) {
         if (event.GetParameter<int>("key_identifier", 0) == Rml::Input::KI_ESCAPE) {
-            if (auto* contextMenu = window.document->GetElementById("sceneContextMenu")) {
+            if (auto *contextMenu = window.document->GetElementById("sceneContextMenu")) {
                 contextMenu->SetProperty("display", "none");
             }
         }
     }));
 }
+
 // ============ SCENE MANAGEMENT ============
 
 void switchToStartup() {
@@ -951,4 +1017,3 @@ void switchToStartup() {
         window.document->Show();
     }
 }
-

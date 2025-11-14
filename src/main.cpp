@@ -8,6 +8,7 @@
  * - loading a project doesnt redirect to the interface screen
 
  * Todo:
+ *  - installer
  *  - slider for beamercount
  *  - settings
  *  - dont have a recentpath as a setting
@@ -15,9 +16,10 @@
  *  - callbacks for exporting importing saving loading etc
  *  - if clicking on new project or loadproject have the ability to go back
  *  - Update Checking
+ *
 */
 
-#include "../include/helper.h"
+#include "helper.h"
 
 int main() {
     std::filesystem::path path = Utilities::getRecentPath();

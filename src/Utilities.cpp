@@ -157,3 +157,9 @@ std::filesystem::path Utilities::getRecentPath() {
     std::cout << "Found recent: " <<  pathStr << std::endl;
     return result;
 }
+
+Rml::Element* Utilities::getEl(const std::string& str) {
+    //if (Rml::Element* temp = window.document->GetElementById(str))
+    //    return temp;
+    return nullptr;
+}

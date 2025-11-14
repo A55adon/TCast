@@ -20,6 +20,7 @@ set(SOURCES
         include/SceneEventListener.h
         include/SceneEditActions.h
         include/ButtonListener.h
+        include/global.h
 )
 
 add_executable(TCast ${SOURCES})

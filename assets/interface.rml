@@ -53,8 +53,8 @@
 
 
             <div class="scene-buttons">
-                <button>⮝ Hoch</button>
-                <button>⮟ Runter</button>
+                <button id="scene-buttons-arrow-up">⮝ Hoch</button>
+                <button id="scene-buttons-arrow-down">⮟ Runter</button>
                 <button>🗑️ Alle löschen</button>
             </div>
         </div>
@@ -73,10 +73,75 @@
                     <button>Stop</button>
                 </div>
             </div>
-            <div class=main-body" id="main-body">
+            <div class="main-body" id="main-body">
                 <div class="projector-grid" id="projectorGrid">
+                    <!-- Projectors will go here -->
                 </div>
-
+                <div class="resource-area" id="resource-area">
+                    <div class="resource-header">
+                        <h2>Ressourcen</h2>
+                        <button id="add-resource-btn">+ Hinzufügen</button>
+                    </div>
+                    <div class="resource-list" id="resourceList">
+                        <!-- Resource items will go here -->
+                        <div class="resource-item">
+                            <img src="test.jpg" alt="Resource" />
+                        </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div><div class="resource-item">
+                        <img src="test.jpg" alt="Resource" />
+                    </div>
+                        <!-- More resource items... -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>

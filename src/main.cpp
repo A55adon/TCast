@@ -21,7 +21,7 @@
  *
 */
 
-#include "helper.h"
+#include "UISetup.h"
 
 int main() {
     std::filesystem::path path = Utilities::getRecentPath();

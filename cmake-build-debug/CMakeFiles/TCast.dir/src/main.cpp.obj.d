@@ -1,5 +1,6 @@
 CMakeFiles/TCast.dir/src/main.cpp.obj: C:\Code\TCast\src\main.cpp \
- C:/Code/TCast/include/helper.h C:/Code/TCast/include/global.h \
+ C:/Code/TCast/include/UISetup.h C:/Code/TCast/include/UIManager.h \
+ C:/Code/TCast/include/Utilities.h C:/Code/TCast/include/global.h \
  C:/msys64/mingw64/include/c++/15.1.0/utility \
  C:/msys64/mingw64/include/c++/15.1.0/x86_64-w64-mingw32/bits/c++config.h \
  C:/msys64/mingw64/include/c++/15.1.0/x86_64-w64-mingw32/bits/os_defines.h \
@@ -700,6 +701,6 @@ CMakeFiles/TCast.dir/src/main.cpp.obj: C:\Code\TCast\src\main.cpp \
  C:/Code/TCast/libs/glad/include/glad/glad.h \
  C:/Code/TCast/libs/glad/include/KHR/khrplatform.h \
  C:/Code/TCast/libs/GLFW/include/GLFW/glfw3.h \
- C:/Code/TCast/include/Utilities.h C:/Code/TCast/include/EventListener.h \
+ C:/Code/TCast/include/EventListener.h \
  C:/Code/TCast/libs/RmlUi/include/RmlUi/Core/EventListener.h \
  C:/Code/TCast/libs/RmlUi/include/RmlUi/Core/ElementDocument.h

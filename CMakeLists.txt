@@ -14,7 +14,7 @@ set(SOURCES
         libs/RmlUi/Samples/shell/src/RendererExtensions.cpp
         libs/RmlUi/Samples/shell/src/Shell.cpp
         libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp
-        include/helper.h
+        helper.txt
         src/Utilities.cpp
         include/Utilities.h
         include/global.h

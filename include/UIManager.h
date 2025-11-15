@@ -30,12 +30,11 @@ public:
     static void populateFolders(const std::string &path);
     static bool loadScenesData();
     static void switchToStartup();
-    static void selectScene(int index);
-
-// Scene Contextmenu
-    static void showRenameDialog();
-    static void renameScene();
-    static void deleteScene();
-    static void duplicateScene();
 
 };
+
+// Scene Contextmenu
+void selectScene(int index);
+void showRenameDialog(int sceneIndex);
+void deleteScene(int sceneIndex);
+void duplicateScene(int sceneIndex);

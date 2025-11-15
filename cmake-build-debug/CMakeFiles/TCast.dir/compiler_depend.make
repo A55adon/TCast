@@ -5598,10 +5598,11 @@ CMakeFiles/TCast.dir/src/main.cpp.obj: C:/Code/TCast/src/main.cpp \
   C:/Code/TCast/include/EventListener.h \
   C:/Code/TCast/include/Projector.h \
   C:/Code/TCast/include/Shell.h \
+  C:/Code/TCast/include/UIManager.h \
+  C:/Code/TCast/include/UISetup.h \
   C:/Code/TCast/include/Utilities.h \
   C:/Code/TCast/include/Window.h \
   C:/Code/TCast/include/global.h \
-  C:/Code/TCast/include/helper.h \
   C:/Code/TCast/include/nlohmann/json.hpp \
   C:/Code/TCast/libs/GLFW/include/GLFW/glfw3.h \
   C:/Code/TCast/libs/RmlUi/Include/RmlUi/Config/Config.h \
@@ -7606,8 +7607,6 @@ C:/Code/TCast/include/global.h:
 C:/Code/TCast/include/nlohmann/json.hpp:
 
 C:/Code/TCast/libs/RmlUi/Include/RmlUi/Core/Element.h:
-
-C:/Code/TCast/include/helper.h:
 
 C:/msys64/mingw64/include/c++/15.1.0/ctime:
 

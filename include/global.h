@@ -58,7 +58,7 @@ void showRenameDialog(int index);
 
 // For switching in UI helper functions
 void setStartupEventListeners();
-void setStartupEventListeners();
+void setInterfaceEventListeners();
 
 // Global Variables
 inline SaveData saveData;

@@ -47,8 +47,23 @@ int main() {
     }
     std::cout << "Project at: " << projectPath << std::endl;
 
+    using clock = std::chrono::high_resolution_clock;
+
+    auto lastTime = clock::now();
+    int frames = 0;
+
     while (getWindow().running) {
         getWindow().update();
+        frames++;
+
+        auto now = clock::now();
+        auto diff = std::chrono::duration_cast<std::chrono::seconds>(now - lastTime);
+
+        if (diff.count() >= 1) {
+            std::cout << "FPS: " << frames << "\n";
+            frames = 0;
+            lastTime = now;
+        }
     }
     return 0;
 }

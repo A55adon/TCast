@@ -15,6 +15,7 @@
 #include <algorithm>
 #include <fstream>
 #include <iostream>
+#include <chrono>
 
 #include "Shell.h"
 #include "Window.h"

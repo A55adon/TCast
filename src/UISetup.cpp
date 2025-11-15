@@ -282,29 +282,21 @@ void UISetup::setupSceneManagement() {
                 }
             })
         );
-    if (auto *sceneButtonArrowDown = getWindow().document->GetElementById("scene-buttons-arrow-down")) {
-        std::cout << activeSceneIndex << std::endl;
-
-        sceneButtonArrowDown->AddEventListener(Rml::EventId::Click,
+    auto sceneButtonsArrowDown = getEl("scene-buttons-arrow-up");
+        sceneButtonsArrowDown->AddEventListener(Rml::EventId::Click,
             new ButtonHandler([]() {
-                if (activeSceneIndex != -1) {
+                if (activeSceneIndex != -1 && activeSceneIndex != sceneManager.scenes.size() - 1) {
                     SceneData temp = sceneManager.scenes[activeSceneIndex + 1];
-                    std::cout << "Swapping scene " << activeSceneIndex << " with " << (
-                        activeSceneIndex + 1) << std::endl;
-                    sceneManager.scenes[activeSceneIndex + 1] = sceneManager.scenes[
-                        activeSceneIndex];
+                    sceneManager.scenes[activeSceneIndex + 1] = sceneManager.scenes[activeSceneIndex];
                     sceneManager.scenes[activeSceneIndex] = temp;
                     activeSceneIndex--;
-                    std::filesystem::path fullProjectPath =
-                            std::filesystem::path(saveData.path) / saveData.
-                            projectName;
-                    UIManager::saveProject(fullProjectPath);
+                    UIManager::saveProject(projectPath);
 
                     UIManager::refreshScenes();
                 }
             })
         );
-    }
+
     std::cout << "Scenes count: " << sceneManager.scenes.size() << std::endl;
 }
 void UISetup::setupSceneContextMenu() {

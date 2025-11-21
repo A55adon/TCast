@@ -1,16 +1,3 @@
-/* === Style Reference ===
-std-font-size: 14px
-large-font-size: 20px
-small-font-size: 18px
-
-primary-color: #3a4f63
-secondary-color: #2c3e50
-btn-highlight-color: #00aced
-btn-highlight-hover-color: #0091c9
-btn-color: #34495e
-warning-color: #c0392b
-========================== */
-
 body {
     margin: 0;
     font-family: "Comic Sans MS";
@@ -37,7 +24,6 @@ body {
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 8px;
-    transition: background-color 0.2s cubic-in-out;
 }
 
 .menu-item:hover {
@@ -51,7 +37,6 @@ body {
     left: 0;
     background-color: #34495e;
     min-width: 180px;
-    border-radius: 0 0 6px 6px;
     flex-direction: column;
     border-radius: 5px;
 }
@@ -101,6 +86,7 @@ body {
     flex-direction: column;
     gap: 4px;
 }
+
 .scene-header {
     display: flex;
     justify-content: space-between;
@@ -127,6 +113,10 @@ body {
 }
 
 .scene-item:hover {
+    background-color: #0091c9;
+}
+
+.scene-item.active {
     background-color: #00aced;
 }
 
@@ -139,7 +129,6 @@ body {
 .scene-buttons button {
     background-color: #00aced;
     color: white;
-    border-width: 0;
     border-radius: 6px;
     padding: 6px;
 }
@@ -171,7 +160,6 @@ body {
     overflow: hidden;
 }
 
-
 .projector:hover {
     background-color: #00aced;
 }
@@ -182,7 +170,6 @@ body {
     text-align: center;
     flex: 1;
 }
-
 
 .main-top-bar {
     display: flex;
@@ -200,15 +187,9 @@ body {
     height: 40px;
 }
 
-.to-right-buttons {
-    display: flex;
-    gap: 10px;
-}
-
 .top-right-buttons button {
     background-color: #00aced;
     color: white;
-    border-width: 0;
     border-radius: 6px;
     padding: 6px 12px;
 }
@@ -221,7 +202,6 @@ body {
 }
 
 .test-control button {
-    border-width: 0;
     border-radius: 6px;
     padding: 6px 12px;
 }
@@ -229,39 +209,57 @@ body {
 .test-control .remove-btn {
     background-color: #c0392b;
 }
-.scene-item {
-    background-color: #34495e;
-    border-radius: 4px;
-    padding: 10px 12px;
-    font-size: 18px;
+
+.rename-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 5px;
 }
 
-.scene-item:hover {
+.rename-input {
+    flex: 1;
+    padding: 4px 8px;
+    background-color: #34495e;
+    color: white;
+    border-radius: 3px;
+}
+
+.rename-ok-button {
+    padding: 4px 12px;
+    background-color: #00aced;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.rename-ok-button:hover {
     background-color: #0091c9;
 }
 
-.scene-item.active {
-    background-color: #00aced;
-    border-top: 2px #3a4f63;
-    border-right: 2px #3a4f63;
-    border-bottom: 2px #3a4f63;
-    border-left: 2px #3a4f63;
-    border-radius: 4px;
+.scene-item.renaming {
+    background-color: #2c3e50;
+    pointer-events: none;
+}
+
+.rename-container {
+    pointer-events: auto;
+}
+
+.rename-input, .rename-ok-button {
+    pointer-events: auto;
 }
 
 .context-menu-item {
     display: block;
-    width: 100%; /* This makes it fill the container */
+    width: 100%;
     background-color: transparent;
     color: white;
-    padding: 12px 20px; /* Increased horizontal padding */
+    padding: 12px 20px;
     text-align: left;
     cursor: pointer;
-    border-radius: 0; /* Remove border radius from items */
     font-size: 16px;
-    box-sizing: border-box; /* Include padding in width calculation */
-    border: none; /* Remove any default borders */
-    margin: 0; /* Remove any margins */
+    box-sizing: border-box;
 }
 
 .context-menu-item:first-child {
@@ -279,74 +277,15 @@ body {
     width: 100%;
 }
 
-/* Context menu styling - bigger with border */
 .context-menu {
     background-color: #34495e;
-    /* RmlUi border syntax for all sides */
-    border-top: 5px #2c3e50;
-    border-right: 5px #2c3e50;
-    border-bottom: 5px #2c3e50;
-    border-left: 5px #2c3e50;
-    border-radius: 6px; /* Slightly larger border radius */
-    padding: 8px 0; /* More padding to make it bigger */
+    border-radius: 6px;
+    padding: 8px 0;
     width: auto;
     z-index: 1000;
-    min-width: 150px; /* Minimum width to make it bigger */
-}
-.scene-item.renaming {
-    background-color: #2c3e50 !important;
+    min-width: 150px;
 }
 
-.rename-container {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    gap: 5px;
-}
-
-.rename-input {
-    flex: 1;
-    padding: 4px 8px;
-    background-color: #34495e;
-    color: white;
-    border: 1px solid #00aced;
-    border-radius: 3px;
-}
-
-.rename-ok-button {
-    padding: 4px 12px;
-    background-color: #00aced;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    white-space: nowrap;
-}
-
-.rename-ok-button:hover {
-    background-color: #0091c9;
-}
-
-.scene-item.renaming {
-    background-color: #2c3e50 !important;
-    pointer-events: none; /* Disable pointer events on the scene item */
-}
-
-.rename-container {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    gap: 5px;
-    pointer-events: auto; /* Re-enable pointer events for the container */
-}
-
-.rename-input, .rename-ok-button {
-    pointer-events: auto; /* Ensure input and button are clickable */
-}
-
-/* === Resource Area Styles === */
-/* === Resource Area Styles === */
-/* === Resource Area Styles === */
 .main-body {
     flex: 1;
     display: flex;
@@ -365,7 +304,7 @@ body {
 }
 
 .resource-area {
-    flex: 1;
+    flex: 2;
     background-color: #2c3e50;
     border-radius: 8px;
     display: flex;
@@ -393,7 +332,6 @@ body {
 #add-resource-btn {
     background-color: #00aced;
     color: white;
-    border: none;
     border-radius: 6px;
     padding: 6px 12px;
     cursor: pointer;
@@ -405,46 +343,141 @@ body {
 }
 
 .resource-list {
-    flex: 1;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     padding: 10px;
-    overflow-y: auto;
     align-content: flex-start;
-    align-items: flex-start;
-    min-height: 0;
-    /* Force proper width calculation */
-    width: 100%;
+    max-height: 260px;
+    overflow-y: auto;
     box-sizing: border-box;
 }
 
 .resource-item {
-    width: 89px;
-    height: 50px;
-    background-color: #34495e;
-    border-radius: 4px;
     display: flex;
+    flex-direction: column;
+    width: 150px;
+    gap: 6px;
     align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    /* Prevent flex items from growing/shrinking */
-    flex: 0 0 auto;
-}
-
-.resource-item:hover {
-    background-color: #00aced;
-}
-
-.resource-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 .resource-item.active {
     background-color: #00aced;
-    border: 2px solid #3a4f63;
+}
+.resource-item:hover {
+    background-color: #0091c9;
+}
+
+.resource-thumbnail {
+    width: 100%;
+    border-radius: 8px;
+    border: none;
+    display: block;
+}
+
+.resource-name {
+    max-width: 100%;
+    padding: 4px 8px;
+    background: #eee;
+    border-radius: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+.resource-item img {
+    width: 88px;
+    height: 70px;
+    display: block;
+}
+
+
+.resource-item.active {
+    background-color: #00aced;
+}
+
+#add-resource-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#add-resource-dialog .dialog-box {
+    background-color: #2c3e50;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 320px;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+#add-resource-dialog input[type="text"] {
+    padding: 6px 10px;
+    background-color: #34495e;
+    color: white;
+    font-size: 14px;
+    border-radius: 6px;
+}
+
+#add-resource-dialog button {
+    background-color: #00aced;
+    color: white;
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#add-resource-dialog button:hover {
+    background-color: #0091c9;
+}
+
+.resource-item.renaming {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    background-color: #2c3e50;
+    padding: 6px;
+    border-radius: 8px;
+}
+
+.resource-item.renaming .rename-container {
+    display: flex;
+    width: 100%;
+    gap: 4px;
+    justify-content: center;
+}
+
+.resource-item.renaming .rename-input {
+    flex: 1;
+    padding: 4px 8px;
+    background-color: #34495e;
+    color: white;
+    border-radius: 4px;
+    text-align: left;
+}
+
+.resource-item.renaming .rename-ok-button {
+    padding: 4px 12px;
+    background-color: #00aced;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.resource-item.renaming .rename-ok-button:hover {
+    background-color: #0091c9;
 }

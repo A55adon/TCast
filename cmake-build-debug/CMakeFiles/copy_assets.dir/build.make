@@ -52,10 +52,10 @@ RM = C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Code\TCast
+CMAKE_SOURCE_DIR = C:\Users\simon\Desktop\Code\TCast
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Code\TCast\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\simon\Desktop\Code\TCast\cmake-build-debug
 
 # Utility rule file for copy_assets.
 
@@ -66,8 +66,8 @@ include CMakeFiles/copy_assets.dir/compiler_depend.make
 include CMakeFiles/copy_assets.dir/progress.make
 
 CMakeFiles/copy_assets:
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=C:\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Copying assets..."
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_directory C:/Code/TCast/assets C:/Code/TCast/cmake-build-debug/assets
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Copying assets..."
+	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_directory C:/Users/simon/Desktop/Code/TCast/assets C:/Users/simon/Desktop/Code/TCast/cmake-build-debug/assets
 
 CMakeFiles/copy_assets.dir/codegen:
 .PHONY : CMakeFiles/copy_assets.dir/codegen
@@ -85,6 +85,6 @@ CMakeFiles/copy_assets.dir/clean:
 .PHONY : CMakeFiles/copy_assets.dir/clean
 
 CMakeFiles/copy_assets.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Code\TCast C:\Code\TCast C:\Code\TCast\cmake-build-debug C:\Code\TCast\cmake-build-debug C:\Code\TCast\cmake-build-debug\CMakeFiles\copy_assets.dir\DependInfo.cmake "--color=$(COLOR)"
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\simon\Desktop\Code\TCast C:\Users\simon\Desktop\Code\TCast C:\Users\simon\Desktop\Code\TCast\cmake-build-debug C:\Users\simon\Desktop\Code\TCast\cmake-build-debug C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles\copy_assets.dir\DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/copy_assets.dir/depend
 

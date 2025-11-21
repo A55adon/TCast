@@ -4,8 +4,6 @@
 
 using json = nlohmann::json;
 
-
-
 // JSON serialization declarations
 void to_json(json &j, const SaveData &d);
 void to_json(json &j, const SceneData &s);
@@ -18,16 +16,17 @@ class Utilities {
 public:
     static std::string browseFolder();
     static std::string browseTCTFile();
+    static std::string browsePng();
     static std::string getExecutablePath();
     static std::string getSaveFolderPath();
     static std::string toBackwardSlashes(const std::string &path);
     static std::filesystem::path getRecentPath();
+    static bool downscaleAndCrop169(const std::string& inputPath, const std::string& outputPath);
 
 
     static bool validateString(std::string &value);
     static void showError(const std::string & msg);
     static void showInfo(std::string msg);
-
 };
 
 Rml::Element* getEl(const std::string &str);

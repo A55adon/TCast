@@ -1,5 +1,14 @@
 #include "Utilities.h"
 
+#include "stb_image.h"
+
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "stb_image_write.h"
+
+#define STB_IMAGE_RESIZE_IMPLEMENTATION
+#include "stb_image_resize2.h"
+
+
 // JSON serialization implementations
 void to_json(json &j, const SaveData &d) {
     j = json{
@@ -158,6 +167,60 @@ std::filesystem::path Utilities::getRecentPath() {
     return result;
 }
 
+bool Utilities::downscaleAndCrop169(const std::string &inputPath, const std::string &outputPath) {
+    int w, h, channels;
+    unsigned char* img = stbi_load(inputPath.c_str(), &w, &h, &channels, 4);
+    if (!img) return false;
+
+    int in_channels = 4;
+    int sw = w / 2;
+    int sh = h / 2;
+    if (sw <= 0 || sh <= 0) {
+        stbi_image_free(img);
+        return false;
+    }
+
+    std::vector<unsigned char> scaled(sw * sh * in_channels);
+
+    int input_stride = w * in_channels;
+    int output_stride = sw * in_channels;
+
+    void *ok = stbir_resize(
+        img, w, h, input_stride,
+        scaled.data(), sw, sh, output_stride,
+        STBIR_RGBA,
+        STBIR_TYPE_UINT8,
+        STBIR_EDGE_CLAMP,
+        STBIR_FILTER_DEFAULT
+    );
+
+    stbi_image_free(img);
+
+    if (!ok) return false;
+
+    const float targetAspect = 16.0f / 9.0f;
+    int cropW = sw;
+    int cropH = static_cast<int>(std::round(sw / targetAspect));
+
+    if (cropH > sh) {
+        cropH = sh;
+        cropW = static_cast<int>(std::round(sh * targetAspect));
+    }
+
+    int offX = std::max(0, (sw - cropW) / 2);
+    int offY = std::max(0, (sh - cropH) / 2);
+
+    std::vector<unsigned char> cropped(cropW * cropH * in_channels);
+    for (int y = 0; y < cropH; ++y) {
+        unsigned char* dst_row = cropped.data() + y * cropW * in_channels;
+        unsigned char* src_row = scaled.data() + ((offY + y) * sw + offX) * in_channels;
+        memcpy(dst_row, src_row, static_cast<size_t>(cropW * in_channels));
+    }
+
+    int write_ok = stbi_write_png(outputPath.c_str(), cropW, cropH, in_channels, cropped.data(), cropW * in_channels);
+    return write_ok != 0;
+}
+
 bool Utilities::validateString(std::string &value) {
     static const std::regex pattern("^[A-Za-z0-9äöüÄÖÜ _.\\-;,]+$");
     if (std::regex_match(value, pattern)) {
@@ -173,6 +236,25 @@ void Utilities::showError(const std::string & msg) {
 void Utilities::showInfo(std::string msg) {
 }
 
+
+std::string Utilities::browsePng() {
+    OPENFILENAME ofn;
+    char szFile[260] = {0};
+    ZeroMemory(&ofn, sizeof(ofn));
+    ofn.lStructSize = sizeof(ofn);
+    ofn.hwndOwner = nullptr;
+    ofn.lpstrFile = szFile;
+    ofn.nMaxFile = sizeof(szFile);
+    ofn.lpstrFilter = "PNG Files\0*.png\0All Files\0*.*\0";
+    ofn.nFilterIndex = 1;
+    ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+    if (GetOpenFileName(&ofn) == TRUE) {
+        return std::string(ofn.lpstrFile);
+    }
+
+    return ""; // user cancelled
+}
 
 Rml::Element* getEl(const std::string& str) {
     if (Rml::Element* temp = getWindow().document->GetElementById(str))

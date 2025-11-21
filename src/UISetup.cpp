@@ -153,9 +153,12 @@ void setInterfaceEventListeners() {
     }
     UISetup::setupDropdownListeners();
     UISetup::setupProjectorGrid();
-    UISetup::setupSceneManagement();
 
+    UISetup::setupSceneManagement();
     UISetup::setupSceneContextMenu();
+
+    UISetup::setupResourcePanel();
+    UISetup::setupResourceContextMenu();
 }
 
 void UISetup::setupDropdownListeners() {
@@ -247,7 +250,7 @@ void UISetup::setupProjectorGrid() {
             Rml::ElementPtr span = getWindow().document->CreateElement("span");
             span->SetInnerRML("Beamer " + std::to_string(i + 1));
             child->AppendChild(std::move(span));
-
+            child->SetId("projector-" + std::to_string(i));
             projectorgrid->AppendChild(std::move(child));
         }
     }
@@ -282,34 +285,45 @@ void UISetup::setupSceneManagement() {
                 }
             })
         );
-    auto sceneButtonsArrowDown = getEl("scene-buttons-arrow-up");
+    auto sceneButtonsArrowDown = getEl("scene-buttons-arrow-down");
         sceneButtonsArrowDown->AddEventListener(Rml::EventId::Click,
             new ButtonHandler([]() {
                 if (activeSceneIndex != -1 && activeSceneIndex != sceneManager.scenes.size() - 1) {
                     SceneData temp = sceneManager.scenes[activeSceneIndex + 1];
                     sceneManager.scenes[activeSceneIndex + 1] = sceneManager.scenes[activeSceneIndex];
                     sceneManager.scenes[activeSceneIndex] = temp;
-                    activeSceneIndex--;
-                    UIManager::saveProject(projectPath);
+                    activeSceneIndex++;
 
+                    UIManager::saveProject(projectPath);
                     UIManager::refreshScenes();
                 }
             })
         );
+    auto sceneButtonsDeleteAll = getEl("scene-buttons-delete-all");
+        sceneButtonsDeleteAll->AddEventListener(Rml::EventId::Click,
+            new ButtonHandler([]() {
+            //TODO: sure you wanna delete all?
+            sceneManager.scenes.clear();
+
+            activeSceneIndex = 0;
+            UIManager::saveProject(projectPath);
+            UIManager::refreshScenes();
+        }));
+
 
     std::cout << "Scenes count: " << sceneManager.scenes.size() << std::endl;
 }
 void UISetup::setupSceneContextMenu() {
     // Rename button in context menu
-    if (auto *contextRename = getEl("context-rename")) {
+    if (auto *contextRename = getEl("scene-context-rename")) {
         contextRename->AddEventListener(Rml::EventId::Click, new SceneContextMenuHandler(getWindow().document, "rename"));
     }
 
-    if (auto *contextDelete = getEl("context-delete")) {
+    if (auto *contextDelete = getEl("scene-context-delete")) {
         contextDelete->AddEventListener(Rml::EventId::Click, new SceneContextMenuHandler(getWindow().document, "delete"));
     }
 
-    if (auto *contextDuplicate = getEl("context-duplicate")) {
+    if (auto *contextDuplicate = getEl("scene-context-duplicate")) {
         contextDuplicate->AddEventListener(Rml::EventId::Click,
                                            new SceneContextMenuHandler(getWindow().document, "duplicate"));
     }
@@ -331,4 +345,133 @@ void UISetup::setupSceneContextMenu() {
     }));
 }
 
+void UISetup::setupResourcePanel() {
+    auto* dialog = getEl("add-resource-dialog");
+    auto* addBtn = getEl("add-resource-btn");
+    auto* cancelBtn = getEl("resource-cancel-btn");
+    auto* confirmBtn = getEl("resource-confirm-btn");
 
+    auto* browseBtn = getEl("browse-png-btn");
+    auto* fileInput = getEl("resource-file");
+    auto* nameInput = getEl("resource-name");
+
+    addBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([dialog, fileInput, nameInput]{
+        dialog->SetAttribute("style", "display:flex;");
+        fileInput->SetAttribute("value", "");
+        nameInput->SetAttribute("value", "");
+    }));
+
+
+    browseBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([fileInput, nameInput] {
+        std::string path = Utilities::browsePng();
+        if (!path.empty()) {
+            fileInput->SetAttribute("value", path);
+
+            Rml::String val;
+            if (nameInput->GetAttribute("value", val), val.empty()) {
+                nameInput->SetAttribute("value", std::filesystem::path(path).stem().string());
+            }
+        }
+    }));
+
+    cancelBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([dialog]{
+        dialog->SetAttribute("style", "display:none;");
+    }));
+
+    auto* fileInputEl = dynamic_cast<Rml::ElementFormControlInput*>(fileInput);
+    auto* nameInputEl = dynamic_cast<Rml::ElementFormControlInput*>(nameInput);
+
+    confirmBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([dialog, fileInputEl, nameInputEl]{
+        if (!fileInputEl || !nameInputEl) return;
+
+        Rml::String filePath = fileInputEl->GetValue();
+        Rml::String nameVal = nameInputEl->GetValue();
+
+        if (filePath.empty()) {
+            Utilities::showError("Bitte eine Datei angeben!");
+            return;
+        }
+
+        if (nameVal.empty()) {
+            Utilities::showError("Bitte einen Namen angeben!");
+            return;
+        }
+
+        std::filesystem::path srcPath(filePath);
+
+        if (!std::filesystem::exists(srcPath)) {
+            Utilities::showError("Datei: " + srcPath.string() + " wurde nicht gefunden");
+            return;
+        }
+
+        dialog->SetAttribute("style", "display:none;");
+
+         auto destinationPath = saveData.path/ saveData.projectName / "resources" / (nameVal + srcPath.extension().string());
+
+        try {
+            std::filesystem::create_directories(destinationPath.parent_path());
+            std::filesystem::copy_file(srcPath, destinationPath, std::filesystem::copy_options::overwrite_existing);
+            std::cout << "Copied: " << srcPath << " -> " << destinationPath << std::endl;
+        } catch (const std::filesystem::filesystem_error& e) {
+            Utilities::showError("Fehler beim Kopieren der Datei: " + std::string(e.what()));
+            return;
+        }
+
+        // Thumbnail path in "resources/thumbnails"
+        if (!UIManager::verifyFolderStructure(projectPath / saveData.projectName))
+            UIManager::fixFolderStructure(projectPath / saveData.projectName);
+        std::filesystem::path thumbnailPath = saveData.path/ saveData.projectName / "resources" / "thumbnails" / (nameVal + ".png");
+
+        // Ensure thumbnail folder exists
+        std::filesystem::create_directories(thumbnailPath.parent_path());
+
+        try {
+            // Create thumbnail
+            if (!Utilities::downscaleAndCrop169(destinationPath.string(), thumbnailPath.string())) {
+               Utilities::showError("Fehler beim Erstellen des Thumbnails");
+               return;
+            }
+        } catch (std::filesystem::filesystem_error& e) {
+            Utilities::showError("Fehler beim Kopieren der Datei: " + std::string(e.what()));
+            return;
+        }
+
+        UIManager::refreshResourcePanel();
+    }));
+
+
+    UIManager::refreshResourcePanel();
+}
+
+void UISetup::setupResourceContextMenu() {
+    // Rename button in context menu
+    if (auto *contextRename = getEl("resource-context-rename")) {
+        contextRename->AddEventListener(Rml::EventId::Click, new ResourceContextMenuHandler(getWindow().document, "rename"));
+    }
+
+    if (auto *contextDelete = getEl("resource-context-delete")) {
+        contextDelete->AddEventListener(Rml::EventId::Click, new ResourceContextMenuHandler(getWindow().document, "delete"));
+    }
+
+    if (auto *body = getEl("body")) {
+        body->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
+            if (auto *contextMenu = getEl("resourceContextMenu")) {
+                contextMenu->SetProperty("display", "none");
+            }
+        }));
+    }
+
+    getWindow().document->AddEventListener(Rml::EventId::Keydown, new KeyEventHandler([](Rml::Event &event) {
+        if (event.GetParameter<int>("key_identifier", 0) == Rml::Input::KI_ESCAPE) {
+            if (auto *contextMenu = getEl("resourceContextMenu")) {
+                contextMenu->SetProperty("display", "none");
+            }
+        }
+    }));
+}
+
+void UISetup::setupProjectors() {
+}
+
+void UISetup::setupProjectorContextMenu() {
+}

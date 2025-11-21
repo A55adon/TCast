@@ -6,6 +6,7 @@
 #include <RmlUi/Core/ElementDocument.h>
 #include <string>
 #include "global.h"
+#include "Utilities.h"
 
 class ButtonHandler final : public Rml::EventListener {
     std::function<void()> callback;
@@ -48,7 +49,7 @@ public:
             if (attr) index = std::stoi(attr->Get<Rml::String>().c_str());
 
             if (action == "rename") {
-                showRenameDialog(index);
+                showSceneRenameDialog(index);
             } else if (action == "delete") {
                 deleteScene(index);
             } else if (action == "duplicate") {
@@ -89,4 +90,65 @@ public:
             selectScene(sceneIndex);
         }
     }
+};
+
+
+class ResourceContextMenuHandler : public Rml::EventListener {
+    Rml::ElementDocument* document;
+    std::string action;
+public:
+    ResourceContextMenuHandler(Rml::ElementDocument* doc, const std::string& action_)
+        : document(doc), action(action_) {}
+
+    void ProcessEvent(Rml::Event& event) override {
+        if (auto* contextMenu = document->GetElementById("resourceContextMenu")) {
+            auto* attr = contextMenu->GetAttribute("data-target-resource");
+            int index = 0;
+            if (attr) index = std::stoi(attr->Get<Rml::String>().c_str());
+
+            if (action == "rename") {
+                showResourceRenameDialog(index);
+            } else if (action == "delete") {
+                deleteResource(index);
+            }
+
+            contextMenu->SetProperty("display", "none");
+        }
+    }
+};
+class ResourceItemHandler : public Rml::EventListener {
+    Rml::ElementDocument* document;
+    int resourceIndex;
+public:
+    ResourceItemHandler(Rml::ElementDocument* doc, int index)
+        : document(doc), resourceIndex(index) {}
+
+    void ProcessEvent(Rml::Event& event) {
+        int button = event.GetParameter<int>("button", 0);
+
+        // Check if this resource is currently being renamed
+        std::string itemId = "resource-item-" + std::to_string(resourceIndex);
+        if (auto* itemEl = getEl(itemId)) {
+            if (itemEl->IsClassSet("renaming")) {
+                return; // ignore click while renaming
+            }
+        }
+
+        if (button == 1) { // Right click
+            event.StopPropagation();
+            std::cout << "Right click on resource: " << resourceIndex << std::endl;
+
+            if (auto* contextMenu = document->GetElementById("resourceContextMenu")) {
+                contextMenu->SetAttribute("data-target-resource", std::to_string(resourceIndex));
+                float mouse_x = event.GetParameter("mouse_x", 0.0f);
+                float mouse_y = event.GetParameter("mouse_y", 0.0f);
+                contextMenu->SetProperty("left", Rml::ToString(mouse_x) + "px");
+                contextMenu->SetProperty("top", Rml::ToString(mouse_y) + "px");
+                contextMenu->SetProperty("display", "block");
+            }
+        } else if (button == 0) { // Left click
+            selectResource(resourceIndex);
+        }
+    }
+
 };

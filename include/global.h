@@ -20,7 +20,6 @@
 #include "Shell.h"
 #include "Window.h"
 
-
 using json = nlohmann::json;
 
 struct SaveData {
@@ -32,7 +31,7 @@ struct SaveData {
 
 struct SceneData {
     std::string sceneName;
-    std::vector<std::string> sources;
+    std::vector<std::string> sources; // [0] would be the name of the resource of the first projector
 
     SceneData()= default;
 
@@ -55,7 +54,11 @@ void renameScene(int index);
 void deleteScene(int index);
 void duplicateScene(int index);
 void selectScene(int index);
-void showRenameDialog(int index);
+void showSceneRenameDialog(int index);
+
+void showResourceRenameDialog(int index);
+void deleteResource(int index);
+void selectResource(int resourceIndex);
 
 // For switching in UI helper functions
 void setStartupEventListeners();
@@ -66,7 +69,8 @@ inline SaveData saveData;
 inline SceneManager sceneManager;
 inline bool createRecentPath = true;
 inline std::filesystem::path projectPath;
-inline int activeSceneIndex = -1; // -1 means no scene selected
+inline int activeSceneIndex = 0; // -1 means no scene selected
+inline int activeResourceIndex = -1; // -1 means no scene selected
 
 
 

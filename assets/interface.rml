@@ -55,7 +55,7 @@
             <div class="scene-buttons">
                 <button id="scene-buttons-arrow-up">⮝ Hoch</button>
                 <button id="scene-buttons-arrow-down">⮟ Runter</button>
-                <button>🗑️ Alle löschen</button>
+                <button id="scene-buttons-delete-all">Alle löschen</button>
             </div>
         </div>
         <div class="main-area">
@@ -77,78 +77,43 @@
                 <div class="projector-grid" id="projectorGrid">
                     <!-- Projectors will go here -->
                 </div>
+                <div id="add-resource-dialog">
+                    <div class="dialog-box">
+                        <label style="font-size:16px; margin-bottom:5px;">Datei auswählen</label>
+                        <div style="display:flex; gap:10px; align-items:center;">
+                            <input type="text" id="resource-file" placeholder="Pfad wählen" style="flex:1;"/>
+                            <button id="browse-png-btn">Wählen</button>
+                        </div>
+                        <input type="text" id="resource-name" placeholder="Ressourcenname"/>
+                        <div style="display:flex; gap:10px; justify-content:flex-end;">
+                            <button id="resource-cancel-btn">Abbrechen</button>
+                            <button id="resource-confirm-btn">Hinzufügen</button>
+                        </div>
+                    </div>
+                </div>
+
+
                 <div class="resource-area" id="resource-area">
                     <div class="resource-header">
                         <h2>Ressourcen</h2>
                         <button id="add-resource-btn">+ Hinzufügen</button>
+
                     </div>
-                    <div class="resource-list" id="resourceList">
-                        <!-- Resource items will go here -->
-                        <div class="resource-item">
-                            <img src="test.jpg" alt="Resource" />
-                        </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div><div class="resource-item">
-                        <img src="test.jpg" alt="Resource" />
-                    </div>
-                        <!-- More resource items... -->
+                    <div class="resource-list" id="resource-list">
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div id="sceneContextMenu" class="context-menu" style="display: none; position: absolute;">
-        <button id="context-rename" class="context-menu-item">Rename</button>
-        <button id="context-delete" class="context-menu-item">Delete</button>
-        <button id="context-duplicate" class="context-menu-item">Duplicate</button>
+        <button id="scene-context-rename" class="context-menu-item">Rename</button>
+        <button id="scene-context-delete" class="context-menu-item">Delete</button>
+        <button id="scene-context-duplicate" class="context-menu-item">Duplicate</button>
+    </div>
+    <div id="resourceContextMenu" class="context-menu" style="display: none; position: absolute;">
+        <button id="resource-context-rename" class="context-menu-item">Rename</button>
+        <button id="resource-context-delete" class="context-menu-item">Delete</button>
     </div>
     </body>
 </rml>

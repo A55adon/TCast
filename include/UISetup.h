@@ -18,7 +18,10 @@ public:
     static void setupProjectorGrid();
     static void setupSceneManagement();
     static void setupSceneContextMenu();
-
+    static void setupResourcePanel();
+    static void setupResourceContextMenu();
+    static void setupProjectors();
+    static void setupProjectorContextMenu();
 
 };
 void setStartupEventListeners();

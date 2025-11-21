@@ -9,7 +9,7 @@ public:
     static bool saveProject();
     static bool saveProject(const std::filesystem::path &savePath);
 
-    static bool verifyFolderStructure(const std::filesystem::path &projectPath);
+    static bool verifyFolderStructure(const std::filesystem::path &savePath);
     static void fixFolderStructure(const std::filesystem::path &savePath);
     static bool saveJsonToFile(const std::filesystem::path &savePath, const json &data);
 
@@ -30,11 +30,6 @@ public:
     static void populateFolders(const std::string &path);
     static bool loadScenesData();
     static void switchToStartup();
+    static void refreshResourcePanel();
 
 };
-
-// Scene Contextmenu
-void selectScene(int index);
-void showRenameDialog(int sceneIndex);
-void deleteScene(int sceneIndex);
-void duplicateScene(int sceneIndex);

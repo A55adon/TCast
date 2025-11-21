@@ -87,6 +87,7 @@ bool UIManager::verifyFolderStructure(const std::filesystem::path &savePath) {
     if (!std::filesystem::exists(savePath / "saveData.json")) return false;
     if (!std::filesystem::exists(savePath / "scenesData.json")) return false;
     if (!std::filesystem::exists(savePath / "resources")) return false;
+    if (!std::filesystem::exists(savePath / "resources" / "thumbnails")) return false;
     return true;
 }
 void UIManager::fixFolderStructure(const std::filesystem::path &savePath) {
@@ -103,6 +104,10 @@ void UIManager::fixFolderStructure(const std::filesystem::path &savePath) {
     }
     if (!std::filesystem::exists(savePath / "resources")) {
         std::filesystem::create_directories(savePath / "resources");
+    }
+
+    if (!std::filesystem::exists(savePath / "resources" / "thumbnails")) {
+        std::filesystem::create_directories(savePath / "resources" / "thumbnails");
     }
 }
 bool UIManager::saveJsonToFile(const std::filesystem::path &savePath, const json &data) {
@@ -184,7 +189,7 @@ bool UIManager::loadProject() {
     if (createRecentPath)
         createRecentPathFile(path);
     else
-        std::cout << "Skipping creation of recent.path" << std::endl;
+        std::cout << "Skipping creation of recent path" << std::endl;
 
     return true;
 }
@@ -237,7 +242,7 @@ bool UIManager::loadProject(const std::filesystem::path& loadPath) {
     if (createRecentPath)
         createRecentPathFile(projectPath);
     else
-        std::cout << "Skipping creation of recent.path" << std::endl;
+        std::cout << "Skipping creation of recent path" << std::endl;
 
     return true;
 }
@@ -315,7 +320,7 @@ bool UIManager::createProject() {
     if (createRecentPath)
         createRecentPathFile(fullProjectPath);
     else
-        std::cout << "Skipping creation of recent.path" << std::endl;
+        std::cout << "Skipping creation of recent path" << std::endl;
 
     return true;
 }
@@ -458,6 +463,45 @@ void UIManager::switchToStartup() {
         getWindow().document->Show();
     }
 }
+void UIManager::refreshResourcePanel() {
+    auto* resourceList = getEl("resource-list");
+    while (resourceList->GetNumChildren() > 0) {
+        resourceList->RemoveChild(resourceList->GetChild(0));
+    }
+    auto directory = saveData.path / saveData.projectName / "resources" / "thumbnails";
+    int i = 0;
+    for (auto& entry : std::filesystem::directory_iterator(directory)) {
+        if (!entry.is_regular_file()) continue;
+        if (entry.path().extension() != ".png") continue;
+
+        std::string filename = entry.path().filename().string();
+        std::string name_no_ext = entry.path().stem().string();
+
+        Rml::ElementPtr item = getWindow().document->CreateElement("div");
+        item->SetAttribute("class", ("resource-item"));
+        item->SetAttribute("id", ("resource-item-" + std::to_string(i)));
+
+        Rml::ElementPtr img = getWindow().document->CreateElement("img");
+        auto imagePath = directory / filename;
+        img->SetAttribute("src", imagePath.string());
+        img->SetAttribute("alt", "Resource");
+
+        Rml::ElementPtr p = getWindow().document->CreateElement("p");
+        p->AppendChild(getWindow().document->CreateTextNode(name_no_ext));
+
+        item->AppendChild(std::move(img));
+        item->AppendChild(std::move(p));
+
+        if (i == activeResourceIndex) {
+            item->SetClass("active", true);
+        }
+
+        item->AddEventListener(Rml::EventId::Mouseup, new ResourceItemHandler(getWindow().document, i));
+
+        resourceList->AppendChild(std::move(item));
+        i++;
+    }
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //Context menu
@@ -467,7 +511,7 @@ void selectScene(const int index) {
     activeSceneIndex = index;
     UIManager::refreshScenes();
 }
-void showRenameDialog(int sceneIndex) {
+void showSceneRenameDialog(int sceneIndex) {
     if (sceneIndex < 0 || sceneIndex >= (int) sceneManager.scenes.size()) {
         std::cerr << "[Error] Invalid scene index for rename: " << sceneIndex << std::endl;
         return;
@@ -603,17 +647,161 @@ void deleteScene(int sceneIndex) {
         UIManager::refreshScenes();
     }
 }
+
 void duplicateScene(int sceneIndex) {
     std::cout << "Duplicate scene: " << sceneIndex << std::endl;
-    if (sceneIndex >= 0 && sceneIndex < (int) sceneManager.scenes.size()) {
+    if (sceneIndex >= 0 && sceneIndex < (int)sceneManager.scenes.size()) {
         SceneData newScene = sceneManager.scenes[sceneIndex];
-        newScene.sceneName = newScene.sceneName + " (Copy)";
+
+        std::string baseName = newScene.sceneName;
+        std::regex copyRegex(R"( \(Copy(?: \d+)?\)$)");
+        baseName = std::regex_replace(baseName, copyRegex, "");
+
+        std::string newName = baseName + " (Copy)";
+        int copyIndex = 2;
+
+        bool nameExists;
+        do {
+            nameExists = false;
+            for (const auto& scene : sceneManager.scenes) {
+                if (scene.sceneName == newName) {
+                    newName = baseName + " (Copy " + std::to_string(copyIndex) + ")";
+                    copyIndex++;
+                    nameExists = true;
+                    break;
+                }
+            }
+        } while (nameExists);
+
+        newScene.sceneName = newName;
         sceneManager.scenes.insert(sceneManager.scenes.begin() + sceneIndex + 1, newScene);
 
-        // Save changes and refresh UI
-        std::filesystem::path fullProjectPath = std::filesystem::path(saveData.path) / saveData.projectName;
-        UIManager::saveProject(fullProjectPath);
+        UIManager::saveProject(projectPath);
         UIManager::refreshScenes();
     }
+}
+void showResourceRenameDialog(int index) {
+    auto directory = saveData.path / saveData.projectName / "resources" / "thumbnails";
+    std::vector<std::filesystem::path> files;
+
+    for (auto& entry : std::filesystem::directory_iterator(directory)) {
+        if (!entry.is_regular_file()) continue;
+        if (entry.path().extension() != ".png") continue;
+        files.push_back(entry.path());
+    }
+
+    if (index < 0 || index >= (int)files.size()) return;
+
+    std::filesystem::path filePath = files[index];
+    std::string currentName = filePath.stem().string();
+
+    std::string itemId = "resource-item-" + std::to_string(index);
+    if (auto* itemEl = getEl(itemId)) {
+        itemEl->SetClass("renaming", true);
+
+        // Detach existing image so we can keep it
+        Rml::ElementPtr existingImg;
+        for (int i = 0; i < itemEl->GetNumChildren(); ++i) {
+            if (itemEl->GetChild(i)->GetTagName() == "img") {
+                existingImg = itemEl->RemoveChild(itemEl->GetChild(i));
+                break;
+            }
+        }
+
+        itemEl->SetInnerRML(""); // clear old text / name
+        if (existingImg) {
+            itemEl->AppendChild(std::move(existingImg));
+        }
+
+        Rml::ElementPtr container = getWindow().document->CreateElement("div");
+        container->SetClass("rename-container", true);
+
+        Rml::ElementPtr input = getWindow().document->CreateElement("input");
+        input->SetAttribute("type", "text");
+        input->SetAttribute("value", currentName);
+        input->SetId("rename-input-" + std::to_string(index));
+        input->SetClass("rename-input", true);
+
+        Rml::ElementPtr okButton = getWindow().document->CreateElement("button");
+        okButton->SetInnerRML("OK");
+        okButton->SetClass("rename-ok-button", true);
+
+        container->AppendChild(std::move(input));
+        container->AppendChild(std::move(okButton));
+        itemEl->AppendChild(std::move(container));
+
+        // Focus input
+        if (auto* inputEl = getWindow().document->GetElementById("rename-input-" + std::to_string(index))) {
+            if (auto* inputField = dynamic_cast<Rml::ElementFormControl*>(inputEl)) {
+                inputField->Focus();
+            }
+        }
+
+        // Add listener safely via container
+        if (auto* containerEl = itemEl->GetChild(itemEl->GetNumChildren() - 1)) {
+            if (auto* okEl = containerEl->GetChild(1)) {
+                okEl->AddEventListener(Rml::EventId::Click, new ButtonHandler([index, filePath, currentName] {
+                    if (auto* inputEl = getWindow().document->GetElementById("rename-input-" + std::to_string(index))) {
+                        if (auto* inputField = dynamic_cast<Rml::ElementFormControl*>(inputEl)) {
+                            std::string newName = inputField->GetValue();
+                            if (!newName.empty()) {
+                                std::filesystem::path newThumbnail = filePath.parent_path() / (newName + filePath.extension().string());
+                                std::filesystem::rename(filePath, newThumbnail);
+
+                                auto mainResource = saveData.path / saveData.projectName / "resources" / filePath.filename();
+                                if (std::filesystem::exists(mainResource)) {
+                                    std::filesystem::path newMain = mainResource.parent_path() / (newName + mainResource.extension().string());
+                                    std::filesystem::rename(mainResource, newMain);
+                                }
+
+                                UIManager::refreshResourcePanel();
+                            }
+                        }
+                    }
+                }));
+            }
+        }
+    }
+}
+
+
+
+void deleteResource(int index) {
+    auto directory = saveData.path / saveData.projectName / "resources" / "thumbnails";
+    int i = 0;
+    std::filesystem::path fileToDelete;
+
+    for (auto& entry : std::filesystem::directory_iterator(directory)) {
+        if (!entry.is_regular_file()) continue;
+        if (entry.path().extension() != ".png") continue;
+
+        if (i == index) {
+            fileToDelete = entry.path();
+            break;
+        }
+        i++;
+    }
+
+    if (!fileToDelete.empty()) {
+        try {
+            std::filesystem::remove(fileToDelete);
+
+            // Optionally also remove the main resource image if it exists somewhere else
+            auto mainImage = saveData.path / saveData.projectName / "resources" / fileToDelete.filename();
+            if (std::filesystem::exists(mainImage)) {
+                std::filesystem::remove(mainImage);
+            }
+
+            UIManager::refreshResourcePanel(); // Update the UI
+        }
+        catch (const std::filesystem::filesystem_error& e) {
+            std::cerr << "Error deleting resource: " << e.what() << std::endl;
+        }
+    }
+}
+void selectResource(int resourceIndex){
+    std::cout << "Selecting Resource: " << resourceIndex << " (previously: " << activeResourceIndex << ")" << std::endl;
+    activeResourceIndex = resourceIndex;
+    UIManager::refreshResourcePanel();
 }
 

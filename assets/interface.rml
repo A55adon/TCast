@@ -68,7 +68,6 @@
                 <h1 id="project-name" >Error-No-Project-Name-Found</h1>
 
                 <div class="top-right-buttons">
-                    <button>Vorschau</button>
                     <button>Anzeige starten</button>
                     <button>Stop</button>
                 </div>
@@ -114,6 +113,9 @@
     <div id="resourceContextMenu" class="context-menu" style="display: none; position: absolute;">
         <button id="resource-context-rename" class="context-menu-item">Rename</button>
         <button id="resource-context-delete" class="context-menu-item">Delete</button>
+    </div>
+    <div id="projectorContextMenu" class="context-menu" style="display: none; position: absolute;">
+        <button id="projector-context-selectResource" class="context-menu-item">Select Resource</button>
     </div>
     </body>
 </rml>

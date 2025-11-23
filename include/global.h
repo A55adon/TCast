@@ -60,6 +60,8 @@ void showResourceRenameDialog(int index);
 void deleteResource(int index);
 void selectResource(int resourceIndex);
 
+void showProjectorResourceSelection(int index);
+
 // For switching in UI helper functions
 void setStartupEventListeners();
 void setInterfaceEventListeners();

@@ -152,3 +152,62 @@ public:
     }
 
 };
+
+
+class ProjectorContextMenuHandler : public Rml::EventListener {
+    Rml::ElementDocument* document;
+    std::string action;
+public:
+    ProjectorContextMenuHandler(Rml::ElementDocument* doc, const std::string& action_)
+        : document(doc), action(action_) {}
+
+    void ProcessEvent(Rml::Event& event) override {
+        if (auto* contextMenu = document->GetElementById("projectorContextMenu")) {
+            auto* attr = contextMenu->GetAttribute("data-target-projector");
+            int index = 0;
+            if (attr) index = std::stoi(attr->Get<Rml::String>().c_str());
+
+            if (action == "selectResource") {
+                showProjectorResourceSelection(index);
+            }
+
+            contextMenu->SetProperty("display", "none");
+        }
+    }
+};
+class ProjectorHandler : public Rml::EventListener {
+    Rml::ElementDocument* document;
+    int projectorIndex;
+public:
+    ProjectorHandler(Rml::ElementDocument* doc, int index)
+        : document(doc), projectorIndex(index) {}
+
+    void ProcessEvent(Rml::Event& event) {
+        int button = event.GetParameter<int>("button", 0);
+
+        // Check if this resource is currently being renamed
+        std::string itemId = "projector-" + std::to_string(projectorIndex);
+        if (auto* itemEl = getEl(itemId)) {
+            if (itemEl->IsClassSet("setResource")) {
+                return; // ignore click while renaming
+            }
+        }
+
+        if (button == 1) { // Right click
+            event.StopPropagation();
+            std::cout << "Right click on projector: " << projectorIndex << std::endl;
+
+            if (auto* contextMenu = document->GetElementById("projectorContextMenu")) {
+                contextMenu->SetAttribute("data-target-projector", std::to_string(projectorIndex));
+                float mouse_x = event.GetParameter("mouse_x", 0.0f);
+                float mouse_y = event.GetParameter("mouse_y", 0.0f);
+                contextMenu->SetProperty("left", Rml::ToString(mouse_x) + "px");
+                contextMenu->SetProperty("top", Rml::ToString(mouse_y) + "px");
+                contextMenu->SetProperty("display", "block");
+            }
+        } else if (button == 0) { // Left click
+            //Todo: Drag to move or connect
+        }
+    }
+
+};

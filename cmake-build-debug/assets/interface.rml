@@ -115,5 +115,8 @@
         <button id="resource-context-rename" class="context-menu-item">Rename</button>
         <button id="resource-context-delete" class="context-menu-item">Delete</button>
     </div>
+    <div id="projectorContextMenu" class="context-menu" style="display: none; position: absolute;">
+        <button id="projector-context-selectResource" class="context-menu-item">Select Resource</button>
+    </div>
     </body>
 </rml>

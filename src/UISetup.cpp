@@ -152,13 +152,14 @@ void setInterfaceEventListeners() {
         projectname->SetInnerRML(saveData.projectName);
     }
     UISetup::setupDropdownListeners();
-    UISetup::setupProjectorGrid();
-
     UISetup::setupSceneManagement();
     UISetup::setupSceneContextMenu();
 
     UISetup::setupResourcePanel();
     UISetup::setupResourceContextMenu();
+
+    UISetup::setupProjectors();
+    UISetup::setupProjectorContextMenu();
 }
 
 void UISetup::setupDropdownListeners() {
@@ -238,21 +239,6 @@ void UISetup::setupFileDropdownListeners() {
         el->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
             exit(EXIT_SUCCESS);
         }));
-    }
-}
-void UISetup::setupProjectorGrid() {
-    if (auto *projectorgrid = getEl("projectorGrid")) {
-        std::cout << "[Info] Projector count: " << saveData.projectorCount << std::endl;
-        for (int i = 0; i < saveData.projectorCount; ++i) {
-            Rml::ElementPtr child = getWindow().document->CreateElement("div");
-            child->SetClass("projector", true);
-
-            Rml::ElementPtr span = getWindow().document->CreateElement("span");
-            span->SetInnerRML("Beamer " + std::to_string(i + 1));
-            child->AppendChild(std::move(span));
-            child->SetId("projector-" + std::to_string(i));
-            projectorgrid->AppendChild(std::move(child));
-        }
     }
 }
 void UISetup::setupSceneManagement() {
@@ -471,7 +457,29 @@ void UISetup::setupResourceContextMenu() {
 }
 
 void UISetup::setupProjectors() {
+    UIManager::refreshProjectors();
 }
 
 void UISetup::setupProjectorContextMenu() {
+    // Select Resource button in context menu
+    if (auto *contextRename = getEl("projector-context-selectResource")) {
+        contextRename->AddEventListener(Rml::EventId::Click, new ProjectorContextMenuHandler(getWindow().document, "selectResource"));
+    }
+
+
+    if (auto *body = getEl("body")) {
+        body->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
+            if (auto *contextMenu = getEl("projectorContextMenu")) {
+                contextMenu->SetProperty("display", "none");
+            }
+        }));
+    }
+
+    getWindow().document->AddEventListener(Rml::EventId::Keydown, new KeyEventHandler([](Rml::Event &event) {
+        if (event.GetParameter<int>("key_identifier", 0) == Rml::Input::KI_ESCAPE) {
+            if (auto *contextMenu = getEl("projectorContextMenu")) {
+                contextMenu->SetProperty("display", "none");
+            }
+        }
+    }));
 }

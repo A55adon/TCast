@@ -26,6 +26,7 @@
  *  - upload multiple resources at once
  *  - upload other file formats
  *  - drag n drop upload
+ *  - two resources with the same name override each other
 */
 
 #include "UISetup.h"

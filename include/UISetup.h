@@ -15,7 +15,6 @@ public:
 
     static void setupDropdownListeners();
     static void setupFileDropdownListeners();
-    static void setupProjectorGrid();
     static void setupSceneManagement();
     static void setupSceneContextMenu();
     static void setupResourcePanel();

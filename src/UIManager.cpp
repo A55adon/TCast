@@ -503,8 +503,52 @@ void UIManager::refreshResourcePanel() {
     }
 }
 
+void UIManager::refreshProjectors() {
+    if (auto *projectorGrid = getEl("projectorGrid")) {
+        for (int i = projectorGrid->GetNumChildren() - 1; i >= 0; --i) {
+            Rml::Element *child = projectorGrid->GetChild(i);
+            projectorGrid->RemoveChild(child);
+        }
+        std::cout << "[Info] Projector count: " << saveData.projectorCount << std::endl;
+        for (int i = 0; i < saveData.projectorCount; ++i) {
+            Rml::ElementPtr child = getWindow().document->CreateElement("div");
+            child->SetClass("projector", true);
+
+            Rml::ElementPtr span = getWindow().document->CreateElement("span");
+            span->SetInnerRML("Beamer " + std::to_string(i + 1));
+            child->AppendChild(std::move(span));
+            child->SetId("projector-" + std::to_string(i));
+
+            child->SetAttribute("data-scene-index", std::to_string(i));
+
+            // Add event listener
+            child->AddEventListener(Rml::EventId::Mouseup, new ProjectorHandler(getWindow().document, i));
+
+            projectorGrid->AppendChild(std::move(child));
+
+        }
+    }
+    for (int i = 0; i < saveData.projectorCount; i++) {
+        auto projector = getEl("projector-" + std::to_string(i));
+
+        if (i < sceneManager.scenes[activeSceneIndex].sources.size() &&
+            !sceneManager.scenes[activeSceneIndex].sources[i].empty()) {
+
+            projector->SetInnerRML("");
+            auto img = getWindow().document->CreateElement("img");
+            img->SetAttribute("src", sceneManager.scenes[activeSceneIndex].sources[i]);
+            img->SetAttribute("style", "width:100%; height:100%; object-fit:cover; display:block;");
+            projector->AppendChild(std::move(img));
+            }
+        else {
+            Utilities::showError("Couldn't load resource for projector-" + std::to_string(i));
+        }
+    }
+
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////
-//Context menu
+//Context menus
 
 void selectScene(const int index) {
     std::cout << "Selecting scene: " << index << " (previously: " << activeSceneIndex << ")" << std::endl;
@@ -804,4 +848,84 @@ void selectResource(int resourceIndex){
     activeResourceIndex = resourceIndex;
     UIManager::refreshResourcePanel();
 }
+
+void showProjectorResourceSelection(int index)
+{
+    auto* doc = getWindow().document;
+    if (!doc) return;
+
+    if (auto* existing = getEl("projector-resource-overlay")) {
+        if (auto* body = getEl("body")) body->RemoveChild(existing);
+    }
+
+    Rml::ElementPtr overlay = doc->CreateElement("div");
+    overlay->SetId("projector-resource-overlay");
+    overlay->SetAttribute("style",
+        "position:fixed;left:0;top:0;width:100%;height:100%;display:flex;align-items:center;"
+        "justify-content:center;background:rgba(0,0,0,0.5);z-index:2000;");
+
+    Rml::ElementPtr dialog = doc->CreateElement("div");
+    dialog->SetId("projector-resource-dialog");
+    dialog->SetAttribute("style",
+        "width:80%;max-width:600px;max-height:80%;overflow:auto;background:#34495e;border-radius:8px;"
+        "padding:12px;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;");
+    overlay->AppendChild(std::move(dialog));
+
+    Rml::Element* overlay_raw = overlay.get();
+    Rml::Element* dialog_raw = overlay_raw->GetChild(0);
+
+    auto directory = saveData.path / saveData.projectName / "resources" / "thumbnails";
+    for (auto& entry : std::filesystem::directory_iterator(directory)) {
+        if (!entry.is_regular_file()) continue;
+        if (entry.path().extension() != ".png") continue;
+
+        std::string filename = entry.path().filename().string();
+        std::string pathstr = (directory / filename).string();
+
+        Rml::ElementPtr row = doc->CreateElement("div");
+        row->SetAttribute("style",
+            "display:flex;align-items:center;gap:14px;padding:8px;background:#3f5870;border-radius:6px;"
+            "cursor:pointer;");
+
+        Rml::ElementPtr img = doc->CreateElement("img");
+        img->SetAttribute("src", pathstr);
+        img->SetAttribute("style", "width:64px;height:64px;object-fit:cover;border-radius:4px;");
+
+        Rml::ElementPtr label = doc->CreateElement("div");
+        label->SetAttribute("style", "color:white;font-size:16px;");
+        label->SetInnerRML(filename);
+
+        row->AppendChild(std::move(img));
+        row->AppendChild(std::move(label));
+
+        Rml::Element* row_raw = row.get();
+
+        struct ProjectorResourceSelectHandler : Rml::EventListener {
+            int projectorIndex;
+            std::string imagePath;
+            Rml::Element* overlay;
+            ProjectorResourceSelectHandler(int idx, const std::string& p, Rml::Element* o)
+                : projectorIndex(idx), imagePath(p), overlay(o) {}
+            void ProcessEvent(Rml::Event&) override {
+                auto& scene = sceneManager.scenes[activeSceneIndex];
+                if (projectorIndex >= scene.sources.size()) {
+                    scene.sources.resize(projectorIndex + 1);
+                }
+                scene.sources[projectorIndex] = imagePath;
+                std::cout << "Set resource[" << projectorIndex << "] to " << imagePath << std::endl;
+                if (auto* body = getEl("body")) body->RemoveChild(overlay);
+                UIManager::refreshProjectors();
+                UIManager::saveProject();
+            }
+        };
+
+        row_raw->AddEventListener(Rml::EventId::Mouseup,
+            new ProjectorResourceSelectHandler(index, pathstr, overlay_raw));
+
+        dialog_raw->AppendChild(std::move(row));
+    }
+
+    if (auto* body = getEl("body")) body->AppendChild(std::move(overlay));
+}
+
 

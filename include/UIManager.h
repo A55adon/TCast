@@ -31,5 +31,6 @@ public:
     static bool loadScenesData();
     static void switchToStartup();
     static void refreshResourcePanel();
+    static void refreshProjectors();
 
 };

@@ -102,8 +102,6 @@ void Window::update()
         if (!projector) continue;
         projector->update();
 
-        if (projector->shouldClose())
-            running = false;
     }
 
     glfwMakeContextCurrent(Backend::GetWindow());

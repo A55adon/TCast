@@ -119,25 +119,56 @@ Projector::Projector(int monitor_index): context(nullptr)
 }
 
 Projector::~Projector() {
+    glfwWindowShouldClose(window);
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteProgram(shaderProgram);
     glfwDestroyWindow(window);
 }
 
-void Projector::update() const
-{
+void Projector::showImg(std::string src) {
+    glfwMakeContextCurrent(window);
+
+    if (texture) {
+        glDeleteTextures(1, &texture);
+        texture = 0;
+    }
+
+    int w, h, channels;
+    unsigned char* data = stbi_load(src.c_str(), &w, &h, &channels, 4);
+    if (!data) return;
+
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+    stbi_image_free(data);
+}
+
+void Projector::update() const {
     if (!window) return;
     glfwMakeContextCurrent(window);
-    glClearColor(0.2f, 0.2f, 0.3f, 1.0f);
+
     glClear(GL_COLOR_BUFFER_BIT);
 
-    // Clear any pending errors to isolate issues
-    while (glGetError() != GL_NO_ERROR) {}
+    glUseProgram(shaderProgram);
+    glBindVertexArray(VAO);
+
+    if (texture) {
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glUniform1i(glGetUniformLocation(shaderProgram, "texture1"), 0);
+    }
+
+    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
     glfwSwapBuffers(window);
 }
 
-bool Projector::shouldClose() const {
-    return glfwWindowShouldClose(window);
-}

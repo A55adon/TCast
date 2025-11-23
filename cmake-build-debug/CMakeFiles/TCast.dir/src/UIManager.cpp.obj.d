@@ -721,6 +721,7 @@ CMakeFiles/TCast.dir/src/UIManager.cpp.obj: \
  C:/Users/simon/Desktop/Code/TCast/libs/glad/include/glad/glad.h \
  C:/Users/simon/Desktop/Code/TCast/libs/glad/include/KHR/khrplatform.h \
  C:/Users/simon/Desktop/Code/TCast/libs/GLFW/include/GLFW/glfw3.h \
+ C:/Users/simon/Desktop/Code/TCast/include/stb_image.h \
  C:/Users/simon/Desktop/Code/TCast/include/EventListener.h \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/EventListener.h \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/ElementDocument.h

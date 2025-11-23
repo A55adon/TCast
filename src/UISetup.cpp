@@ -160,6 +160,8 @@ void setInterfaceEventListeners() {
 
     UISetup::setupProjectors();
     UISetup::setupProjectorContextMenu();
+
+    UISetup::setupProjection();
 }
 
 void UISetup::setupDropdownListeners() {
@@ -481,5 +483,20 @@ void UISetup::setupProjectorContextMenu() {
                 contextMenu->SetProperty("display", "none");
             }
         }
+    }));
+}
+
+void UISetup::setupProjection() {
+    auto *start = getEl("project-sources");
+    start->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
+        for (int i = 0; i < saveData.projectorCount; i++) {
+            Projector projector = Projector(i);
+            projector.showImg(sceneManager.scenes[activeSceneIndex].sources[i]);
+            projectors.push_back(projector);
+        }
+    }));
+    auto *stop = getEl("stop-projection");
+    stop->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
+        projectors.clear();
     }));
 }

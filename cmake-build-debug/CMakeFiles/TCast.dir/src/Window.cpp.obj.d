@@ -362,6 +362,7 @@ CMakeFiles/TCast.dir/src/Window.cpp.obj: \
  C:/Users/simon/Desktop/Code/TCast/libs/glad/include/glad/glad.h \
  C:/Users/simon/Desktop/Code/TCast/libs/glad/include/KHR/khrplatform.h \
  C:/Users/simon/Desktop/Code/TCast/libs/GLFW/include/GLFW/glfw3.h \
+ C:/Users/simon/Desktop/Code/TCast/include/stb_image.h \
  C:/Users/simon/Desktop/Code/TCast/include/Shell.h \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Input.h \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Types.h \

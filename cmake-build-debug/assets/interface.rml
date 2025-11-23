@@ -68,9 +68,8 @@
                 <h1 id="project-name" >Error-No-Project-Name-Found</h1>
 
                 <div class="top-right-buttons">
-                    <button>Vorschau</button>
-                    <button>Anzeige starten</button>
-                    <button>Stop</button>
+                    <button id="project-sources">Anzeige starten</button>
+                    <button id="stop-projection">Stop</button>
                 </div>
             </div>
             <div class="main-body" id="main-body">

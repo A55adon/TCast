@@ -71,6 +71,7 @@ inline SaveData saveData;
 inline SceneManager sceneManager;
 inline bool createRecentPath = true;
 inline std::filesystem::path projectPath;
+inline std::vector<Projector> projectors;
 inline int activeSceneIndex = 0; // -1 means no scene selected
 inline int activeResourceIndex = -1; // -1 means no scene selected
 

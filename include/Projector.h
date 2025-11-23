@@ -4,6 +4,7 @@
 #include <RmlUi/Core.h>
 #include <string>
 #include "GLFW/glfw3.h"
+#include "stb_image.h"
 
 class Projector
 {
@@ -11,14 +12,16 @@ public:
     Projector(int monitor_index);
     ~Projector();
 
+    void showImg(std::string src);
+
     void update() const;
-    bool shouldClose() const;
 
     GLFWwindow* getWindow() const { return window; }
 
 private:
     GLuint shaderProgram = 0;
     GLuint VAO, VBO = 0;
+    GLuint texture = 0;
 
     GLFWwindow* window;
     int width, height;

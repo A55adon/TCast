@@ -361,6 +361,7 @@ CMakeFiles/TCast.dir/src/Projector.cpp.obj: \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Include/RmlUi/Core/Texture.h \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Elements/ElementTabSet.h \
  C:/Users/simon/Desktop/Code/TCast/libs/GLFW/include/GLFW/glfw3.h \
+ C:/Users/simon/Desktop/Code/TCast/include/stb_image.h \
  C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iostream \
  C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ostream \
  C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ios \

@@ -87,7 +87,6 @@ bool UIManager::verifyFolderStructure(const std::filesystem::path &savePath) {
     if (!std::filesystem::exists(savePath / "saveData.json")) return false;
     if (!std::filesystem::exists(savePath / "scenesData.json")) return false;
     if (!std::filesystem::exists(savePath / "resources")) return false;
-    if (!std::filesystem::exists(savePath / "resources" / "thumbnails")) return false;
     return true;
 }
 void UIManager::fixFolderStructure(const std::filesystem::path &savePath) {
@@ -106,9 +105,6 @@ void UIManager::fixFolderStructure(const std::filesystem::path &savePath) {
         std::filesystem::create_directories(savePath / "resources");
     }
 
-    if (!std::filesystem::exists(savePath / "resources" / "thumbnails")) {
-        std::filesystem::create_directories(savePath / "resources" / "thumbnails");
-    }
 }
 bool UIManager::saveJsonToFile(const std::filesystem::path &savePath, const json &data) {
     std::ofstream file(savePath);
@@ -468,7 +464,7 @@ void UIManager::refreshResourcePanel() {
     while (resourceList->GetNumChildren() > 0) {
         resourceList->RemoveChild(resourceList->GetChild(0));
     }
-    auto directory = saveData.path / saveData.projectName / "resources" / "thumbnails";
+    auto directory = saveData.path / saveData.projectName / "resources";
     int i = 0;
     for (auto& entry : std::filesystem::directory_iterator(directory)) {
         if (!entry.is_regular_file()) continue;
@@ -535,10 +531,10 @@ void UIManager::refreshProjectors() {
             !sceneManager.scenes[activeSceneIndex].sources[i].empty()) {
 
             projector->SetInnerRML("");
-            auto img = getWindow().document->CreateElement("img");
-            img->SetAttribute("src", sceneManager.scenes[activeSceneIndex].sources[i]);
-            img->SetAttribute("style", "width:100%; height:100%; object-fit:cover; display:block;");
-            projector->AppendChild(std::move(img));
+            //auto img = getWindow().document->CreateElement("img");
+            //img->SetAttribute("src", sceneManager.scenes[activeSceneIndex].sources[i]);
+            projector->SetAttribute("style", "decorator: image(" + sceneManager.scenes[activeSceneIndex].sources[i] + ");");
+            //projector->AppendChild(std::move(img));
             }
         else {
             Utilities::showError("Couldn't load resource for projector-" + std::to_string(i));
@@ -725,7 +721,7 @@ void duplicateScene(int sceneIndex) {
     }
 }
 void showResourceRenameDialog(int index) {
-    auto directory = saveData.path / saveData.projectName / "resources" / "thumbnails";
+    auto directory = saveData.path / saveData.projectName / "resources";
     std::vector<std::filesystem::path> files;
 
     for (auto& entry : std::filesystem::directory_iterator(directory)) {
@@ -811,7 +807,7 @@ void showResourceRenameDialog(int index) {
 
 
 void deleteResource(int index) {
-    auto directory = saveData.path / saveData.projectName / "resources" / "thumbnails";
+    auto directory = saveData.path / saveData.projectName / "resources";
     int i = 0;
     std::filesystem::path fileToDelete;
 
@@ -874,7 +870,7 @@ void showProjectorResourceSelection(int index)
     Rml::Element* overlay_raw = overlay.get();
     Rml::Element* dialog_raw = overlay_raw->GetChild(0);
 
-    auto directory = saveData.path / saveData.projectName / "resources" / "thumbnails";
+    auto directory = saveData.path / saveData.projectName / "resources";
     for (auto& entry : std::filesystem::directory_iterator(directory)) {
         if (!entry.is_regular_file()) continue;
         if (entry.path().extension() != ".png") continue;

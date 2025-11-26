@@ -5,7 +5,7 @@
 
 #include "RmlUi_Backend.h"
 
-// Simple vertex shader source
+// Vertex shader source
 auto vertexShaderSource = R"(
 #version 330 core
 layout (location = 0) in vec2 aPos;
@@ -17,7 +17,7 @@ void main() {
 }
 )";
 
-// Simple fragment shader source
+// Fragment shader source
 auto fragmentShaderSource = R"(
 #version 330 core
 out vec4 FragColor;
@@ -27,148 +27,183 @@ void main() {
     FragColor = texture(texture1, TexCoord);
 }
 )";
-Projector::Projector(int monitor_index): context(nullptr)
+
+GLuint compileShader(GLenum type, const char* source) {
+    GLuint shader = glCreateShader(type);
+    glShaderSource(shader, 1, &source, nullptr);
+    glCompileShader(shader);
+
+    int success;
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+    if (!success) {
+        char infoLog[512];
+        glGetShaderInfoLog(shader, 512, nullptr, infoLog);
+        std::cerr << "Shader compilation failed: " << infoLog << std::endl;
+    }
+    return shader;
+}
+
+Projector::Projector(int monitor_index, std::string img)
 {
-    // Check how many monitors exist
-    int monitorCount;
-    GLFWmonitor **monitors = glfwGetMonitors(&monitorCount);
-    if (monitor_index >= monitorCount) {
-        std::cerr << "Monitor index out of range\n";
-        exit(EXIT_FAILURE);
+    th = std::thread([=]() {
+        run(monitor_index, img);
+    });
+}
+
+void Projector::run(int monitor_index, std::string img) {
+
+    int count = 0;
+    GLFWmonitor** monitors = glfwGetMonitors(&count);
+
+    if (!monitors || monitor_index >= count) {
+        running = false;
+        return;
     }
 
-    GLFWmonitor *monitor = monitors[monitor_index];
-    const GLFWvidmode *mode = glfwGetVideoMode(monitor);
+    GLFWmonitor* mon = monitors[monitor_index];
+    const GLFWvidmode* mode = glfwGetVideoMode(mon);
+
     width = mode->width;
     height = mode->height;
 
-    // Set context hints
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    // Create the actual projector window
-    window = glfwCreateWindow(width, height, "Projector", monitor, Backend::GetWindow());
+    window = glfwCreateWindow(width, height, "Projector", mon, nullptr);
     if (!window) {
-        std::cerr << "Failed to create GLFW window for projector\n";
-        exit(EXIT_FAILURE);
+        running = false;
+        return;
     }
 
     glfwMakeContextCurrent(window);
 
-    // Compile shaders
-    const GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
-    glCompileShader(vertexShader);
-    GLint success;
-    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-    if (!success) {
-        char infoLog[512];
-        glGetShaderInfoLog(vertexShader, 512, nullptr, infoLog);
-        std::cerr << "Vertex shader compilation failed: " << infoLog << "\n";
-        exit(EXIT_FAILURE);
+    initShaders();
+    initGLObjects();
+    loadTexture(img);
+
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glUseProgram(shaderProgram);
+    glUniform1i(glGetUniformLocation(shaderProgram, "texture1"), 0);
+
+    while (running && !glfwWindowShouldClose(window)) {
+        glClear(GL_COLOR_BUFFER_BIT);
+        draw();
+        glfwSwapBuffers(window);
+        glfwPollEvents();
     }
 
-    const GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr);
-    glCompileShader(fragmentShader);
-    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-    if (!success) {
-        char infoLog[512];
-        glGetShaderInfoLog(fragmentShader, 512, nullptr, infoLog);
-        std::cerr << "Fragment shader compilation failed: " << infoLog << "\n";
-        exit(EXIT_FAILURE);
-    }
+    glfwDestroyWindow(window);
+}
+
+void Projector::initShaders() {
+    GLuint vertex = compileShader(GL_VERTEX_SHADER, vertexShaderSource);
+    GLuint fragment = compileShader(GL_FRAGMENT_SHADER, fragmentShaderSource);
 
     shaderProgram = glCreateProgram();
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
+    glAttachShader(shaderProgram, vertex);
+    glAttachShader(shaderProgram, fragment);
     glLinkProgram(shaderProgram);
+
+    int success;
     glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
     if (!success) {
         char infoLog[512];
         glGetProgramInfoLog(shaderProgram, 512, nullptr, infoLog);
-        std::cerr << "Shader program linking failed: " << infoLog << "\n";
-        exit(EXIT_FAILURE);
+        std::cerr << "Shader linking failed: " << infoLog << std::endl;
     }
 
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
+    glDeleteShader(vertex);
+    glDeleteShader(fragment);
+}
 
-    // Set up quad VAO/VBO
-    constexpr float vertices[] = {
-        -1.0f, -1.0f, 0.0f, 0.0f,
-        1.0f, -1.0f, 1.0f, 0.0f,
-        1.0f, 1.0f, 1.0f, 1.0f,
-        -1.0f, 1.0f, 0.0f, 1.0f
+void Projector::initGLObjects() {
+    float vertices[] = {
+        -1.0f, -1.0f,  0.0f, 0.0f,
+         1.0f, -1.0f,  1.0f, 0.0f,
+         1.0f,  1.0f,  1.0f, 1.0f,
+        -1.0f,  1.0f,  0.0f, 1.0f
+    };
+
+    unsigned int indices[] = {
+        0, 1, 2,
+        2, 3, 0
     };
 
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
+    GLuint ebo;
+    glGenBuffers(1, &ebo);
+
     glBindVertexArray(VAO);
+
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), static_cast<void *>(nullptr));
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), reinterpret_cast<void *>(2 * sizeof(float)));
+
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+}
+
+void Projector::loadTexture(const std::string& path) {
+    int w, h, channels;
+    unsigned char* data = stbi_load(path.c_str(), &w, &h, &channels, 4);
+    if (!data) {
+        std::cerr << "Failed to load texture: " << path << std::endl;
+        return;
+    }
+
+    if (!texture)
+        glGenTextures(1, &texture);
+
+    glBindTexture(GL_TEXTURE_2D, texture);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, w, h, 0,
+                 GL_RGBA, GL_UNSIGNED_BYTE, data);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    stbi_image_free(data);
+}
+
+void Projector::draw() {
+    glUseProgram(shaderProgram);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glBindVertexArray(VAO);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }
 
 Projector::~Projector() {
-    glfwWindowShouldClose(window);
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-    glDeleteProgram(shaderProgram);
-    glfwDestroyWindow(window);
+    running = false;
+    if (th.joinable())
+        th.join();
 }
 
-void Projector::showImg(std::string src) {
-    glfwMakeContextCurrent(window);
-
-    if (texture) {
-        glDeleteTextures(1, &texture);
-        texture = 0;
+void Projector::die() {
+    running = false;
+    if (window) {
+        glfwSetWindowShouldClose(window, GLFW_TRUE);
     }
-
-    int w, h, channels;
-    unsigned char* data = stbi_load(src.c_str(), &w, &h, &channels, 4);
-    if (!data) return;
-
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-
-    glBindTexture(GL_TEXTURE_2D, 0);
-    stbi_image_free(data);
-}
-
-void Projector::update() const {
-    if (!window) return;
-    glfwMakeContextCurrent(window);
-
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    glUseProgram(shaderProgram);
-    glBindVertexArray(VAO);
-
-    if (texture) {
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture);
-        glUniform1i(glGetUniformLocation(shaderProgram, "texture1"), 0);
+    if (th.joinable()) {
+        th.join();
     }
-
-    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-
-    glfwSwapBuffers(window);
+    window = nullptr;
 }
 
+void Projector::requestDie() {
+    running = false;
+}
+
+bool Projector::isRunning() {
+    return running;
+}

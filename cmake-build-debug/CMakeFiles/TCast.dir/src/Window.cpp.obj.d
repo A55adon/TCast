@@ -359,8 +359,16 @@ CMakeFiles/TCast.dir/src/Window.cpp.obj: \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Include/RmlUi/Core/Texture.h \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Elements/ElementTabSet.h \
  C:/Users/simon/Desktop/Code/TCast/include/Projector.h \
+ C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/atomic \
  C:/Users/simon/Desktop/Code/TCast/libs/glad/include/glad/glad.h \
  C:/Users/simon/Desktop/Code/TCast/libs/glad/include/KHR/khrplatform.h \
+ C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/thread \
+ C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/std_thread.h \
+ C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/this_thread_sleep.h \
+ C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/chrono.h \
+ C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ratio \
+ C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ctime \
+ C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/parse_numbers.h \
  C:/Users/simon/Desktop/Code/TCast/libs/GLFW/include/GLFW/glfw3.h \
  C:/Users/simon/Desktop/Code/TCast/include/stb_image.h \
  C:/Users/simon/Desktop/Code/TCast/include/Shell.h \

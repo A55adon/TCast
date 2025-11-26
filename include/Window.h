@@ -23,7 +23,6 @@ public:
     bool running;
 
 private:
-    std::vector<std::unique_ptr<Projector>> projectors;
     int width = 800;
     int height = 600;
 };

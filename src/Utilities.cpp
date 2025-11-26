@@ -166,60 +166,80 @@ std::filesystem::path Utilities::getRecentPath() {
     std::cout << "Found recent: " <<  pathStr << std::endl;
     return result;
 }
-
 bool Utilities::downscaleAndCrop169(const std::string &inputPath, const std::string &outputPath) {
     int w, h, channels;
     unsigned char* img = stbi_load(inputPath.c_str(), &w, &h, &channels, 4);
     if (!img) return false;
 
     int in_channels = 4;
-    int sw = w / 2;
-    int sh = h / 2;
-    if (sw <= 0 || sh <= 0) {
-        stbi_image_free(img);
-        return false;
+
+    int targetW = w;
+    int targetH = h;
+
+    const int maxW = 1920;
+    const int maxH = 1080;
+
+    // Determine if downscaling is needed
+    float aspect = 16.0f / 9.0f;
+    float imgAspect = static_cast<float>(w) / h;
+
+    if (w > maxW || h > maxH) {
+        if (imgAspect >= aspect) {
+            targetW = maxW;
+            targetH = static_cast<int>(std::round(targetW / aspect));
+        } else {
+            targetH = maxH;
+            targetW = static_cast<int>(std::round(targetH * aspect));
+        }
+    } else {
+        // For images smaller than 1920x1080, just adjust crop to 16:9
+        if (imgAspect >= aspect) {
+            targetW = static_cast<int>(std::round(h * aspect));
+            targetH = h;
+        } else {
+            targetH = static_cast<int>(std::round(w / aspect));
+            targetW = w;
+        }
     }
 
-    std::vector<unsigned char> scaled(sw * sh * in_channels);
+    // Center crop coordinates
+    int offX = std::max(0, (w - targetW) / 2);
+    int offY = std::max(0, (h - targetH) / 2);
 
-    int input_stride = w * in_channels;
-    int output_stride = sw * in_channels;
+    std::vector<unsigned char> cropped(targetW * targetH * in_channels);
 
-    void *ok = stbir_resize(
-        img, w, h, input_stride,
-        scaled.data(), sw, sh, output_stride,
-        STBIR_RGBA,
-        STBIR_TYPE_UINT8,
-        STBIR_EDGE_CLAMP,
-        STBIR_FILTER_DEFAULT
-    );
+    for (int y = 0; y < targetH; ++y) {
+        unsigned char* dst_row = cropped.data() + y * targetW * in_channels;
+        unsigned char* src_row = img + ((offY + y) * w + offX) * in_channels;
+        memcpy(dst_row, src_row, static_cast<size_t>(targetW * in_channels));
+    }
 
     stbi_image_free(img);
 
-    if (!ok) return false;
+    // If the cropped size exceeds 1920x1080, downscale to fit
+    if (targetW > maxW || targetH > maxH) {
+        int finalW = std::min(targetW, maxW);
+        int finalH = std::min(targetH, maxH);
+        std::vector<unsigned char> finalImg(finalW * finalH * in_channels);
 
-    const float targetAspect = 16.0f / 9.0f;
-    int cropW = sw;
-    int cropH = static_cast<int>(std::round(sw / targetAspect));
+        stbir_resize(
+            cropped.data(), targetW, targetH, targetW * in_channels,
+            finalImg.data(), finalW, finalH, finalW * in_channels,
+            STBIR_RGBA,
+            STBIR_TYPE_UINT8,
+            STBIR_EDGE_CLAMP,
+            STBIR_FILTER_DEFAULT
+        );
 
-    if (cropH > sh) {
-        cropH = sh;
-        cropW = static_cast<int>(std::round(sh * targetAspect));
+        targetW = finalW;
+        targetH = finalH;
+        cropped.swap(finalImg);
     }
 
-    int offX = std::max(0, (sw - cropW) / 2);
-    int offY = std::max(0, (sh - cropH) / 2);
-
-    std::vector<unsigned char> cropped(cropW * cropH * in_channels);
-    for (int y = 0; y < cropH; ++y) {
-        unsigned char* dst_row = cropped.data() + y * cropW * in_channels;
-        unsigned char* src_row = scaled.data() + ((offY + y) * sw + offX) * in_channels;
-        memcpy(dst_row, src_row, static_cast<size_t>(cropW * in_channels));
-    }
-
-    int write_ok = stbi_write_png(outputPath.c_str(), cropW, cropH, in_channels, cropped.data(), cropW * in_channels);
+    int write_ok = stbi_write_png(outputPath.c_str(), targetW, targetH, in_channels, cropped.data(), targetW * in_channels);
     return write_ok != 0;
 }
+
 
 bool Utilities::validateString(std::string &value) {
     static const std::regex pattern("^[A-Za-z0-9äöüÄÖÜ _.\\-;,]+$");

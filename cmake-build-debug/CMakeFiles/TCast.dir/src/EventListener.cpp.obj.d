@@ -719,8 +719,12 @@ CMakeFiles/TCast.dir/src/EventListener.cpp.obj: \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Types.h \
  C:/Users/simon/Desktop/Code/TCast/include/Window.h \
  C:/Users/simon/Desktop/Code/TCast/include/Projector.h \
+ C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/atomic \
  C:/Users/simon/Desktop/Code/TCast/libs/glad/include/glad/glad.h \
  C:/Users/simon/Desktop/Code/TCast/libs/glad/include/KHR/khrplatform.h \
+ C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/thread \
+ C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/std_thread.h \
+ C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/this_thread_sleep.h \
  C:/Users/simon/Desktop/Code/TCast/libs/GLFW/include/GLFW/glfw3.h \
  C:/Users/simon/Desktop/Code/TCast/include/stb_image.h \
  C:/Users/simon/Desktop/Code/TCast/include/Utilities.h

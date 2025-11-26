@@ -405,25 +405,6 @@ void UISetup::setupResourcePanel() {
             return;
         }
 
-        // Thumbnail path in "resources/thumbnails"
-        if (!UIManager::verifyFolderStructure(projectPath / saveData.projectName))
-            UIManager::fixFolderStructure(projectPath / saveData.projectName);
-        std::filesystem::path thumbnailPath = saveData.path/ saveData.projectName / "resources" / "thumbnails" / (nameVal + ".png");
-
-        // Ensure thumbnail folder exists
-        std::filesystem::create_directories(thumbnailPath.parent_path());
-
-        try {
-            // Create thumbnail
-            if (!Utilities::downscaleAndCrop169(destinationPath.string(), thumbnailPath.string())) {
-               Utilities::showError("Fehler beim Erstellen des Thumbnails");
-               return;
-            }
-        } catch (std::filesystem::filesystem_error& e) {
-            Utilities::showError("Fehler beim Kopieren der Datei: " + std::string(e.what()));
-            return;
-        }
-
         UIManager::refreshResourcePanel();
     }));
 
@@ -490,13 +471,31 @@ void UISetup::setupProjection() {
     auto *start = getEl("project-sources");
     start->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
         for (int i = 0; i < saveData.projectorCount; i++) {
-            Projector projector = Projector(i);
-            projector.showImg(sceneManager.scenes[activeSceneIndex].sources[i]);
-            projectors.push_back(projector);
+
+            auto p = new Projector(
+                i + 1,
+                sceneManager.scenes[activeSceneIndex].sources[i]
+            );
+
+            projectors.push_back(p);
         }
     }));
+
     auto *stop = getEl("stop-projection");
     stop->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
+        // just signal threads to exit
+        for (auto& projector : projectors) {
+            projector->requestDie();
+        }
+
+        // optionally, wait for threads to finish safely after this
+        for (auto& projector : projectors) {
+            if (projector->th.joinable())
+                projector->th.join(); // can also do this in destructor
+        }
+
         projectors.clear();
+        std::cout << projectors.size() << std::endl;
     }));
+
 }

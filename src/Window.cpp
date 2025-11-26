@@ -64,28 +64,6 @@ Window::~Window()
     ShellRml::Shutdown();
 }
 
-void Window::addProjector(int monitor_index, const std::string& content_path, bool is_video)
-{
-    projectors.emplace_back(std::make_unique<Projector>(monitor_index));
-    glfwMakeContextCurrent(Backend::GetWindow()); // Give the context back to the main window after creating a new projector window
-}
-
-void Window::removeProjector(int index)
-{
-    if (index < 0 || static_cast<size_t>(index) >= projectors.size()) {
-        std::cerr << "Invalid projector index\n";
-        return;
-    }
-
-    if (const auto& projector = projectors[index]; projector && projector->getWindow()) {
-        glfwMakeContextCurrent(projector->getWindow());
-    }
-
-    projectors.erase(projectors.begin() + index);
-
-    glfwMakeContextCurrent(Backend::GetWindow());
-}
-
 void Window::update()
 {
     // Update main window
@@ -95,14 +73,6 @@ void Window::update()
     Backend::BeginFrame();
     context->Render();
     Backend::PresentFrame();
-
-    // Update projectors
-    for (const auto& projector : projectors)
-    {
-        if (!projector) continue;
-        projector->update();
-
-    }
 
     glfwMakeContextCurrent(Backend::GetWindow());
 }

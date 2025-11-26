@@ -1,34 +1,41 @@
 #pragma once
 
+#include <atomic>
 #include <glad/glad.h>
 #include <RmlUi/Core.h>
 #include <string>
+#include <thread>
+
 #include "GLFW/glfw3.h"
 #include "stb_image.h"
 
 class Projector
 {
 public:
-    Projector(int monitor_index);
+    Projector(int monitor_index, std::string img);
     ~Projector();
+    std::atomic<bool> running{true};
+    void requestDie();   // just signal thread to stop
+    bool isRunning();    // check if thread is still running
+    void initShaders();
 
-    void showImg(std::string src);
 
-    void update() const;
-
-    GLFWwindow* getWindow() const { return window; }
-
+    std::thread th;
 private:
+    void run(int monitor_index, std::string img);
+
+    void die();
+    void initGLObjects();
+    void loadTexture(const std::string& path);
+    void draw();
+
+
     GLuint shaderProgram = 0;
-    GLuint VAO, VBO = 0;
+    GLuint VAO = 0;
+    GLuint VBO = 0;
     GLuint texture = 0;
 
-    GLFWwindow* window;
-    int width, height;
-
-    Rml::Context* context;
-    //GLuint texture_id;
-    //bool is_video;
-    std::string content_path;
-    //bool texture_loaded = false;
+    GLFWwindow* window = nullptr;
+    int width = 0;
+    int height = 0;
 };

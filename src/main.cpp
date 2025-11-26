@@ -27,6 +27,9 @@
  *  - upload other file formats
  *  - drag n drop upload
  *  - two resources with the same name override each other
+ *  - renaming or deleting a resource shows white images
+ *  - trying to change source when resource is deleted it crashes
+ *
 */
 
 #include "UISetup.h"

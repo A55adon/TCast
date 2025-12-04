@@ -550,6 +550,7 @@ void selectScene(const int index) {
     std::cout << "Selecting scene: " << index << " (previously: " << activeSceneIndex << ")" << std::endl;
     activeSceneIndex = index;
     UIManager::refreshScenes();
+    UIManager::refreshProjectors();
 }
 void showSceneRenameDialog(int sceneIndex) {
     if (sceneIndex < 0 || sceneIndex >= (int) sceneManager.scenes.size()) {
@@ -860,15 +861,47 @@ void showProjectorResourceSelection(int index)
         "position:fixed;left:0;top:0;width:100%;height:100%;display:flex;align-items:center;"
         "justify-content:center;background:rgba(0,0,0,0.5);z-index:2000;");
 
+
     Rml::ElementPtr dialog = doc->CreateElement("div");
     dialog->SetId("projector-resource-dialog");
     dialog->SetAttribute("style",
-        "width:80%;max-width:600px;max-height:80%;overflow:auto;background:#34495e;border-radius:8px;"
-        "padding:12px;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;");
+    "width:80%;max-width:600px;max-height:80%;"
+    "overflow-y:auto;overflow-x:hidden;"
+    "background:#34495e;border-radius:8px;"
+    "padding:12px;box-sizing:border-box;"
+    "display:flex;flex-direction:column;gap:8px;");
+
     overlay->AppendChild(std::move(dialog));
 
     Rml::Element* overlay_raw = overlay.get();
+
+    struct CloseOverlayHandler : Rml::EventListener {
+        Rml::Element* overlay;
+        CloseOverlayHandler(Rml::Element* o) : overlay(o) {}
+
+        void ProcessEvent(Rml::Event& e) override {
+            if (auto* body = getEl("body"))
+                body->RemoveChild(overlay);
+        }
+    };
+
+    //overlay->AddEventListener(Rml::EventId::Click, new CloseOverlayHandler(overlay_raw));
+
     Rml::Element* dialog_raw = overlay_raw->GetChild(0);
+    struct StopPropagationHandler : public Rml::EventListener {
+        void ProcessEvent(Rml::Event& e) override {
+            e.StopPropagation();
+        }
+    };
+    // Close overlay on ANY mouse interaction (left or right)
+    overlay_raw->AddEventListener(Rml::EventId::Mousedown, new CloseOverlayHandler(overlay_raw));
+    overlay_raw->AddEventListener(Rml::EventId::Mouseup,   new CloseOverlayHandler(overlay_raw));
+
+    // Prevent dialog from receiving close events
+    dialog_raw->AddEventListener(Rml::EventId::Mousedown, new StopPropagationHandler());
+    dialog_raw->AddEventListener(Rml::EventId::Mouseup,   new StopPropagationHandler());
+
+
 
     auto directory = saveData.path / saveData.projectName / "resources";
     for (auto& entry : std::filesystem::directory_iterator(directory)) {
@@ -893,6 +926,11 @@ void showProjectorResourceSelection(int index)
 
         row->AppendChild(std::move(img));
         row->AppendChild(std::move(label));
+
+        row->SetAttribute("style","display:flex;align-items:center;gap:14px;padding:8px;"
+            "background:#3f5870;border-radius:6px;cursor:pointer;"
+            "width:100%;box-sizing:border-box;");
+
 
         Rml::Element* row_raw = row.get();
 

@@ -257,7 +257,7 @@ void Utilities::showInfo(std::string msg) {
 }
 
 
-std::string Utilities::browsePng() {
+std::string Utilities::browseImage() {
     OPENFILENAME ofn;
     char szFile[260] = {0};
     ZeroMemory(&ofn, sizeof(ofn));
@@ -265,7 +265,12 @@ std::string Utilities::browsePng() {
     ofn.hwndOwner = nullptr;
     ofn.lpstrFile = szFile;
     ofn.nMaxFile = sizeof(szFile);
-    ofn.lpstrFilter = "PNG Files\0*.png\0All Files\0*.*\0";
+
+    // Accept many image file types
+    ofn.lpstrFilter =
+        "Image Files\0*.png;*.jpg;*.jpeg;*.bmp;*.tga;*.gif;*.tif;*.tiff;*.webp\0"
+        "All Files\0*.*\0";
+
     ofn.nFilterIndex = 1;
     ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 
@@ -273,7 +278,21 @@ std::string Utilities::browsePng() {
         return std::string(ofn.lpstrFile);
     }
 
-    return ""; // user cancelled
+    return "";
+}
+
+bool Utilities::convertToPng(const std::string& src, const std::string& dst) {
+    int w, h, channels;
+    stbi_uc* data = stbi_load(src.c_str(), &w, &h, &channels, 4);  // always RGBA
+
+    if (!data) {
+        return false;
+    }
+
+    int success = stbi_write_png(dst.c_str(), w, h, 4, data, w * 4);
+    stbi_image_free(data);
+
+    return success != 0;
 }
 
 Rml::Element* getEl(const std::string& str) {

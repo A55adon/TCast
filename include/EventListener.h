@@ -189,7 +189,8 @@ public:
         std::string itemId = "projector-" + std::to_string(projectorIndex);
         if (auto* itemEl = getEl(itemId)) {
             if (itemEl->IsClassSet("setResource")) {
-                return; // ignore click while renaming
+                auto* contextMenu = getEl("projectorContextMenu");
+                contextMenu->SetProperty("display", "none");
             }
         }
 
@@ -197,14 +198,15 @@ public:
             event.StopPropagation();
             std::cout << "Right click on projector: " << projectorIndex << std::endl;
 
-            if (auto* contextMenu = document->GetElementById("projectorContextMenu")) {
-                contextMenu->SetAttribute("data-target-projector", std::to_string(projectorIndex));
-                float mouse_x = event.GetParameter("mouse_x", 0.0f);
-                float mouse_y = event.GetParameter("mouse_y", 0.0f);
-                contextMenu->SetProperty("left", Rml::ToString(mouse_x) + "px");
-                contextMenu->SetProperty("top", Rml::ToString(mouse_y) + "px");
-                contextMenu->SetProperty("display", "block");
-            }
+            //if (auto* contextMenu = document->GetElementById("projectorContextMenu")) {
+            //    contextMenu->SetAttribute("data-target-projector", std::to_string(projectorIndex));
+            //    float mouse_x = event.GetParameter("mouse_x", 0.0f);
+            //    float mouse_y = event.GetParameter("mouse_y", 0.0f);
+            //    contextMenu->SetProperty("left", Rml::ToString(mouse_x) + "px");
+            //    contextMenu->SetProperty("top", Rml::ToString(mouse_y) + "px");
+            //    contextMenu->SetProperty("display", "block");
+            //}
+                showProjectorResourceSelection(projectorIndex);
         } else if (button == 0) { // Left click
             //Todo: Drag to move or connect
         }

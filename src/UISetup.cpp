@@ -351,7 +351,7 @@ void UISetup::setupResourcePanel() {
 
 
     browseBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([fileInput, nameInput] {
-        std::string path = Utilities::browsePng();
+        std::string path = Utilities::browseImage();
         if (!path.empty()) {
             fileInput->SetAttribute("value", path);
 
@@ -369,7 +369,9 @@ void UISetup::setupResourcePanel() {
     auto* fileInputEl = dynamic_cast<Rml::ElementFormControlInput*>(fileInput);
     auto* nameInputEl = dynamic_cast<Rml::ElementFormControlInput*>(nameInput);
 
-    confirmBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([dialog, fileInputEl, nameInputEl]{
+    confirmBtn->AddEventListener(Rml::EventId::Click,
+    new ButtonHandler([dialog, fileInputEl, nameInputEl] {
+
         if (!fileInputEl || !nameInputEl) return;
 
         Rml::String filePath = fileInputEl->GetValue();
@@ -394,19 +396,30 @@ void UISetup::setupResourcePanel() {
 
         dialog->SetAttribute("style", "display:none;");
 
-         auto destinationPath = saveData.path/ saveData.projectName / "resources" / (nameVal + srcPath.extension().string());
+        // ALWAYS save as PNG:
+        auto destinationPath =
+            saveData.path / saveData.projectName / "resources" / (nameVal + ".png");
 
         try {
             std::filesystem::create_directories(destinationPath.parent_path());
-            std::filesystem::copy_file(srcPath, destinationPath, std::filesystem::copy_options::overwrite_existing);
-            std::cout << "Copied: " << srcPath << " -> " << destinationPath << std::endl;
+
+            // Convert to PNG
+            if (!Utilities::convertToPng(srcPath.string(), destinationPath.string())) {
+                Utilities::showError("Fehler: Bild konnte nicht als PNG gespeichert werden.");
+                return;
+            }
+
+            std::cout << "Converted to PNG: " << srcPath << " -> " << destinationPath << std::endl;
+
         } catch (const std::filesystem::filesystem_error& e) {
-            Utilities::showError("Fehler beim Kopieren der Datei: " + std::string(e.what()));
+            Utilities::showError("Fehler beim Speichern: " + std::string(e.what()));
             return;
         }
 
         UIManager::refreshResourcePanel();
-    }));
+        })
+    );
+
 
 
     UIManager::refreshResourcePanel();

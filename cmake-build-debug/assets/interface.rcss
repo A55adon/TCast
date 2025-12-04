@@ -481,3 +481,24 @@ body {
 .resource-item.renaming .rename-ok-button:hover {
     background-color: #0091c9;
 }
+
+#projector-resource-dialog > #scrollbarvertical {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 10px;
+    pointer-events: auto;
+}
+
+#scrollbarvertical {
+    position:absolute;
+}
+
+slidertrack {
+}
+sliderbar {
+}
+scrollbarvertical {
+     max-width:0px;
+ }

@@ -6,7 +6,7 @@
  *   or UISetup so i know where they are from
  *
  * Known Bugs:
- * - if the amount of folderProjects is higher than 8 or fills up the height of the list they are unclickable and are squished to the left
+ * //FIXED - if the amount of folderProjects is higher than 8 or fills up the height of the list they are unclickable and are squished to the left -> fix: scrollbarvertical {max-width:0px;}
  * - when creating a new project or loading a project from the dropdown of the main interface it does not switch to that project automatically
  * - loading a project doesnt redirect to the interface screen
 
@@ -24,7 +24,6 @@
  *  - popups for showInfo and showError
  *  - upload videos
  *  - upload multiple resources at once
- *  - upload other file formats
  *  - drag n drop upload
  *  - two resources with the same name override each other
  *  - renaming or deleting a resource shows white images

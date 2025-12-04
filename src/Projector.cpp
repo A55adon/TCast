@@ -153,6 +153,8 @@ void Projector::initGLObjects() {
 }
 
 void Projector::loadTexture(const std::string& path) {
+    stbi_set_flip_vertically_on_load(true);
+
     int w, h, channels;
     unsigned char* data = stbi_load(path.c_str(), &w, &h, &channels, 4);
     if (!data) {

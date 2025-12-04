@@ -106,16 +106,16 @@
         </div>
     </div>
     <div id="sceneContextMenu" class="context-menu" style="display: none; position: absolute;">
-        <button id="scene-context-rename" class="context-menu-item">Rename</button>
-        <button id="scene-context-delete" class="context-menu-item">Delete</button>
-        <button id="scene-context-duplicate" class="context-menu-item">Duplicate</button>
+        <button id="scene-context-rename" class="context-menu-item">Umbenennen</button>
+        <button id="scene-context-delete" class="context-menu-item">Löschen</button>
+        <button id="scene-context-duplicate" class="context-menu-item">Klonen</button>
     </div>
     <div id="resourceContextMenu" class="context-menu" style="display: none; position: absolute;">
-        <button id="resource-context-rename" class="context-menu-item">Rename</button>
-        <button id="resource-context-delete" class="context-menu-item">Delete</button>
+        <button id="resource-context-rename" class="context-menu-item">Umbenennen</button>
+        <button id="resource-context-delete" class="context-menu-item">Löschen</button>
     </div>
     <div id="projectorContextMenu" class="context-menu" style="display: none; position: absolute;">
-        <button id="projector-context-selectResource" class="context-menu-item">Select Resource</button>
+        <button id="projector-context-selectResource" class="context-menu-item">Ressource Auswählen</button>
     </div>
     </body>
 </rml>

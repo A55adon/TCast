@@ -16,7 +16,8 @@ class Utilities {
 public:
     static std::string browseFolder();
     static std::string browseTCTFile();
-    static std::string browsePng();
+    static std::string browseImage();
+    static bool convertToPng(const std::string& src, const std::string& dst);
     static std::string getExecutablePath();
     static std::string getSaveFolderPath();
     static std::string toBackwardSlashes(const std::string &path);

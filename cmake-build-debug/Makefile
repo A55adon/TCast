@@ -477,6 +477,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/nanosvg_impl.obj: src/nanosvg_impl.cpp.obj
+.PHONY : src/nanosvg_impl.obj
+
+# target to build an object file
+src/nanosvg_impl.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj
+.PHONY : src/nanosvg_impl.cpp.obj
+
+src/nanosvg_impl.i: src/nanosvg_impl.cpp.i
+.PHONY : src/nanosvg_impl.i
+
+# target to preprocess a source file
+src/nanosvg_impl.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.i
+.PHONY : src/nanosvg_impl.cpp.i
+
+src/nanosvg_impl.s: src/nanosvg_impl.cpp.s
+.PHONY : src/nanosvg_impl.s
+
+# target to generate assembly for a file
+src/nanosvg_impl.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.s
+.PHONY : src/nanosvg_impl.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -529,6 +553,9 @@ help:
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
+	@echo ... src/nanosvg_impl.obj
+	@echo ... src/nanosvg_impl.i
+	@echo ... src/nanosvg_impl.s
 .PHONY : help
 
 

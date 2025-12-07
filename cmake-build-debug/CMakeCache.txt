@@ -248,6 +248,12 @@ TCast_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 TCast_SOURCE_DIR:STATIC=C:/Users/simon/Desktop/Code/TCast
 
+//The directory containing a CMake configuration file for lunasvg.
+lunasvg_DIR:PATH=C:/Program Files (x86)/lunasvg/lib/cmake/lunasvg
+
+//The directory containing a CMake configuration file for plutovg.
+plutovg_DIR:PATH=C:/libs/mingw/lib/cmake/plutovg
+
 
 ########################
 # INTERNAL cache entries
@@ -331,6 +337,8 @@ CMAKE_GENERATOR_INSTANCE:INTERNAL=
 CMAKE_GENERATOR_PLATFORM:INTERNAL=
 //Name of generator toolset.
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
+//Test CMAKE_HAVE_LIBC_PTHREAD
+CMAKE_HAVE_LIBC_PTHREAD:INTERNAL=1
 //Source directory with the top level CMakeLists.txt file for this
 // project
 CMAKE_HOME_DIRECTORY:INTERNAL=C:/Users/simon/Desktop/Code/TCast
@@ -409,4 +417,6 @@ CMAKE_STRIP-ADVANCED:INTERNAL=1
 CMAKE_TAPI-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//Details about finding Threads
+FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 

@@ -61,15 +61,31 @@
         <div class="main-area">
             <div class="main-top-bar">
                 <div class="logo">
-                      <!--<img src="test.jpg" alt="Logo" /> -->
-                    <span>TCast</span>
+                    <img src="logo.png" alt="Logo" />
                 </div>
 
                 <h1 id="project-name" >Error-No-Project-Name-Found</h1>
 
                 <div class="top-right-buttons">
-                    <button id="project-sources">Anzeige starten</button>
-                    <button id="stop-projection">Stop</button>
+                    <button id="project-sources">
+                        <svg src="play.svg"></svg>
+                        <svg
+                                version="1.1"
+                                baseProfile="full"
+                                width="300"
+                                height="200"
+                                xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100%" height="100%" fill="black" />
+                            <circle cx="150" cy="100" r="90" fill="blue" />
+                        </svg>
+                        <img
+                                src="play.svg"
+                                alt="triangle with all three sides equal"
+                                height="87"
+                                width="100" />
+                    </button>
+                    <button id="stop-projection">
+                    </button>
                 </div>
             </div>
             <div class="main-body" id="main-body">

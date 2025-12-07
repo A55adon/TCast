@@ -22,6 +22,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/simon/Desktop/Code/TCast/src/Utilities.cpp" "CMakeFiles/TCast.dir/src/Utilities.cpp.obj" "gcc" "CMakeFiles/TCast.dir/src/Utilities.cpp.obj.d"
   "C:/Users/simon/Desktop/Code/TCast/src/Window.cpp" "CMakeFiles/TCast.dir/src/Window.cpp.obj" "gcc" "CMakeFiles/TCast.dir/src/Window.cpp.obj.d"
   "C:/Users/simon/Desktop/Code/TCast/src/main.cpp" "CMakeFiles/TCast.dir/src/main.cpp.obj" "gcc" "CMakeFiles/TCast.dir/src/main.cpp.obj.d"
+  "C:/Users/simon/Desktop/Code/TCast/src/nanosvg_impl.cpp" "CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj" "gcc" "CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

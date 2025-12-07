@@ -242,7 +242,7 @@ bool Utilities::downscaleAndCrop169(const std::string &inputPath, const std::str
 
 
 bool Utilities::validateString(std::string &value) {
-    static const std::regex pattern("^[A-Za-z0-9äöüÄÖÜ _.\\-;,]+$");
+    static const std::regex pattern("^[A-Za-z0-9äöüÄÖÜ ()_.\\-;,]+$");
     if (std::regex_match(value, pattern)) {
         return true;  // return pointer to the original string
     }

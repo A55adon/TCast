@@ -209,6 +209,8 @@ CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj: C:/User
   C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/vadefs.h \
   C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/wchar.h \
   C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/wctype.h \
+  C:/Users/simon/Desktop/Code/TCast/include/nanosvg.h \
+  C:/Users/simon/Desktop/Code/TCast/include/nanosvgrast.h \
   C:/Users/simon/Desktop/Code/TCast/libs/GLFW/include/GLFW/glfw3.h \
   C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Include/RmlUi/Config/Config.h \
   C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Include/RmlUi/Core/Containers/itlib/flat_map.hpp \
@@ -902,6 +904,8 @@ CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp.obj: C:/Users/si
   C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/wow64apiset.h \
   C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/wtypes.h \
   C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/wtypesbase.h \
+  C:/Users/simon/Desktop/Code/TCast/include/nanosvg.h \
+  C:/Users/simon/Desktop/Code/TCast/include/nanosvgrast.h \
   C:/Users/simon/Desktop/Code/TCast/include/stb_image.h \
   C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Include/RmlUi/Config/Config.h \
   C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Include/RmlUi/Core/Containers/itlib/flat_map.hpp \
@@ -6569,9 +6573,9 @@ C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Animation.h:
 
 C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cwctype:
 
-C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/debug/assertions.h:
-
 C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Event.h:
+
+C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/debug/assertions.h:
 
 C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/debug/debug.h:
 
@@ -6852,6 +6856,10 @@ C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include
 C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/regex.tcc:
 
 C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/x86_64-w64-mingw32/include/wctype.h:
+
+C:/Users/simon/Desktop/Code/TCast/include/nanosvg.h:
+
+C:/Users/simon/Desktop/Code/TCast/include/nanosvgrast.h:
 
 C:/Users/simon/Desktop/Code/TCast/libs/GLFW/include/GLFW/glfw3.h:
 

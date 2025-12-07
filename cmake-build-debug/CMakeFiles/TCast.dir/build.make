@@ -281,6 +281,21 @@ CMakeFiles/TCast.dir/src/EventListener.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/src/EventListener.cpp.s"
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\src\EventListener.cpp -o CMakeFiles\TCast.dir\src\EventListener.cpp.s
 
+CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj: CMakeFiles/TCast.dir/flags.make
+CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
+CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj: C:/Users/simon/Desktop/Code/TCast/src/nanosvg_impl.cpp
+CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj"
+	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj -MF CMakeFiles\TCast.dir\src\nanosvg_impl.cpp.obj.d -o CMakeFiles\TCast.dir\src\nanosvg_impl.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\src\nanosvg_impl.cpp
+
+CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.i"
+	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\src\nanosvg_impl.cpp > CMakeFiles\TCast.dir\src\nanosvg_impl.cpp.i
+
+CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.s"
+	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\src\nanosvg_impl.cpp -o CMakeFiles\TCast.dir\src\nanosvg_impl.cpp.s
+
 # Object files for target TCast
 TCast_OBJECTS = \
 "CMakeFiles/TCast.dir/src/main.cpp.obj" \
@@ -296,7 +311,8 @@ TCast_OBJECTS = \
 "CMakeFiles/TCast.dir/src/Utilities.cpp.obj" \
 "CMakeFiles/TCast.dir/src/UISetup.cpp.obj" \
 "CMakeFiles/TCast.dir/src/UIManager.cpp.obj" \
-"CMakeFiles/TCast.dir/src/EventListener.cpp.obj"
+"CMakeFiles/TCast.dir/src/EventListener.cpp.obj" \
+"CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj"
 
 # External object files for target TCast
 TCast_EXTERNAL_OBJECTS =
@@ -315,6 +331,7 @@ TCast.exe: CMakeFiles/TCast.dir/src/Utilities.cpp.obj
 TCast.exe: CMakeFiles/TCast.dir/src/UISetup.cpp.obj
 TCast.exe: CMakeFiles/TCast.dir/src/UIManager.cpp.obj
 TCast.exe: CMakeFiles/TCast.dir/src/EventListener.cpp.obj
+TCast.exe: CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj
 TCast.exe: CMakeFiles/TCast.dir/build.make
 TCast.exe: C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/build-mingw/librmlui.dll.a
 TCast.exe: C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/build-mingw/librmlui_debugger.dll.a
@@ -323,7 +340,7 @@ TCast.exe: C:/Users/simon/Desktop/Code/TCast/libs/glew-2.1.0/lib/Release/x64/gle
 TCast.exe: CMakeFiles/TCast.dir/linkLibs.rsp
 TCast.exe: CMakeFiles/TCast.dir/objects1.rsp
 TCast.exe: CMakeFiles/TCast.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable TCast.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable TCast.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\TCast.dir\link.txt --verbose=$(VERBOSE)
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold "Copying DLLs..."
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/build-mingw/librmlui.dll C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/build-mingw/librmlui_debugger.dll C:/Users/simon/Desktop/Code/TCast/libs/GLFW/lib/glfw3.dll C:/Users/simon/Desktop/Code/TCast/libs/freetype_x64-windows/libfreetype-6.dll C:/Users/simon/Desktop/Code/TCast/libs/glew-2.1.0/bin/Release/Win32/glew32.dll C:/Users/simon/Desktop/Code/TCast/libs/default/libstdc++-6.dll C:/Users/simon/Desktop/Code/TCast/libs/default/libgcc_s_seh-1.dll C:/Users/simon/Desktop/Code/TCast/libs/default/libwinpthread-1.dll C:/Users/simon/Desktop/Code/TCast/libs/default/libbrotlidec.dll C:/Users/simon/Desktop/Code/TCast/libs/default/libharfbuzz-0.dll C:/Users/simon/Desktop/Code/TCast/libs/default/libpng16-16.dll C:/Users/simon/Desktop/Code/TCast/libs/default/zlib1.dll C:/Users/simon/Desktop/Code/TCast/libs/default/libbz2-1.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug

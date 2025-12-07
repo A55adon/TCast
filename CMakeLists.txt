@@ -23,6 +23,7 @@ set(SOURCES
         include/UIManager.h
         src/EventListener.cpp
         include/EventListener.h
+        src/nanosvg_impl.cpp
 )
 
 add_executable(TCast ${SOURCES})

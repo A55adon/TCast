@@ -502,3 +502,28 @@ sliderbar {
 scrollbarvertical {
      max-width:0px;
  }
+
+.projector-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 per row */
+    gap: 10px; /* spacing between projectors/buttons */
+}
+
+.projector {
+    background: #ccc;
+    padding: 20px;
+    text-align: center;
+}
+
+.connect-btn {
+    background-color: yellow;
+    border: 1px solid #aaa;
+    cursor: pointer;
+}
+
+.test{
+    min-width: 50px;
+    decorator: svg("play.svg" crop-to-content) content-box;
+    min-height: 50px;
+    display: inline-block;
+}

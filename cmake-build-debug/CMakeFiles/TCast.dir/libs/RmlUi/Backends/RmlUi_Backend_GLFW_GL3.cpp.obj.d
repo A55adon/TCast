@@ -241,6 +241,9 @@ CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj: \
  C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Backends\RmlUi_Platform_GLFW.h \
  C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Backends\RmlUi_Renderer_GL3.h \
  C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bitset \
+ C:/Users/simon/Desktop/Code/TCast/include/nanosvg.h \
+ C:/Users/simon/Desktop/Code/TCast/include/nanosvgrast.h \
+ C:/Users/simon/Desktop/Code/TCast/include/nanosvg.h \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Context.h \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Input.h \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/ScriptInterface.h \

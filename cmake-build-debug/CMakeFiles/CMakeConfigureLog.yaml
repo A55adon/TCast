@@ -593,3 +593,49 @@ events:
       Running the CXX compiler's linker: "C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/bin/ld.exe" "-v"
       GNU ld (GNU Binutils) 2.40
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
+      - "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/CheckCSourceCompiles.cmake:58 (cmake_check_source_compiles)"
+      - "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/FindThreads.cmake:97 (check_c_source_compiles)"
+      - "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/CMakeFindDependencyMacro.cmake:78 (find_package)"
+      - "C:/Program Files (x86)/plutovg/lib/cmake/plutovg/plutovgConfig.cmake:28 (find_dependency)"
+      - "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/CMakeFindDependencyMacro.cmake:78 (find_package)"
+      - "C:/Program Files (x86)/lunasvg/lib/cmake/lunasvg/lunasvgConfig.cmake:28 (find_dependency)"
+      - "CMakeLists.txt:46 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "C:/Users/simon/Desktop/Code/TCast/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-zoss3k"
+      binary: "C:/Users/simon/Desktop/Code/TCast/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-zoss3k"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/simon/Desktop/Code/TCast/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-zoss3k'
+        
+        Run Build Command(s): C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/bin/cmake.exe -E env VERBOSE=1 C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe -f Makefile cmTC_47217/fast
+        mingw32-make[1]: Entering directory 'C:/Users/simon/Desktop/Code/TCast/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-zoss3k'
+        C:/Users/simon/AppData/Local/Programs/CLion/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_47217.dir\\build.make CMakeFiles/cmTC_47217.dir/build
+        mingw32-make[2]: Entering directory 'C:/Users/simon/Desktop/Code/TCast/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-zoss3k'
+        Building C object CMakeFiles/cmTC_47217.dir/src.c.obj
+        C:\\Users\\simon\\AppData\\Local\\Programs\\CLion\\bin\\mingw\\bin\\gcc.exe -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles\\cmTC_47217.dir\\src.c.obj -c C:\\Users\\simon\\Desktop\\Code\\TCast\\cmake-build-debug\\CMakeFiles\\CMakeScratch\\TryCompile-zoss3k\\src.c
+        Linking C executable cmTC_47217.exe
+        C:\\Users\\simon\\AppData\\Local\\Programs\\CLion\\bin\\cmake\\win\\x64\\bin\\cmake.exe -E cmake_link_script CMakeFiles\\cmTC_47217.dir\\link.txt --verbose=1
+        C:\\Users\\simon\\AppData\\Local\\Programs\\CLion\\bin\\cmake\\win\\x64\\bin\\cmake.exe -E rm -f CMakeFiles\\cmTC_47217.dir/objects.a
+        C:\\Users\\simon\\AppData\\Local\\Programs\\CLion\\bin\\mingw\\bin\\ar.exe qc CMakeFiles\\cmTC_47217.dir/objects.a @CMakeFiles\\cmTC_47217.dir\\objects1.rsp
+        C:\\Users\\simon\\AppData\\Local\\Programs\\CLion\\bin\\mingw\\bin\\gcc.exe -Wl,--whole-archive CMakeFiles\\cmTC_47217.dir/objects.a -Wl,--no-whole-archive -o cmTC_47217.exe -Wl,--out-implib,libcmTC_47217.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_47217.dir\\linkLibs.rsp
+        mingw32-make[2]: Leaving directory 'C:/Users/simon/Desktop/Code/TCast/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-zoss3k'
+        mingw32-make[1]: Leaving directory 'C:/Users/simon/Desktop/Code/TCast/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-zoss3k'
+        
+      exitCode: 0
+...

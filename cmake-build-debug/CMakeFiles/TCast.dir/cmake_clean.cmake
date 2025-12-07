@@ -27,6 +27,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/TCast.dir/src/Window.cpp.obj.d"
   "CMakeFiles/TCast.dir/src/main.cpp.obj"
   "CMakeFiles/TCast.dir/src/main.cpp.obj.d"
+  "CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj"
+  "CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj.d"
   "TCast.exe"
   "TCast.exe.manifest"
   "TCast.pdb"

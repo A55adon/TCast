@@ -893,6 +893,7 @@ void showProjectorResourceSelection(int index)
             e.StopPropagation();
         }
     };
+
     // Close overlay on ANY mouse interaction (left or right)
     overlay_raw->AddEventListener(Rml::EventId::Mousedown, new CloseOverlayHandler(overlay_raw));
     overlay_raw->AddEventListener(Rml::EventId::Mouseup,   new CloseOverlayHandler(overlay_raw));
@@ -901,7 +902,52 @@ void showProjectorResourceSelection(int index)
     dialog_raw->AddEventListener(Rml::EventId::Mousedown, new StopPropagationHandler());
     dialog_raw->AddEventListener(Rml::EventId::Mouseup,   new StopPropagationHandler());
 
+    {
+        Rml::ElementPtr row = doc->CreateElement("div");
+        row->SetAttribute("style",
+            "display:flex;align-items:center;gap:14px;padding:8px;background:#3f5870;"
+            "border-radius:6px;cursor:pointer;width:100%;box-sizing:border-box;");
 
+        // Fake transparent thumbnail
+        Rml::ElementPtr img = doc->CreateElement("div");
+        img->SetAttribute("style",
+            "width:64px;height:64px;border-radius:4px;"
+            "background:#2b3d4f;display:flex;align-items:center;justify-content:center;"
+            "color:#aaa;font-size:12px;");
+        img->SetInnerRML("None");
+
+        Rml::ElementPtr label = doc->CreateElement("div");
+        label->SetAttribute("style", "color:white;font-size:16px;");
+        label->SetInnerRML("Kein Bild");
+
+        row->AppendChild(std::move(img));
+        row->AppendChild(std::move(label));
+
+        struct ProjectorResourceSelectHandler_Clear : Rml::EventListener {
+            int projectorIndex;
+            Rml::Element* overlay;
+            ProjectorResourceSelectHandler_Clear(int idx, Rml::Element* o)
+                : projectorIndex(idx), overlay(o) {}
+            void ProcessEvent(Rml::Event&) override {
+                auto& scene = sceneManager.scenes[activeSceneIndex];
+                if (projectorIndex >= scene.sources.size()) {
+                    scene.sources.resize(projectorIndex + 1);
+                }
+                scene.sources[projectorIndex] = "";   // IMPORTANT: empty string = no image
+                std::cout << "Cleared resource[" << projectorIndex << "]" << std::endl;
+
+                if (auto* body = getEl("body")) body->RemoveChild(overlay);
+                UIManager::refreshProjectors();
+                UIManager::saveProject();
+            }
+        };
+
+        row->AddEventListener(
+            Rml::EventId::Mouseup,
+            new ProjectorResourceSelectHandler_Clear(index, overlay_raw));
+
+        dialog_raw->AppendChild(std::move(row));
+    }
 
     auto directory = saveData.path / saveData.projectName / "resources";
     for (auto& entry : std::filesystem::directory_iterator(directory)) {

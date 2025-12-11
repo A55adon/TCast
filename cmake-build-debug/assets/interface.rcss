@@ -296,6 +296,7 @@ body {
 
 .projector-grid {
     flex: 4;
+    flex-direction: column;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -371,7 +372,6 @@ body {
 .resource-thumbnail {
     width: 100%;
     border-radius: 8px;
-    border: none;
     display: block;
 }
 
@@ -382,7 +382,6 @@ body {
     border-radius: 6px;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 
@@ -504,8 +503,6 @@ scrollbarvertical {
  }
 
 .projector-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 per row */
     gap: 10px; /* spacing between projectors/buttons */
 }
 
@@ -515,15 +512,49 @@ scrollbarvertical {
     text-align: center;
 }
 
-.connect-btn {
-    background-color: yellow;
-    border: 1px solid #aaa;
-    cursor: pointer;
+
+#project-sources {
+    width: 50px;
+    height: 50px;
+}
+#play-svg {
+    width: 50px;
+    height: 50px;
 }
 
-.test{
-    min-width: 50px;
-    decorator: svg("play.svg" crop-to-content) content-box;
-    min-height: 50px;
-    display: inline-block;
+.connect-btn {
+    background-color: #cccc00;
+    width: 10px;
+    height: 100%;
+}
+
+.toast-container {
+    font-family: "Comic Sans MS";
+    position: fixed;
+    top: 10px;       /* near top of window */
+    right: 10px;     /* near right edge */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 9999;
+}
+
+.toast {
+    font-family: "Comic Sans MS";
+    background-color: rgba(0,0,0,0.8);
+    color: #ffffff;
+    word-break: auto-phrase;
+    font-size: 1.5rem;
+    background-color: #5e99dc;
+    padding: 10px 20px;
+    border-radius: 8px;
+    min-width: 200px;
+    max-width: 300px;
+    min-height: 25px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.toast-error {
+    background-color: rgba(200,0,0,0.9);
 }

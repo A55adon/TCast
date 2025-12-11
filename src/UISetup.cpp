@@ -351,16 +351,34 @@ void UISetup::setupResourcePanel() {
 
 
     browseBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([fileInput, nameInput] {
-        std::string path = Utilities::browseImage();
-        if (!path.empty()) {
-            fileInput->SetAttribute("value", path);
+        std::string paths = Utilities::browseImage();
+        if (paths.empty()) return;
 
-            Rml::String val;
-            if (nameInput->GetAttribute("value", val), val.empty()) {
-                nameInput->SetAttribute("value", std::filesystem::path(path).stem().string());
+        fileInput->SetAttribute("value", paths);
+
+        // If names empty → auto-generate
+        Rml::String val;
+        nameInput->GetAttribute("value", val);
+
+        if (val.empty()) {
+            std::stringstream ss(paths);
+            std::string item;
+            std::vector<std::string> names;
+
+            while (std::getline(ss, item, ',')) {
+                names.push_back(std::filesystem::path(item).stem().string());
             }
+
+            std::string joined;
+            for (size_t i = 0; i < names.size(); i++) {
+                if (i > 0) joined += ",";
+                joined += names[i];
+            }
+
+            nameInput->SetAttribute("value", joined);
         }
     }));
+
 
     cancelBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([dialog]{
         dialog->SetAttribute("style", "display:none;");
@@ -369,56 +387,71 @@ void UISetup::setupResourcePanel() {
     auto* fileInputEl = dynamic_cast<Rml::ElementFormControlInput*>(fileInput);
     auto* nameInputEl = dynamic_cast<Rml::ElementFormControlInput*>(nameInput);
 
-    confirmBtn->AddEventListener(Rml::EventId::Click,
-    new ButtonHandler([dialog, fileInputEl, nameInputEl] {
+    confirmBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([dialog, fileInputEl, nameInputEl] {
 
         if (!fileInputEl || !nameInputEl) return;
 
-        Rml::String filePath = fileInputEl->GetValue();
-        Rml::String nameVal = nameInputEl->GetValue();
+        std::string filePaths = fileInputEl->GetValue();
+        std::string names = nameInputEl->GetValue();
 
-        if (filePath.empty()) {
+        if (filePaths.empty()) {
             Utilities::showError("Bitte eine Datei angeben!");
             return;
         }
-
-        if (nameVal.empty()) {
+        if (names.empty()) {
             Utilities::showError("Bitte einen Namen angeben!");
             return;
         }
 
-        std::filesystem::path srcPath(filePath);
+        // Split comma-separated lists
+        std::vector<std::string> pathList;
+        std::vector<std::string> nameList;
 
-        if (!std::filesystem::exists(srcPath)) {
-            Utilities::showError("Datei: " + srcPath.string() + " wurde nicht gefunden");
+        {
+            std::stringstream ss(filePaths);
+            std::string item;
+            while (std::getline(ss, item, ',')) pathList.push_back(item);
+        }
+        {
+            std::stringstream ss(names);
+            std::string item;
+            while (std::getline(ss, item, ',')) nameList.push_back(item);
+        }
+
+        if (pathList.size() != nameList.size()) {
+            Utilities::showError("Anzahl der Dateien und Namen stimmt nicht überein!");
             return;
+        }
+
+        for (size_t i = 0; i < pathList.size(); ++i) {
+            std::filesystem::path src(pathList[i]);
+            if (!std::filesystem::exists(src)) {
+                Utilities::showError("Datei nicht gefunden: " + src.string());
+                continue;
+            }
+
+            auto destination =
+                saveData.path / saveData.projectName / "resources" / (nameList[i] + ".png");
+
+            try {
+                std::filesystem::create_directories(destination.parent_path());
+
+                if (!Utilities::convertToPng(src.string(), destination.string())) {
+                    Utilities::showError("Fehler beim Konvertieren: " + src.string());
+                    continue;
+                }
+
+                std::cout << "Converted: " << src << " -> " << destination << std::endl;
+
+            } catch (std::filesystem::filesystem_error& e) {
+                Utilities::showError("Fehler: " + std::string(e.what()));
+            }
         }
 
         dialog->SetAttribute("style", "display:none;");
-
-        // ALWAYS save as PNG:
-        auto destinationPath =
-            saveData.path / saveData.projectName / "resources" / (nameVal + ".png");
-
-        try {
-            std::filesystem::create_directories(destinationPath.parent_path());
-
-            // Convert to PNG
-            if (!Utilities::convertToPng(srcPath.string(), destinationPath.string())) {
-                Utilities::showError("Fehler: Bild konnte nicht als PNG gespeichert werden.");
-                return;
-            }
-
-            std::cout << "Converted to PNG: " << srcPath << " -> " << destinationPath << std::endl;
-
-        } catch (const std::filesystem::filesystem_error& e) {
-            Utilities::showError("Fehler beim Speichern: " + std::string(e.what()));
-            return;
-        }
-
         UIManager::refreshResourcePanel();
-        })
-    );
+    }));
+
 
 
 

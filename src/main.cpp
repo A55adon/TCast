@@ -1,14 +1,14 @@
 /*
  * Info:
- * - Render interface is in RmlUi_Renderer_GL3.cpp and can do all stib_image file formats
- * - getEl and some other utilitie functions were left out of the namespace because i was to lazy to write Utilities:: everytime.
- *   I know you cant do namespace so you dont have to write Utilities:: everytime but I like to write it when using funcions from like UIManager
- *   or UISetup so i know where they are from
+ * - Render interface is in RmlUi_Renderer_GL3.cpp and can do all stib_image file formats + SVGs via nanosvg
+ * - getEl and some other utility functions were left out of the namespace because its useless to write Utilities:: everytime
  *
  * Known Bugs:
  * //FIXED - if the amount of folderProjects is higher than 8 or fills up the height of the list they are unclickable and are squished to the left -> fix: scrollbarvertical {max-width:0px;}
  * - when creating a new project or loading a project from the dropdown of the main interface it does not switch to that project automatically
  * - loading a project doesnt redirect to the interface screen
+ * - images flip around when you rename them?
+ *
 
  * Todo:
  *  - installer
@@ -23,12 +23,14 @@
  *  - warn of invalid folder structure when loading a project and offer to fix it
  *  - popups for showInfo and showError
  *  - upload videos
- *  - upload multiple resources at once
  *  - drag n drop upload
  *  - two resources with the same name override each other
  *  - renaming or deleting a resource shows white images
  *  - trying to change source when resource is deleted it crashes
- *
+ *  - resource name clipping
+ *  - visuals
+ *  - multiselect
+ *  - drag n drop resource selection
 */
 
 #include "UISetup.h"

@@ -305,6 +305,14 @@ bool UIManager::createProject() {
         return false;
     }
 
+    int counter = 0;
+    for (int i = 0; i < 3; i++) {         // rows
+        for (int j = 0; j < 3; j++) {     // columns
+            sceneManager.scenes[0].connection[i][j] = counter;
+            counter++;
+        }
+    }
+
     projectPath = fullProjectPath;
 
     // Save project data
@@ -500,48 +508,83 @@ void UIManager::refreshResourcePanel() {
 }
 
 void UIManager::refreshProjectors() {
-    if (auto *projectorGrid = getEl("projectorGrid")) {
-        for (int i = projectorGrid->GetNumChildren() - 1; i >= 0; --i) {
-            Rml::Element *child = projectorGrid->GetChild(i);
-            projectorGrid->RemoveChild(child);
-        }
-        std::cout << "[Info] Projector count: " << saveData.projectorCount << std::endl;
-        for (int i = 0; i < saveData.projectorCount; ++i) {
-            Rml::ElementPtr child = getWindow().document->CreateElement("div");
-            child->SetClass("projector", true);
+    auto *projectorGrid = getEl("projectorGrid");
+    if (!projectorGrid) return;
 
-            Rml::ElementPtr span = getWindow().document->CreateElement("span");
-            span->SetInnerRML("Beamer " + std::to_string(i + 1));
-            child->AppendChild(std::move(span));
-            child->SetId("projector-" + std::to_string(i));
+    // Clear existing children
+    for (int i = projectorGrid->GetNumChildren() - 1; i >= 0; --i) {
+        Rml::Element *child = projectorGrid->GetChild(i);
+        projectorGrid->RemoveChild(child);
+    }
 
-            child->SetAttribute("data-scene-index", std::to_string(i));
+    int n = saveData.projectorCount;
+    int maxPerRow = 3;
+    int currentIndex = 0;
+
+    // Make projectorGrid a flex container in column direction to split rows vertically
+    projectorGrid->SetProperty("display", "flex");
+    projectorGrid->SetProperty("flex-direction", "column");
+    projectorGrid->SetProperty("height", "100%"); // Fill the parent container
+    projectorGrid->SetProperty("gap", "5px");    // optional spacing between rows
+
+    while (currentIndex < n) {
+        // Determine how many projectors in this row
+        int remaining = n - currentIndex;
+        int itemsInRow = remaining >= maxPerRow ? maxPerRow : remaining;
+
+        Rml::ElementPtr row = getWindow().document->CreateElement("div");
+        row->SetProperty("display", "flex");
+        row->SetProperty("flex-direction", "row");
+        row->SetProperty("flex", "1");           // make row share vertical space equally
+        row->SetProperty("gap", "5px");          // spacing between projectors
+        row->SetProperty("justify-content", "center");
+
+        for (int i = 0; i < itemsInRow && currentIndex < n; i++, currentIndex++) {
+
+            Rml::ElementPtr projector = getWindow().document->CreateElement("div");
+            projector->SetClass("projector", true);
+            projector->SetId("projector-" + std::to_string(currentIndex));
+
+            // Make each projector grow equally in the row
+            projector->SetProperty("flex", "1");
+            projector->SetProperty("background-color", "#333");
+            projector->SetProperty("border", "1px solid #555");
+            projector->SetProperty("border-radius", "4px");
+            projector->SetProperty("padding", "10px");
+            projector->SetProperty("color", "white");
+
+            // Add text or image
+            if (currentIndex < sceneManager.scenes[activeSceneIndex].sources.size() &&
+                !sceneManager.scenes[activeSceneIndex].sources[currentIndex].empty()) {
+                projector->SetAttribute(
+                    "style",
+                    "decorator: image(" + sceneManager.scenes[activeSceneIndex].sources[currentIndex] + ");"
+                );
+            } else {
+                projector->SetInnerRML("Projector " + std::to_string(currentIndex + 1));
+            }
 
             // Add event listener
-            child->AddEventListener(Rml::EventId::Mouseup, new ProjectorHandler(getWindow().document, i));
+            projector->AddEventListener(Rml::EventId::Mouseup, new ProjectorHandler(getWindow().document, currentIndex));
 
-            projectorGrid->AppendChild(std::move(child));
+            row->AppendChild(std::move(projector));
 
-        }
-    }
-    for (int i = 0; i < saveData.projectorCount; i++) {
-        auto projector = getEl("projector-" + std::to_string(i));
-
-        if (i < sceneManager.scenes[activeSceneIndex].sources.size() &&
-            !sceneManager.scenes[activeSceneIndex].sources[i].empty()) {
-
-            projector->SetInnerRML("");
-            //auto img = getWindow().document->CreateElement("img");
-            //img->SetAttribute("src", sceneManager.scenes[activeSceneIndex].sources[i]);
-            projector->SetAttribute("style", "decorator: image(" + sceneManager.scenes[activeSceneIndex].sources[i] + ");");
-            //projector->AppendChild(std::move(img));
+            if ((itemsInRow == 3 && (i == 0 || i == 1)) || itemsInRow == 2 && i == 0) {
+                Rml::ElementPtr connect = getWindow().document->CreateElement("button");
+                connect->SetClass("connect-btn", true);
+                connect->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
+                    Utilities::showInfo("test");
+                }));
+                row->AppendChild(std::move(connect));
             }
-        else {
-            Utilities::showError("Couldn't load resource for projector-" + std::to_string(i));
-        }
-    }
 
+        }
+
+        projectorGrid->AppendChild(std::move(row));
+    }
 }
+
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //Context menus

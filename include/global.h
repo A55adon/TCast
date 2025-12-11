@@ -32,6 +32,7 @@ struct SaveData {
 struct SceneData {
     std::string sceneName;
     std::vector<std::string> sources; // [0] would be the name of the resource of the first projector
+    int connection[3][3];
 
     SceneData()= default;
 

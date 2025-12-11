@@ -24,7 +24,7 @@ public:
     static std::filesystem::path getRecentPath();
     static bool downscaleAndCrop169(const std::string& inputPath, const std::string& outputPath);
 
-
+    static void showPopup(const std::string& msg, bool isError = false);
     static bool validateString(std::string &value);
     static void showError(const std::string & msg);
     static void showInfo(std::string msg);

@@ -6,6 +6,7 @@
 #include "stb_image_write.h"
 
 #define STB_IMAGE_RESIZE_IMPLEMENTATION
+#include "EventListener.h"
 #include "stb_image_resize2.h"
 
 
@@ -21,8 +22,9 @@ void to_json(json &j, const SaveData &d) {
 
 void to_json(json &j, const SceneData &s) {
     j = json{
-            {"sceneName", s.sceneName},
-            {"sources", s.sources}
+        {"sceneName", s.sceneName},
+        {"sources", s.sources},
+        {"connections", s.connection}
     };
 }
 
@@ -42,6 +44,7 @@ void from_json(const json &j, SaveData &d) {
 void from_json(const json &j, SceneData &s) {
     j.at("sceneName").get_to(s.sceneName);
     j.at("sources").get_to(s.sources);
+    j.at("connections").get_to(s.connection);
 }
 
 void from_json(const json &j, SceneManager &m) {
@@ -244,41 +247,149 @@ bool Utilities::downscaleAndCrop169(const std::string &inputPath, const std::str
 bool Utilities::validateString(std::string &value) {
     static const std::regex pattern("^[A-Za-z0-9äöüÄÖÜ ()_.\\-;,]+$");
     if (std::regex_match(value, pattern)) {
-        return true;  // return pointer to the original string
+        return true;  // input is valid
     }
     return false;     // invalid input
 }
 
+void Utilities::showPopup(const std::string& msg, bool isError) {
+    using namespace Rml;
+
+    ElementDocument* doc = getWindow().document;
+    if (!doc) return;
+
+    // Create or get container
+    Element* container = doc->GetElementById("toast-container");
+    if (!container) {
+        ElementPtr new_container = doc->CreateElement("div");
+        new_container->SetId("toast-container");
+        new_container->SetAttribute("class", "toast-container");
+        container = new_container.get();
+        doc->GetElementById("body")->AppendChild(std::move(new_container));
+    }
+
+    // Create new toast
+    ElementPtr toast = doc->CreateElement("div");
+    toast->SetAttribute("class", isError ? "toast toast-error" : "toast");
+    toast->SetInnerRML(msg.c_str());
+
+    Element* toast_raw = toast.get(); // raw pointer for callbacks
+    container->AppendChild(std::move(toast)); // transfer ownership
+
+    // Click to remove
+    toast_raw->AddEventListener(EventId::Click, new ButtonHandler([toast_raw] {
+        if (Element* parent = toast_raw->GetParentNode())
+            parent->RemoveChild(toast_raw);
+    }));
+
+    // Auto-remove after 10s
+    std::thread([toast_raw] {
+        std::this_thread::sleep_for(std::chrono::seconds(10));
+        if (Element* parent = toast_raw->GetParentNode())
+            parent->RemoveChild(toast_raw);
+    }).detach();
+}
+
+
 void Utilities::showError(const std::string & msg) {
     std::cerr << msg << std::endl;
+    showPopup(msg, true);
 }
 
 void Utilities::showInfo(std::string msg) {
+    std::clog << msg << std::endl;
+    showPopup(msg);
 }
 
 
-std::string Utilities::browseImage() {
-    OPENFILENAME ofn;
-    char szFile[260] = {0};
-    ZeroMemory(&ofn, sizeof(ofn));
-    ofn.lStructSize = sizeof(ofn);
-    ofn.hwndOwner = nullptr;
-    ofn.lpstrFile = szFile;
-    ofn.nMaxFile = sizeof(szFile);
+std::string Utilities::browseImage() // also more than 1 image
+{
+    // Initialize COM
+    HRESULT hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+    if (FAILED(hr)) return "";
 
-    // Accept many image file types
-    ofn.lpstrFilter =
-        "Image Files\0*.png;*.jpg;*.jpeg;*.bmp;*.tga;*.gif;*.tif;*.tiff;*.webp\0"
-        "All Files\0*.*\0";
-
-    ofn.nFilterIndex = 1;
-    ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
-
-    if (GetOpenFileName(&ofn) == TRUE) {
-        return std::string(ofn.lpstrFile);
+    IFileOpenDialog* dialog = nullptr;
+    hr = CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_INPROC_SERVER,
+                          IID_PPV_ARGS(&dialog));
+    if (FAILED(hr)) {
+        CoUninitialize();
+        return "";
     }
 
-    return "";
+    // Allow multiple selection
+    DWORD options;
+    dialog->GetOptions(&options);
+    dialog->SetOptions(options | FOS_ALLOWMULTISELECT | FOS_FORCEFILESYSTEM);
+
+    // Set filter for images
+    COMDLG_FILTERSPEC filters[] = {
+        { L"Image Files", L"*.png;*.jpg;*.jpeg;*.bmp;*.tga;*.gif;*.tif;*.tiff;*.webp" },
+        { L"All Files", L"*.*" }
+    };
+    dialog->SetFileTypes(_countof(filters), filters);
+    dialog->SetFileTypeIndex(1);
+
+    // Show dialog
+    hr = dialog->Show(nullptr);
+    if (FAILED(hr)) {
+        dialog->Release();
+        CoUninitialize();
+        return "";
+    }
+
+    // Get result items
+    IShellItemArray* items = nullptr;
+    hr = dialog->GetResults(&items);
+    if (FAILED(hr)) {
+        dialog->Release();
+        CoUninitialize();
+        return "";
+    }
+
+    DWORD count = 0;
+    items->GetCount(&count);
+
+    std::vector<std::string> paths;
+    paths.reserve(count);
+
+    for (DWORD i = 0; i < count; ++i) {
+        IShellItem* item = nullptr;
+        items->GetItemAt(i, &item);
+
+        PWSTR wpath = nullptr;
+        item->GetDisplayName(SIGDN_FILESYSPATH, &wpath);
+
+        if (wpath) {
+            char pathUtf8[MAX_PATH * 4];
+
+            // Convert UTF-16 → UTF-8
+            int len = WideCharToMultiByte(CP_UTF8, 0, wpath, -1,
+                                          pathUtf8, sizeof(pathUtf8),
+                                          nullptr, nullptr);
+            if (len > 0) {
+                paths.emplace_back(pathUtf8);
+            }
+
+            CoTaskMemFree(wpath);
+        }
+
+        item->Release();
+    }
+
+    items->Release();
+    dialog->Release();
+    CoUninitialize();
+
+    if (paths.empty())
+        return "";
+
+    // Join with commas
+    std::string joined;
+    for (size_t i = 0; i < paths.size(); i++) {
+        if (i > 0) joined += ",";
+        joined += paths[i];
+    }
+    return joined;
 }
 
 bool Utilities::convertToPng(const std::string& src, const std::string& dst) {

@@ -1,0 +1,17 @@
+{
+    "scenes": [
+        {
+            "sceneName": "testw",
+            "sources": [
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        {
+            "sceneName": "Szene 2",
+            "sources": []
+        }
+    ]
+}

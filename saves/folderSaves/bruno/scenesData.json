@@ -1,0 +1,72 @@
+{
+    "scenes": [
+        {
+            "connections": [
+                [
+                    -314611979,
+                    895,
+                    1
+                ],
+                [
+                    5,
+                    0,
+                    1149698048
+                ],
+                [
+                    0,
+                    0,
+                    259
+                ]
+            ],
+            "sceneName": "testw",
+            "sources": [
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\bruno\\resources\\images.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\bruno\\resources\\imaeges.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\bruno\\resources\\oskar-smethurst-B1GtwanCbiw-unsplash.png",
+                ""
+            ]
+        },
+        {
+            "connections": [
+                [
+                    -314611979,
+                    895,
+                    1
+                ],
+                [
+                    5,
+                    0,
+                    1149698048
+                ],
+                [
+                    0,
+                    0,
+                    259
+                ]
+            ],
+            "sceneName": "Szene 2",
+            "sources": []
+        },
+        {
+            "connections": [
+                [
+                    720,
+                    0,
+                    237783056
+                ],
+                [
+                    282,
+                    -213791580,
+                    32762
+                ],
+                [
+                    1,
+                    0,
+                    147228636
+                ]
+            ],
+            "sceneName": "nigger",
+            "sources": []
+        }
+    ]
+}

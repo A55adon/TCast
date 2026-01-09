@@ -76,225 +76,225 @@ CMakeFiles/TCast.dir/src/main.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
 CMakeFiles/TCast.dir/src/main.cpp.obj: C:/Users/simon/Desktop/Code/TCast/src/main.cpp
 CMakeFiles/TCast.dir/src/main.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/TCast.dir/src/main.cpp.obj"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/src/main.cpp.obj -MF CMakeFiles\TCast.dir\src\main.cpp.obj.d -o CMakeFiles\TCast.dir\src\main.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\src\main.cpp
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/src/main.cpp.obj -MF CMakeFiles\TCast.dir\src\main.cpp.obj.d -o CMakeFiles\TCast.dir\src\main.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\src\main.cpp
 
 CMakeFiles/TCast.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/src/main.cpp.i"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\src\main.cpp > CMakeFiles\TCast.dir\src\main.cpp.i
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\src\main.cpp > CMakeFiles\TCast.dir\src\main.cpp.i
 
 CMakeFiles/TCast.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/src/main.cpp.s"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\src\main.cpp -o CMakeFiles\TCast.dir\src\main.cpp.s
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\src\main.cpp -o CMakeFiles\TCast.dir\src\main.cpp.s
 
 CMakeFiles/TCast.dir/src/Projector.cpp.obj: CMakeFiles/TCast.dir/flags.make
 CMakeFiles/TCast.dir/src/Projector.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
 CMakeFiles/TCast.dir/src/Projector.cpp.obj: C:/Users/simon/Desktop/Code/TCast/src/Projector.cpp
 CMakeFiles/TCast.dir/src/Projector.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/TCast.dir/src/Projector.cpp.obj"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/src/Projector.cpp.obj -MF CMakeFiles\TCast.dir\src\Projector.cpp.obj.d -o CMakeFiles\TCast.dir\src\Projector.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\src\Projector.cpp
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/src/Projector.cpp.obj -MF CMakeFiles\TCast.dir\src\Projector.cpp.obj.d -o CMakeFiles\TCast.dir\src\Projector.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\src\Projector.cpp
 
 CMakeFiles/TCast.dir/src/Projector.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/src/Projector.cpp.i"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\src\Projector.cpp > CMakeFiles\TCast.dir\src\Projector.cpp.i
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\src\Projector.cpp > CMakeFiles\TCast.dir\src\Projector.cpp.i
 
 CMakeFiles/TCast.dir/src/Projector.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/src/Projector.cpp.s"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\src\Projector.cpp -o CMakeFiles\TCast.dir\src\Projector.cpp.s
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\src\Projector.cpp -o CMakeFiles\TCast.dir\src\Projector.cpp.s
 
 CMakeFiles/TCast.dir/src/Window.cpp.obj: CMakeFiles/TCast.dir/flags.make
 CMakeFiles/TCast.dir/src/Window.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
 CMakeFiles/TCast.dir/src/Window.cpp.obj: C:/Users/simon/Desktop/Code/TCast/src/Window.cpp
 CMakeFiles/TCast.dir/src/Window.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/TCast.dir/src/Window.cpp.obj"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/src/Window.cpp.obj -MF CMakeFiles\TCast.dir\src\Window.cpp.obj.d -o CMakeFiles\TCast.dir\src\Window.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\src\Window.cpp
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/src/Window.cpp.obj -MF CMakeFiles\TCast.dir\src\Window.cpp.obj.d -o CMakeFiles\TCast.dir\src\Window.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\src\Window.cpp
 
 CMakeFiles/TCast.dir/src/Window.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/src/Window.cpp.i"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\src\Window.cpp > CMakeFiles\TCast.dir\src\Window.cpp.i
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\src\Window.cpp > CMakeFiles\TCast.dir\src\Window.cpp.i
 
 CMakeFiles/TCast.dir/src/Window.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/src/Window.cpp.s"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\src\Window.cpp -o CMakeFiles\TCast.dir\src\Window.cpp.s
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\src\Window.cpp -o CMakeFiles\TCast.dir\src\Window.cpp.s
 
 CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp.obj: CMakeFiles/TCast.dir/flags.make
 CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
 CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp.obj: C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp
 CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp.obj"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp.obj -MF CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Platform_GLFW.cpp.obj.d -o CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Platform_GLFW.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Backends\RmlUi_Platform_GLFW.cpp
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp.obj -MF CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Platform_GLFW.cpp.obj.d -o CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Platform_GLFW.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Backends\RmlUi_Platform_GLFW.cpp
 
 CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp.i"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Backends\RmlUi_Platform_GLFW.cpp > CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Platform_GLFW.cpp.i
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Backends\RmlUi_Platform_GLFW.cpp > CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Platform_GLFW.cpp.i
 
 CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp.s"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Backends\RmlUi_Platform_GLFW.cpp -o CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Platform_GLFW.cpp.s
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Backends\RmlUi_Platform_GLFW.cpp -o CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Platform_GLFW.cpp.s
 
 CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp.obj: CMakeFiles/TCast.dir/flags.make
 CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
 CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp.obj: C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp
 CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp.obj"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp.obj -MF CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Renderer_GL3.cpp.obj.d -o CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Renderer_GL3.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Backends\RmlUi_Renderer_GL3.cpp
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp.obj -MF CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Renderer_GL3.cpp.obj.d -o CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Renderer_GL3.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Backends\RmlUi_Renderer_GL3.cpp
 
 CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp.i"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Backends\RmlUi_Renderer_GL3.cpp > CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Renderer_GL3.cpp.i
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Backends\RmlUi_Renderer_GL3.cpp > CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Renderer_GL3.cpp.i
 
 CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp.s"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Backends\RmlUi_Renderer_GL3.cpp -o CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Renderer_GL3.cpp.s
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Backends\RmlUi_Renderer_GL3.cpp -o CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Renderer_GL3.cpp.s
 
 CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj: CMakeFiles/TCast.dir/flags.make
 CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
 CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj: C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp
 CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj -MF CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Backend_GLFW_GL3.cpp.obj.d -o CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Backend_GLFW_GL3.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Backends\RmlUi_Backend_GLFW_GL3.cpp
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj -MF CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Backend_GLFW_GL3.cpp.obj.d -o CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Backend_GLFW_GL3.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Backends\RmlUi_Backend_GLFW_GL3.cpp
 
 CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.i"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Backends\RmlUi_Backend_GLFW_GL3.cpp > CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Backend_GLFW_GL3.cpp.i
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Backends\RmlUi_Backend_GLFW_GL3.cpp > CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Backend_GLFW_GL3.cpp.i
 
 CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.s"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Backends\RmlUi_Backend_GLFW_GL3.cpp -o CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Backend_GLFW_GL3.cpp.s
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Backends\RmlUi_Backend_GLFW_GL3.cpp -o CMakeFiles\TCast.dir\libs\RmlUi\Backends\RmlUi_Backend_GLFW_GL3.cpp.s
 
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp.obj: CMakeFiles/TCast.dir/flags.make
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp.obj: C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp.obj"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp.obj -MF CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\PlatformExtensions.cpp.obj.d -o CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\PlatformExtensions.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\PlatformExtensions.cpp
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp.obj -MF CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\PlatformExtensions.cpp.obj.d -o CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\PlatformExtensions.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\PlatformExtensions.cpp
 
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp.i"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\PlatformExtensions.cpp > CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\PlatformExtensions.cpp.i
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\PlatformExtensions.cpp > CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\PlatformExtensions.cpp.i
 
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp.s"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\PlatformExtensions.cpp -o CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\PlatformExtensions.cpp.s
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\PlatformExtensions.cpp -o CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\PlatformExtensions.cpp.s
 
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/RendererExtensions.cpp.obj: CMakeFiles/TCast.dir/flags.make
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/RendererExtensions.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/RendererExtensions.cpp.obj: C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Samples/shell/src/RendererExtensions.cpp
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/RendererExtensions.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/RendererExtensions.cpp.obj"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/RendererExtensions.cpp.obj -MF CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\RendererExtensions.cpp.obj.d -o CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\RendererExtensions.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\RendererExtensions.cpp
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/RendererExtensions.cpp.obj -MF CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\RendererExtensions.cpp.obj.d -o CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\RendererExtensions.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\RendererExtensions.cpp
 
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/RendererExtensions.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/RendererExtensions.cpp.i"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\RendererExtensions.cpp > CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\RendererExtensions.cpp.i
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\RendererExtensions.cpp > CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\RendererExtensions.cpp.i
 
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/RendererExtensions.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/RendererExtensions.cpp.s"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\RendererExtensions.cpp -o CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\RendererExtensions.cpp.s
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\RendererExtensions.cpp -o CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\RendererExtensions.cpp.s
 
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.obj: CMakeFiles/TCast.dir/flags.make
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.obj: C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Samples/shell/src/Shell.cpp
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.obj"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.obj -MF CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\Shell.cpp.obj.d -o CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\Shell.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\Shell.cpp
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.obj -MF CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\Shell.cpp.obj.d -o CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\Shell.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\Shell.cpp
 
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.i"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\Shell.cpp > CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\Shell.cpp.i
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\Shell.cpp > CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\Shell.cpp.i
 
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.s"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\Shell.cpp -o CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\Shell.cpp.s
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\Shell.cpp -o CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\Shell.cpp.s
 
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj: CMakeFiles/TCast.dir/flags.make
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj: C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj -MF CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\ShellFileInterface.cpp.obj.d -o CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\ShellFileInterface.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\ShellFileInterface.cpp
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj -MF CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\ShellFileInterface.cpp.obj.d -o CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\ShellFileInterface.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\ShellFileInterface.cpp
 
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.i"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\ShellFileInterface.cpp > CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\ShellFileInterface.cpp.i
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\ShellFileInterface.cpp > CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\ShellFileInterface.cpp.i
 
 CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.s"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\ShellFileInterface.cpp -o CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\ShellFileInterface.cpp.s
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\libs\RmlUi\Samples\shell\src\ShellFileInterface.cpp -o CMakeFiles\TCast.dir\libs\RmlUi\Samples\shell\src\ShellFileInterface.cpp.s
 
 CMakeFiles/TCast.dir/src/Utilities.cpp.obj: CMakeFiles/TCast.dir/flags.make
 CMakeFiles/TCast.dir/src/Utilities.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
 CMakeFiles/TCast.dir/src/Utilities.cpp.obj: C:/Users/simon/Desktop/Code/TCast/src/Utilities.cpp
 CMakeFiles/TCast.dir/src/Utilities.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/TCast.dir/src/Utilities.cpp.obj"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/src/Utilities.cpp.obj -MF CMakeFiles\TCast.dir\src\Utilities.cpp.obj.d -o CMakeFiles\TCast.dir\src\Utilities.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\src\Utilities.cpp
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/src/Utilities.cpp.obj -MF CMakeFiles\TCast.dir\src\Utilities.cpp.obj.d -o CMakeFiles\TCast.dir\src\Utilities.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\src\Utilities.cpp
 
 CMakeFiles/TCast.dir/src/Utilities.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/src/Utilities.cpp.i"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\src\Utilities.cpp > CMakeFiles\TCast.dir\src\Utilities.cpp.i
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\src\Utilities.cpp > CMakeFiles\TCast.dir\src\Utilities.cpp.i
 
 CMakeFiles/TCast.dir/src/Utilities.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/src/Utilities.cpp.s"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\src\Utilities.cpp -o CMakeFiles\TCast.dir\src\Utilities.cpp.s
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\src\Utilities.cpp -o CMakeFiles\TCast.dir\src\Utilities.cpp.s
 
 CMakeFiles/TCast.dir/src/UISetup.cpp.obj: CMakeFiles/TCast.dir/flags.make
 CMakeFiles/TCast.dir/src/UISetup.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
 CMakeFiles/TCast.dir/src/UISetup.cpp.obj: C:/Users/simon/Desktop/Code/TCast/src/UISetup.cpp
 CMakeFiles/TCast.dir/src/UISetup.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/TCast.dir/src/UISetup.cpp.obj"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/src/UISetup.cpp.obj -MF CMakeFiles\TCast.dir\src\UISetup.cpp.obj.d -o CMakeFiles\TCast.dir\src\UISetup.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\src\UISetup.cpp
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/src/UISetup.cpp.obj -MF CMakeFiles\TCast.dir\src\UISetup.cpp.obj.d -o CMakeFiles\TCast.dir\src\UISetup.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\src\UISetup.cpp
 
 CMakeFiles/TCast.dir/src/UISetup.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/src/UISetup.cpp.i"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\src\UISetup.cpp > CMakeFiles\TCast.dir\src\UISetup.cpp.i
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\src\UISetup.cpp > CMakeFiles\TCast.dir\src\UISetup.cpp.i
 
 CMakeFiles/TCast.dir/src/UISetup.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/src/UISetup.cpp.s"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\src\UISetup.cpp -o CMakeFiles\TCast.dir\src\UISetup.cpp.s
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\src\UISetup.cpp -o CMakeFiles\TCast.dir\src\UISetup.cpp.s
 
 CMakeFiles/TCast.dir/src/UIManager.cpp.obj: CMakeFiles/TCast.dir/flags.make
 CMakeFiles/TCast.dir/src/UIManager.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
 CMakeFiles/TCast.dir/src/UIManager.cpp.obj: C:/Users/simon/Desktop/Code/TCast/src/UIManager.cpp
 CMakeFiles/TCast.dir/src/UIManager.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/TCast.dir/src/UIManager.cpp.obj"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/src/UIManager.cpp.obj -MF CMakeFiles\TCast.dir\src\UIManager.cpp.obj.d -o CMakeFiles\TCast.dir\src\UIManager.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\src\UIManager.cpp
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/src/UIManager.cpp.obj -MF CMakeFiles\TCast.dir\src\UIManager.cpp.obj.d -o CMakeFiles\TCast.dir\src\UIManager.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\src\UIManager.cpp
 
 CMakeFiles/TCast.dir/src/UIManager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/src/UIManager.cpp.i"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\src\UIManager.cpp > CMakeFiles\TCast.dir\src\UIManager.cpp.i
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\src\UIManager.cpp > CMakeFiles\TCast.dir\src\UIManager.cpp.i
 
 CMakeFiles/TCast.dir/src/UIManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/src/UIManager.cpp.s"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\src\UIManager.cpp -o CMakeFiles\TCast.dir\src\UIManager.cpp.s
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\src\UIManager.cpp -o CMakeFiles\TCast.dir\src\UIManager.cpp.s
 
 CMakeFiles/TCast.dir/src/EventListener.cpp.obj: CMakeFiles/TCast.dir/flags.make
 CMakeFiles/TCast.dir/src/EventListener.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
 CMakeFiles/TCast.dir/src/EventListener.cpp.obj: C:/Users/simon/Desktop/Code/TCast/src/EventListener.cpp
 CMakeFiles/TCast.dir/src/EventListener.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/TCast.dir/src/EventListener.cpp.obj"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/src/EventListener.cpp.obj -MF CMakeFiles\TCast.dir\src\EventListener.cpp.obj.d -o CMakeFiles\TCast.dir\src\EventListener.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\src\EventListener.cpp
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/src/EventListener.cpp.obj -MF CMakeFiles\TCast.dir\src\EventListener.cpp.obj.d -o CMakeFiles\TCast.dir\src\EventListener.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\src\EventListener.cpp
 
 CMakeFiles/TCast.dir/src/EventListener.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/src/EventListener.cpp.i"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\src\EventListener.cpp > CMakeFiles\TCast.dir\src\EventListener.cpp.i
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\src\EventListener.cpp > CMakeFiles\TCast.dir\src\EventListener.cpp.i
 
 CMakeFiles/TCast.dir/src/EventListener.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/src/EventListener.cpp.s"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\src\EventListener.cpp -o CMakeFiles\TCast.dir\src\EventListener.cpp.s
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\src\EventListener.cpp -o CMakeFiles\TCast.dir\src\EventListener.cpp.s
 
 CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj: CMakeFiles/TCast.dir/flags.make
 CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
 CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj: C:/Users/simon/Desktop/Code/TCast/src/nanosvg_impl.cpp
 CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj -MF CMakeFiles\TCast.dir\src\nanosvg_impl.cpp.obj.d -o CMakeFiles\TCast.dir\src\nanosvg_impl.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\src\nanosvg_impl.cpp
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj -MF CMakeFiles\TCast.dir\src\nanosvg_impl.cpp.obj.d -o CMakeFiles\TCast.dir\src\nanosvg_impl.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\src\nanosvg_impl.cpp
 
 CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.i"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\src\nanosvg_impl.cpp > CMakeFiles\TCast.dir\src\nanosvg_impl.cpp.i
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\src\nanosvg_impl.cpp > CMakeFiles\TCast.dir\src\nanosvg_impl.cpp.i
 
 CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.s"
-	C:\Users\simon\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\src\nanosvg_impl.cpp -o CMakeFiles\TCast.dir\src\nanosvg_impl.cpp.s
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\src\nanosvg_impl.cpp -o CMakeFiles\TCast.dir\src\nanosvg_impl.cpp.s
 
 # Object files for target TCast
 TCast_OBJECTS = \

@@ -8,6 +8,7 @@
 #define STB_IMAGE_RESIZE_IMPLEMENTATION
 #include "EventListener.h"
 #include "stb_image_resize2.h"
+#define STBIW_ZLIB_COMPRESS_LEVEL 1
 
 
 // JSON serialization implementations
@@ -24,6 +25,7 @@ void to_json(json &j, const SceneData &s) {
     j = json{
         {"sceneName", s.sceneName},
         {"sources", s.sources},
+        {"splitSources", s.splitSources},
         {"connections", s.connection}
     };
 }
@@ -44,6 +46,7 @@ void from_json(const json &j, SaveData &d) {
 void from_json(const json &j, SceneData &s) {
     j.at("sceneName").get_to(s.sceneName);
     j.at("sources").get_to(s.sources);
+    j.at("splitSources").get_to(s.splitSources);
     j.at("connections").get_to(s.connection);
 }
 
@@ -241,6 +244,67 @@ bool Utilities::downscaleAndCrop169(const std::string &inputPath, const std::str
 
     int write_ok = stbi_write_png(outputPath.c_str(), targetW, targetH, in_channels, cropped.data(), targetW * in_channels);
     return write_ok != 0;
+}
+bool Utilities::cropImagePart(
+    float start,
+    float end,
+    const std::string& inputPath,
+    const std::string& outputPath
+) {
+    if (start < 0.f || end > 1.f || start >= end)
+        return false;
+
+    int srcW, srcH, _;
+    unsigned char* src = stbi_load(inputPath.c_str(), &srcW, &srcH, &_, 4);
+    if (!src)
+        return false;
+
+    constexpr int channels = 4;
+
+    const int cropX0 = static_cast<int>(srcW * start);
+    const int cropX1 = static_cast<int>(srcW * end);
+    const int cropW  = cropX1 - cropX0;
+
+    if (cropW <= 0) {
+        stbi_image_free(src);
+        return false;
+    }
+
+    const int outW = cropW;
+    const int outH = static_cast<int>(cropW * 9.f / 16.f);
+
+    std::vector<unsigned char> out(outW * outH * channels);
+
+    for (int y = 0; y < outH; ++y) {
+        const int srcY = std::min(
+            static_cast<int>((float)y * srcH / outH),
+            srcH - 1
+        );
+
+        const unsigned char* srcRow =
+            src + (srcY * srcW + cropX0) * channels;
+
+        unsigned char* dstRow =
+            out.data() + y * outW * channels;
+
+        memcpy(dstRow, srcRow, outW * channels);
+    }
+
+    stbi_image_free(src);
+
+    // FAST PNG write
+    stbi_write_png_compression_level = 1;
+
+    const bool ok = stbi_write_png(
+        outputPath.c_str(),
+        outW,
+        outH,
+        channels,
+        out.data(),
+        outW * channels
+    );
+
+    return ok;
 }
 
 

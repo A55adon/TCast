@@ -23,6 +23,7 @@ public:
     static std::string toBackwardSlashes(const std::string &path);
     static std::filesystem::path getRecentPath();
     static bool downscaleAndCrop169(const std::string& inputPath, const std::string& outputPath);
+    static bool cropImagePart(float start, float end, const std::string& inputPath, const std::string& outputPath);
 
     static void showPopup(const std::string& msg, bool isError = false);
     static bool validateString(std::string &value);

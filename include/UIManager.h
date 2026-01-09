@@ -33,4 +33,5 @@ public:
     static void refreshResourcePanel();
     static void refreshProjectors();
 
+    static void regenerateSplitSources();
 };

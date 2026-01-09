@@ -146,7 +146,6 @@ body {
 }
 
 .projector {
-    display: flex;
     align-items: center;
     justify-content: center;
     flex-basis: 30%;
@@ -523,10 +522,21 @@ scrollbarvertical {
 }
 
 .connect-btn {
-    background-color: #cccc00;
-    width: 10px;
-    height: 100%;
+    width: 16px;
+    min-width: 16px;
+    height: 60%;
+    border-radius: 4px;
+    cursor: pointer;
 }
+
+.connect-btn.connected {
+    background-color: #c0392b; /* red */
+}
+
+.connect-btn.disconnected {
+    background-color: #f1c40f; /* yellow */
+}
+
 
 .toast-container {
     font-family: "Comic Sans MS";
@@ -543,7 +553,6 @@ scrollbarvertical {
     font-family: "Comic Sans MS";
     background-color: rgba(0,0,0,0.8);
     color: #ffffff;
-    word-break: auto-phrase;
     font-size: 1.5rem;
     background-color: #5e99dc;
     padding: 10px 20px;

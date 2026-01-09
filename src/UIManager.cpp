@@ -181,6 +181,10 @@ bool UIManager::loadProject() {
         return false;
     }
 
+    for (auto& scene : sceneManager.scenes) {
+        scene.connection.resize(saveData.projectorCount);
+    }
+
     // Create recent path file
     if (createRecentPath)
         createRecentPathFile(path);
@@ -234,6 +238,10 @@ bool UIManager::loadProject(const std::filesystem::path& loadPath) {
         return false;
     }
 
+    for (auto& scene : sceneManager.scenes) {
+        scene.connection.resize(saveData.projectorCount);
+    }
+
     // Create recent path file
     if (createRecentPath)
         createRecentPathFile(projectPath);
@@ -256,6 +264,7 @@ bool UIManager::createProject() {
             saveData.projectName = value;
         }
     }
+    int projc;
 
     // Validate and get projector count
     if (auto *el = getEl("projector-count-input")) {
@@ -263,6 +272,7 @@ bool UIManager::createProject() {
             std::string value = input->GetValue();
             if (auto count = validateProjectorCount(value).value()) {
                 saveData.projectorCount = count;
+                projc = count;
             } else {
                 Utilities::showError("Ungültige Eingabe für Projektoranzahl (1-9)");
                 return false;
@@ -305,12 +315,8 @@ bool UIManager::createProject() {
         return false;
     }
 
-    int counter = 0;
-    for (int i = 0; i < 3; i++) {         // rows
-        for (int j = 0; j < 3; j++) {     // columns
-            sceneManager.scenes[0].connection[i][j] = counter;
-            counter++;
-        }
+    for (int i = 0; i < projc; ++i) {
+        sceneManager.scenes[activeSceneIndex].connection.push_back(0);
     }
 
     projectPath = fullProjectPath;
@@ -330,7 +336,7 @@ bool UIManager::createProject() {
 }
 
 std::optional<int> UIManager::validateProjectorCount(const std::string &value) {
-    if (value.size() == 1 && value[0] >= '1' && value[0] <= '9') {
+    if (value.size() == 1 && value[0] >= '1' && value[0] <= '6') {
         return value[0] - '0';
     }
     return std::nullopt;
@@ -426,12 +432,13 @@ void UIManager::populateFolders(const std::string &path) {
         }
     }
 }
+
 bool UIManager::loadScenesData() {
     std::cout << "[Info] Loading scenes data" << std::endl;
 
     std::ifstream file(projectPath / "scenesData.json");
     if (!file.is_open()) {
-        std::cerr << "[Info] Couldn't open " << projectPath / "scensesData.json" << std::endl;
+        std::cerr << "[Info] Couldn't open scenesData.json" << std::endl;
         return false;
     }
 
@@ -441,23 +448,51 @@ bool UIManager::loadScenesData() {
         json j;
         file >> j;
 
-        if (j.contains("scenes")) {
-            for (const auto &sceneJson: j["scenes"]) {
-                SceneData scene;
-                scene.sceneName = sceneJson.value("sceneName", "Unnamed Scene");
-                if (sceneJson.contains("sources")) {
-                    for (const auto &src: sceneJson["sources"])
-                        scene.sources.push_back(src.get<std::string>());
-                }
-                sceneManager.scenes.push_back(scene);
-            }
+        if (!j.contains("scenes") || !j["scenes"].is_array()) {
+            std::cerr << "[Helper] Invalid scenesData.json format" << std::endl;
+            return false;
         }
-    } catch (const std::exception &e) {
-        std::cerr << "[Helper] Error parsing JSON: " << e.what() << std::endl;
+
+        for (const auto& sceneJson : j["scenes"]) {
+            SceneData scene;
+
+            scene.sceneName =
+                sceneJson.value("sceneName", "Unnamed Scene");
+
+            if (sceneJson.contains("sources")) {
+                for (const auto& src : sceneJson["sources"]) {
+                    scene.sources.push_back(src.get<std::string>());
+                }
+            }
+
+            if (sceneJson.contains("splitSources")) {
+                for (const auto& src : sceneJson["splitSources"]) {
+                    scene.splitSources.push_back(src.get<std::string>());
+                }
+            }
+
+            if (sceneJson.contains("connections")) {
+                for (const auto& c : sceneJson["connections"]) {
+                    scene.connection.push_back(c.get<int>());
+                }
+            }
+
+            sceneManager.scenes.push_back(std::move(scene));
+        }
+
+    } catch (const std::exception& e) {
+        std::cerr << " Error parsing JSON: " << e.what() << std::endl;
         return false;
     }
 
-    std::cout << "[Helper] Loaded " << sceneManager.scenes.size() << " scenes" << std::endl;
+    std::cout << "Loaded "
+              << sceneManager.scenes.size()
+              << " scenes" << std::endl;
+
+    //for (int i = 0; i < saveData.projectorCount - 1; i++) {
+    //    std::cout << sceneManager.scenes[0].connection[i] << " connection" << std::endl;
+    //}
+
     refreshScenes();
     return true;
 }
@@ -508,83 +543,147 @@ void UIManager::refreshResourcePanel() {
 }
 
 void UIManager::refreshProjectors() {
-    auto *projectorGrid = getEl("projectorGrid");
+
+    auto* projectorGrid = getEl("projectorGrid");
     if (!projectorGrid) return;
 
-    // Clear existing children
-    for (int i = projectorGrid->GetNumChildren() - 1; i >= 0; --i) {
-        Rml::Element *child = projectorGrid->GetChild(i);
-        projectorGrid->RemoveChild(child);
-    }
+    while (projectorGrid->GetNumChildren() > 0)
+        projectorGrid->RemoveChild(projectorGrid->GetChild(0));
 
     int n = saveData.projectorCount;
-    int maxPerRow = 3;
-    int currentIndex = 0;
 
-    // Make projectorGrid a flex container in column direction to split rows vertically
     projectorGrid->SetProperty("display", "flex");
-    projectorGrid->SetProperty("flex-direction", "column");
-    projectorGrid->SetProperty("height", "100%"); // Fill the parent container
-    projectorGrid->SetProperty("gap", "5px");    // optional spacing between rows
+    projectorGrid->SetProperty("flex-direction", "row");
+    projectorGrid->SetProperty("flex-wrap", "nowrap");
+    projectorGrid->SetProperty("gap", "10px");
+    projectorGrid->SetProperty("width", "100%");
+    projectorGrid->SetProperty("height", "100%");
+    projectorGrid->SetProperty("align-items", "center");
 
-    while (currentIndex < n) {
-        // Determine how many projectors in this row
-        int remaining = n - currentIndex;
-        int itemsInRow = remaining >= maxPerRow ? maxPerRow : remaining;
+    for (auto& scene : sceneManager.scenes) {
+        scene.connection.resize(n);
+    }
 
-        Rml::ElementPtr row = getWindow().document->CreateElement("div");
-        row->SetProperty("display", "flex");
-        row->SetProperty("flex-direction", "row");
-        row->SetProperty("flex", "1");           // make row share vertical space equally
-        row->SetProperty("gap", "5px");          // spacing between projectors
-        row->SetProperty("justify-content", "center");
+    sceneManager.scenes[activeSceneIndex].splitSources.resize(n);
 
-        for (int i = 0; i < itemsInRow && currentIndex < n; i++, currentIndex++) {
+    for (int i = 0; i < n; ++i) {
 
-            Rml::ElementPtr projector = getWindow().document->CreateElement("div");
-            projector->SetClass("projector", true);
-            projector->SetId("projector-" + std::to_string(currentIndex));
+        // ---- PROJECTOR ----
+        Rml::ElementPtr projector = getWindow().document->CreateElement("div");
+        projector->SetClass("projector", true);
+        projector->SetId("projector-" + std::to_string(i));
+        projector->SetProperty("flex", "1 1 0");
+        projector->SetProperty("overflow", "hidden");
 
-            // Make each projector grow equally in the row
-            projector->SetProperty("flex", "1");
-            projector->SetProperty("background-color", "#333");
-            projector->SetProperty("border", "1px solid #555");
-            projector->SetProperty("border-radius", "4px");
-            projector->SetProperty("padding", "10px");
-            projector->SetProperty("color", "white");
+        if (i < sceneManager.scenes[activeSceneIndex].sources.size() && !sceneManager.scenes[activeSceneIndex].sources[
+                 i].empty())
+            {
 
-            // Add text or image
-            if (currentIndex < sceneManager.scenes[activeSceneIndex].sources.size() &&
-                !sceneManager.scenes[activeSceneIndex].sources[currentIndex].empty()) {
+            if (!sceneManager.scenes[activeSceneIndex].splitSources[i].empty() && i < sceneManager.scenes[activeSceneIndex].splitSources.size()) {
                 projector->SetAttribute(
                     "style",
-                    "decorator: image(" + sceneManager.scenes[activeSceneIndex].sources[currentIndex] + ");"
+                    "decorator: image(" +
+                    sceneManager.scenes[activeSceneIndex].splitSources[i] +
+                    "); "
                 );
             } else {
-                projector->SetInnerRML("Projector " + std::to_string(currentIndex + 1));
+                projector->SetAttribute(
+                    "style",
+                    "decorator: image(" +
+                    sceneManager.scenes[activeSceneIndex].sources[i] +
+                    ");"
+                );
             }
-
-            // Add event listener
-            projector->AddEventListener(Rml::EventId::Mouseup, new ProjectorHandler(getWindow().document, currentIndex));
-
-            row->AppendChild(std::move(projector));
-
-            if ((itemsInRow == 3 && (i == 0 || i == 1)) || itemsInRow == 2 && i == 0) {
-                Rml::ElementPtr connect = getWindow().document->CreateElement("button");
-                connect->SetClass("connect-btn", true);
-                connect->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
-                    Utilities::showInfo("test");
-                }));
-                row->AppendChild(std::move(connect));
-            }
-
+        } else {
+            projector->SetInnerRML("Projector " + std::to_string(i + 1));
         }
 
-        projectorGrid->AppendChild(std::move(row));
+        projector->AddEventListener( Rml::EventId::Mouseup, new ProjectorHandler(getWindow().document, i) );
+
+        projectorGrid->AppendChild(std::move(projector));
+
+        // ---- CONNECT BUTTON (except after last projector) ----
+        if (i < n - 1) {
+            Rml::ElementPtr connectBtn = getWindow().document->CreateElement("div");
+            connectBtn->SetClass("connect-btn", true);
+
+            if (sceneManager.scenes[activeSceneIndex].connection[i] == 1)
+                connectBtn->SetClass("connected", true);
+            else
+                connectBtn->SetClass("disconnected", true);
+
+            connectBtn->AddEventListener(
+                Rml::EventId::Click,
+                new ConnectHandler(i)
+            );
+
+            projectorGrid->AppendChild(std::move(connectBtn));
+        }
     }
 }
 
+void UIManager::regenerateSplitSources()
+{
+    static uint64_t generationId = 0;
+    generationId++;
 
+    namespace fs = std::filesystem;
+
+    fs::path tempPath = saveData.path / saveData.projectName / "temp";
+
+    if (fs::exists(tempPath))
+        fs::remove_all(tempPath);
+    fs::create_directories(tempPath);
+
+    const int n = static_cast<int>(sceneManager.scenes[activeSceneIndex].sources.size());
+
+    sceneManager.scenes[activeSceneIndex].splitSources.clear();
+    sceneManager.scenes[activeSceneIndex].splitSources.resize(n);
+    sceneManager.scenes[activeSceneIndex].splitSources.assign(sceneManager.scenes[activeSceneIndex].sources.size(), "");
+    sceneManager.scenes[activeSceneIndex].connection.resize(n - 1);
+
+
+    int i = 0;
+    while (i < n - 1) {
+
+        if (sceneManager.scenes[activeSceneIndex].connection[i] == 1) {
+            int connectionStart = i;
+            int connectionLength = 2; // at least i and i+1
+
+            int j = i + 1;
+            while (j < n - 1 && sceneManager.scenes[activeSceneIndex].connection[j] == 1) {
+                ++connectionLength;
+                ++j;
+            }
+
+            //std::cout
+            //    << "start: " << connectionStart
+            //    << " | length: " << connectionLength
+            //    << std::endl;
+
+            for (int it = 0; it < connectionLength; ++it) {
+                float s = float(it) / float(connectionLength);
+                float e = float(it + 1) / float(connectionLength);
+                std::string src = sceneManager.scenes[activeSceneIndex].sources[connectionStart];
+                std::string dest_name = std::to_string(s) + "_" + std::to_string(e) + "_" + std::to_string(connectionStart) + "_" + std::to_string(generationId) + "_temp.png";
+                std::string dest = (saveData.path / saveData.projectName / "temp" / dest_name).string();
+
+                for (int i = connectionStart; i < connectionLength; ++i) {
+                    sceneManager.scenes[activeSceneIndex].sources[i] = src;
+                }
+
+                if (Utilities::cropImagePart(s,e,src,dest))
+                    sceneManager.scenes[activeSceneIndex].splitSources[it + connectionStart] = dest;
+            }
+
+            i = j + 1; // skip entire group
+        }
+        else {
+            ++i;
+        }
+    }
+    refreshProjectors();
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //Context menus
@@ -1039,6 +1138,7 @@ void showProjectorResourceSelection(int index)
                 if (auto* body = getEl("body")) body->RemoveChild(overlay);
                 UIManager::refreshProjectors();
                 UIManager::saveProject();
+                UIManager::regenerateSplitSources();
             }
         };
 
@@ -1052,3 +1152,41 @@ void showProjectorResourceSelection(int index)
 }
 
 
+
+void connect(int index)
+{
+    if (index < 0 || index >= saveData.projectorCount - 1)
+        return;
+
+    //create connection
+    sceneManager.scenes[activeSceneIndex].connection[index] = 1;
+
+    //to prevent crashes if the project was just loaded
+    sceneManager.scenes[activeSceneIndex].splitSources.resize(saveData.projectorCount);
+
+    //set both splitparts to have the same native source
+    sceneManager.scenes[activeSceneIndex].sources[index + 1] = sceneManager.scenes[activeSceneIndex].sources[index];
+
+    //generate displayed sources
+    UIManager::regenerateSplitSources();
+
+    UIManager::refreshProjectors();
+
+    UIManager::saveProject();
+}
+
+
+void disconnect(int index) {
+    sceneManager.scenes[activeSceneIndex].connection[index] = 0;
+
+    UIManager::regenerateSplitSources();
+    UIManager::refreshProjectors();
+
+    sceneManager.scenes[activeSceneIndex].splitSources.clear();
+
+    UIManager::saveProject();
+
+    sceneManager.scenes[activeSceneIndex].sources.resize(saveData.projectorCount);
+    sceneManager.scenes[activeSceneIndex].splitSources.resize(saveData.projectorCount);
+    sceneManager.scenes[activeSceneIndex].connection.resize(saveData.projectorCount);
+}

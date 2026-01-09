@@ -151,6 +151,7 @@ void setInterfaceEventListeners() {
         std::cout << "[Info] Setting project name: " << saveData.projectName << std::endl;
         projectname->SetInnerRML(saveData.projectName);
     }
+
     UISetup::setupDropdownListeners();
     UISetup::setupSceneManagement();
     UISetup::setupSceneContextMenu();
@@ -162,6 +163,7 @@ void setInterfaceEventListeners() {
     UISetup::setupProjectorContextMenu();
 
     UISetup::setupProjection();
+
 }
 
 void UISetup::setupDropdownListeners() {
@@ -486,6 +488,7 @@ void UISetup::setupResourceContextMenu() {
 }
 
 void UISetup::setupProjectors() {
+    UIManager::regenerateSplitSources();
     UIManager::refreshProjectors();
 }
 
@@ -516,32 +519,48 @@ void UISetup::setupProjectorContextMenu() {
 void UISetup::setupProjection() {
     auto *start = getEl("project-sources");
     start->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
+
+        // --- Stop and clear existing projectors ---
+        for (auto& proj : projectors) {
+            proj->requestDie();
+            if (proj->th.joinable())
+                proj->th.join();
+            delete proj;
+        }
+        projectors.clear();
+
+        // --- Regenerate split sources according to current connections ---
+        UIManager::regenerateSplitSources();
+
+        // --- Create new projectors ---
         for (int i = 0; i < saveData.projectorCount; i++) {
+            std::string imgPath = sceneManager.scenes[activeSceneIndex].splitSources[i];
 
-            auto p = new Projector(
-                i + 1,
-                sceneManager.scenes[activeSceneIndex].sources[i]
-            );
+            // If no split image, fallback to original source
+            if (imgPath.empty())
+                imgPath = sceneManager.scenes[activeSceneIndex].sources[i];
 
+            auto p = new Projector(i + 1, imgPath);
             projectors.push_back(p);
         }
+
     }));
 
     auto *stop = getEl("stop-projection");
     stop->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
-        // just signal threads to exit
-        for (auto& projector : projectors) {
-            projector->requestDie();
+
+        // --- Stop all projectors safely ---
+        for (auto& proj : projectors) {
+            proj->requestDie();
         }
 
-        // optionally, wait for threads to finish safely after this
-        for (auto& projector : projectors) {
-            if (projector->th.joinable())
-                projector->th.join(); // can also do this in destructor
+        for (auto& proj : projectors) {
+            if (proj->th.joinable())
+                proj->th.join();
+            delete proj;
         }
 
         projectors.clear();
-        std::cout << projectors.size() << std::endl;
+        std::cout << "[Info] Projectors stopped, count: " << projectors.size() << std::endl;
     }));
-
 }

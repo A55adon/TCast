@@ -211,5 +211,22 @@ public:
             //Todo: Drag to move or connect
         }
     }
+};
 
+
+class ConnectHandler : public Rml::EventListener {
+public:
+    int index;
+
+    ConnectHandler(int i) : index(i) {}
+
+    void ProcessEvent(Rml::Event& event) override {
+        if (sceneManager.scenes[activeSceneIndex].connection[index] == 1) {
+            disconnect(index);
+            sceneManager.scenes[activeSceneIndex].connection[index] = 0;
+        } else {
+            connect(index);
+            sceneManager.scenes[activeSceneIndex].connection[index] = 1;
+        }
+    }
 };

@@ -36,6 +36,7 @@
 #include "UISetup.h"
 
 int main() {
+
     std::filesystem::path path = Utilities::getRecentPath();
     if (path != "" && std::filesystem::exists(path)) {
         projectPath = path;
@@ -60,14 +61,8 @@ int main() {
     }
     std::cout << "Project at: " << projectPath << std::endl;
 
-    using clock = std::chrono::high_resolution_clock;
-
-    auto lastTime = clock::now();
-    int frames = 0;
-
     while (getWindow().running) {
         getWindow().update();
-        frames++;
     }
     return 0;
 }

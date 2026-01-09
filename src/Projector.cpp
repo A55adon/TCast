@@ -13,7 +13,7 @@ layout (location = 1) in vec2 aTexCoord;
 out vec2 TexCoord;
 void main() {
     gl_Position = vec4(aPos, 0.0, 1.0);
-    TexCoord = aTexCoord;
+    TexCoord = vec2(aTexCoord.x, 1.0 - aTexCoord.y); // flip vertically
 }
 )";
 
@@ -153,7 +153,6 @@ void Projector::initGLObjects() {
 }
 
 void Projector::loadTexture(const std::string& path) {
-    stbi_set_flip_vertically_on_load(true);
 
     int w, h, channels;
     unsigned char* data = stbi_load(path.c_str(), &w, &h, &channels, 4);

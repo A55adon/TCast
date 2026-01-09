@@ -32,13 +32,17 @@ struct SaveData {
 struct SceneData {
     std::string sceneName;
     std::vector<std::string> sources; // [0] would be the name of the resource of the first projector
-    int connection[3][3];
+    std::vector<std::string> splitSources; // for connections
+
+    std::vector<int> connection;
 
     SceneData()= default;
 
     SceneData(std::string  name, std::vector<std::string> src)
         : sceneName(std::move(name)), sources(std::move(src)) {}
 };
+
+inline SaveData saveData;
 
 struct SceneManager {
     std::vector<SceneData> scenes;
@@ -61,6 +65,9 @@ void showResourceRenameDialog(int index);
 void deleteResource(int index);
 void selectResource(int resourceIndex);
 
+void connect(int index);
+void disconnect(int index);
+
 void showProjectorResourceSelection(int index);
 
 // For switching in UI helper functions
@@ -68,7 +75,6 @@ void setStartupEventListeners();
 void setInterfaceEventListeners();
 
 // Global Variables
-inline SaveData saveData;
 inline SceneManager sceneManager;
 inline bool createRecentPath = true;
 inline std::filesystem::path projectPath;

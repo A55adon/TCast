@@ -18,25 +18,12 @@
             </div>
         </div>
         <div class="menu-item">Einstellungen
-            <div class="dropdown">
-                <button>Allgemein</button>
-                <button>Anzeige</button>
-                <button>Projektoren</button>
-                <button>Netzwerk</button>
-            </div>
-        </div>
-        <div class="menu-item">Ansicht
-            <div class="dropdown">
-                <button>Layout zurücksetzen</button>
-                <button>Dunkles Theme</button>
-                <button>Volle Bildschirmansicht</button>
-            </div>
         </div>
         <div class="menu-item">Hilfe
             <div class="dropdown">
                 <button>Dokumentation</button>
                 <button>Support</button>
-                <button>Über</button>
+                <button>Credits</button>
             </div>
         </div>
     </div>
@@ -53,8 +40,8 @@
 
 
             <div class="scene-buttons">
-                <button id="scene-buttons-arrow-up">⮝ Hoch</button>
-                <button id="scene-buttons-arrow-down">⮟ Runter</button>
+                <button id="scene-buttons-arrow-up">🔼Hoch</button>
+                <button id="scene-buttons-arrow-down">🔽Runter</button>
                 <button id="scene-buttons-delete-all">Alle löschen</button>
             </div>
         </div>

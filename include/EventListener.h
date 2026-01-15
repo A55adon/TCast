@@ -224,7 +224,7 @@ public:
         if (sceneManager.scenes[activeSceneIndex].connection[index] == 1) {
             disconnect(index);
             sceneManager.scenes[activeSceneIndex].connection[index] = 0;
-        } else {
+        } else if (!sceneManager.scenes[activeSceneIndex].sources[index].empty()){
             connect(index);
             sceneManager.scenes[activeSceneIndex].connection[index] = 1;
         }

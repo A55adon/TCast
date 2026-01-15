@@ -37,6 +37,7 @@ target_include_directories(TCast PRIVATE
         "${CMAKE_SOURCE_DIR}/libs/RmlUi/Backends"
         "${CMAKE_SOURCE_DIR}/libs/RmlUi/Samples/shell/include"
         "${CMAKE_SOURCE_DIR}/libs/glad/include"
+        "C:/msys64/mingw64/include"
 )
 
 link_directories(
@@ -52,6 +53,14 @@ target_link_libraries(TCast
         "${CMAKE_SOURCE_DIR}/libs/glew-2.1.0/lib/Release/x64/glew32.lib"
         opengl32
         Shlwapi
+        avformat
+        avcodec
+        avutil
+        swscale
+)
+
+link_directories(
+        C:/msys64/mingw64/lib
 )
 
 # Copy DLLs when building TCast
@@ -94,6 +103,8 @@ add_custom_target(copy_assets ALL
         DEPENDS ${ASSET_FILES}
         COMMENT "Copying assets..."
 )
+
+target_compile_definitions(TCast PRIVATE VERSION=\"0.0.1\")
 
 
 add_dependencies(TCast copy_assets)

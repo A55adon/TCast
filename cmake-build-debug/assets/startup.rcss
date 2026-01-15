@@ -2,43 +2,43 @@ body.window {
     width: 100%;
     height: 100%;
     margin: 0;
-    padding: 0;
+    padding: 20px; /* Added padding around entire window */
     background-color: #2c3e50;
     font-family: "Comic Sans MS";
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-sizing: border-box; /* Ensure padding doesn't affect width calculation */
 }
 
 h1 {
-    font-size: 28px;
-    margin: 20px 0;
+    font-size: 36px; /* Increased from 28px */
+    margin: 25px 0; /* Increased margin */
 }
 
 .project-settings-div {
-    padding: 20px;
-    border-radius: 8px;
+    padding: 30px; /* Increased from 20px */
+    border-radius: 12px; /* Increased from 8px */
     background-color: #3a4f63;
-    width: 620px;
+    width: 800px; /* Increased from 620px */
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px; /* Increased from 15px */
 }
 
 .tabs {
     display: flex;
-    margin-bottom: 8px;
+    margin-bottom: 12px; /* Increased from 8px */
 }
 
 .tab-button {
     flex: 1;
-    padding: 10px;
+    padding: 14px; /* Increased from 10px */
     background-color: #2c3e50;
     color: white;
     border-radius: 600px;
-    font-size: 15px;
-    /*border: none;*/
+    font-size: 18px; /* Increased from 15px */
     cursor: pointer;
 }
 
@@ -50,81 +50,149 @@ h1 {
 .tab-content {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 18px; /* Increased from 12px */
     background-color: #34495e;
-    padding: 14px;
-    border-radius: 6px 6px 6px 6px;
+    padding: 20px; /* Increased from 14px */
+    border-radius: 8px 8px 8px 8px; /* Increased from 6px */
 }
 
 .input-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: 15px; /* Increased from 10px */
 }
 
 label {
-    width: 140px;
-    font-size: 14px;
+    width: 180px; /* Increased from 140px */
+    font-size: 16px; /* Increased from 14px */
 }
 
 input, textarea {
     flex: 1;
-    padding: 8px 10px;
-    border-radius: 6px;
-    /*border: 1px solid #1f2d3a;*/
+    padding: 12px 14px; /* Increased from 8px 10px */
+    border-radius: 8px; /* Increased from 6px */
     background-color: #2c3e50;
     color: white;
-    font-size: 14px;
+    font-size: 16px; /* Increased from 14px */
 }
 
 textarea {
-    /*resize: vertical;*/
-    min-height: 60px;
-    max-height: 150px;
+    min-height: 80px; /* Increased from 60px */
+    max-height: 200px; /* Increased from 150px */
     line-height: 1.4;
 }
 
 .action-btn {
-    padding: 10px 14px;
-    font-size: 14px;
-    /*background: linear-gradient(180deg, #00aced, #0084b4);*/
+    padding: 14px 18px; /* Increased from 10px 14px */
+    font-size: 16px; /* Increased from 14px */
     color: white;
-    border-radius: 6px;
-    /*border: none;*/
+    border-radius: 8px; /* Increased from 6px */
     cursor: pointer;
 }
 
 .action-btn:hover {
-    /*background: linear-gradient(180deg, #33c6f3, #0099cc);*/
+    background: #33c6f3;
+}
+
+.sample-project {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 8px;
+    cursor: pointer;
+    position: relative;
+}
+
+.trash-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+
+    background-color: #d85c64;
+
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sample-project:hover .trash-btn {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.trash-icon {
+    width: 28px;
+    height: 28px;
+}
+
+.sample-project[data-selected="true"]::after {
+    width: 6px;
+    height: 100%;
+    background-color: rgba(255, 120, 120, 0.6);
+    margin-left: 8px;
+}
+
+/* Base slider */
+input[type="range"] {
+    width: 100%;
+    height: 24px;
+    background-color: transparent;
+    margin: 6px 0;
+}
+
+/* Track (dark bar) */
+input[type="range"] slidertrack {
+    height: 6px;
+    background-color: #1f2d3a;   /* dark blue */
+    border-radius: 999px;
+    margin-top: 4px;             /* centers track vertically */
+}
+
+/* Knob */
+input[type="range"] sliderbar {
+    width: 16px;
+    height: 16px;
+    background-color: #00aced;
+    border-radius: 999px;
+}
+
+/* Hover feedback */
+input[type="range"]:hover sliderbar {
+    background-color: #33c6f3;
 }
 
 .load-area {
     display: flex;
     flex-direction: row;
-    gap: 15px;
+    gap: 20px; /* Increased from 15px */
 }
 
 .sample-list {
     flex: 1;
-    max-height: 200px;
+    max-height: 250px; /* Increased from 200px */
     overflow-y: auto;
     background-color: #2c3e50;
-    padding: 8px;
-    border-radius: 6px;
+    padding: 12px; /* Increased from 8px */
+    border-radius: 8px; /* Increased from 6px */
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px; /* Increased from 6px */
 }
 
 .sample-project {
-    padding: 8px;
+    padding: 12px; /* Increased from 8px */
     background-color: #3a4f63;
-    border-radius: 4px;
+    border-radius: 6px; /* Increased from 4px */
     cursor: pointer;
+    font-size: 16px; /* Added font size */
 }
 
-.sample-project:hover {
+.sample-project:focus {
     background-color: #00aced;
 }
 
@@ -134,22 +202,21 @@ textarea {
 }
 
 .selected-panel {
-    width: 200px;
+    width: 240px; /* Increased from 200px */
     background-color: #2c3e50;
-    border-radius: 6px;
-    padding: 10px;
+    border-radius: 8px; /* Increased from 6px */
+    padding: 14px; /* Increased from 10px */
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px; /* Increased from 6px */
 }
 
 button {
     background-color: #00aced;
     color: white;
-    /*border: none;*/
-    border-radius: 6px;
-    padding: 10px 16px;
-    font-size: 15px;
+    border-radius: 8px; /* Increased from 6px */
+    padding: 14px 20px; /* Increased from 10px 16px */
+    font-size: 18px; /* Increased from 15px */
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.2s, transform 0.1s;
@@ -165,7 +232,7 @@ button:active {
 
 .tab-button {
     flex: 1;
-    border-radius: 6px 6px 0 0;
+    border-radius: 8px 8px 0 0; /* Increased from 6px */
     background-color: #2c3e50;
     font-weight: normal;
 }
@@ -174,9 +241,10 @@ button:active {
     background-color: #00aced;
     font-weight: bold;
 }
+
 .load-area {
     display: flex;
-    gap: 20px;
+    gap: 25px; /* Increased from 20px */
     align-items: flex-start;
     width: 100%;
 }
@@ -191,27 +259,27 @@ button:active {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 14px; /* Increased from 10px */
 }
 
 .path-section {
-    margin-top: 10px;
+    margin-top: 14px; /* Increased from 10px */
     display: flex;
     flex-direction: row;
-    gap: 5px;
+    gap: 8px; /* Increased from 5px */
     width: 100%;
 }
 
 .sample-list {
     flex: 1;
-    min-height: 300px;
+    min-height: 350px; /* Increased from 300px */
     overflow-y: auto;
     background-color: #2c3e50;
-    padding: 8px;
-    border-radius: 6px;
+    padding: 12px; /* Increased from 8px */
+    border-radius: 8px; /* Increased from 6px */
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px; /* Increased from 6px */
 }
 
 .sample-project:hover {
@@ -224,21 +292,21 @@ button:active {
 }
 
 #tab-load-div .sample-list {
-    max-height: 300px;
+    max-height: 350px; /* Increased from 300px */
     overflow-y: auto;
     background-color: #2c3e50;
-    padding: 8px;
-    border-radius: 6px;
+    padding: 12px; /* Increased from 8px */
+    border-radius: 8px; /* Increased from 6px */
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px; /* Increased from 6px */
 }
 
 .load-dir-input {
     flex: 1;
-    padding: 8px 10px;
-    font-size: 14px;
-    border-radius: 6px;
+    padding: 12px 14px; /* Increased from 8px 10px */
+    font-size: 16px; /* Increased from 14px */
+    border-radius: 8px; /* Increased from 6px */
     background-color: #2c3e50;
     color: white;
 }
@@ -247,6 +315,30 @@ button:active {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: 15px; /* Increased from 10px */
 }
 
+#projector-resource-dialog > #scrollbarvertical {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 12px; /* Increased from 10px */
+    pointer-events: auto;
+}
+
+#scrollbarvertical {
+    position:absolute;
+}
+
+slidertrack {
+}
+sliderbar {
+}
+scrollbarvertical {
+    max-width:0px;
+}
+
+.projector-grid {
+    gap: 15px; /* Increased from 10px */
+}

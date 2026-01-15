@@ -122,6 +122,22 @@ void UISetup::setupProjectActions() {
             // TODO: Add user feedback
         }));
     }
+
+    if (auto* slider = getEl("projector-count-input")) {
+        slider->AddEventListener(Rml::EventId::Change, new ButtonHandler([] {
+            auto* sliderEl = dynamic_cast<Rml::ElementFormControl*>(
+                getWindow().document->GetElementById("projector-count-input"));
+
+            auto* valueEl = getWindow().document->GetElementById("projector-count-value");
+
+            if (sliderEl && valueEl) {
+                int value = static_cast<int>(std::stof(sliderEl->GetValue()));
+                valueEl->SetInnerRML(std::to_string(value));
+
+            }
+        }));
+    }
+
 }
 void UISetup::setupProjectSelection() {
     for (int i = 1; i <= 5; i++) {
@@ -292,7 +308,7 @@ void UISetup::setupSceneManagement() {
     auto sceneButtonsDeleteAll = getEl("scene-buttons-delete-all");
         sceneButtonsDeleteAll->AddEventListener(Rml::EventId::Click,
             new ButtonHandler([]() {
-            //TODO: sure you wanna delete all?
+            //TODO: confirm
             sceneManager.scenes.clear();
 
             activeSceneIndex = 0;
@@ -353,12 +369,11 @@ void UISetup::setupResourcePanel() {
 
 
     browseBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([fileInput, nameInput] {
-        std::string paths = Utilities::browseImage();
+        std::string paths = Utilities::browseImageOrMp4();
         if (paths.empty()) return;
 
         fileInput->SetAttribute("value", paths);
 
-        // If names empty → auto-generate
         Rml::String val;
         nameInput->GetAttribute("value", val);
 
@@ -432,30 +447,55 @@ void UISetup::setupResourcePanel() {
                 continue;
             }
 
-            auto destination =
-                saveData.path / saveData.projectName / "resources" / (nameList[i] + ".png");
-
             try {
-                std::filesystem::create_directories(destination.parent_path());
+                std::filesystem::create_directories(
+                    saveData.path / saveData.projectName / "resources"
+                );
 
-                if (!Utilities::convertToPng(src.string(), destination.string())) {
-                    Utilities::showError("Fehler beim Konvertieren: " + src.string());
+                std::filesystem::path destination;
+
+                if (Utilities::isImageExt(src)) {
+                    destination =
+                        saveData.path / saveData.projectName / "resources" / (nameList[i] + ".png");
+
+                    if (!Utilities::convertToPng(src.string(), destination.string())) {
+                        Utilities::showError("Fehler beim Konvertieren: " + src.string());
+                        continue;
+                    }
+
+                    std::cout << "Converted image: " << src << " -> " << destination << std::endl;
+                }
+                else if (Utilities::isMp4Ext(src)) {
+                    destination = saveData.path / saveData.projectName / "resources" / (nameList[i] + ".mp4");
+                    std::filesystem::path thumb_destination = saveData.path / saveData.projectName / "resources" / "thumbs" / (nameList[i] + ".png");
+                    std::filesystem::create_directories(thumb_destination.parent_path());
+
+
+                    std::filesystem::copy_file(src, destination, std::filesystem::copy_options::overwrite_existing);
+
+                    if (!Utilities::extractMp4Thumbnail(destination.string(), thumb_destination.string())) {
+                        std::cerr << "Couldn't generate thumbnail" << std::endl;
+                        //TODO: userfeedback + nothumb image replacement
+                    }
+
+                    std::cout << "Copied mp4: " << src << " -> " << destination << std::endl;
+                }
+                else {
+                    Utilities::showError(
+                        "Nicht unterstützter Dateityp: " + src.extension().string()
+                    );
                     continue;
                 }
-
-                std::cout << "Converted: " << src << " -> " << destination << std::endl;
-
-            } catch (std::filesystem::filesystem_error& e) {
+            }
+            catch (std::filesystem::filesystem_error& e) {
                 Utilities::showError("Fehler: " + std::string(e.what()));
             }
+
         }
 
         dialog->SetAttribute("style", "display:none;");
         UIManager::refreshResourcePanel();
     }));
-
-
-
 
     UIManager::refreshResourcePanel();
 }

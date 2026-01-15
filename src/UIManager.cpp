@@ -269,14 +269,10 @@ bool UIManager::createProject() {
     // Validate and get projector count
     if (auto *el = getEl("projector-count-input")) {
         if (auto *input = dynamic_cast<Rml::ElementFormControl *>(el)) {
-            std::string value = input->GetValue();
-            if (auto count = validateProjectorCount(value).value()) {
-                saveData.projectorCount = count;
-                projc = count;
-            } else {
-                Utilities::showError("Ungültige Eingabe für Projektoranzahl (1-9)");
-                return false;
-            }
+            int count = std::stoi(input->GetValue());
+            saveData.projectorCount = count;
+            projc = count;
+
         }
     }
 
@@ -299,6 +295,8 @@ bool UIManager::createProject() {
         }
     }
 
+    saveData.version = VERSION;
+
     // Create full project path
     std::filesystem::path fullProjectPath = basePath / saveData.projectName;
 
@@ -314,6 +312,8 @@ bool UIManager::createProject() {
         Utilities::showError("Konnte Projektverzeichnis nicht erstellen");
         return false;
     }
+    activeSceneIndex = 0;
+    sceneManager.scenes.push_back({saveData.projectName, {}});
 
     for (int i = 0; i < projc; ++i) {
         sceneManager.scenes[activeSceneIndex].connection.push_back(0);
@@ -335,20 +335,12 @@ bool UIManager::createProject() {
     return true;
 }
 
-std::optional<int> UIManager::validateProjectorCount(const std::string &value) {
-    if (value.size() == 1 && value[0] >= '1' && value[0] <= '6') {
-        return value[0] - '0';
-    }
-    return std::nullopt;
-}
 std::string* UIManager::validateInputField(std::string &value, const std::string &fieldName) {
     if (Utilities::validateString(value)) {
         return &value;
-    } else {
-        Utilities::showError("Ungültige Zeichen im Feld: " + fieldName);
-        return nullptr;
     }
-
+    Utilities::showError("Ungültige Zeichen im Feld: " + fieldName);
+    return nullptr;
 }
 bool UIManager::createRecentPathFile(const std::filesystem::path &savePath) {
 
@@ -402,34 +394,76 @@ void UIManager::setSelectedProject(const std::string &name) {
         label->SetInnerRML(name);
     }
 }
-void UIManager::populateFolders(const std::string &path) {
-    Rml::Element *container = getEl("tab-folder-list");
 
+static void clearSelection(Rml::Element* container) {
+    for (int i = 0; i < container->GetNumChildren(); ++i) {
+        container->GetChild(i)->RemoveAttribute("data-selected");
+    }
+}
+
+bool deleteProject(const std::string& path) {
+    namespace fs = std::filesystem;
+
+    std::error_code ec;
+    fs::remove_all(path, ec);
+
+    if (ec) {
+        std::cerr << "Failed to delete project: " << ec.message() << '\n';
+        return false;
+    }
+
+    UIManager::populateFolders("../saves/folderSaves/");
+    return true;
+}
+
+void UIManager::populateFolders(const std::string& path) {
+    Rml::Element* container = getEl("tab-folder-list");
     container->SetInnerRML("");
 
-    for (auto &entry: std::filesystem::directory_iterator(path)) {
-        if (entry.is_directory()) {
-            std::string folderName = entry.path().filename().string();
-            std::string fullPath = entry.path().string();
+    for (auto& entry : std::filesystem::directory_iterator(path)) {
+        if (!entry.is_directory())
+            continue;
 
-            Rml::ElementPtr folderDiv = getWindow().document->CreateElement("div");
-            folderDiv->SetClassNames("sample-project");
-            folderDiv->SetId("folder-" + folderName);
-            folderDiv->SetInnerRML(folderName);
+        std::string folderName = entry.path().filename().string();
+        std::string fullPath   = entry.path().string();
 
-            folderDiv->AddEventListener(Rml::EventId::Click, new ButtonHandler(
-                                            [fullPath] {
-                                                if (auto *inputEl = getWindow().document->GetElementById("load-dir-input")) {
-                                                    if (auto *input = dynamic_cast<Rml::ElementFormControl *>(
-                                                        inputEl)) {
-                                                        input->SetValue(Utilities::toBackwardSlashes(fullPath));
-                                                    }
-                                                }
-                                            }
-                                        ));
+        // Folder row
+        Rml::ElementPtr folderDiv = getWindow().document->CreateElement("div");
+        folderDiv->SetAttribute("class", "sample-project");
 
-            container->AppendChild(std::move(folderDiv));
-        }
+        // Folder name
+        Rml::ElementPtr nameSpan = getWindow().document->CreateElement("span");
+        nameSpan->SetInnerRML(folderName);
+        folderDiv->AppendChild(std::move(nameSpan));
+
+        Rml::ElementPtr trashBtn = getWindow().document->CreateElement("div");
+        trashBtn->SetAttribute("class", "trash-btn");
+
+        Rml::ElementPtr trashIcon = getWindow().document->CreateElement("img");
+        trashIcon->SetAttribute("src", "trash.svg");
+        trashIcon->SetAttribute("class", "trash-icon");
+        trashBtn->AppendChild(std::move(trashIcon));
+
+        trashBtn->AddEventListener(
+            Rml::EventId::Click,
+            new ButtonHandler([fullPath]() {
+                //TODO: confirm
+                deleteProject(fullPath);
+            }, true)
+        );
+
+        folderDiv->AddEventListener(Rml::EventId::Click, new ButtonHandler(
+            [fullPath] {
+                if (auto *inputEl = getWindow().document->GetElementById("load-dir-input")) {
+                    if (auto *input = dynamic_cast<Rml::ElementFormControl *>(inputEl)) {
+                        input->SetValue(Utilities::toBackwardSlashes(fullPath));
+                    }
+                }
+            }
+        ));
+
+        folderDiv->AppendChild(std::move(trashBtn));
+        container->AppendChild(std::move(folderDiv));
     }
 }
 
@@ -498,49 +532,77 @@ bool UIManager::loadScenesData() {
 }
 void UIManager::switchToStartup() {
     if ((getWindow().document = getWindow().context->LoadDocument("assets/startup.rml"))) {
+        sceneManager.scenes.clear();
         setStartupEventListeners();
         getWindow().document->Show();
     }
 }
+
 void UIManager::refreshResourcePanel() {
     auto* resourceList = getEl("resource-list");
-    while (resourceList->GetNumChildren() > 0) {
-        resourceList->RemoveChild(resourceList->GetChild(0));
-    }
-    auto directory = saveData.path / saveData.projectName / "resources";
-    int i = 0;
-    for (auto& entry : std::filesystem::directory_iterator(directory)) {
-        if (!entry.is_regular_file()) continue;
-        if (entry.path().extension() != ".png") continue;
 
-        std::string filename = entry.path().filename().string();
-        std::string name_no_ext = entry.path().stem().string();
+    while (resourceList->GetNumChildren() > 0)
+        resourceList->RemoveChild(resourceList->GetChild(0));
+
+    auto resourcesDir = saveData.path / saveData.projectName / "resources";
+    auto thumbsDir = resourcesDir / "thumbs";
+
+    int i = 0;
+
+    for (auto& entry : std::filesystem::directory_iterator(resourcesDir)) {
+        if (!entry.is_regular_file())
+            continue;
+
+        const auto ext = entry.path().extension().string();
+        const bool isImage = (ext == ".png");
+        const bool isVideo = (ext == ".mp4");
+
+        if (!isImage && !isVideo)
+            continue;
+
+        const std::string stem = entry.path().stem().string();
+
+        // Decide thumbnail source
+        std::filesystem::path previewImage;
+        if (isImage) {
+            previewImage = entry.path();
+        } else {
+            previewImage = thumbsDir / (stem + ".png");
+            if (!std::filesystem::exists(previewImage)) {
+                // Thumbnail missing → skip or show placeholder
+                continue;
+            }
+        }
 
         Rml::ElementPtr item = getWindow().document->CreateElement("div");
-        item->SetAttribute("class", ("resource-item"));
-        item->SetAttribute("id", ("resource-item-" + std::to_string(i)));
+        item->SetAttribute("class", "resource-item");
+        item->SetAttribute("id", "resource-item-" + std::to_string(i));
 
+        // Image preview
         Rml::ElementPtr img = getWindow().document->CreateElement("img");
-        auto imagePath = directory / filename;
-        img->SetAttribute("src", imagePath.string());
+        img->SetAttribute("src", previewImage.string());
         img->SetAttribute("alt", "Resource");
 
+        // Label
         Rml::ElementPtr p = getWindow().document->CreateElement("p");
-        p->AppendChild(getWindow().document->CreateTextNode(name_no_ext));
+        p->AppendChild(getWindow().document->CreateTextNode(stem));
 
         item->AppendChild(std::move(img));
         item->AppendChild(std::move(p));
 
-        if (i == activeResourceIndex) {
+        if (i == activeResourceIndex)
             item->SetClass("active", true);
-        }
 
-        item->AddEventListener(Rml::EventId::Mouseup, new ResourceItemHandler(getWindow().document, i));
+        item->AddEventListener(
+            Rml::EventId::Mouseup,
+            new ResourceItemHandler(getWindow().document, i)
+        );
 
         resourceList->AppendChild(std::move(item));
         i++;
     }
 }
+
 
 void UIManager::refreshProjectors() {
 
@@ -575,25 +637,30 @@ void UIManager::refreshProjectors() {
         projector->SetProperty("flex", "1 1 0");
         projector->SetProperty("overflow", "hidden");
 
-        if (i < sceneManager.scenes[activeSceneIndex].sources.size() && !sceneManager.scenes[activeSceneIndex].sources[
-                 i].empty())
-            {
+        if (i < sceneManager.scenes[activeSceneIndex].sources.size() && !sceneManager.scenes[activeSceneIndex].sources[i].empty())
+        {
+            std::string src;
 
-            if (!sceneManager.scenes[activeSceneIndex].splitSources[i].empty() && i < sceneManager.scenes[activeSceneIndex].splitSources.size()) {
-                projector->SetAttribute(
-                    "style",
-                    "decorator: image(" +
-                    sceneManager.scenes[activeSceneIndex].splitSources[i] +
-                    "); "
-                );
-            } else {
-                projector->SetAttribute(
-                    "style",
-                    "decorator: image(" +
-                    sceneManager.scenes[activeSceneIndex].sources[i] +
-                    ");"
-                );
+            if (i < sceneManager.scenes[activeSceneIndex].splitSources.size() &&
+                !sceneManager.scenes[activeSceneIndex].splitSources[i].empty())
+            {
+                src = sceneManager.scenes[activeSceneIndex].splitSources[i];
             }
+            else
+            {
+                src = sceneManager.scenes[activeSceneIndex].sources[i];
+            }
+
+            std::filesystem::path p(src);
+
+            if (p.extension() == ".mp4") {
+                src = (p.parent_path() / "thumbs" / (p.stem().string() + ".png")).string();
+            }
+
+            projector->SetAttribute(
+                "style",
+                "decorator: image(" + src + ");"
+            );
         } else {
             projector->SetInnerRML("Projector " + std::to_string(i + 1));
         }
@@ -635,9 +702,10 @@ void UIManager::regenerateSplitSources()
         fs::remove_all(tempPath);
     fs::create_directories(tempPath);
 
-    const int n = static_cast<int>(sceneManager.scenes[activeSceneIndex].sources.size());
+    const int n = saveData.projectorCount;
 
     sceneManager.scenes[activeSceneIndex].splitSources.clear();
+    sceneManager.scenes[activeSceneIndex].sources.resize(n);
     sceneManager.scenes[activeSceneIndex].splitSources.resize(n);
     sceneManager.scenes[activeSceneIndex].splitSources.assign(sceneManager.scenes[activeSceneIndex].sources.size(), "");
     sceneManager.scenes[activeSceneIndex].connection.resize(n - 1);
@@ -1030,7 +1098,7 @@ void showProjectorResourceSelection(int index)
     //overlay->AddEventListener(Rml::EventId::Click, new CloseOverlayHandler(overlay_raw));
 
     Rml::Element* dialog_raw = overlay_raw->GetChild(0);
-    struct StopPropagationHandler : public Rml::EventListener {
+    struct StopPropagationHandler : Rml::EventListener {
         void ProcessEvent(Rml::Event& e) override {
             e.StopPropagation();
         }
@@ -1094,10 +1162,17 @@ void showProjectorResourceSelection(int index)
     auto directory = saveData.path / saveData.projectName / "resources";
     for (auto& entry : std::filesystem::directory_iterator(directory)) {
         if (!entry.is_regular_file()) continue;
-        if (entry.path().extension() != ".png") continue;
+        if (entry.path().extension() != ".png" && entry.path().extension() != ".mp4") continue;
 
         std::string filename = entry.path().filename().string();
-        std::string pathstr = (directory / filename).string();
+        std::string pathstr;
+        if (entry.path().extension() == ".png") {
+            pathstr = (directory / filename).string();
+        } else { // video
+
+            const std::string stem = entry.path().stem().string();
+            pathstr = (directory / "thumbs" /  (stem + ".png")).string();
+        }
 
         Rml::ElementPtr row = doc->CreateElement("div");
         row->SetAttribute("style",
@@ -1119,6 +1194,9 @@ void showProjectorResourceSelection(int index)
             "background:#3f5870;border-radius:6px;cursor:pointer;"
             "width:100%;box-sizing:border-box;");
 
+
+
+        pathstr = (directory / filename).string(); // reset before applying to projector
 
         Rml::Element* row_raw = row.get();
 

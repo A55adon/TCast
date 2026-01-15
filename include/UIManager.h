@@ -3,6 +3,7 @@
 #include "Utilities.h"
 #include "EventListener.h"
 
+
 class UIManager {
 public:
 // SaveFunction + helpers
@@ -20,7 +21,6 @@ public:
 // CreateFunction + helpers
     static bool createProject();
 
-    static std::optional<int> validateProjectorCount(const std::string &value);
     static std::string* validateInputField(std::string &value, const std::string &fieldName);
     static bool createRecentPathFile(const std::filesystem::path &savePath);
 

@@ -27,13 +27,14 @@ struct SaveData {
     int projectorCount{};
     std::string description;
     std::filesystem::path path;
+
+    std::string version;
 };
 
 struct SceneData {
     std::string sceneName;
     std::vector<std::string> sources; // [0] would be the name of the resource of the first projector
     std::vector<std::string> splitSources; // for connections
-
     std::vector<int> connection;
 
     SceneData()= default;
@@ -76,7 +77,7 @@ void setInterfaceEventListeners();
 
 // Global Variables
 inline SceneManager sceneManager;
-inline bool createRecentPath = true;
+inline bool createRecentPath = false;
 inline std::filesystem::path projectPath;
 inline std::vector<Projector*> projectors;
 inline int activeSceneIndex = 0; // -1 means no scene selected

@@ -1,6 +1,7 @@
 {
-    "description": "test project",
+    "description": "test",
     "path": "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves",
     "projectName": "test",
-    "projectorCount": 3
+    "projectorCount": 6,
+    "version": "0.0.1"
 }

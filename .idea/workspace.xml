@@ -31,75 +31,335 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1152f206-875e-46cb-bb3e-fd323fcd6a4a" name="Changes" comment="added msg popups">
+    <list default="true" id="1152f206-875e-46cb-bb3e-fd323fcd6a4a" name="Changes" comment="minor changes">
+      <change afterPath="$PROJECT_DIR$/assets/arrow-down.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/arrow-up.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-c0f2e180598477c1b2e4.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-8b3781d25a2cffdd17da.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-0440a4f2003905c20e6b.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2026-01-09T18-47-07-0113.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-TCast-Debug-353bef30e9efe4e5cf68.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/assets/arrow-down.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/assets/arrow-up.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/interface.rcss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/interface.rcss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-12b2177b99e570282338.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-8b3781d25a2cffdd17da.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2025-12-07T15-37-43-0481.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/toolchains-v1-3d337aed8e2571f3cad8.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/interface.rml" beforeDir="false" afterPath="$PROJECT_DIR$/assets/interface.rml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/startup.rcss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/startup.rcss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/startup.rml" beforeDir="false" afterPath="$PROJECT_DIR$/assets/startup.rml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-6143e169f5b85f544e56.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-2599f9b0c88bbba95295.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-f6fb8992bbe8d057f23d.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2026-01-08T20-23-21-0735.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-TCast-Debug-48f93993f0f932536f6b.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CMakeCCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CMakeCCompiler.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CMakeCXXCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CMakeCXXCompiler.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CMakeDetermineCompilerABI_C.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CMakeRCCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CMakeRCCompiler.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CompilerIdC/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CompilerIdC/a.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CompilerIdCXX/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CompilerIdCXX/a.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/compiler_depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/compiler_depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/compiler_depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/compiler_depend.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/flags.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Platform_GLFW.cpp.obj.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Renderer_GL3.cpp.obj.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp.obj.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/RendererExtensions.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/RendererExtensions.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/RendererExtensions.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/RendererExtensions.cpp.obj.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/Shell.cpp.obj.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/link.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/objects.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/EventListener.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/EventListener.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/EventListener.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/EventListener.cpp.obj.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Projector.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Projector.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Projector.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Projector.cpp.obj.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UIManager.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UIManager.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UIManager.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UIManager.cpp.obj.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UISetup.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UISetup.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UISetup.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UISetup.cpp.obj.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Utilities.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Utilities.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Utilities.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Utilities.cpp.obj.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Window.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Window.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Window.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Window.cpp.obj.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/main.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/main.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/main.cpp.obj.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/TCast.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/TCast.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/assets/interface.rcss" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/assets/interface.rcss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/assets/interface.rml" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/assets/interface.rml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/assets/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/assets/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/assets/startup.rcss" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/assets/startup.rcss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/assets/startup.rml" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/assets/startup.rml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/EventListener.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/EventListener.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/Projector.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/Projector.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/UIManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/UIManager.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/Utilities.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/Utilities.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/global.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/global.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/3w/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/3w/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/41/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/41/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/awdd/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/awdd/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/bruno/resources/Untitled (2).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/bruno/resources/imaeges.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/bruno/resources/images.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/bruno/resources/nigger.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/bruno/resources/oskar-smethurst-B1GtwanCbiw-unsplash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/bruno/resources/pexels-christian-heitz-285904-842711.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/bruno/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/bruno/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dwa/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dwa/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/guuno/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/guuno/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/niggernigger/resources/Untitled (2).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/niggernigger/resources/back1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/niggernigger/resources/back2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/niggernigger/resources/back3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/niggernigger/resources/button-left.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/niggernigger/resources/button-middle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/niggernigger/resources/button-right.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/niggernigger/resources/imaeges.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/niggernigger/resources/images.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/niggernigger/resources/nigger.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/niggernigger/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/niggernigger/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/qw3egrh/resources/nigger.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/qw3egrh/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/qw3egrh/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test/saveData.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/folderSaves/test/saveData.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test/scenesData.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/folderSaves/test/scenesData.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/testguno/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/testguno/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/Untitled (2).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/ajax_clock_small.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/arrow_ltr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/arrow_rtl.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/asc_order.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_bookmark.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_browse.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_calendar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_chart.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_column_add.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_comment.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_dbstatistics.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_deltbl.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_docs.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_docsql.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_drop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_edit.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_empty.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_engine.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_event_add.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_events.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_export.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_favorite.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_find_replace.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_firstpage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_ftext.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_globe.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_group.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_help.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_home.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_import.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_index.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_index_add.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_info.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_inline_edit.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_insrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_key.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_lastpage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_minus.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_more.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_move.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_newdb.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_newtbl.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_nextpage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_no_favorite.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_pdfdoc.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_plugin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_plus.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_prevpage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_primary.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_print.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_props.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_relations.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_report.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_routine_add.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_routines.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_save.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_saveimage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_sbrowse.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_sdb.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_search.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_select.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_snewtbl.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_spatial.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_sql.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_sqldoc.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_sqlhelp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_table_add.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_tblanalyse.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_tblexport.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_tblimport.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_tblops.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_tbloptimize.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_tipp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_trigger_add.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_triggers.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_unique.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_usradd.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_usrcheck.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_usrdrop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_usredit.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_usrlist.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_versions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_view.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_view_add.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/b_views.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/bd_browse.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/bd_deltbl.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/bd_drop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/bd_edit.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/bd_empty.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/bd_export.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/bd_firstpage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/bd_ftext.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/bd_index.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/bd_insrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/bd_lastpage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/bd_nextpage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/bd_prevpage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/bd_primary.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/bd_routine_add.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/bd_sbrowse.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/bd_select.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/bd_spatial.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/bd_unique.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/centralColumns.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/centralColumns_add.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/centralColumns_delete.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/col_drop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/col_pointer.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/col_pointer_ver.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/console.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/database.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/docs_menu_bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/east-mini.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/eye.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/eye_grey.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/hide.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/imaeges.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/images.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/item.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/item_ltr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/item_rtl.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/lightbulb.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/lightbulb_off.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/more.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/new_data.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/new_data_hovered.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/new_data_selected.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/new_data_selected_hovered.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/new_struct.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/new_struct_hovered.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/new_struct_selected.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/new_struct_selected_hovered.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/nigger.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/normalize.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/north-mini.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/pause.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/php_sym.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/play.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/pma_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/pma_logo2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_asc.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_asci.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_attention.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_cancel.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_cancel2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_cog.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_collapseall.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_db.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_desc.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_error.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_error2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_fulltext.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_host.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_info.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_lang.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_link.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_lock.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_loggoff.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_notice.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_okay.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_partialtext.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_passwd.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_process.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_really.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_reload.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_replication.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_rights.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_sortable.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_status.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_success.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_sync.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_tbl.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_theme.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_top.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_unlink.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_vars.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/s_views.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/show.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/south-mini.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/spacer.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/sprites.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/toggle-ltr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/toggle-rtl.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/vertical_line.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/west-mini.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/window-new.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/zoom-minus-mini.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/zoom-plus-mini.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/resources/zoom-world-mini.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt 67/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt.tct" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/resources/Untitled (2).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/resources/arrow_ltr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/resources/b_browse.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/resources/b_drop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/resources/b_empty.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/resources/coal-particle-shadow-2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/resources/computer-age-1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/resources/concrete-shore-out-of-map-transition.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/resources/ddischarge-defense-equipment.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/resources/deepwater-green2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/resources/grass-4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/resources/imaeges.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/resources/image.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/resources/images.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/resources/img.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/resources/nCbiw-unsplash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/resources/oskar-smethurst-B1GtwanCbiw-unsplash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/resources/pexels-christian-heitz-285904-842711.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/resources/r.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/resources/screen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/resources/show.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/saveData.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/saveData.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/scenesData.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/folderSaves/unterwasserwelt/scenesData.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/w/resources/imaeges.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/w/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/w/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wad/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wad/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wda/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wda/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wdawdwdwddd/resources/Untitled (2).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wdawdwdwddd/resources/button-lnigger.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wdawdwdwddd/resources/imaeges.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wdawdwdwddd/resources/images.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wdawdwdwddd/resources/intro-1663174780.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wdawdwdwddd/resources/nigger.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wdawdwdwddd/resources/oskar-smethurst-B1GtwanCbiw-unsplash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wdawdwdwddd/resources/pexels-christian-heitz-285904-842711.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wdawdwdwddd/resources/sample3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wdawdwdwddd/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wdawdwdwddd/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wdawdwdwddd/temp/0.000000_0.166667_0_20_temp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wdawdwdwddd/temp/0.166667_0.333333_0_20_temp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wdawdwdwddd/temp/0.333333_0.500000_0_20_temp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wdawdwdwddd/temp/0.500000_0.666667_0_20_temp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wdawdwdwddd/temp/0.666667_0.833333_0_20_temp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wdawdwdwddd/temp/0.833333_1.000000_0_20_temp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/werg/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/werg/scenesData.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/saves/recent.path" beforeDir="false" afterPath="$PROJECT_DIR$/saves/recent.path" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Projector.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Projector.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UIManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/UIManager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UISetup.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/UISetup.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Utilities.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utilities.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Window.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Window.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -128,403 +388,6 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -668,7 +531,10 @@
       <workItem from="1765533704615" duration="6000" />
       <workItem from="1766252027050" duration="24000" />
       <workItem from="1767903794340" duration="8558000" />
-      <workItem from="1767946725498" duration="16655000" />
+      <workItem from="1767946725498" duration="27606000" />
+      <workItem from="1768336054549" duration="751000" />
+      <workItem from="1768423623891" duration="6000" />
+      <workItem from="1768498581784" duration="8261000" />
     </task>
     <task id="LOCAL-00001" summary="Added different dependencies">
       <option name="closed" value="true" />
@@ -862,7 +728,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765464833798</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="added image stretching">
+      <option name="closed" value="true" />
+      <created>1767979475017</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1767979475017</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -908,7 +782,9 @@
     <MESSAGE value="smaller fixes + fixed scrollbar issue" />
     <MESSAGE value="can render svgs now" />
     <MESSAGE value="added msg popups" />
-    <option name="LAST_COMMIT_MESSAGE" value="added msg popups" />
+    <MESSAGE value="added image stretching" />
+    <MESSAGE value="minor changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor changes" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

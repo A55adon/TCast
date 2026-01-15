@@ -10,6 +10,12 @@
 #include "stb_image_resize2.h"
 #define STBIW_ZLIB_COMPRESS_LEVEL 1
 
+extern "C" {
+#include <libavformat/avformat.h>
+#include <libavcodec/avcodec.h>
+#include <libswscale/swscale.h>
+#include <libavutil/imgutils.h>
+}
 
 // JSON serialization implementations
 void to_json(json &j, const SaveData &d) {
@@ -17,7 +23,8 @@ void to_json(json &j, const SaveData &d) {
             {"projectName", d.projectName},
             {"projectorCount", d.projectorCount},
             {"description", d.description},
-            {"path", d.path}
+            {"path", d.path},
+            {"version", d.version}
     };
 }
 
@@ -41,6 +48,7 @@ void from_json(const json &j, SaveData &d) {
     j.at("projectorCount").get_to(d.projectorCount);
     j.at("description").get_to(d.description);
     j.at("path").get_to(d.path);
+    j.at("version").get_to(d.version);
 }
 
 void from_json(const json &j, SceneData &s) {
@@ -307,8 +315,132 @@ bool Utilities::cropImagePart(
     return ok;
 }
 
+bool Utilities::extractMp4Thumbnail(const std::string &videoPath, const std::string &outPngPath) {
+
+    AVFormatContext* fmt = nullptr;
+
+    if (avformat_open_input(&fmt, videoPath.c_str(), nullptr, nullptr) < 0)
+        return false;
+
+    if (avformat_find_stream_info(fmt, nullptr) < 0)
+        return false;
+
+    int videoStream = -1;
+    for (unsigned i = 0; i < fmt->nb_streams; i++) {
+        if (fmt->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_VIDEO) {
+            videoStream = i;
+            break;
+        }
+    }
+    if (videoStream == -1)
+        return false;
+
+    AVCodecParameters* params = fmt->streams[videoStream]->codecpar;
+    const AVCodec* codec = avcodec_find_decoder(params->codec_id);
+    if (!codec)
+        return false;
+
+    AVCodecContext* ctx = avcodec_alloc_context3(codec);
+    avcodec_parameters_to_context(ctx, params);
+    avcodec_open2(ctx, codec, nullptr);
+
+    AVPacket* packet = av_packet_alloc();
+    AVFrame* frame = av_frame_alloc();
+    AVFrame* rgb = av_frame_alloc();
+
+    SwsContext* sws = sws_getContext(
+        ctx->width, ctx->height, ctx->pix_fmt,
+        ctx->width, ctx->height, AV_PIX_FMT_RGB24,
+        SWS_BILINEAR, nullptr, nullptr, nullptr
+    );
+
+    int bufSize = av_image_get_buffer_size(
+        AV_PIX_FMT_RGB24, ctx->width, ctx->height, 1
+    );
+    uint8_t* buffer = (uint8_t*)av_malloc(bufSize);
+    av_image_fill_arrays(rgb->data, rgb->linesize, buffer,
+                          AV_PIX_FMT_RGB24, ctx->width, ctx->height, 1);
+
+    bool gotFrame = false;
+
+    while (av_read_frame(fmt, packet) >= 0 && !gotFrame) {
+        if (packet->stream_index == videoStream) {
+            if (avcodec_send_packet(ctx, packet) == 0) {
+                if (avcodec_receive_frame(ctx, frame) == 0) {
+                    sws_scale(
+                        sws,
+                        frame->data, frame->linesize,
+                        0, ctx->height,
+                        rgb->data, rgb->linesize
+                    );
+
+                    // save RGB → PNG
+                    saveRgbToPng(
+                        rgb->data[0],
+                        ctx->width,
+                        ctx->height,
+                        outPngPath
+                    );
+
+                    gotFrame = true;
+                }
+            }
+        }
+        av_packet_unref(packet);
+    }
+
+    av_free(buffer);
+    av_frame_free(&frame);
+    av_frame_free(&rgb);
+    av_packet_free(&packet);
+    sws_freeContext(sws);
+    avcodec_free_context(&ctx);
+    avformat_close_input(&fmt);
+
+    return gotFrame;
+}
+
+bool Utilities::saveRgbToPng(const unsigned char *rgbData, int width, int height, const std::string &outPath) {
+    if (!rgbData || width <= 0 || height <= 0) {
+        std::cerr << "saveRgbToPng: invalid input\n";
+        return false;
+    }
+
+    try {
+        std::filesystem::create_directories(
+            std::filesystem::path(outPath).parent_path()
+        );
+    } catch (...) {
+        std::cerr << "saveRgbToPng: failed to create directories\n";
+        return false;
+    }
+
+    // stride = width * RGB
+    const int stride = width * 3;
+
+    int result = stbi_write_png(
+        outPath.c_str(),
+        width,
+        height,
+        3,              // RGB
+        rgbData,
+        stride
+    );
+
+    if (!result) {
+        std::cerr << "saveRgbToPng: failed to write " << outPath << "\n";
+        return false;
+    }
+
+    return true;
+}
+
 
 bool Utilities::validateString(std::string &value) {
+    if (value.empty()) {
+        return true; // allow empty strings
+    }
+
     static const std::regex pattern("^[A-Za-z0-9äöüÄÖÜ ()_.\\-;,]+$");
     if (std::regex_match(value, pattern)) {
         return true;  // input is valid
@@ -365,8 +497,19 @@ void Utilities::showInfo(std::string msg) {
     showPopup(msg);
 }
 
+bool Utilities::isImageExt(const std::filesystem::path &p) {
+    auto ext = p.extension().string();
+    std::transform(ext.begin(), ext.end(), ext.begin(), ::tolower);
+    return ext == ".png" || ext == ".jpg" || ext == ".jpeg" || ext == ".bmp" || ext == ".webp";
+}
 
-std::string Utilities::browseImage() // also more than 1 image
+bool Utilities::isMp4Ext(const std::filesystem::path &p) {
+    auto ext = p.extension().string();
+    std::transform(ext.begin(), ext.end(), ext.begin(), ::tolower);
+    return ext == ".mp4";
+}
+
+std::string Utilities::browseImageOrMp4() // also more than 1 image
 {
     // Initialize COM
     HRESULT hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
@@ -387,7 +530,7 @@ std::string Utilities::browseImage() // also more than 1 image
 
     // Set filter for images
     COMDLG_FILTERSPEC filters[] = {
-        { L"Image Files", L"*.png;*.jpg;*.jpeg;*.bmp;*.tga;*.gif;*.tif;*.tiff;*.webp" },
+        { L"Image Files", L"*.png;*.jpg;*.jpeg;*.bmp;*.tga;*.gif;*.tif;*.tiff;*.webp;*.mp4" },
         { L"All Files", L"*.*" }
     };
     dialog->SetFileTypes(_countof(filters), filters);

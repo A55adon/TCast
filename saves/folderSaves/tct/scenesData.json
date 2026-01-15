@@ -1,0 +1,31 @@
+{
+    "scenes": [
+        {
+            "connections": [
+                1,
+                1,
+                0,
+                0,
+                0,
+                0
+            ],
+            "sceneName": "tct",
+            "sources": [
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\tct\\resources\\back2.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\tct\\resources\\back2.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\tct\\resources\\back2.png",
+                "",
+                "",
+                ""
+            ],
+            "splitSources": [
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\tct\\temp\\0.000000_0.333333_0_15_temp.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\tct\\temp\\0.333333_0.666667_0_15_temp.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\tct\\temp\\0.666667_1.000000_0_15_temp.png",
+                "",
+                "",
+                ""
+            ]
+        }
+    ]
+}

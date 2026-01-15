@@ -358,8 +358,6 @@ CMakeFiles/TCast.dir/src/Window.cpp.obj: \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Elements/ElementTabSet.h \
  C:/Users/simon/Desktop/Code/TCast/include/Projector.h \
  C:/msys64/mingw64/include/c++/15.2.0/atomic \
- C:/Users/simon/Desktop/Code/TCast/libs/glad/include/glad/glad.h \
- C:/Users/simon/Desktop/Code/TCast/libs/glad/include/KHR/khrplatform.h \
  C:/msys64/mingw64/include/c++/15.2.0/thread \
  C:/msys64/mingw64/include/c++/15.2.0/bits/std_thread.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/this_thread_sleep.h \
@@ -367,8 +365,86 @@ CMakeFiles/TCast.dir/src/Window.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/ratio \
  C:/msys64/mingw64/include/c++/15.2.0/ctime \
  C:/msys64/mingw64/include/c++/15.2.0/bits/parse_numbers.h \
+ C:/msys64/mingw64/include/c++/15.2.0/chrono \
+ C:/Users/simon/Desktop/Code/TCast/libs/glad/include/glad/glad.h \
+ C:/Users/simon/Desktop/Code/TCast/libs/glad/include/KHR/khrplatform.h \
  C:/Users/simon/Desktop/Code/TCast/libs/GLFW/include/GLFW/glfw3.h \
  C:/Users/simon/Desktop/Code/TCast/include/stb_image.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavformat/avformat.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec_par.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/avutil.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/common.h \
+ C:/msys64/mingw64/include/inttypes.h \
+ C:/msys64/mingw64/include/c++/15.2.0/math.h \
+ C:/msys64/mingw64/include/c++/15.2.0/cmath \
+ C:/msys64/mingw64/include/math.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/specfun.h \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/gamma.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/special_function_util.h \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/bessel_function.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/beta_function.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/ell_integral.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/exp_integral.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/hypergeometric.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/legendre_function.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/modified_bessel_func.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/poly_hermite.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/poly_laguerre.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/riemann_zeta.tcc \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/attributes.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/error.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/macros.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/avconfig.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/version.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/mem.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/rational.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/mathematics.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/intfloat.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/log.h \
+ C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stdarg.h \
+ C:/msys64/mingw64/include/stdarg.h \
+ C:/msys64/mingw64/include/_mingw_stdarg.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/pixfmt.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/channel_layout.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/rational.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/pixfmt.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec_id.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/samplefmt.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavcodec/version_major.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavcodec/defs.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavcodec/packet.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/attributes.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/buffer.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/dict.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/version.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavcodec/version_major.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavcodec/defs.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavcodec/packet.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/log.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavformat/avio.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavformat/version_major.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavformat/version.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavformat/version_major.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/frame.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/avutil.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/buffer.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/channel_layout.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/dict.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/samplefmt.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/hwcontext.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/frame.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec_id.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavcodec/avcodec.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavcodec/version.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec_desc.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec_par.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libswscale/swscale.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libswscale/version_major.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libswscale/version.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/imgutils.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/pixdesc.h \
  C:/Users/simon/Desktop/Code/TCast/include/Shell.h \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Input.h \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Types.h \

@@ -1,0 +1,31 @@
+{
+    "scenes": [
+        {
+            "connections": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "sceneName": "TCast sample",
+            "sources": [
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\TCast sample\\resources\\nigger.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\TCast sample\\resources\\nigger.png",
+                "",
+                "",
+                "",
+                ""
+            ],
+            "splitSources": [
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            ]
+        }
+    ]
+}

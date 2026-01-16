@@ -10,8 +10,22 @@
                 0
             ],
             "sceneName": "test nigga balls",
-            "sources": [],
-            "splitSources": []
+            "sources": [
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\test nigga balls\\resources\\images\\test_thumbnail.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\test nigga balls\\resources\\images\\test_thumbnail.png",
+                "",
+                "",
+                "",
+                ""
+            ],
+            "splitSources": [
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            ]
         }
     ]
 }

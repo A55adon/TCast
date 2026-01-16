@@ -17,6 +17,11 @@ public:
     static Resource& getResource(int id);
 
     static std::vector<Resource> getResources();
+
+    static int createSplitResource(int sourceId, float start, float end, const std::string& nameSuffix);
+
+    static int getResourceIdByPath(const std::string &path);
+
 private:
     static ResourceManager rm;
 

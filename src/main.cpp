@@ -10,6 +10,8 @@
  * - creating a project with a existing name crashes
  * - resource renaming deleting doenst work
  * - deleting resources doesnt delete the file
+ * - image with spaces can lead to a crash
+ * - loading a project without a path crashes
  *
 
  * Todo:

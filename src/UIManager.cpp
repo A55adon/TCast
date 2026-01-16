@@ -700,69 +700,86 @@ void UIManager::refreshProjectors() {
     }
 }
 
+int generationid = 0;
+
 void UIManager::regenerateSplitSources()
 {
-    static uint64_t generationId = 0;
-    generationId++;
+    std::filesystem::path dir = saveData.path / saveData.projectName / "resources" / "splits";
+    if (!std::filesystem::exists(dir))
+        return;
 
-    namespace fs = std::filesystem;
+    for (const auto& entry : std::filesystem::directory_iterator(dir))
+    {
+        std::filesystem::remove_all(entry.path());
+    }
 
-    fs::path tempPath = saveData.path / saveData.projectName / "temp";
+    auto& scene = sceneManager.scenes[activeSceneIndex];
 
-    if (fs::exists(tempPath))
-        fs::remove_all(tempPath);
-    fs::create_directories(tempPath);
-
-    const int n = saveData.projectorCount;
-
-    sceneManager.scenes[activeSceneIndex].splitSources.clear();
-    sceneManager.scenes[activeSceneIndex].sources.resize(n);
-    sceneManager.scenes[activeSceneIndex].splitSources.resize(n);
-    sceneManager.scenes[activeSceneIndex].splitSources.assign(sceneManager.scenes[activeSceneIndex].sources.size(), "");
-    sceneManager.scenes[activeSceneIndex].connection.resize(n - 1);
-
+    scene.splitSources.resize(saveData.projectorCount);
 
     int i = 0;
-    while (i < n - 1) {
+    while (i < saveData.projectorCount)
+    {
+        // 1. detect group start
+        int groupStart = i;
+        int groupLength = 1;
 
-        if (sceneManager.scenes[activeSceneIndex].connection[i] == 1) {
-            int connectionStart = i;
-            int connectionLength = 2; // at least i and i+1
-
-            int j = i + 1;
-            while (j < n - 1 && sceneManager.scenes[activeSceneIndex].connection[j] == 1) {
-                ++connectionLength;
-                ++j;
-            }
-
-            //std::cout
-            //    << "start: " << connectionStart
-            //    << " | length: " << connectionLength
-            //    << std::endl;
-
-            for (int it = 0; it < connectionLength; ++it) {
-                float s = float(it) / float(connectionLength);
-                float e = float(it + 1) / float(connectionLength);
-                std::string src = sceneManager.scenes[activeSceneIndex].sources[connectionStart];
-                std::string dest_name = std::to_string(s) + "_" + std::to_string(e) + "_" + std::to_string(connectionStart) + "_" + std::to_string(generationId) + "_temp.png";
-                std::string dest = (saveData.path / saveData.projectName / "temp" / dest_name).string();
-
-                for (int i = connectionStart; i < connectionLength; ++i) {
-                    sceneManager.scenes[activeSceneIndex].sources[i] = src;
-                }
-
-                if (Utilities::cropImagePart(s,e,src,dest))
-                    sceneManager.scenes[activeSceneIndex].splitSources[it + connectionStart] = dest;
-            }
-
-            i = j + 1; // skip entire group
+        // 2. detect group length
+        while (groupStart + groupLength - 1 < saveData.projectorCount - 1 &&
+               scene.connection[groupStart + groupLength - 1])
+        {
+            groupLength++;
         }
-        else {
-            ++i;
+
+        const std::string& leftSource = scene.sources[groupStart];
+
+        // 3. assign leftmost source to all projectors in group
+        for (int k = 0; k < groupLength; ++k)
+        {
+            scene.sources[groupStart + k] = leftSource;
         }
+
+        // 4. split leftmost source if group > 1
+        if (groupLength > 1 && !leftSource.empty())
+        {
+            const std::filesystem::path outDir =
+                saveData.path / saveData.projectName /
+                "resources" / "splits";
+
+            std::filesystem::create_directories(outDir);
+
+            for (int k = 0; k < groupLength; ++k)
+            {
+                float start = float(k) / float(groupLength);
+                float end   = float(k + 1) / float(groupLength);
+
+                std::filesystem::path out =
+                    outDir /
+                    ("scene_" + std::to_string(activeSceneIndex) +
+                     "_proj_" + std::to_string(generationid) + "_" + std::to_string(groupStart + k) + ".png");
+
+                Utilities::cropImagePart(
+                    start,
+                    end,
+                    leftSource,
+                    out.string()
+                );
+
+                scene.splitSources[groupStart + k] = out.string();
+            }
+        }
+        else
+        {
+            // no split → normal source
+            scene.splitSources[groupStart] = leftSource;
+        }
+
+        i += groupLength; // advance to next group
     }
     refreshProjectors();
+    generationid++;
 }
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //Context menus
@@ -1243,42 +1260,28 @@ void showProjectorResourceSelection(int index)
     if (auto* body = getEl("body")) body->AppendChild(std::move(overlay));
 }
 
-
-
-void connect(int index)
-{
+void connect(int index) {
     if (index < 0 || index >= saveData.projectorCount - 1)
         return;
 
-    //create connection
     sceneManager.scenes[activeSceneIndex].connection[index] = 1;
 
-    //to prevent crashes if the project was just loaded
+    // make sure splitSources has space
     sceneManager.scenes[activeSceneIndex].splitSources.resize(saveData.projectorCount);
 
-    //set both splitparts to have the same native source
-    sceneManager.scenes[activeSceneIndex].sources[index + 1] = sceneManager.scenes[activeSceneIndex].sources[index];
-
-    //generate displayed sources
+    // regenerate splits for the scene
     UIManager::regenerateSplitSources();
 
     UIManager::refreshProjectors();
-
     UIManager::saveProject();
 }
-
 
 void disconnect(int index) {
     sceneManager.scenes[activeSceneIndex].connection[index] = 0;
 
+    // regenerate splits for the scene
     UIManager::regenerateSplitSources();
+
     UIManager::refreshProjectors();
-
-    sceneManager.scenes[activeSceneIndex].splitSources.clear();
-
     UIManager::saveProject();
-
-    sceneManager.scenes[activeSceneIndex].sources.resize(saveData.projectorCount);
-    sceneManager.scenes[activeSceneIndex].splitSources.resize(saveData.projectorCount);
-    sceneManager.scenes[activeSceneIndex].connection.resize(saveData.projectorCount);
 }

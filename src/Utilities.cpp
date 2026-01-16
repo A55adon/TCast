@@ -521,12 +521,12 @@ void Utilities::showPopup(const std::string& msg, bool isError) {
 
 void Utilities::showError(const std::string & msg) {
     std::cerr << msg << std::endl;
-    showPopup(msg, true);
+    //showPopup(msg, true);
 }
 
 void Utilities::showInfo(std::string msg) {
     std::clog << msg << std::endl;
-    showPopup(msg);
+    //showPopup(msg);
 }
 
 bool Utilities::isImageExt(const std::filesystem::path &p) {

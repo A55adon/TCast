@@ -83,7 +83,7 @@ Resource& ResourceHandler::createResource(std::filesystem::path path, std::strin
         if (ext == ".mp4") {
             r.isVideo = true;
 
-            r.path = getRelativeVideoPath() / (name + ".mp4");
+            r.path = getRelativeVideoPath() / ("video_mp4_" + std::to_string(rm.maxId) + ".mp4");
 
             std::filesystem::create_directories(r.path.parent_path());
             std::filesystem::copy_file(
@@ -92,7 +92,7 @@ Resource& ResourceHandler::createResource(std::filesystem::path path, std::strin
                 std::filesystem::copy_options::overwrite_existing
             );
 
-            const auto thumbPath = getRelativeThumbnailPath() / (name + ".png");
+            const auto thumbPath = getRelativeThumbnailPath() / ("image_png_tumbnail" + std::to_string(rm.maxId) + ".png");
             std::filesystem::create_directories(thumbPath.parent_path());
 
             if (Utilities::extractMp4Thumbnail(path.string(), thumbPath.string())) {
@@ -113,7 +113,7 @@ Resource& ResourceHandler::createResource(std::filesystem::path path, std::strin
         else {
             r.isVideo = false;
 
-            r.path = getRelativeImagePath() / (name + ".png");
+            r.path = getRelativeImagePath() / ("image_png_" + std::to_string(rm.maxId) + ".png");
 
             std::filesystem::create_directories(r.path.parent_path());
 
@@ -200,6 +200,48 @@ Resource& ResourceHandler::getResource(int id)
 
 std::vector<Resource> ResourceHandler::getResources() {
     return rm.resources;
+}
+
+int ResourceHandler::createSplitResource(int sourceId, float start, float end, const std::string& nameSuffix) {
+    Resource& src = getResource(sourceId);
+
+    if (!std::filesystem::exists(src.path))
+        throw std::runtime_error("Source resource missing: " + src.path.string());
+
+    std::string ext = getFileExtension(src.path.string());
+    if (ext != ".png") // Only handle images for cropping
+        throw std::runtime_error("Splits only supported for images");
+
+    // Build path for split image
+    std::filesystem::path splitPath = getRelativeImagePath() / (src.name + "_" + nameSuffix + ".png");
+    std::filesystem::create_directories(splitPath.parent_path());
+
+    // Crop the image
+    if (!Utilities::cropImagePart(start, end, src.path.string(), splitPath.string()))
+        throw std::runtime_error("Failed to crop image: " + src.path.string());
+
+    // Register as a resource
+    Resource r;
+    r.id = rm.maxId++;
+    r.name = src.name + "_" + nameSuffix;
+    r.path = splitPath;
+    r.isVideo = false;
+    r.thumbnail_id = -1;
+
+    rm.resources.push_back(r);
+    saveResources();
+
+    return r.id;
+}
+
+
+
+int ResourceHandler::getResourceIdByPath(const std::string& path) {
+    for (auto& r : rm.resources) {
+        if (r.path == path)
+            return r.id;
+    }
+    throw std::runtime_error("Resource not found for path: " + path);
 }
 
 bool ResourceHandler::verifyResources() {

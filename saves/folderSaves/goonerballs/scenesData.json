@@ -1,0 +1,31 @@
+{
+    "scenes": [
+        {
+            "connections": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "sceneName": "goonerballs",
+            "sources": [
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\goonerballs\\resources\\videos\\thumbnails\\test.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\goonerballs\\resources\\images\\WhatsApp Image 2026-01-15 at 18.48.22.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\goonerballs\\resources\\images\\untitled.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\goonerballs\\resources\\images\\WhatsApp Image 2026-01-15 at 18.48.22.png",
+                "",
+                ""
+            ],
+            "splitSources": [
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            ]
+        }
+    ]
+}

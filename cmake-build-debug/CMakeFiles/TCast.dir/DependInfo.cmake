@@ -17,6 +17,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp" "CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj" "gcc" "CMakeFiles/TCast.dir/libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp.obj.d"
   "C:/Users/simon/Desktop/Code/TCast/src/EventListener.cpp" "CMakeFiles/TCast.dir/src/EventListener.cpp.obj" "gcc" "CMakeFiles/TCast.dir/src/EventListener.cpp.obj.d"
   "C:/Users/simon/Desktop/Code/TCast/src/Projector.cpp" "CMakeFiles/TCast.dir/src/Projector.cpp.obj" "gcc" "CMakeFiles/TCast.dir/src/Projector.cpp.obj.d"
+  "C:/Users/simon/Desktop/Code/TCast/src/ResourceHandler.cpp" "CMakeFiles/TCast.dir/src/ResourceHandler.cpp.obj" "gcc" "CMakeFiles/TCast.dir/src/ResourceHandler.cpp.obj.d"
   "C:/Users/simon/Desktop/Code/TCast/src/UIManager.cpp" "CMakeFiles/TCast.dir/src/UIManager.cpp.obj" "gcc" "CMakeFiles/TCast.dir/src/UIManager.cpp.obj.d"
   "C:/Users/simon/Desktop/Code/TCast/src/UISetup.cpp" "CMakeFiles/TCast.dir/src/UISetup.cpp.obj" "gcc" "CMakeFiles/TCast.dir/src/UISetup.cpp.obj.d"
   "C:/Users/simon/Desktop/Code/TCast/src/Utilities.cpp" "CMakeFiles/TCast.dir/src/Utilities.cpp.obj" "gcc" "CMakeFiles/TCast.dir/src/Utilities.cpp.obj.d"

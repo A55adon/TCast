@@ -8,9 +8,14 @@ using json = nlohmann::json;
 void to_json(json &j, const SaveData &d);
 void to_json(json &j, const SceneData &s);
 void to_json(json &j, const SceneManager &m);
+void to_json(json &j, const Resource &r);
+void to_json(json &j, const ResourceManager &rm);
+
 void from_json(const json &j, SaveData &d);
 void from_json(const json &j, SceneData &s);
 void from_json(const json &j, SceneManager &m);
+void from_json(const json &j, Resource &r);
+void from_json(const json &j, ResourceManager &rm);
 
 class Utilities {
 public:

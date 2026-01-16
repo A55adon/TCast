@@ -43,6 +43,20 @@ struct SceneData {
         : sceneName(std::move(name)), sources(std::move(src)) {}
 };
 
+struct Resource {
+    int id;
+    std::filesystem::path path;
+    std::string name;
+
+    bool isVideo;
+    int thumbnail_id;
+};
+
+struct ResourceManager {
+    std::vector<Resource> resources;
+    int maxId;
+};
+
 inline SaveData saveData;
 
 struct SceneManager {
@@ -53,6 +67,8 @@ inline Window& getWindow() {
     static Window window(1920,1080);
     return window;
 }
+
+
 
 // Shared Functions
 

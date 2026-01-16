@@ -1,5 +1,7 @@
 #include "UISetup.h"
 
+#include "ResourceHandler.h"
+
 void setStartupEventListeners() {
     UISetup::setupTabListeners();
     UISetup::setupBrowseButtons();
@@ -160,6 +162,8 @@ void UISetup::setupProjectSelection() {
 }
 
 void setInterfaceEventListeners() {
+    ResourceHandler::initResources();
+
     if (!UIManager::loadScenesData()) {
         std::cerr << "Failed to load scenesData" << std::endl;
     }
@@ -440,58 +444,8 @@ void UISetup::setupResourcePanel() {
             return;
         }
 
-        for (size_t i = 0; i < pathList.size(); ++i) {
-            std::filesystem::path src(pathList[i]);
-            if (!std::filesystem::exists(src)) {
-                Utilities::showError("Datei nicht gefunden: " + src.string());
-                continue;
-            }
-
-            try {
-                std::filesystem::create_directories(
-                    saveData.path / saveData.projectName / "resources"
-                );
-
-                std::filesystem::path destination;
-
-                if (Utilities::isImageExt(src)) {
-                    destination =
-                        saveData.path / saveData.projectName / "resources" / (nameList[i] + ".png");
-
-                    if (!Utilities::convertToPng(src.string(), destination.string())) {
-                        Utilities::showError("Fehler beim Konvertieren: " + src.string());
-                        continue;
-                    }
-
-                    std::cout << "Converted image: " << src << " -> " << destination << std::endl;
-                }
-                else if (Utilities::isMp4Ext(src)) {
-                    destination = saveData.path / saveData.projectName / "resources" / (nameList[i] + ".mp4");
-                    std::filesystem::path thumb_destination = saveData.path / saveData.projectName / "resources" / "thumbs" / (nameList[i] + ".png");
-                    std::filesystem::create_directories(thumb_destination.parent_path());
-
-
-                    std::filesystem::copy_file(src, destination, std::filesystem::copy_options::overwrite_existing);
-
-                    if (!Utilities::extractMp4Thumbnail(destination.string(), thumb_destination.string())) {
-                        std::cerr << "Couldn't generate thumbnail" << std::endl;
-                        //TODO: userfeedback + nothumb image replacement
-                    }
-
-                    std::cout << "Copied mp4: " << src << " -> " << destination << std::endl;
-                }
-                else {
-                    Utilities::showError(
-                        "Nicht unterstützter Dateityp: " + src.extension().string()
-                    );
-                    continue;
-                }
-            }
-            catch (std::filesystem::filesystem_error& e) {
-                Utilities::showError("Fehler: " + std::string(e.what()));
-            }
-
-        }
+        for (size_t i = 0; i < pathList.size(); ++i)
+            ResourceHandler::createResource(pathList[i], nameList[i]);
 
         dialog->SetAttribute("style", "display:none;");
         UIManager::refreshResourcePanel();

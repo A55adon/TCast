@@ -1,5 +1,7 @@
 #include "UIManager.h"
 
+#include "ResourceHandler.h"
+
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // Saving Functions
 
@@ -538,54 +540,61 @@ void UIManager::switchToStartup() {
     }
 }
 
-void UIManager::refreshResourcePanel() {
+void UIManager::refreshResourcePanel()
+{
     auto* resourceList = getEl("resource-list");
 
     while (resourceList->GetNumChildren() > 0)
         resourceList->RemoveChild(resourceList->GetChild(0));
 
-    auto resourcesDir = saveData.path / saveData.projectName / "resources";
-    auto thumbsDir = resourcesDir / "thumbs";
+    const auto& resources = ResourceHandler::getResources();
 
     int i = 0;
-
-    for (auto& entry : std::filesystem::directory_iterator(resourcesDir)) {
-        if (!entry.is_regular_file())
+    for (const Resource& r : resources)
+    {
+        if (!r.isVideo && r.name.size() >= 10 &&
+        r.name.compare(r.name.size() - 10, 10, "_thumbnail") == 0)
             continue;
 
-        const auto ext = entry.path().extension().string();
-        const bool isImage = (ext == ".png");
-        const bool isVideo = (ext == ".mp4");
-
-        if (!isImage && !isVideo)
-            continue;
-
-        const std::string stem = entry.path().stem().string();
-
-        // Decide thumbnail source
         std::filesystem::path previewImage;
-        if (isImage) {
-            previewImage = entry.path();
-        } else {
-            previewImage = thumbsDir / (stem + ".png");
-            if (!std::filesystem::exists(previewImage)) {
-                // Thumbnail missing → skip or show placeholder
-                continue;
+
+        if (r.isVideo)
+        {
+            // find thumbnail resource
+            const Resource* thumb = nullptr;
+            for (const Resource& candidate : ResourceHandler::getResources())
+            {
+                if (candidate.id == r.thumbnail_id)
+                {
+                    thumb = &candidate;
+                    break;
+                }
             }
+
+            // ignore missing thumbnail
+            if (!thumb || !std::filesystem::exists(thumb->path))
+                continue;
+
+            previewImage = thumb->path;
+        }
+        else
+        {
+            if (!std::filesystem::exists(r.path))
+                continue;
+
+            previewImage = r.path;
         }
 
         Rml::ElementPtr item = getWindow().document->CreateElement("div");
         item->SetAttribute("class", "resource-item");
         item->SetAttribute("id", "resource-item-" + std::to_string(i));
 
-        // Image preview
         Rml::ElementPtr img = getWindow().document->CreateElement("img");
         img->SetAttribute("src", previewImage.string());
         img->SetAttribute("alt", "Resource");
 
-        // Label
         Rml::ElementPtr p = getWindow().document->CreateElement("p");
-        p->AppendChild(getWindow().document->CreateTextNode(stem));
+        p->AppendChild(getWindow().document->CreateTextNode(r.name));
 
         item->AppendChild(std::move(img));
         item->AppendChild(std::move(p));
@@ -593,15 +602,17 @@ void UIManager::refreshResourcePanel() {
         if (i == activeResourceIndex)
             item->SetClass("active", true);
 
+        const int resourceId = r.id;
         item->AddEventListener(
             Rml::EventId::Mouseup,
-            new ResourceItemHandler(getWindow().document, i)
+            new ResourceItemHandler(getWindow().document, resourceId)
         );
 
         resourceList->AppendChild(std::move(item));
         i++;
     }
 }
+
 
 
 void UIManager::refreshProjectors() {
@@ -1071,15 +1082,14 @@ void showProjectorResourceSelection(int index)
         "position:fixed;left:0;top:0;width:100%;height:100%;display:flex;align-items:center;"
         "justify-content:center;background:rgba(0,0,0,0.5);z-index:2000;");
 
-
     Rml::ElementPtr dialog = doc->CreateElement("div");
     dialog->SetId("projector-resource-dialog");
     dialog->SetAttribute("style",
-    "width:80%;max-width:600px;max-height:80%;"
-    "overflow-y:auto;overflow-x:hidden;"
-    "background:#34495e;border-radius:8px;"
-    "padding:12px;box-sizing:border-box;"
-    "display:flex;flex-direction:column;gap:8px;");
+        "width:80%;max-width:600px;max-height:80%;"
+        "overflow-y:auto;overflow-x:hidden;"
+        "background:#34495e;border-radius:8px;"
+        "padding:12px;box-sizing:border-box;"
+        "display:flex;flex-direction:column;gap:8px;");
 
     overlay->AppendChild(std::move(dialog));
 
@@ -1088,37 +1098,31 @@ void showProjectorResourceSelection(int index)
     struct CloseOverlayHandler : Rml::EventListener {
         Rml::Element* overlay;
         CloseOverlayHandler(Rml::Element* o) : overlay(o) {}
-
-        void ProcessEvent(Rml::Event& e) override {
+        void ProcessEvent(Rml::Event&) override {
             if (auto* body = getEl("body"))
                 body->RemoveChild(overlay);
         }
     };
 
-    //overlay->AddEventListener(Rml::EventId::Click, new CloseOverlayHandler(overlay_raw));
-
-    Rml::Element* dialog_raw = overlay_raw->GetChild(0);
-    struct StopPropagationHandler : Rml::EventListener {
-        void ProcessEvent(Rml::Event& e) override {
-            e.StopPropagation();
-        }
-    };
-
-    // Close overlay on ANY mouse interaction (left or right)
     overlay_raw->AddEventListener(Rml::EventId::Mousedown, new CloseOverlayHandler(overlay_raw));
     overlay_raw->AddEventListener(Rml::EventId::Mouseup,   new CloseOverlayHandler(overlay_raw));
 
-    // Prevent dialog from receiving close events
+    Rml::Element* dialog_raw = overlay_raw->GetChild(0);
+
+    struct StopPropagationHandler : Rml::EventListener {
+        void ProcessEvent(Rml::Event& e) override { e.StopPropagation(); }
+    };
+
     dialog_raw->AddEventListener(Rml::EventId::Mousedown, new StopPropagationHandler());
     dialog_raw->AddEventListener(Rml::EventId::Mouseup,   new StopPropagationHandler());
 
+    // "None" row
     {
         Rml::ElementPtr row = doc->CreateElement("div");
         row->SetAttribute("style",
             "display:flex;align-items:center;gap:14px;padding:8px;background:#3f5870;"
             "border-radius:6px;cursor:pointer;width:100%;box-sizing:border-box;");
 
-        // Fake transparent thumbnail
         Rml::ElementPtr img = doc->CreateElement("div");
         img->SetAttribute("style",
             "width:64px;height:64px;border-radius:4px;"
@@ -1143,76 +1147,81 @@ void showProjectorResourceSelection(int index)
                 if (projectorIndex >= scene.sources.size()) {
                     scene.sources.resize(projectorIndex + 1);
                 }
-                scene.sources[projectorIndex] = "";   // IMPORTANT: empty string = no image
-                std::cout << "Cleared resource[" << projectorIndex << "]" << std::endl;
-
+                scene.sources[projectorIndex] = "";
                 if (auto* body = getEl("body")) body->RemoveChild(overlay);
                 UIManager::refreshProjectors();
                 UIManager::saveProject();
             }
         };
 
-        row->AddEventListener(
-            Rml::EventId::Mouseup,
+        row.get()->AddEventListener(Rml::EventId::Mouseup,
             new ProjectorResourceSelectHandler_Clear(index, overlay_raw));
 
         dialog_raw->AppendChild(std::move(row));
     }
 
-    auto directory = saveData.path / saveData.projectName / "resources";
-    for (auto& entry : std::filesystem::directory_iterator(directory)) {
-        if (!entry.is_regular_file()) continue;
-        if (entry.path().extension() != ".png" && entry.path().extension() != ".mp4") continue;
+    // --- Populate from ResourceHandler ---
+    std::vector<Resource> resources = ResourceHandler::getResources();
 
-        std::string filename = entry.path().filename().string();
-        std::string pathstr;
-        if (entry.path().extension() == ".png") {
-            pathstr = (directory / filename).string();
-        } else { // video
+    for (const Resource& r : resources) {
 
-            const std::string stem = entry.path().stem().string();
-            pathstr = (directory / "thumbs" /  (stem + ".png")).string();
+        // skip thumbnail resources
+        if (!r.isVideo && r.name.size() >= 10 &&
+            r.name.compare(r.name.size() - 10, 10, "_thumbnail") == 0)
+            continue;
+
+        std::filesystem::path previewImage;
+
+        if (r.isVideo) {
+            // find thumbnail resource
+            const Resource* thumb = nullptr;
+            for (const Resource& candidate : resources) {
+                if (candidate.id == r.thumbnail_id) {
+                    thumb = &candidate;
+                    break;
+                }
+            }
+
+            if (!thumb || !std::filesystem::exists(thumb->path))
+                continue;
+
+            previewImage = thumb->path;
+        } else {
+            if (!std::filesystem::exists(r.path))
+                continue;
+
+            previewImage = r.path;
         }
 
         Rml::ElementPtr row = doc->CreateElement("div");
         row->SetAttribute("style",
             "display:flex;align-items:center;gap:14px;padding:8px;background:#3f5870;border-radius:6px;"
-            "cursor:pointer;");
+            "cursor:pointer;width:100%;box-sizing:border-box;");
 
         Rml::ElementPtr img = doc->CreateElement("img");
-        img->SetAttribute("src", pathstr);
+        img->SetAttribute("src", previewImage.string());
         img->SetAttribute("style", "width:64px;height:64px;object-fit:cover;border-radius:4px;");
 
         Rml::ElementPtr label = doc->CreateElement("div");
         label->SetAttribute("style", "color:white;font-size:16px;");
-        label->SetInnerRML(filename);
+        label->SetInnerRML(r.name);
 
         row->AppendChild(std::move(img));
         row->AppendChild(std::move(label));
-
-        row->SetAttribute("style","display:flex;align-items:center;gap:14px;padding:8px;"
-            "background:#3f5870;border-radius:6px;cursor:pointer;"
-            "width:100%;box-sizing:border-box;");
-
-
-
-        pathstr = (directory / filename).string(); // reset before applying to projector
-
-        Rml::Element* row_raw = row.get();
 
         struct ProjectorResourceSelectHandler : Rml::EventListener {
             int projectorIndex;
             std::string imagePath;
             Rml::Element* overlay;
-            ProjectorResourceSelectHandler(int idx, const std::string& p, Rml::Element* o)
-                : projectorIndex(idx), imagePath(p), overlay(o) {}
+
+            ProjectorResourceSelectHandler(int idx, std::string p, Rml::Element* o)
+                : projectorIndex(idx), imagePath(std::move(p)), overlay(o) {}
+
             void ProcessEvent(Rml::Event&) override {
                 auto& scene = sceneManager.scenes[activeSceneIndex];
-                if (projectorIndex >= scene.sources.size()) {
+                if (projectorIndex >= scene.sources.size())
                     scene.sources.resize(projectorIndex + 1);
-                }
                 scene.sources[projectorIndex] = imagePath;
-                std::cout << "Set resource[" << projectorIndex << "] to " << imagePath << std::endl;
                 if (auto* body = getEl("body")) body->RemoveChild(overlay);
                 UIManager::refreshProjectors();
                 UIManager::saveProject();
@@ -1220,8 +1229,13 @@ void showProjectorResourceSelection(int index)
             }
         };
 
-        row_raw->AddEventListener(Rml::EventId::Mouseup,
-            new ProjectorResourceSelectHandler(index, pathstr, overlay_raw));
+
+        // click handler to assign resource to projector
+        row.get()->AddEventListener(
+            Rml::EventId::Mouseup,
+            new ProjectorResourceSelectHandler(index, previewImage.string(), overlay_raw)
+        );
+
 
         dialog_raw->AppendChild(std::move(row));
     }

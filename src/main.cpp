@@ -7,6 +7,9 @@
  * - when creating a new project or loading a project from the dropdown of the main interface it does not switch to that project automatically
  * - images flip around when you rename them?
  * - renaming does not work at all
+ * - creating a project with a existing name crashes
+ * - resource renaming deleting doenst work
+ * - deleting resources doesnt delete the file
  *
 
  * Todo:
@@ -28,6 +31,8 @@
  *  - visuals
  *  - |multiselect
  *  - |drag n drop resource selection
+ *  - |request missing
+ *  - cleanup
 */
 
 #include "UISetup.h"

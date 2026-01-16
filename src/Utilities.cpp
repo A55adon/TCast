@@ -43,6 +43,25 @@ void to_json(json &j, const SceneManager &m) {
     };
 }
 
+void to_json(json& j, const Resource& r)
+{
+    j = json{
+            {"id", r.id},
+            {"path", r.path},
+            {"name", r.name},
+            {"isVideo", r.isVideo},
+            {"thumbnail_id", r.thumbnail_id}
+    };
+}
+
+
+void to_json(json &j, const ResourceManager &rm) {
+    j = json{
+        {"maxId", rm.maxId},
+        {"resources", rm.resources}
+    };
+}
+
 void from_json(const json &j, SaveData &d) {
     j.at("projectName").get_to(d.projectName);
     j.at("projectorCount").get_to(d.projectorCount);
@@ -60,6 +79,19 @@ void from_json(const json &j, SceneData &s) {
 
 void from_json(const json &j, SceneManager &m) {
     j.at("scenes").get_to(m.scenes);
+}
+
+void from_json(const json &j, Resource &r) {
+    j.at("id").get_to(r.id);
+    j.at("path").get_to(r.path);
+    j.at("name").get_to(r.name);
+    j.at("isVideo").get_to(r.isVideo);
+    j.at("thumbnail_id").get_to(r.thumbnail_id);
+}
+
+void from_json(const json &j, ResourceManager &rm) {
+    j.at("maxId").get_to(rm.maxId);
+    j.at("resources").get_to(rm.resources);
 }
 
 // Utilities class implementations
@@ -616,5 +648,7 @@ bool Utilities::convertToPng(const std::string& src, const std::string& dst) {
 Rml::Element* getEl(const std::string& str) {
     if (Rml::Element* temp = getWindow().document->GetElementById(str))
         return temp;
+
+    std::cerr << "Coulnd not get element " << str << std::endl;
     return nullptr;
 }

@@ -17,6 +17,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/TCast.dir/src/EventListener.cpp.obj.d"
   "CMakeFiles/TCast.dir/src/Projector.cpp.obj"
   "CMakeFiles/TCast.dir/src/Projector.cpp.obj.d"
+  "CMakeFiles/TCast.dir/src/ResourceHandler.cpp.obj"
+  "CMakeFiles/TCast.dir/src/ResourceHandler.cpp.obj.d"
   "CMakeFiles/TCast.dir/src/UIManager.cpp.obj"
   "CMakeFiles/TCast.dir/src/UIManager.cpp.obj.d"
   "CMakeFiles/TCast.dir/src/UISetup.cpp.obj"

@@ -357,6 +357,30 @@ src/Projector.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/src/Projector.cpp.s
 .PHONY : src/Projector.cpp.s
 
+src/ResourceHandler.obj: src/ResourceHandler.cpp.obj
+.PHONY : src/ResourceHandler.obj
+
+# target to build an object file
+src/ResourceHandler.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/src/ResourceHandler.cpp.obj
+.PHONY : src/ResourceHandler.cpp.obj
+
+src/ResourceHandler.i: src/ResourceHandler.cpp.i
+.PHONY : src/ResourceHandler.i
+
+# target to preprocess a source file
+src/ResourceHandler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/src/ResourceHandler.cpp.i
+.PHONY : src/ResourceHandler.cpp.i
+
+src/ResourceHandler.s: src/ResourceHandler.cpp.s
+.PHONY : src/ResourceHandler.s
+
+# target to generate assembly for a file
+src/ResourceHandler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/src/ResourceHandler.cpp.s
+.PHONY : src/ResourceHandler.cpp.s
+
 src/UIManager.obj: src/UIManager.cpp.obj
 .PHONY : src/UIManager.obj
 
@@ -538,6 +562,9 @@ help:
 	@echo ... src/Projector.obj
 	@echo ... src/Projector.i
 	@echo ... src/Projector.s
+	@echo ... src/ResourceHandler.obj
+	@echo ... src/ResourceHandler.i
+	@echo ... src/ResourceHandler.s
 	@echo ... src/UIManager.obj
 	@echo ... src/UIManager.i
 	@echo ... src/UIManager.s

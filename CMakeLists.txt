@@ -24,6 +24,8 @@ set(SOURCES
         src/EventListener.cpp
         include/EventListener.h
         src/nanosvg_impl.cpp
+        src/ResourceHandler.cpp
+        include/ResourceHandler.h
 )
 
 add_executable(TCast ${SOURCES})

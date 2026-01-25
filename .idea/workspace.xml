@@ -31,21 +31,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1152f206-875e-46cb-bb3e-fd323fcd6a4a" name="Changes" comment="Image splitting works; Video splitting and displaying works; Added debug ui with f1; Videos play a bit laggy">
+    <list default="true" id="1152f206-875e-46cb-bb3e-fd323fcd6a4a" name="Changes" comment="Videos play correctly">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/objects.a" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Projector.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Projector.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UIManager.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UIManager.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/TCast.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/TCast.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/Projector.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/Projector.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/splits/scene_0_proj_0_0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/splits/scene_0_proj_0_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/splits/scene_0_proj_0_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/splits/scene_0_proj_0_4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/scenesData.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/scenesData.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Projector.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Projector.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UIManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/UIManager.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -214,7 +201,7 @@
       <workItem from="1769276068656" duration="10098000" />
       <workItem from="1769292612258" duration="6333000" />
       <workItem from="1769362931308" duration="319000" />
-      <workItem from="1769367618686" duration="2087000" />
+      <workItem from="1769367618686" duration="2793000" />
     </task>
     <task id="LOCAL-00001" summary="Added different dependencies">
       <option name="closed" value="true" />
@@ -440,7 +427,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769367863902</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Videos play correctly">
+      <option name="closed" value="true" />
+      <created>1769369912453</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1769369912453</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -491,7 +486,8 @@
     <MESSAGE value="Added resourcehandler which has controll over all assets" />
     <MESSAGE value="problems with splitting and displaying images" />
     <MESSAGE value="Image splitting works; Video splitting and displaying works; Added debug ui with f1; Videos play a bit laggy" />
-    <option name="LAST_COMMIT_MESSAGE" value="Image splitting works; Video splitting and displaying works; Added debug ui with f1; Videos play a bit laggy" />
+    <MESSAGE value="Videos play correctly" />
+    <option name="LAST_COMMIT_MESSAGE" value="Videos play correctly" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

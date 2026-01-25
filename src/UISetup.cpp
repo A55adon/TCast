@@ -516,28 +516,62 @@ void UISetup::setupProjection() {
 
         // --- Stop and clear existing projectors ---
         for (auto& proj : projectors) {
-            proj->requestDie();
-            if (proj->th.joinable())
-                proj->th.join();
-            delete proj;
+            if (proj) {
+                proj->requestDie();
+                if (proj->th.joinable())
+                    proj->th.join();
+                delete proj;
+            }
         }
         projectors.clear();
 
-        // --- Regenerate split sources according to current connections ---
+        // --- Regenerate split sources (this now populates splitInfo) ---
         UIManager::regenerateSplitSources();
 
-        // --- Create new projectors ---
+        auto& currentScene = sceneManager.scenes[activeSceneIndex];
+
+        // --- Create new projectors with split info ---
         for (int i = 0; i < saveData.projectorCount; i++) {
-            std::string imgPath = sceneManager.scenes[activeSceneIndex].splitSources[i];
+            // Check if we have a valid splitInfo for this projector
+            if (i < currentScene.splitInfo.size()) {
+                const auto& splitInfo = currentScene.splitInfo[i];
 
-            // If no split image, fallback to original source
-            if (imgPath.empty())
-                imgPath = sceneManager.scenes[activeSceneIndex].sources[i];
+                // Get the actual resource path using ResourceHandler
+                std::string resourcePath;
+                try {
+                    if (splitInfo.resourceId != -1) {
+                        Resource& resource = ResourceHandler::getResource(splitInfo.resourceId);
+                        resourcePath = resource.path.string();
 
-            auto p = new Projector(i + 1, imgPath);
-            projectors.push_back(p);
+                        std::cout << "Launching projector " << i
+                                  << " with resource: " << resourcePath
+                                  << " (ID: " << splitInfo.resourceId << ")"
+                                  << " Split: " << (splitInfo.isSplit ? "Yes" : "No");
+
+                        if (splitInfo.isSplit) {
+                            std::cout << " Range: " << splitInfo.start << " - " << splitInfo.end;
+                        }
+                        std::cout << std::endl;
+
+                        // Create projector with split info
+                        auto p = new Projector(i + 1, resourcePath, splitInfo);
+                        projectors.push_back(p);
+                    } else {
+                        std::cout << "No resource ID for projector " << i << std::endl;
+                        // Create empty projector or skip
+                        projectors.push_back(nullptr);
+                    }
+                } catch (const std::exception& e) {
+                    std::cerr << "Error launching projector " << i << ": " << e.what() << std::endl;
+                    projectors.push_back(nullptr);
+                }
+            } else {
+                std::cout << "No split info for projector " << i << std::endl;
+                projectors.push_back(nullptr);
+            }
         }
 
+        std::cout << "[Info] Projectors started, count: " << projectors.size() << std::endl;
     }));
 
     auto *stop = getEl("stop-projection");
@@ -545,16 +579,21 @@ void UISetup::setupProjection() {
 
         // --- Stop all projectors safely ---
         for (auto& proj : projectors) {
-            proj->requestDie();
+            if (proj) {
+                proj->requestDie();
+            }
         }
 
+        // Wait for all threads to finish
         for (auto& proj : projectors) {
-            if (proj->th.joinable())
-                proj->th.join();
-            delete proj;
+            if (proj) {
+                if (proj->th.joinable())
+                    proj->th.join();
+                delete proj;
+            }
         }
 
         projectors.clear();
-        std::cout << "[Info] Projectors stopped, count: " << projectors.size() << std::endl;
+        std::cout << "[Info] Projectors stopped" << std::endl;
     }));
 }

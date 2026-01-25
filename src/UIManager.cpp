@@ -43,6 +43,8 @@ bool UIManager::saveProject() {
             return false;
         }
     }
+    if (!ResourceHandler::saveResources())
+        return false;
     return true;
 }
 
@@ -463,6 +465,23 @@ void UIManager::populateFolders(const std::string& path) {
                 }
             }
         ));
+        folderDiv->AddEventListener(Rml::EventId::Dblclick, new ButtonHandler(
+            [fullPath] {
+                if (auto *inputEl = getWindow().document->GetElementById("load-dir-input")) {
+                    if (auto *input = dynamic_cast<Rml::ElementFormControl *>(inputEl)) {
+                        input->SetValue(Utilities::toBackwardSlashes(fullPath));
+                    }
+                }
+                if (loadProject()) {
+                    getWindow().document->Hide();
+                    std::cout << "Project loaded: " << saveData.projectName << std::endl;
+                    if ((getWindow().document = getWindow().context->LoadDocument("assets/interface.rml"))) {
+                        getWindow().document->Show();
+                    }
+                    setInterfaceEventListeners();
+                }
+            }
+        ));
 
         folderDiv->AppendChild(std::move(trashBtn));
         container->AppendChild(std::move(folderDiv));
@@ -587,7 +606,7 @@ void UIManager::refreshResourcePanel()
 
         Rml::ElementPtr item = getWindow().document->CreateElement("div");
         item->SetAttribute("class", "resource-item");
-        item->SetAttribute("id", "resource-item-" + std::to_string(i));
+        item->SetAttribute("id", "resource-item-" + std::to_string(r.id));
 
         Rml::ElementPtr img = getWindow().document->CreateElement("img");
         img->SetAttribute("src", previewImage.string());
@@ -613,71 +632,142 @@ void UIManager::refreshResourcePanel()
     }
 }
 
-
-
 void UIManager::refreshProjectors() {
-
     auto* projectorGrid = getEl("projectorGrid");
     if (!projectorGrid) return;
 
+    // remove all children
     while (projectorGrid->GetNumChildren() > 0)
         projectorGrid->RemoveChild(projectorGrid->GetChild(0));
+    int n = std::max(1, saveData.projectorCount);
 
-    int n = saveData.projectorCount;
+    // container metrics
+    float gridWidth = static_cast<float>(projectorGrid->GetClientWidth());
+    gridWidth -= 60.f;
+    const int totalConnectors = std::max(0, n - 1);
 
+    // MUST match RCSS exactly
+    const float gap = 10.0f;            // .projector-grid gap
+    const float connectorWidth = 16.0f; // .connect-btn width
+    const float gridPadding = 0.0f;     // set to 16.0f ONLY if grid has 8px left + right padding
+
+    // total non-projector width
+    const float reservedWidth =
+        gridPadding +
+        (totalConnectors * connectorWidth) +
+        ((n - 1) * gap);
+
+    // usable space for projectors
+    float usableWidth = gridWidth - reservedWidth;
+    if (usableWidth <= 0.0f)
+        usableWidth = 1.0f;
+
+    // ideal width per projector
+    float projectorWidth = usableWidth / static_cast<float>(n);
+
+    // hard upper bound: cannot exceed container slice
+    const float maxProjectorWidth = gridWidth / static_cast<float>(n);
+    if (projectorWidth > maxProjectorWidth)
+        projectorWidth = maxProjectorWidth;
+
+    // optional minimum size (only if you WANT overflow/scrolling)
+    const float minProjectorWidth = 0.0f;
+    if (projectorWidth < minProjectorWidth)
+        projectorWidth = minProjectorWidth;
+
+    // derive height AFTER width is final
+    float projectorHeight = projectorWidth * 9.0f / 16.0f;
+
+   // std::cout << "\n=== refreshProjectors DEBUG ===\n";
+   // std::cout << std::fixed << std::setprecision(2);
+//
+   // std::cout << "gridWidth        = " << gridWidth << " px\n";
+   // std::cout << "n                = " << n << "\n";
+   // std::cout << "totalConnectors  = " << totalConnectors << "\n";
+   // std::cout << "gap              = " << gap << " px\n";
+   // std::cout << "connectorWidth   = " << connectorWidth << " px\n";
+   // std::cout << "gridPadding      = " << gridPadding << " px\n";
+//
+   // std::cout << "reservedWidth    = " << reservedWidth << " px\n";
+   // std::cout << "  connectors     = " << (totalConnectors * connectorWidth) << " px\n";
+   // std::cout << "  gaps           = " << ((n - 1) * gap) << " px\n";
+//
+   // std::cout << "usableWidth      = " << usableWidth << " px\n";
+   // std::cout << "projectorWidth   = " << projectorWidth << " px\n";
+   // std::cout << "projectorHeight  = " << projectorHeight << " px\n";
+
+
+
+    // container styling (flex row, horizontal scroll when needed)
     projectorGrid->SetProperty("display", "flex");
     projectorGrid->SetProperty("flex-direction", "row");
     projectorGrid->SetProperty("flex-wrap", "nowrap");
-    projectorGrid->SetProperty("gap", "10px");
-    projectorGrid->SetProperty("width", "100%");
-    projectorGrid->SetProperty("height", "100%");
+    projectorGrid->SetProperty("gap", std::to_string((int)gap) + "px");
     projectorGrid->SetProperty("align-items", "center");
+    projectorGrid->SetProperty("overflow-x", "auto");
+    projectorGrid->SetProperty("overflow-x", "visible");
 
+
+    // ensure scene arrays sizes
     for (auto& scene : sceneManager.scenes) {
         scene.connection.resize(n);
     }
-
     sceneManager.scenes[activeSceneIndex].splitSources.resize(n);
 
     for (int i = 0; i < n; ++i) {
-
-        // ---- PROJECTOR ----
+        // ---- PROJECTOR wrapper (fixed px size so inner can maintain 16:9) ----
         Rml::ElementPtr projector = getWindow().document->CreateElement("div");
         projector->SetClass("projector", true);
         projector->SetId("projector-" + std::to_string(i));
-        projector->SetProperty("flex", "1 1 0");
+
+        // prevent flex from stretching the box
+        projector->SetProperty("flex", "0 0 auto");
+
+        // set explicit pixel size
+        int pw = static_cast<int>(std::round(projectorWidth));
+        int ph = static_cast<int>(std::round(projectorHeight));
+        projector->SetProperty("width", std::to_string(pw) + "px");
+        projector->SetProperty("height", std::to_string(ph) + "px");
         projector->SetProperty("overflow", "hidden");
 
-        if (i < sceneManager.scenes[activeSceneIndex].sources.size() && !sceneManager.scenes[activeSceneIndex].sources[i].empty())
+        // create an inner element that will hold the background image and preserve aspect ratio
+        Rml::ElementPtr inner = getWindow().document->CreateElement("div");
+        inner->SetClass("projector-inner", true);
+        inner->SetProperty("width", "100%");
+        inner->SetProperty("height", "100%");
+
+        if (i < sceneManager.scenes[activeSceneIndex].sources.size()
+            && !sceneManager.scenes[activeSceneIndex].sources[i].empty())
         {
             std::string src;
 
-            if (i < sceneManager.scenes[activeSceneIndex].splitSources.size() &&
-                !sceneManager.scenes[activeSceneIndex].splitSources[i].empty())
+            if (i < sceneManager.scenes[activeSceneIndex].splitSources.size()
+                && !sceneManager.scenes[activeSceneIndex].splitSources[i].empty())
             {
                 src = sceneManager.scenes[activeSceneIndex].splitSources[i];
-            }
-            else
-            {
+            } else {
                 src = sceneManager.scenes[activeSceneIndex].sources[i];
             }
 
             std::filesystem::path p(src);
-
             if (p.extension() == ".mp4") {
                 src = (p.parent_path() / "thumbs" / (p.stem().string() + ".png")).string();
             }
 
-            projector->SetAttribute(
-                "style",
-                "decorator: image(" + src + ");"
-            );
+            // apply the image to the inner element (background-size: cover is in RCSS)
+            inner->SetAttribute("style", "decorator: image(" + src + ");");
         } else {
-            projector->SetInnerRML("Projector " + std::to_string(i + 1));
+            // fall back text centered inside inner
+            inner->SetInnerRML("Projector " + std::to_string(i + 1));
         }
 
-        projector->AddEventListener( Rml::EventId::Mouseup, new ProjectorHandler(getWindow().document, i) );
+        // attach the inner to the wrapper
+        projector->AppendChild(std::move(inner));
 
+        // click handler for selecting projector
+        projector->AddEventListener(Rml::EventId::Mouseup, new ProjectorHandler(getWindow().document, i));
+
+        // add wrapper to the grid
         projectorGrid->AppendChild(std::move(projector));
 
         // ---- CONNECT BUTTON (except after last projector) ----
@@ -690,95 +780,163 @@ void UIManager::refreshProjectors() {
             else
                 connectBtn->SetClass("disconnected", true);
 
-            connectBtn->AddEventListener(
-                Rml::EventId::Click,
-                new ConnectHandler(i)
-            );
+            // size and vertical centering
+            connectBtn->SetProperty("width", std::to_string(static_cast<int>(connectorWidth)) + "px");
+            // make connect button height proportional to projector (60% of projector height)
+            int ch = std::max(10, static_cast<int>(std::round(projectorHeight * 0.6f)));
+            connectBtn->SetProperty("height", std::to_string(ch) + "px");
+            connectBtn->SetProperty("align-self", "center");
+
+            connectBtn->AddEventListener(Rml::EventId::Click, new ConnectHandler(i));
 
             projectorGrid->AppendChild(std::move(connectBtn));
         }
     }
 }
 
+
 int generationid = 0;
 
 void UIManager::regenerateSplitSources()
 {
-    std::filesystem::path dir = saveData.path / saveData.projectName / "resources" / "splits";
-    if (!std::filesystem::exists(dir))
-        return;
-
-    for (const auto& entry : std::filesystem::directory_iterator(dir))
-    {
-        std::filesystem::remove_all(entry.path());
-    }
-
     auto& scene = sceneManager.scenes[activeSceneIndex];
 
+    scene.sources.resize(saveData.projectorCount);
+    scene.splitSources.clear();
     scene.splitSources.resize(saveData.projectorCount);
+    scene.splitInfo.clear();
+    scene.splitInfo.resize(saveData.projectorCount);
+
+    std::filesystem::path dir =
+        saveData.path / saveData.projectName / "resources" / "splits";
+
+    if (!std::filesystem::exists(dir))
+        std::filesystem::create_directories(dir);
+
+    // Clear old split images for this scene
+    for (const auto& entry : std::filesystem::directory_iterator(dir)) {
+        if (entry.path().filename().string().find("scene_" + std::to_string(activeSceneIndex)) != std::string::npos) {
+            std::filesystem::remove_all(entry.path());
+        }
+    }
 
     int i = 0;
     while (i < saveData.projectorCount)
     {
-        // 1. detect group start
         int groupStart = i;
         int groupLength = 1;
 
-        // 2. detect group length
         while (groupStart + groupLength - 1 < saveData.projectorCount - 1 &&
                scene.connection[groupStart + groupLength - 1])
         {
             groupLength++;
         }
 
-        const std::string& leftSource = scene.sources[groupStart];
+        const std::string leftSource = scene.sources[groupStart];
 
-        // 3. assign leftmost source to all projectors in group
         for (int k = 0; k < groupLength; ++k)
-        {
             scene.sources[groupStart + k] = leftSource;
-        }
 
-        // 4. split leftmost source if group > 1
         if (groupLength > 1 && !leftSource.empty())
         {
-            const std::filesystem::path outDir =
-                saveData.path / saveData.projectName /
-                "resources" / "splits";
-
-            std::filesystem::create_directories(outDir);
-
             for (int k = 0; k < groupLength; ++k)
             {
                 float start = float(k) / float(groupLength);
                 float end   = float(k + 1) / float(groupLength);
 
+                // Generate split image for UI preview
                 std::filesystem::path out =
-                    outDir /
+                    dir /
                     ("scene_" + std::to_string(activeSceneIndex) +
-                     "_proj_" + std::to_string(generationid) + "_" + std::to_string(groupStart + k) + ".png");
+                     "_proj_" + std::to_string(generationid) + "_" +
+                     std::to_string(groupStart + k) + ".png");
 
-                Utilities::cropImagePart(
-                    start,
-                    end,
-                    leftSource,
-                    out.string()
-                );
+                Utilities::cropImagePart(start, end, leftSource, out.string());
 
-                scene.splitSources[groupStart + k] = out.string();
+                SplitInfo splitInfo;
+                try {
+                    Resource resource;
+                    for (auto& res : ResourceHandler::getResources()) {
+                        if (res.id == ResourceHandler::getResourceIdByPath(leftSource)) {
+                            resource = res;
+                        }
+                    }
+                    for (auto& res : ResourceHandler::getResources()) {
+                        if (res.thumbnail_id == ResourceHandler::getResourceIdByPath(leftSource)) {
+                            resource = res;
+                        }
+                    }
+                    splitInfo.resourceId = resource.id;
+                    splitInfo.isSplit = true;
+                    splitInfo.start = start;
+                    splitInfo.end = end;
+
+                    scene.splitInfo[groupStart + k] = splitInfo;
+                    scene.splitSources[groupStart + k] = out.string();
+
+                    std::cout << "Created split " << groupStart + k
+                              << ": " << start << " - " << end
+                              << " (Resource ID: " << splitInfo.resourceId << ")"
+                              << std::endl;
+                } catch (const std::exception& e) {
+                    std::cerr << "Error creating split for projector " << groupStart + k
+                              << ": " << e.what() << std::endl;
+                }
+            }
+        }
+        else if (!leftSource.empty())
+        {
+            SplitInfo splitInfo;
+            try {
+                Resource resource;
+                for (auto& res : ResourceHandler::getResources()) {
+                    if (res.id == ResourceHandler::getResourceIdByPath(leftSource)) {
+                        resource = res;
+                    }
+                }
+                for (auto& res : ResourceHandler::getResources()) {
+                    if (res.thumbnail_id == ResourceHandler::getResourceIdByPath(leftSource)) {
+                        resource = res;
+                    }
+                }
+
+                splitInfo.resourceId = resource.id;
+                splitInfo.isSplit = false;
+                splitInfo.start = 0.0f;
+                splitInfo.end = 1.0f;
+
+                scene.splitInfo[groupStart] = splitInfo;
+                scene.splitSources[groupStart] = leftSource;
+
+                std::cout << "Full resource for projector " << groupStart
+                          << " (Resource ID: " << splitInfo.resourceId << ")"
+                          << std::endl;
+            } catch (const std::exception& e) {
+                std::cerr << "Error getting resource ID for projector " << groupStart
+                          << ": " << e.what() << std::endl;
             }
         }
         else
         {
-            // no split → normal source
-            scene.splitSources[groupStart] = leftSource;
+            // No source assigned
+            SplitInfo splitInfo;
+            splitInfo.resourceId = -1;
+            splitInfo.isSplit = false;
+            splitInfo.start = 0.0f;
+            splitInfo.end = 1.0f;
+
+            scene.splitInfo[groupStart] = splitInfo;
+            std::cout << "No resource for projector " << groupStart << std::endl;
         }
 
-        i += groupLength; // advance to next group
+        i += groupLength;
     }
+
+    ++generationid;
     refreshProjectors();
-    generationid++;
+    saveProject();
 }
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -959,22 +1117,20 @@ void duplicateScene(int sceneIndex) {
         UIManager::refreshScenes();
     }
 }
-void showResourceRenameDialog(int index) {
-    auto directory = saveData.path / saveData.projectName / "resources";
-    std::vector<std::filesystem::path> files;
+void showResourceRenameDialog(int id) {
+    // Use the new ResourceHandler method
+    std::optional<Resource> resourceOpt = ResourceHandler::getResource(id);
 
-    for (auto& entry : std::filesystem::directory_iterator(directory)) {
-        if (!entry.is_regular_file()) continue;
-        if (entry.path().extension() != ".png") continue;
-        files.push_back(entry.path());
+    if (!resourceOpt.has_value()) {
+        std::cerr << "Error: Resource with ID " << id << " not found!" << std::endl;
+        return;
     }
 
-    if (index < 0 || index >= (int)files.size()) return;
+    Resource resource = resourceOpt.value();
+    std::filesystem::path filePath = resource.path;  // From Resource struct
+    std::string currentName = resource.name;         // From Resource struct
 
-    std::filesystem::path filePath = files[index];
-    std::string currentName = filePath.stem().string();
-
-    std::string itemId = "resource-item-" + std::to_string(index);
+    std::string itemId = "resource-item-" + std::to_string(id);
     if (auto* itemEl = getEl(itemId)) {
         itemEl->SetClass("renaming", true);
 
@@ -998,7 +1154,7 @@ void showResourceRenameDialog(int index) {
         Rml::ElementPtr input = getWindow().document->CreateElement("input");
         input->SetAttribute("type", "text");
         input->SetAttribute("value", currentName);
-        input->SetId("rename-input-" + std::to_string(index));
+        input->SetId("rename-input-" + std::to_string(id));
         input->SetClass("rename-input", true);
 
         Rml::ElementPtr okButton = getWindow().document->CreateElement("button");
@@ -1010,7 +1166,7 @@ void showResourceRenameDialog(int index) {
         itemEl->AppendChild(std::move(container));
 
         // Focus input
-        if (auto* inputEl = getWindow().document->GetElementById("rename-input-" + std::to_string(index))) {
+        if (auto* inputEl = getWindow().document->GetElementById("rename-input-" + std::to_string(id))) {
             if (auto* inputField = dynamic_cast<Rml::ElementFormControl*>(inputEl)) {
                 inputField->Focus();
             }
@@ -1019,24 +1175,50 @@ void showResourceRenameDialog(int index) {
         // Add listener safely via container
         if (auto* containerEl = itemEl->GetChild(itemEl->GetNumChildren() - 1)) {
             if (auto* okEl = containerEl->GetChild(1)) {
-                okEl->AddEventListener(Rml::EventId::Click, new ButtonHandler([index, filePath, currentName] {
-                    if (auto* inputEl = getWindow().document->GetElementById("rename-input-" + std::to_string(index))) {
+                okEl->AddEventListener(Rml::EventId::Click, new ButtonHandler([id, filePath, currentName] {
+                    if (auto* inputEl = getWindow().document->GetElementById("rename-input-" + std::to_string(id))) {
                         if (auto* inputField = dynamic_cast<Rml::ElementFormControl*>(inputEl)) {
                             std::string newName = inputField->GetValue();
-                            if (!newName.empty()) {
-                                std::filesystem::path newThumbnail = filePath.parent_path() / (newName + filePath.extension().string());
-                                std::filesystem::rename(filePath, newThumbnail);
+                            if (!newName.empty() && newName != currentName) {
+                                // Rename using ResourceHandler method
+                                ResourceHandler::getResource(id).name = newName;
 
-                                auto mainResource = saveData.path / saveData.projectName / "resources" / filePath.filename();
-                                if (std::filesystem::exists(mainResource)) {
-                                    std::filesystem::path newMain = mainResource.parent_path() / (newName + mainResource.extension().string());
-                                    std::filesystem::rename(mainResource, newMain);
+                                if (true) {
+                                    std::cout << "Successfully renamed resource " << id << " to: " << newName << std::endl;
+
+                                    // Update the UI
+                                    UIManager::refreshResourcePanel();
+
+                                    // Optionally: Close the rename dialog
+                                    std::string itemId = "resource-item-" + std::to_string(id);
+                                    if (auto* itemEl = getEl(itemId)) {
+                                        // Restore original display
+                                        itemEl->SetClass("renaming", false);
+
+                                        // Remove rename container
+                                        if (itemEl->GetNumChildren() > 0) {
+                                            auto* containerEl = itemEl->GetChild(itemEl->GetNumChildren() - 1);
+                                            if (containerEl && containerEl->HasAttribute("rename-container")) {
+                                                itemEl->RemoveChild(containerEl);
+                                            }
+                                        }
+
+                                        // Update displayed name
+                                        itemEl->SetInnerRML(newName);
+
+                                        // Re-add the image if needed
+                                        // (You might need to restore the image element here)
+                                    }
+                                } else {
+                                    std::cerr << "Failed to rename resource " << id << std::endl;
+                                    // Show error to user
                                 }
-
-                                UIManager::refreshResourcePanel();
                             }
                         }
                     }
+
+                    UIManager::saveProject();
+                    UIManager::refreshResourcePanel();
                 }));
             }
         }
@@ -1045,38 +1227,9 @@ void showResourceRenameDialog(int index) {
 
 
 
-void deleteResource(int index) {
-    auto directory = saveData.path / saveData.projectName / "resources";
-    int i = 0;
-    std::filesystem::path fileToDelete;
-
-    for (auto& entry : std::filesystem::directory_iterator(directory)) {
-        if (!entry.is_regular_file()) continue;
-        if (entry.path().extension() != ".png") continue;
-
-        if (i == index) {
-            fileToDelete = entry.path();
-            break;
-        }
-        i++;
-    }
-
-    if (!fileToDelete.empty()) {
-        try {
-            std::filesystem::remove(fileToDelete);
-
-            // Optionally also remove the main resource image if it exists somewhere else
-            auto mainImage = saveData.path / saveData.projectName / "resources" / fileToDelete.filename();
-            if (std::filesystem::exists(mainImage)) {
-                std::filesystem::remove(mainImage);
-            }
-
-            UIManager::refreshResourcePanel(); // Update the UI
-        }
-        catch (const std::filesystem::filesystem_error& e) {
-            std::cerr << "Error deleting resource: " << e.what() << std::endl;
-        }
-    }
+void deleteResource(int id) {
+    ResourceHandler::deleteResource(id);
+    UIManager::refreshResourcePanel();
 }
 void selectResource(int resourceIndex){
     std::cout << "Selecting Resource: " << resourceIndex << " (previously: " << activeResourceIndex << ")" << std::endl;

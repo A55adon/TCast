@@ -3,6 +3,8 @@
 #include "Utilities.h"
 #include "EventListener.h"
 
+#include <iostream>
+#include <iomanip>
 
 class UIManager {
 public:

@@ -1,0 +1,58 @@
+{
+    "scenes": [
+        {
+            "connections": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+            ],
+            "sceneName": "dsfgwaddawdaweg",
+            "sources": [
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\videos\\thumbnails\\image_png_tumbnail17.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\videos\\thumbnails\\image_png_tumbnail17.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\images\\image_png_13.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\images\\image_png_1.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\images\\image_png_1.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\images\\image_png_1.png"
+            ],
+            "splitSources": [
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\splits\\scene_0_proj_0_0.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\splits\\scene_0_proj_0_1.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\images\\image_png_13.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\splits\\scene_0_proj_0_3.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\splits\\scene_0_proj_0_4.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\images\\image_png_1.png"
+            ]
+        },
+        {
+            "connections": [
+                1,
+                1,
+                0,
+                0,
+                0,
+                0
+            ],
+            "sceneName": "Szene 2",
+            "sources": [
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\videos\\thumbnails\\image_png_tumbnail4.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\videos\\thumbnails\\image_png_tumbnail4.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\videos\\thumbnails\\image_png_tumbnail4.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\videos\\thumbnails\\image_png_tumbnail4.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\videos\\thumbnails\\image_png_tumbnail4.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\videos\\thumbnails\\image_png_tumbnail4.png"
+            ],
+            "splitSources": [
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\splits\\scene_1_proj_23_0.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\splits\\scene_1_proj_23_1.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\splits\\scene_1_proj_23_2.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\videos\\thumbnails\\image_png_tumbnail4.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\videos\\thumbnails\\image_png_tumbnail4.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\dsfgwaddawdaweg\\resources\\videos\\thumbnails\\image_png_tumbnail4.png"
+            ]
+        }
+    ]
+}

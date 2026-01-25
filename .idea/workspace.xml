@@ -31,27 +31,365 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1152f206-875e-46cb-bb3e-fd323fcd6a4a" name="Changes" comment="Added resourcehandler which has controll over all assets">
+    <list default="true" id="1152f206-875e-46cb-bb3e-fd323fcd6a4a" name="Changes" comment="problems with splitting and displaying images">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/interface.rcss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/interface.rcss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-84b56d5293e7973a5747.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2026-01-16T17-20-50-0278.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-TCast-Debug-0c36b575481fce2202f7.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-copy_assets-Debug-276211410b91423aa06c.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CMakeDetermineCompilerABI_C.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CompilerIdC/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CompilerIdC/a.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CompilerIdCXX/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CompilerIdCXX/a.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/compiler_depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/compiler_depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/compiler_depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/compiler_depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/includes_CXX.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/includes_CXX.rsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/objects.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/objects1.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/objects1.rsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/EventListener.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/EventListener.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/EventListener.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/EventListener.cpp.obj.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Projector.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Projector.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Projector.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Projector.cpp.obj.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/ResourceHandler.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/ResourceHandler.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/ResourceHandler.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/ResourceHandler.cpp.obj.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UIManager.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UIManager.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UIManager.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UIManager.cpp.obj.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UISetup.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UISetup.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UISetup.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UISetup.cpp.obj.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Utilities.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Utilities.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Utilities.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Utilities.cpp.obj.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Window.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Window.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Window.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Window.cpp.obj.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/main.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/main.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/main.cpp.obj.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/copy_assets.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/copy_assets.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/OpenCL.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/assets/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/assets/LatoLatin-Bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/assets/LatoLatin-BoldItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/assets/LatoLatin-Italic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/assets/LatoLatin-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/assets/NotoEmoji-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/assets/alien_small.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/assets/demo.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/assets/hello_world.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/assets/high_scores_alien_1.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/assets/high_scores_alien_2.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/assets/high_scores_alien_3.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/assets/high_scores_defender.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/assets/invader.rcss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/assets/invader.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/assets/present.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/assets/rml.rcss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/assets/window.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/animation/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/animation/data/animation.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/animation/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/benchmark/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/benchmark/data/benchmark.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/benchmark/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/bitmap_font/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/bitmap_font/data/Comfortaa_Regular_22.fnt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/bitmap_font/data/Comfortaa_Regular_22.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/bitmap_font/data/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/bitmap_font/data/bitmap_font.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/bitmap_font/src/FontEngineBitmap.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/bitmap_font/src/FontEngineBitmap.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/bitmap_font/src/FontEngineInterfaceBitmap.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/bitmap_font/src/FontEngineInterfaceBitmap.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/bitmap_font/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/custom_log/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/custom_log/src/SystemInterface.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/custom_log/src/SystemInterface.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/custom_log/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/data_binding/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/data_binding/data/data_binding.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/data_binding/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/demo/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/demo/data/demo.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/demo/src/DemoEventListener.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/demo/src/DemoEventListener.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/demo/src/DemoWindow.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/demo/src/DemoWindow.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/demo/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/drag/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/drag/data/icon.rcss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/drag/data/inventory.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/drag/src/DragListener.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/drag/src/DragListener.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/drag/src/Inventory.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/drag/src/Inventory.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/drag/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/effects/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/effects/data/effects.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/effects/data/effects_style.rcss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/effects/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/data/Cairo-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/data/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/data/Poppins-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/data/harfbuzz.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/FontEngineInterfaceHarfBuzz.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/FontEngineInterfaceHarfBuzz.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/FontFace.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/FontFace.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/FontFaceHandleHarfBuzz.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/FontFaceHandleHarfBuzz.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/FontFaceLayer.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/FontFaceLayer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/FontFamily.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/FontFamily.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/FontGlyph.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/FontProvider.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/FontProvider.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/FreeTypeInterface.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/FreeTypeInterface.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/LanguageData.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/TextureLayout.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/TextureLayout.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/TextureLayoutRectangle.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/TextureLayoutRectangle.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/TextureLayoutRow.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/TextureLayoutRow.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/TextureLayoutTexture.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/TextureLayoutTexture.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/harfbuzz/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/ime/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/ime/data/ime.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/ime/src/SystemFontWin32.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/ime/src/SystemFontWin32.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/ime/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/load_document/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/load_document/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/lottie/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/lottie/data/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/lottie/data/a_mountain.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/lottie/data/lottie.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/lottie/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/svg/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/svg/data/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/svg/data/svg_decorator.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/svg/data/svg_element.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/svg/data/tiger.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/svg/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/transform/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/transform/data/transform.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/transform/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/tree_view/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/tree_view/data/tree_view.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/tree_view/src/FileBrowser.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/tree_view/src/FileBrowser.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/basic/tree_view/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeCache.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CMakeCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CMakeCXXCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CMakeRCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CMakeSystem.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdC/CompilerIdC.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdC/CompilerIdC.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdC/Debug/CMakeCCompilerId.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdC/Debug/CompilerIdC.exe.recipe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdC/Debug/CompilerIdC.tlog/CL.command.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdC/Debug/CompilerIdC.tlog/CL.read.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdC/Debug/CompilerIdC.tlog/CL.write.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdC/Debug/CompilerIdC.tlog/Cl.items.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdC/Debug/CompilerIdC.tlog/CompilerIdC.lastbuildstate" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdC/Debug/CompilerIdC.tlog/link.command.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdC/Debug/CompilerIdC.tlog/link.read.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdC/Debug/CompilerIdC.tlog/link.secondary.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdC/Debug/CompilerIdC.tlog/link.write.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdC/Debug/vcpkg.applocal.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdCXX/CompilerIdCXX.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdCXX/CompilerIdCXX.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdCXX/Debug/CMakeCXXCompilerId.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdCXX/Debug/CompilerIdCXX.exe.recipe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdCXX/Debug/CompilerIdCXX.tlog/CL.command.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdCXX/Debug/CompilerIdCXX.tlog/CL.read.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdCXX/Debug/CompilerIdCXX.tlog/CL.write.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdCXX/Debug/CompilerIdCXX.tlog/Cl.items.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdCXX/Debug/CompilerIdCXX.tlog/CompilerIdCXX.lastbuildstate" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdCXX/Debug/CompilerIdCXX.tlog/link.command.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdCXX/Debug/CompilerIdCXX.tlog/link.read.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdCXX/Debug/CompilerIdCXX.tlog/link.secondary.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdCXX/Debug/CompilerIdCXX.tlog/link.write.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/CompilerIdCXX/Debug/vcpkg.applocal.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/VCTargetsPath.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/VCTargetsPath.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/VCTargetsPath/x64/Debug/VCTargetsPath.recipe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/4.1.0/VCTargetsPath/x64/Debug/VCTargetsPath.tlog/VCTargetsPath.lastbuildstate" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/build/CMakeFiles/cmake.check_cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/data/background.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/data/background.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/data/game.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/data/help.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/data/help_defender.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/data/help_invader_mothership.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/data/help_invader_rank1.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/data/help_invader_rank2.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/data/help_invader_rank3.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/data/high_score.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/data/high_scores_defender.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/data/invaders.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/data/logo.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/data/logo.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/data/main_menu.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/data/options.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/data/pause.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/data/start_game.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/DecoratorDefender.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/DecoratorDefender.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/DecoratorStarfield.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/DecoratorStarfield.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/Defender.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/Defender.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/ElementGame.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/ElementGame.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/EventHandler.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/EventHandler.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/EventHandlerHighScore.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/EventHandlerHighScore.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/EventHandlerOptions.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/EventHandlerOptions.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/EventHandlerStartGame.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/EventHandlerStartGame.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/EventListener.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/EventListener.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/EventListenerInstancer.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/EventListenerInstancer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/EventManager.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/EventManager.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/Game.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/Game.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/GameDetails.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/GameDetails.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/HighScores.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/HighScores.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/Invader.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/Invader.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/Mothership.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/Mothership.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/Shield.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/Shield.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/Sprite.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/Sprite.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/invaders/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/data/background.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/data/background.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/data/game.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/data/help.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/data/help_defender.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/data/help_invader_mothership.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/data/help_invader_rank1.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/data/help_invader_rank2.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/data/help_invader_rank3.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/data/high_score.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/data/high_scores_defender.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/data/invaders.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/data/logo.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/data/logo.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/data/main_menu.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/data/options.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/data/pause.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/data/start_game.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/data/window.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/lua/start.lua" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/DecoratorDefender.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/DecoratorDefender.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/DecoratorStarfield.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/DecoratorStarfield.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/Defender.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/Defender.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/ElementGame.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/ElementGame.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/ElementGameInstancer.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/ElementGameInstancer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/Game.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/Game.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/GameDetails.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/GameDetails.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/HighScores.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/HighScores.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/Invader.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/Invader.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/LuaInterface.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/LuaInterface.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/Mothership.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/Mothership.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/Shield.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/Shield.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/Sprite.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/Sprite.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/lua_invaders/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/shell/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/shell/include/PlatformExtensions.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/shell/include/RendererExtensions.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/shell/include/Shell.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/shell/include/ShellFileInterface.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/shell/src/PlatformExtensions.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/shell/src/RendererExtensions.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/shell/src/Shell.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/shell/src/ShellFileInterface.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/tutorial/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/tutorial/drag/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/tutorial/drag/data/inventory.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/tutorial/drag/data/tutorial.rcss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/tutorial/drag/src/Inventory.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/tutorial/drag/src/Inventory.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/tutorial/drag/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/tutorial/template/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/tutorial/template/data/tutorial.rcss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/tutorial/template/data/tutorial.rml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Samples/tutorial/template/src/main.cpp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/TCast.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/TCast.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/assets/interface.rcss" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/assets/interface.rcss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libSPIRV-Tools-diff.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libSPIRV-Tools-link.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libSPIRV-Tools-lint.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/vulkan-1.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/EventListener.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/EventListener.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/Projector.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/Projector.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ResourceHandler.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/ResourceHandler.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/saves/folderSaves/goonerballs/resourceData.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/folderSaves/goonerballs/resourceData.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/saves/folderSaves/goonerballs/resources/images/WhatsApp Image 2026-01-15 at 18.48.22.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/saves/folderSaves/goonerballs/resources/images/untitled.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/saves/folderSaves/goonerballs/resources/videos/test.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/saves/folderSaves/goonerballs/resources/videos/thumbnails/test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/saves/folderSaves/goonerballs/scenesData.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/folderSaves/goonerballs/scenesData.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test nigga balls/scenesData.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/folderSaves/test nigga balls/scenesData.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/UIManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/UIManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/UISetup.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/UISetup.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/global.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/global.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/goonerballs/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/goonerballs/resources/images/image_png_25.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/goonerballs/resources/images/image_png_26.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/goonerballs/resources/images/image_png_27.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/goonerballs/resources/images/image_png_28.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/goonerballs/resources/videos/thumbnails/image_png_tumbnail23.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/goonerballs/resources/videos/video_mp4_23.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/goonerballs/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/goonerballs/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/recent.path" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Projector.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Projector.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ResourceHandler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ResourceHandler.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UIManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/UIManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utilities.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utilities.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UISetup.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/UISetup.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Window.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Window.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,58 +421,6 @@
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/include/EventListener.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/include/Projector.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/include/UIManager.h" root0="FORCE_HIGHLIGHTING" />
@@ -155,42 +441,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "CMake Application.TCast.executor": "Run",
-    "RunOnceActivity.RadMigrateCodeStyle": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "RunOnceActivity.west.config.association.type.startup.service": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "C:/Users/simon/Desktop/Code/TCast",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.stylelint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.stylelint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "settings.sync",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;CMake Application.TCast.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/simon/Desktop/Code/TCast&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mariadb"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mariadb&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\simon\Desktop\Code\TCast\include" />
@@ -200,11 +486,6 @@
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.TCast">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TCast" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="TCast" TARGET_NAME="TCast" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="TCast" RUN_TARGET_NAME="TCast">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -271,7 +552,14 @@
       <workItem from="1768336054549" duration="751000" />
       <workItem from="1768423623891" duration="6000" />
       <workItem from="1768498581784" duration="8261000" />
-      <workItem from="1768571695414" duration="24350000" />
+      <workItem from="1768571695414" duration="24606000" />
+      <workItem from="1768847838347" duration="97000" />
+      <workItem from="1769005001307" duration="12310000" />
+      <workItem from="1769254433650" duration="6719000" />
+      <workItem from="1769276068656" duration="10098000" />
+      <workItem from="1769292612258" duration="6333000" />
+      <workItem from="1769362931308" duration="319000" />
+      <workItem from="1769367618686" duration="8000" />
     </task>
     <task id="LOCAL-00001" summary="Added different dependencies">
       <option name="closed" value="true" />
@@ -481,7 +769,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768588117116</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="problems with splitting and displaying images">
+      <option name="closed" value="true" />
+      <created>1768603065905</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1768603065906</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -530,18 +826,8 @@
     <MESSAGE value="added image stretching" />
     <MESSAGE value="minor changes" />
     <MESSAGE value="Added resourcehandler which has controll over all assets" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added resourcehandler which has controll over all assets" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/ResourceHandler.cpp</url>
-          <line>135</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="problems with splitting and displaying images" />
+    <option name="LAST_COMMIT_MESSAGE" value="problems with splitting and displaying images" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

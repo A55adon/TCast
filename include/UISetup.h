@@ -5,14 +5,11 @@
 class UISetup {
 public:
 // Startup function + helpers
-
     static void setupTabListeners();
     static void setupBrowseButtons();
     static void setupProjectActions();
     static void setupProjectSelection();
-
 // Interface function + helpers
-
     static void setupDropdownListeners();
     static void setupFileDropdownListeners();
     static void setupSceneManagement();
@@ -22,7 +19,6 @@ public:
     static void setupProjectors();
     static void setupProjectorContextMenu();
     static void setupProjection();
-
 };
 void setStartupEventListeners();
 void setInterfaceEventListeners();

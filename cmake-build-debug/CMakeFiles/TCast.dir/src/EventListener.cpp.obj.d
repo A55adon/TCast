@@ -704,9 +704,13 @@ CMakeFiles/TCast.dir/src/EventListener.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/thread \
  C:/msys64/mingw64/include/c++/15.2.0/bits/std_thread.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/this_thread_sleep.h \
- C:/Users/simon/Desktop/Code/TCast/libs/glad/include/glad/glad.h \
+ C:/msys64/mingw64/include/c++/15.2.0/mutex \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/std_mutex.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/unique_lock.h \
+ C:/Users/simon/Desktop/Code/TCast/include/glad/glad.h \
  C:/Users/simon/Desktop/Code/TCast/libs/glad/include/KHR/khrplatform.h \
  C:/Users/simon/Desktop/Code/TCast/libs/GLFW/include/GLFW/glfw3.h \
+ C:/Users/simon/Desktop/Code/TCast/include/ResourceHandler.h \
  C:/Users/simon/Desktop/Code/TCast/include/stb_image.h \
  C:/Users/simon/Desktop/Code/TCast/include/libavformat/avformat.h \
  C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec_par.h \

@@ -2,8 +2,21 @@
 
 #include <string>
 #include <vector>
+#include <filesystem>
 
-#include "global.h"
+struct Resource {
+    int id;
+    std::filesystem::path path;
+    std::string name;
+
+    bool isVideo;
+    int thumbnail_id;
+};
+
+struct ResourceManager {
+    std::vector<Resource> resources;
+    int maxId;
+};
 
 class ResourceHandler {
 public:
@@ -21,6 +34,7 @@ public:
     static int createSplitResource(int sourceId, float start, float end, const std::string& nameSuffix);
 
     static int getResourceIdByPath(const std::string &path);
+    static std::string getFileExtension(std::string in);
 
 private:
     static ResourceManager rm;
@@ -30,6 +44,5 @@ private:
     static std::filesystem::path getRelativeImagePath();
     static std::filesystem::path getRelativeVideoPath();
     static std::filesystem::path getRelativeThumbnailPath();
-    static std::string getFileExtension(std::string in);
 };
 

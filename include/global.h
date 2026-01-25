@@ -19,6 +19,7 @@
 
 #include "Shell.h"
 #include "Window.h"
+#include "Projector.h"
 
 using json = nlohmann::json;
 
@@ -35,6 +36,7 @@ struct SceneData {
     std::string sceneName;
     std::vector<std::string> sources; // [0] would be the name of the resource of the first projector
     std::vector<std::string> splitSources; // for connections
+    std::vector<SplitInfo> splitInfo; // for connections
     std::vector<int> connection;
 
     SceneData()= default;
@@ -43,32 +45,18 @@ struct SceneData {
         : sceneName(std::move(name)), sources(std::move(src)) {}
 };
 
-struct Resource {
-    int id;
-    std::filesystem::path path;
-    std::string name;
-
-    bool isVideo;
-    int thumbnail_id;
-};
-
-struct ResourceManager {
-    std::vector<Resource> resources;
-    int maxId;
-};
-
 inline SaveData saveData;
 
 struct SceneManager {
     std::vector<SceneData> scenes;
 };
 
+
+
 inline Window& getWindow() {
     static Window window(1920,1080);
     return window;
 }
-
-
 
 // Shared Functions
 
@@ -78,8 +66,8 @@ void duplicateScene(int index);
 void selectScene(int index);
 void showSceneRenameDialog(int index);
 
-void showResourceRenameDialog(int index);
-void deleteResource(int index);
+void showResourceRenameDialog(int id);
+void deleteResource(int id);
 void selectResource(int resourceIndex);
 
 void connect(int index);

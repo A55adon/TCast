@@ -1,10 +1,12 @@
 #include <fstream>
 #include <nlohmann/json.hpp>
 
-#include "../include/ResourceHandler.h"
+#include "ResourceHandler.h"
 
 #include "EventListener.h"
 #include "Utilities.h"
+
+#include "global.h"
 
 using json = nlohmann::json;
 
@@ -132,50 +134,15 @@ Resource& ResourceHandler::createResource(std::filesystem::path path, std::strin
     }
 }
 
-
-//std::string ResourceHandler::requestMissingResource(int id) { // "" -> remove; "path" -> new path;
-//    std::string text = "'" + rm.resources[id].name + "' konnte nicht gefunden werden!";
-//
-//    auto resource_request_dialog = getEl("resource-request-dialog");
-//
-//    resource_request_dialog->SetClass("show", true);
-//
-//    resource_request_dialog = getEl("resource-edit-path");
-//    resource_request_dialog->SetAttribute("value", rm.resources[id].path.string());
-//
-//    resource_request_dialog = getEl("resource-edit-name");
-//    resource_request_dialog->SetInnerRML(rm.resources[id].name);
-//
-//    auto resource_browse = getEl("resource-request-browse");
-//
-//    std::string newPath;
-//
-//    resource_browse->AddEventListener(Rml::EventId::Click, new ButtonHandler ([newPath]{
-//        newPath = Utilities::browseImageOrMp4();
-//    }));
-//
-//    auto resource_apply = getEl("resource-request-apply");
-//    resource_apply->AddEventListener(Rml::EventId::Click, new ButtonHandler ([newPath, id, resource_request_dialog] {
-//        if (!newPath.empty()) {
-//            resource_request_dialog->SetClass("show", false);
-//            return newPath;
-//        }
-//    }));
-//
-//    auto resource_decline = getEl("resource-request-apply");
-//    resource_apply->AddEventListener(Rml::EventId::Click, new ButtonHandler ([newPath, id, resource_request_dialog] {
-//        resource_request_dialog->SetClass("show", false);
-//        return "";
-//    }));
-//
-//    return "";
-//}
-//
-
 void ResourceHandler::deleteResource(int id)
 {
     auto& resources = rm.resources;
 
+    for (auto& res : resources) {
+        if (res.id == id)
+            if (res.isVideo)
+                deleteResource(res.thumbnail_id);
+    }
     resources.erase(
         std::remove_if(
             resources.begin(),

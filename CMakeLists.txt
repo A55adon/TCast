@@ -15,31 +15,35 @@ set(SOURCES
         libs/RmlUi/Samples/shell/src/Shell.cpp
         libs/RmlUi/Samples/shell/src/ShellFileInterface.cpp
         src/Utilities.cpp
-        include/Utilities.h
-        include/global.h
         src/UISetup.cpp
-        include/UISetup.h
         src/UIManager.cpp
-        include/UIManager.h
         src/EventListener.cpp
-        include/EventListener.h
         src/nanosvg_impl.cpp
         src/ResourceHandler.cpp
-        include/ResourceHandler.h
+
+        libs/imgui/imgui.cpp
+        libs/imgui/imgui_draw.cpp
+        libs/imgui/imgui_tables.cpp
+        libs/imgui/imgui_widgets.cpp
+        libs/imgui/backends/imgui_impl_glfw.cpp
+        libs/imgui/backends/imgui_impl_opengl3.cpp
 )
 
 add_executable(TCast ${SOURCES})
 
 target_include_directories(TCast PRIVATE
-        "${CMAKE_SOURCE_DIR}/include"
-        "${CMAKE_SOURCE_DIR}/include/stb"
-        "${CMAKE_SOURCE_DIR}/libs/RmlUi/include"
-        "${CMAKE_SOURCE_DIR}/libs/GLFW/include"
-        "${CMAKE_SOURCE_DIR}/libs/glew-2.1.0/include"
-        "${CMAKE_SOURCE_DIR}/libs/RmlUi/Backends"
-        "${CMAKE_SOURCE_DIR}/libs/RmlUi/Samples/shell/include"
-        "${CMAKE_SOURCE_DIR}/libs/glad/include"
-        "C:/msys64/mingw64/include"
+        ${CMAKE_SOURCE_DIR}/include
+        ${CMAKE_SOURCE_DIR}/include/stb
+        ${CMAKE_SOURCE_DIR}/libs/RmlUi/include
+        ${CMAKE_SOURCE_DIR}/libs/GLFW/include
+        ${CMAKE_SOURCE_DIR}/libs/glew-2.1.0/include
+        ${CMAKE_SOURCE_DIR}/libs/RmlUi/Backends
+        ${CMAKE_SOURCE_DIR}/libs/RmlUi/Samples/shell/include
+        ${CMAKE_SOURCE_DIR}/libs/glad/include
+        C:/msys64/mingw64/include
+        ${CMAKE_SOURCE_DIR}/include
+        ${CMAKE_SOURCE_DIR}/include/imgui
+        ${CMAKE_SOURCE_DIR}/include/imgui/backends
 )
 
 link_directories(

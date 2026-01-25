@@ -103,13 +103,14 @@ public:
     void ProcessEvent(Rml::Event& event) override {
         if (auto* contextMenu = document->GetElementById("resourceContextMenu")) {
             auto* attr = contextMenu->GetAttribute("data-target-resource");
-            int index = 0;
-            if (attr) index = std::stoi(attr->Get<Rml::String>().c_str());
+            int id = 0;
+            if (attr) id = std::stoi(attr->Get<Rml::String>().c_str());
 
             if (action == "rename") {
-                showResourceRenameDialog(index);
+                showResourceRenameDialog(id);
             } else if (action == "delete") {
-                deleteResource(index);
+                //TODO: sure?
+                deleteResource(id);
             }
 
             contextMenu->SetProperty("display", "none");

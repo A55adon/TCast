@@ -1,23 +1,14 @@
 /*
- * Info:
- * - Render interface is in RmlUi_Renderer_GL3.cpp and can do all stib_image file formats + SVGs via nanosvg
- * - getEl and some other utility functions were left out of the namespace because its awkward to write Utilities:: everytime
- *
  * Known Bugs:
  * - when creating a new project or loading a project from the dropdown of the main interface it does not switch to that project automatically
- * - images flip around when you rename them?
- * - renaming does not work at all
  * - creating a project with a existing name crashes
- * - resource renaming deleting doenst work
- * - deleting resources doesnt delete the file
  * - image with spaces can lead to a crash
  * - loading a project without a path crashes
- *
+ * - window resize makes projector size 0
+ * - video splitting restarts at like 60%
+ * - video playback is laggy
 
  * Todo:
- * IMPORTANT:
- *  - resource handler
- * REST:
  *  - |installer
  *  - settings
  *  - ->dont have a recent path as a setting
@@ -38,6 +29,13 @@
 */
 
 #include "UISetup.h"
+#include "Shell.h"
+#include "RmlUi/Debugger.h"
+#include "RmlUi_Backend.h"
+
+void resize_callback() {
+    UIManager::refreshProjectors();
+}
 
 int main() {
 
@@ -64,6 +62,8 @@ int main() {
             getWindow().document->Show();
         }
     }
+
+    glfwSetWindowSizeCallback(Backend::GetWindow(), GLFWwindowsizefun(resize_callback));
 
     while (getWindow().running) {
         getWindow().update();

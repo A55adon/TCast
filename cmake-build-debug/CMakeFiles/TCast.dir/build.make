@@ -311,6 +311,96 @@ CMakeFiles/TCast.dir/src/ResourceHandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/src/ResourceHandler.cpp.s"
 	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\src\ResourceHandler.cpp -o CMakeFiles\TCast.dir\src\ResourceHandler.cpp.s
 
+CMakeFiles/TCast.dir/libs/imgui/imgui.cpp.obj: CMakeFiles/TCast.dir/flags.make
+CMakeFiles/TCast.dir/libs/imgui/imgui.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
+CMakeFiles/TCast.dir/libs/imgui/imgui.cpp.obj: C:/Users/simon/Desktop/Code/TCast/libs/imgui/imgui.cpp
+CMakeFiles/TCast.dir/libs/imgui/imgui.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/TCast.dir/libs/imgui/imgui.cpp.obj"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/libs/imgui/imgui.cpp.obj -MF CMakeFiles\TCast.dir\libs\imgui\imgui.cpp.obj.d -o CMakeFiles\TCast.dir\libs\imgui\imgui.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\libs\imgui\imgui.cpp
+
+CMakeFiles/TCast.dir/libs/imgui/imgui.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/libs/imgui/imgui.cpp.i"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\libs\imgui\imgui.cpp > CMakeFiles\TCast.dir\libs\imgui\imgui.cpp.i
+
+CMakeFiles/TCast.dir/libs/imgui/imgui.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/libs/imgui/imgui.cpp.s"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\libs\imgui\imgui.cpp -o CMakeFiles\TCast.dir\libs\imgui\imgui.cpp.s
+
+CMakeFiles/TCast.dir/libs/imgui/imgui_draw.cpp.obj: CMakeFiles/TCast.dir/flags.make
+CMakeFiles/TCast.dir/libs/imgui/imgui_draw.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
+CMakeFiles/TCast.dir/libs/imgui/imgui_draw.cpp.obj: C:/Users/simon/Desktop/Code/TCast/libs/imgui/imgui_draw.cpp
+CMakeFiles/TCast.dir/libs/imgui/imgui_draw.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/TCast.dir/libs/imgui/imgui_draw.cpp.obj"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/libs/imgui/imgui_draw.cpp.obj -MF CMakeFiles\TCast.dir\libs\imgui\imgui_draw.cpp.obj.d -o CMakeFiles\TCast.dir\libs\imgui\imgui_draw.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\libs\imgui\imgui_draw.cpp
+
+CMakeFiles/TCast.dir/libs/imgui/imgui_draw.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/libs/imgui/imgui_draw.cpp.i"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\libs\imgui\imgui_draw.cpp > CMakeFiles\TCast.dir\libs\imgui\imgui_draw.cpp.i
+
+CMakeFiles/TCast.dir/libs/imgui/imgui_draw.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/libs/imgui/imgui_draw.cpp.s"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\libs\imgui\imgui_draw.cpp -o CMakeFiles\TCast.dir\libs\imgui\imgui_draw.cpp.s
+
+CMakeFiles/TCast.dir/libs/imgui/imgui_tables.cpp.obj: CMakeFiles/TCast.dir/flags.make
+CMakeFiles/TCast.dir/libs/imgui/imgui_tables.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
+CMakeFiles/TCast.dir/libs/imgui/imgui_tables.cpp.obj: C:/Users/simon/Desktop/Code/TCast/libs/imgui/imgui_tables.cpp
+CMakeFiles/TCast.dir/libs/imgui/imgui_tables.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/TCast.dir/libs/imgui/imgui_tables.cpp.obj"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/libs/imgui/imgui_tables.cpp.obj -MF CMakeFiles\TCast.dir\libs\imgui\imgui_tables.cpp.obj.d -o CMakeFiles\TCast.dir\libs\imgui\imgui_tables.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\libs\imgui\imgui_tables.cpp
+
+CMakeFiles/TCast.dir/libs/imgui/imgui_tables.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/libs/imgui/imgui_tables.cpp.i"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\libs\imgui\imgui_tables.cpp > CMakeFiles\TCast.dir\libs\imgui\imgui_tables.cpp.i
+
+CMakeFiles/TCast.dir/libs/imgui/imgui_tables.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/libs/imgui/imgui_tables.cpp.s"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\libs\imgui\imgui_tables.cpp -o CMakeFiles\TCast.dir\libs\imgui\imgui_tables.cpp.s
+
+CMakeFiles/TCast.dir/libs/imgui/imgui_widgets.cpp.obj: CMakeFiles/TCast.dir/flags.make
+CMakeFiles/TCast.dir/libs/imgui/imgui_widgets.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
+CMakeFiles/TCast.dir/libs/imgui/imgui_widgets.cpp.obj: C:/Users/simon/Desktop/Code/TCast/libs/imgui/imgui_widgets.cpp
+CMakeFiles/TCast.dir/libs/imgui/imgui_widgets.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/TCast.dir/libs/imgui/imgui_widgets.cpp.obj"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/libs/imgui/imgui_widgets.cpp.obj -MF CMakeFiles\TCast.dir\libs\imgui\imgui_widgets.cpp.obj.d -o CMakeFiles\TCast.dir\libs\imgui\imgui_widgets.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\libs\imgui\imgui_widgets.cpp
+
+CMakeFiles/TCast.dir/libs/imgui/imgui_widgets.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/libs/imgui/imgui_widgets.cpp.i"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\libs\imgui\imgui_widgets.cpp > CMakeFiles\TCast.dir\libs\imgui\imgui_widgets.cpp.i
+
+CMakeFiles/TCast.dir/libs/imgui/imgui_widgets.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/libs/imgui/imgui_widgets.cpp.s"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\libs\imgui\imgui_widgets.cpp -o CMakeFiles\TCast.dir\libs\imgui\imgui_widgets.cpp.s
+
+CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_glfw.cpp.obj: CMakeFiles/TCast.dir/flags.make
+CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_glfw.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
+CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_glfw.cpp.obj: C:/Users/simon/Desktop/Code/TCast/libs/imgui/backends/imgui_impl_glfw.cpp
+CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_glfw.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_glfw.cpp.obj"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_glfw.cpp.obj -MF CMakeFiles\TCast.dir\libs\imgui\backends\imgui_impl_glfw.cpp.obj.d -o CMakeFiles\TCast.dir\libs\imgui\backends\imgui_impl_glfw.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\libs\imgui\backends\imgui_impl_glfw.cpp
+
+CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_glfw.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_glfw.cpp.i"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\libs\imgui\backends\imgui_impl_glfw.cpp > CMakeFiles\TCast.dir\libs\imgui\backends\imgui_impl_glfw.cpp.i
+
+CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_glfw.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_glfw.cpp.s"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\libs\imgui\backends\imgui_impl_glfw.cpp -o CMakeFiles\TCast.dir\libs\imgui\backends\imgui_impl_glfw.cpp.s
+
+CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_opengl3.cpp.obj: CMakeFiles/TCast.dir/flags.make
+CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_opengl3.cpp.obj: CMakeFiles/TCast.dir/includes_CXX.rsp
+CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_opengl3.cpp.obj: C:/Users/simon/Desktop/Code/TCast/libs/imgui/backends/imgui_impl_opengl3.cpp
+CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_opengl3.cpp.obj: CMakeFiles/TCast.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_opengl3.cpp.obj"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_opengl3.cpp.obj -MF CMakeFiles\TCast.dir\libs\imgui\backends\imgui_impl_opengl3.cpp.obj.d -o CMakeFiles\TCast.dir\libs\imgui\backends\imgui_impl_opengl3.cpp.obj -c C:\Users\simon\Desktop\Code\TCast\libs\imgui\backends\imgui_impl_opengl3.cpp
+
+CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_opengl3.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_opengl3.cpp.i"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\simon\Desktop\Code\TCast\libs\imgui\backends\imgui_impl_opengl3.cpp > CMakeFiles\TCast.dir\libs\imgui\backends\imgui_impl_opengl3.cpp.i
+
+CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_opengl3.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_opengl3.cpp.s"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\simon\Desktop\Code\TCast\libs\imgui\backends\imgui_impl_opengl3.cpp -o CMakeFiles\TCast.dir\libs\imgui\backends\imgui_impl_opengl3.cpp.s
+
 # Object files for target TCast
 TCast_OBJECTS = \
 "CMakeFiles/TCast.dir/src/main.cpp.obj" \
@@ -328,7 +418,13 @@ TCast_OBJECTS = \
 "CMakeFiles/TCast.dir/src/UIManager.cpp.obj" \
 "CMakeFiles/TCast.dir/src/EventListener.cpp.obj" \
 "CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj" \
-"CMakeFiles/TCast.dir/src/ResourceHandler.cpp.obj"
+"CMakeFiles/TCast.dir/src/ResourceHandler.cpp.obj" \
+"CMakeFiles/TCast.dir/libs/imgui/imgui.cpp.obj" \
+"CMakeFiles/TCast.dir/libs/imgui/imgui_draw.cpp.obj" \
+"CMakeFiles/TCast.dir/libs/imgui/imgui_tables.cpp.obj" \
+"CMakeFiles/TCast.dir/libs/imgui/imgui_widgets.cpp.obj" \
+"CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_glfw.cpp.obj" \
+"CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_opengl3.cpp.obj"
 
 # External object files for target TCast
 TCast_EXTERNAL_OBJECTS =
@@ -349,6 +445,12 @@ TCast.exe: CMakeFiles/TCast.dir/src/UIManager.cpp.obj
 TCast.exe: CMakeFiles/TCast.dir/src/EventListener.cpp.obj
 TCast.exe: CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj
 TCast.exe: CMakeFiles/TCast.dir/src/ResourceHandler.cpp.obj
+TCast.exe: CMakeFiles/TCast.dir/libs/imgui/imgui.cpp.obj
+TCast.exe: CMakeFiles/TCast.dir/libs/imgui/imgui_draw.cpp.obj
+TCast.exe: CMakeFiles/TCast.dir/libs/imgui/imgui_tables.cpp.obj
+TCast.exe: CMakeFiles/TCast.dir/libs/imgui/imgui_widgets.cpp.obj
+TCast.exe: CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_glfw.cpp.obj
+TCast.exe: CMakeFiles/TCast.dir/libs/imgui/backends/imgui_impl_opengl3.cpp.obj
 TCast.exe: CMakeFiles/TCast.dir/build.make
 TCast.exe: C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/build-mingw/librmlui.dll.a
 TCast.exe: C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/build-mingw/librmlui_debugger.dll.a
@@ -357,7 +459,7 @@ TCast.exe: C:/Users/simon/Desktop/Code/TCast/libs/glew-2.1.0/lib/Release/x64/gle
 TCast.exe: CMakeFiles/TCast.dir/linkLibs.rsp
 TCast.exe: CMakeFiles/TCast.dir/objects1.rsp
 TCast.exe: CMakeFiles/TCast.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable TCast.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Linking CXX executable TCast.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\TCast.dir\link.txt --verbose=$(VERBOSE)
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold "Copying DLLs..."
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/build-mingw/librmlui.dll C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/build-mingw/librmlui_debugger.dll C:/Users/simon/Desktop/Code/TCast/libs/GLFW/lib/glfw3.dll C:/Users/simon/Desktop/Code/TCast/libs/freetype_x64-windows/libfreetype-6.dll C:/Users/simon/Desktop/Code/TCast/libs/glew-2.1.0/bin/Release/Win32/glew32.dll C:/Users/simon/Desktop/Code/TCast/libs/default/libstdc++-6.dll C:/Users/simon/Desktop/Code/TCast/libs/default/libgcc_s_seh-1.dll C:/Users/simon/Desktop/Code/TCast/libs/default/libwinpthread-1.dll C:/Users/simon/Desktop/Code/TCast/libs/default/libbrotlidec.dll C:/Users/simon/Desktop/Code/TCast/libs/default/libharfbuzz-0.dll C:/Users/simon/Desktop/Code/TCast/libs/default/libpng16-16.dll C:/Users/simon/Desktop/Code/TCast/libs/default/zlib1.dll C:/Users/simon/Desktop/Code/TCast/libs/default/libbz2-1.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug

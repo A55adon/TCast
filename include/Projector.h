@@ -68,6 +68,7 @@ private:
     void updateVideo();
     void cleanupVideo();
     void seekToTime(double seconds); // For video splits
+    double getVideoFrameRate() const;
 
     std::atomic<bool> running{ true };
     std::atomic<bool> initialized{ false };
@@ -104,7 +105,8 @@ private:
     int videoStreamIndex = -1;
     double timeBase = 0.0;
 
-    std::chrono::high_resolution_clock::time_point startTime;
+    std::chrono::time_point<std::chrono::system_clock, std::chrono::duration<double, std::ratio<1, 1000000000>>>
+    startTime;
 
     // Thread safety
     mutable std::mutex splitInfoMutex;

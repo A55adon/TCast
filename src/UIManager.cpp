@@ -1225,8 +1225,6 @@ void showResourceRenameDialog(int id) {
     }
 }
 
-
-
 void deleteResource(int id) {
     ResourceHandler::deleteResource(id);
     UIManager::refreshResourcePanel();

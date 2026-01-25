@@ -194,20 +194,15 @@ void Projector::run(int monitor_index, std::string path, SplitInfo splitInfo) {
     glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
     glfwWindowHint(GLFW_CENTER_CURSOR, GLFW_FALSE);     // Don't center cursor
 
-
     // Create window
     window = glfwCreateWindow(width, height, "Projector", monitors[monitor_index], nullptr);
-    //window = glfwCreateWindow(800, 600, "Projector", nullptr, nullptr);
     if (!window) {
         std::cerr << "Failed to create GLFW window for monitor " << monitor_index << std::endl;
         return;
     }
-    glfwFocusWindow(window);
 
     glfwMakeContextCurrent(window);
-
-    glfwSwapInterval(0); // Disable vsync for better performance
-    //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+    glfwSwapInterval(1); // Enable vsync for smooth video playback
 
     initShaders();
     if (shaderProgram == 0) {
@@ -271,33 +266,16 @@ void Projector::run(int monitor_index, std::string path, SplitInfo splitInfo) {
 
     // Main render loop
     while (running && !glfwWindowShouldClose(window)) {
-        // Make sure our context is current for this thread
         glfwMakeContextCurrent(window);
-
         glClear(GL_COLOR_BUFFER_BIT);
 
         if (isVideo) {
             updateVideo();
-
-            if (currentSplitInfo.isSplit) {
-                double elapsed = std::chrono::duration<double>(
-                    std::chrono::high_resolution_clock::now() - startTime).count();
-
-                if (elapsed >= (videoSplitEndTime - videoSplitStartTime)) {
-                    seekToTime(videoSplitStartTime);
-                    startTime = std::chrono::high_resolution_clock::now();
-                }
-            }
         }
 
         draw();
         glfwSwapBuffers(window);
-
-        // Process events but don't block
         glfwPollEvents();
-
-        // Small delay to prevent 100% CPU usage
-        std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
 
     if (isVideo)
@@ -562,159 +540,156 @@ void Projector::seekToTime(double seconds) {
 
     avcodec_flush_buffers(codecCtx);
 }
-
-int test = 0;
 void Projector::updateVideo() {
     std::lock_guard<std::mutex> lock(videoStateMutex);
-
-    static int frameCounter = 0;  // Counts frames actually displayed
-    static int callCounter = 0;   // Counts function calls
-    callCounter++;
 
     if (!formatCtx || !codecCtx) {
         return;
     }
 
-    // Calculate current playback time
-    double elapsed = std::chrono::duration<double>(
-        std::chrono::high_resolution_clock::now() - startTime).count();
-
-    if (currentSplitInfo.isSplit) {
-        elapsed += videoSplitStartTime;
+    // Get the video's frame rate
+    AVStream* stream = formatCtx->streams[videoStreamIndex];
+    double frameRate = av_q2d(stream->avg_frame_rate);
+    if (frameRate <= 0.0) {
+        frameRate = av_q2d(stream->r_frame_rate);
+        if (frameRate <= 0.0) {
+            frameRate = 30.0; // fallback to 30 FPS
+        }
     }
 
-    // Variables to track the best frame
-    AVFrame* bestFrame = nullptr;
-    double bestPts = -1.0;
-    double smallestDiff = std::numeric_limits<double>::max();
-    int framesExamined = 0;
-    bool eofReached = false;
+    // Calculate how much time has passed since we started
+    auto now = std::chrono::high_resolution_clock::now();
+    double elapsed = std::chrono::duration<double>(now - startTime).count();
 
-    // Read and examine frames to find the closest one to our target time
-    while (true) {
-        int readResult = av_read_frame(formatCtx, packet);
+    // Calculate target playback position
+    double targetTime;
+    if (currentSplitInfo.isSplit) {
+        targetTime = videoSplitStartTime + elapsed;
 
-        if (readResult < 0) {
-            eofReached = true;
-            break;  // Exit the reading loop
+        // Check if we've reached the end of the split
+        if (targetTime >= videoSplitEndTime) {
+            // Calculate how far we overshot the end
+            double overshoot = targetTime - videoSplitEndTime;
+
+            // Seek to start of split
+            seekToTime(videoSplitStartTime);
+
+            // Adjust start time to account for overshoot
+            startTime = now - std::chrono::duration<double>(overshoot);
+            targetTime = videoSplitStartTime + overshoot;
         }
+    } else {
+        targetTime = elapsed;
 
-        if (packet->stream_index != videoStreamIndex) {
+        // Check if we've reached the end of the video
+        if (targetTime >= videoDuration) {
+            // Calculate how far we overshot the end
+            double overshoot = targetTime - videoDuration;
+
+            // Seek to start
+            seekToTime(0);
+
+            // Adjust start time to account for overshoot
+            startTime = now - std::chrono::duration<double>(overshoot);
+            targetTime = overshoot;
+        }
+    }
+
+    // Calculate how many frames should have been displayed by now
+    double targetFrameNumber = targetTime * frameRate;
+
+    // Track the current frame number we're displaying
+    static double currentFrameNumber = -1.0;
+
+    // Only decode a new frame if we're behind by at least 0.5 frames
+    if (currentFrameNumber < 0 || (targetFrameNumber - currentFrameNumber) >= 0.5) {
+
+        bool frameFound = false;
+        while (!frameFound) {
+            int readResult = av_read_frame(formatCtx, packet);
+
+            if (readResult < 0) {
+                // End of file - seek back to appropriate position
+                if (currentSplitInfo.isSplit) {
+                    seekToTime(videoSplitStartTime);
+                } else {
+                    seekToTime(0);
+                }
+                // Reset frame tracking
+                currentFrameNumber = -1.0;
+                continue;
+            }
+
+            if (packet->stream_index != videoStreamIndex) {
+                av_packet_unref(packet);
+                continue;
+            }
+
+            int ret = avcodec_send_packet(codecCtx, packet);
             av_packet_unref(packet);
-            continue;
-        }
 
-        int ret = avcodec_send_packet(codecCtx, packet);
-        av_packet_unref(packet);
+            if (ret < 0) {
+                continue;
+            }
 
-        if (ret < 0) {
-            continue;
-        }
-
-        // Process all frames from this packet
-        while (ret >= 0) {
             ret = avcodec_receive_frame(codecCtx, frame);
 
             if (ret == AVERROR(EAGAIN)) {
-                break;
+                continue;
             } else if (ret == AVERROR_EOF) {
-                eofReached = true;
-                break;
+                // End of stream - loop
+                if (currentSplitInfo.isSplit) {
+                    seekToTime(videoSplitStartTime);
+                } else {
+                    seekToTime(0);
+                }
+                currentFrameNumber = -1.0;
+                continue;
             } else if (ret < 0) {
-                break;
+                continue;
             }
 
-            framesExamined++;
-            double pts = frame->pts * timeBase;
+            // Calculate frame time and frame number
+            double frameTime = frame->pts * timeBase;
 
             // Check split boundaries
             if (currentSplitInfo.isSplit) {
-                if (pts < videoSplitStartTime) {
+                if (frameTime < videoSplitStartTime) {
                     av_frame_unref(frame);
                     continue;
                 }
-                if (pts > videoSplitEndTime) {
+                if (frameTime > videoSplitEndTime) {
                     av_frame_unref(frame);
-                    eofReached = true;  // Treat as EOF for this split
-                    goto process_best_frame;
+                    // Loop back to start of split
+                    seekToTime(videoSplitStartTime);
+                    currentFrameNumber = -1.0;
+                    continue;
                 }
             }
 
-            // Calculate how close this frame is to our target time
-            double diff = std::abs(pts - elapsed);
+            // Calculate which frame number this is
+            currentFrameNumber = frameTime * frameRate;
 
+            // Display this frame
+            frameFound = true;
 
-            // Check if this is the closest frame so far
-            if (diff < smallestDiff) {
-                smallestDiff = diff;
+            // Convert frame to RGBA
+            sws_scale(swsCtx,
+                      frame->data, frame->linesize,
+                      0, codecCtx->height,
+                      frameRGBA->data, frameRGBA->linesize);
 
-                // Free the previous best frame
-                if (bestFrame) {
-                    av_frame_unref(bestFrame);
-                }
-
-                // Clone this frame as our new best
-                bestFrame = av_frame_clone(frame);
-                bestPts = pts;
-
-                // If we're very close to the target, we can stop searching
-                const double GOOD_ENOUGH_THRESHOLD = 0.001; // 1ms
-                if (diff <= GOOD_ENOUGH_THRESHOLD) {
-                    av_frame_unref(frame);
-                    goto process_best_frame;
-                }
-            }
-
-            // If this frame is significantly ahead of our target time,
-            // we won't find anything closer by reading further
-            if (pts > elapsed + 0.5) { // 500ms threshold
-                av_frame_unref(frame);
-                goto process_best_frame;
-            }
+            // Update OpenGL texture
+            glBindTexture(GL_TEXTURE_2D, texture);
+            glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0,
+                            codecCtx->width, codecCtx->height,
+                            GL_RGBA, GL_UNSIGNED_BYTE,
+                            frameRGBA->data[0]);
 
             av_frame_unref(frame);
         }
     }
-
-process_best_frame:
-
-    // Clean up the current frame if we still have it
-    if (frame && frame->buf[0]) {
-        av_frame_unref(frame);
-    }
-
-    if (bestFrame) {
-        frameCounter++;
-
-        // Convert the best frame to RGBA
-        sws_scale(swsCtx,
-            bestFrame->data, bestFrame->linesize,
-            0, codecCtx->height,
-            frameRGBA->data, frameRGBA->linesize);
-
-        // Update OpenGL texture
-        glBindTexture(GL_TEXTURE_2D, texture);
-        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0,
-            codecCtx->width, codecCtx->height,
-            GL_RGBA, GL_UNSIGNED_BYTE,
-            frameRGBA->data[0]);
-
-        // Free the best frame
-        av_frame_unref(bestFrame);
-    } else
-
-    // Handle EOF or split end
-    if (eofReached) {
-
-        if (currentSplitInfo.isSplit) {
-            seekToTime(videoSplitStartTime);
-        } else {
-            seekToTime(0);
-        }
-
-        // Reset playback timer
-        startTime = std::chrono::high_resolution_clock::now();
-    }
+    // else: keep displaying the current frame
 }
 
 void Projector::cleanupVideo() {
@@ -747,4 +722,23 @@ void Projector::cleanupVideo() {
     }
 
     avformat_network_deinit();
+}
+
+double Projector::getVideoFrameRate() const {
+    if (!formatCtx || videoStreamIndex < 0) {
+        return 30.0; // Default fallback
+    }
+
+    AVStream* stream = formatCtx->streams[videoStreamIndex];
+    double frameRate = av_q2d(stream->avg_frame_rate);
+
+    if (frameRate <= 0.0) {
+        frameRate = av_q2d(stream->r_frame_rate);
+    }
+
+    if (frameRate <= 0.0) {
+        frameRate = 30.0; // Default fallback
+    }
+
+    return frameRate;
 }

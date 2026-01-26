@@ -31,10 +31,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1152f206-875e-46cb-bb3e-fd323fcd6a4a" name="Changes" comment="Added all dependencies">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/libs/RmlUi/Samples/shell/src/PlatformExtensions.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="1152f206-875e-46cb-bb3e-fd323fcd6a4a" name="Changes" comment="save" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -122,6 +119,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\simon\Desktop\Code\TCast\assets" />
       <recent name="C:\Users\simon\Desktop\Code\TCast\include" />
       <recent name="C:\Code\TCast" />
       <recent name="C:\Code\TCast\src" />
@@ -208,7 +206,7 @@
       <workItem from="1769292612258" duration="6333000" />
       <workItem from="1769362931308" duration="319000" />
       <workItem from="1769367618686" duration="2836000" />
-      <workItem from="1769445166762" duration="6823000" />
+      <workItem from="1769445166762" duration="6920000" />
     </task>
     <task id="LOCAL-00001" summary="Added different dependencies">
       <option name="closed" value="true" />
@@ -474,7 +472,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769459475712</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="save">
+      <option name="closed" value="true" />
+      <created>1769460029735</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1769460029735</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -504,7 +510,6 @@
     </ignored-roots>
     <MESSAGE value="fixed cmakelists to include the default dlls" />
     <MESSAGE value="newly created scenes are now saved" />
-    <MESSAGE value="save" />
     <MESSAGE value="refactor: reorganize header files and add scene management functionality" />
     <MESSAGE value="implement scene renaming functionality with UI updates" />
     <MESSAGE value="add global header and update scene data structure; modify UI elements" />
@@ -527,7 +532,8 @@
     <MESSAGE value="Videos play correctly" />
     <MESSAGE value="Added dependencies" />
     <MESSAGE value="Added all dependencies" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added all dependencies" />
+    <MESSAGE value="save" />
+    <option name="LAST_COMMIT_MESSAGE" value="save" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

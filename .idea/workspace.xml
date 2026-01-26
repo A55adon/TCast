@@ -31,8 +31,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1152f206-875e-46cb-bb3e-fd323fcd6a4a" name="Changes" comment="Videos play correctly">
+    <list default="true" id="1152f206-875e-46cb-bb3e-fd323fcd6a4a" name="Changes" comment="Added dependencies">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,7 +202,8 @@
       <workItem from="1769276068656" duration="10098000" />
       <workItem from="1769292612258" duration="6333000" />
       <workItem from="1769362931308" duration="319000" />
-      <workItem from="1769367618686" duration="2793000" />
+      <workItem from="1769367618686" duration="2836000" />
+      <workItem from="1769445166762" duration="42000" />
     </task>
     <task id="LOCAL-00001" summary="Added different dependencies">
       <option name="closed" value="true" />
@@ -435,7 +437,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769369912453</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Added dependencies">
+      <option name="closed" value="true" />
+      <created>1769370456110</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1769370456110</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -487,7 +497,8 @@
     <MESSAGE value="problems with splitting and displaying images" />
     <MESSAGE value="Image splitting works; Video splitting and displaying works; Added debug ui with f1; Videos play a bit laggy" />
     <MESSAGE value="Videos play correctly" />
-    <option name="LAST_COMMIT_MESSAGE" value="Videos play correctly" />
+    <MESSAGE value="Added dependencies" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added dependencies" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

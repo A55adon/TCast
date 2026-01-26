@@ -129,17 +129,17 @@ TCast/fast:
 .PHONY : TCast/fast
 
 #=============================================================================
-# Target rules for targets named copy_assets
+# Target rules for targets named process_assets
 
 # Build rule for target.
-copy_assets: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 copy_assets
-.PHONY : copy_assets
+process_assets: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 process_assets
+.PHONY : process_assets
 
 # fast build rule for target.
-copy_assets/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\copy_assets.dir\build.make CMakeFiles/copy_assets.dir/build
-.PHONY : copy_assets/fast
+process_assets/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\process_assets.dir\build.make CMakeFiles/process_assets.dir/build
+.PHONY : process_assets/fast
 
 libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.obj: libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.cpp.obj
 .PHONY : libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.obj
@@ -677,7 +677,7 @@ help:
 	@echo ... depend
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... copy_assets
+	@echo ... process_assets
 	@echo ... TCast
 	@echo ... libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.obj
 	@echo ... libs/RmlUi/Backends/RmlUi_Backend_GLFW_GL3.i

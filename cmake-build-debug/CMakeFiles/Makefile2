@@ -63,12 +63,12 @@ CMAKE_BINARY_DIR = C:\Users\simon\Desktop\Code\TCast\cmake-build-debug
 
 # The main recursive "all" target.
 all: CMakeFiles/TCast.dir/all
-all: CMakeFiles/copy_assets.dir/all
+all: CMakeFiles/process_assets.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: CMakeFiles/TCast.dir/codegen
-codegen: CMakeFiles/copy_assets.dir/codegen
+codegen: CMakeFiles/process_assets.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -77,14 +77,14 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/TCast.dir/clean
-clean: CMakeFiles/copy_assets.dir/clean
+clean: CMakeFiles/process_assets.dir/clean
 .PHONY : clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/TCast.dir
 
 # All Build rule for target.
-CMakeFiles/TCast.dir/all: CMakeFiles/copy_assets.dir/all
+CMakeFiles/TCast.dir/all: CMakeFiles/process_assets.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23 "Built target TCast"
@@ -102,7 +102,7 @@ TCast: CMakeFiles/TCast.dir/rule
 .PHONY : TCast
 
 # codegen rule for target.
-CMakeFiles/TCast.dir/codegen: CMakeFiles/copy_assets.dir/all
+CMakeFiles/TCast.dir/codegen: CMakeFiles/process_assets.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TCast.dir\build.make CMakeFiles/TCast.dir/codegen
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23 "Finished codegen for target TCast"
 .PHONY : CMakeFiles/TCast.dir/codegen
@@ -113,36 +113,36 @@ CMakeFiles/TCast.dir/clean:
 .PHONY : CMakeFiles/TCast.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/copy_assets.dir
+# Target rules for target CMakeFiles/process_assets.dir
 
 # All Build rule for target.
-CMakeFiles/copy_assets.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\copy_assets.dir\build.make CMakeFiles/copy_assets.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\copy_assets.dir\build.make CMakeFiles/copy_assets.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=24 "Built target copy_assets"
-.PHONY : CMakeFiles/copy_assets.dir/all
+CMakeFiles/process_assets.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\process_assets.dir\build.make CMakeFiles/process_assets.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\process_assets.dir\build.make CMakeFiles/process_assets.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=24 "Built target process_assets"
+.PHONY : CMakeFiles/process_assets.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/copy_assets.dir/rule: cmake_check_build_system
+CMakeFiles/process_assets.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles 1
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/copy_assets.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/process_assets.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles 0
-.PHONY : CMakeFiles/copy_assets.dir/rule
+.PHONY : CMakeFiles/process_assets.dir/rule
 
 # Convenience name for target.
-copy_assets: CMakeFiles/copy_assets.dir/rule
-.PHONY : copy_assets
+process_assets: CMakeFiles/process_assets.dir/rule
+.PHONY : process_assets
 
 # codegen rule for target.
-CMakeFiles/copy_assets.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\copy_assets.dir\build.make CMakeFiles/copy_assets.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=24 "Finished codegen for target copy_assets"
-.PHONY : CMakeFiles/copy_assets.dir/codegen
+CMakeFiles/process_assets.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\process_assets.dir\build.make CMakeFiles/process_assets.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=24 "Finished codegen for target process_assets"
+.PHONY : CMakeFiles/process_assets.dir/codegen
 
 # clean rule for target.
-CMakeFiles/copy_assets.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\copy_assets.dir\build.make CMakeFiles/copy_assets.dir/clean
-.PHONY : CMakeFiles/copy_assets.dir/clean
+CMakeFiles/process_assets.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\process_assets.dir\build.make CMakeFiles/process_assets.dir/clean
+.PHONY : CMakeFiles/process_assets.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

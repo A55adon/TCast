@@ -27,8 +27,8 @@ CMAKE_BUILD_TYPE:STRING=Debug
 //Enable colored diagnostics throughout.
 CMAKE_COLOR_DIAGNOSTICS:BOOL=ON
 
-//No help, variable specified on the command line.
-CMAKE_CXX_COMPILER:UNINITIALIZED=C:/msys64/mingw64/bin/g++.exe
+//CXX compiler
+CMAKE_CXX_COMPILER:STRING=C:/msys64/mingw64/bin/g++.exe
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
@@ -56,8 +56,8 @@ CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 //Libraries linked by default with all C++ applications.
 CMAKE_CXX_STANDARD_LIBRARIES:STRING=-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
 
-//No help, variable specified on the command line.
-CMAKE_C_COMPILER:UNINITIALIZED=C:/msys64/mingw64/bin/gcc.exe
+//C compiler
+CMAKE_C_COMPILER:STRING=C:/msys64/mingw64/bin/gcc.exe
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
@@ -409,4 +409,19 @@ CMAKE_STRIP-ADVANCED:INTERNAL=1
 CMAKE_TAPI-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//Details about finding Python3
+FIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[C:/Users/simon/AppData/Local/Programs/Python/Python311/python.exe][found components: Interpreter ][v3.11.0()]
+//Compiler reason failure
+_Python3_Compiler_REASON_FAILURE:INTERNAL=
+//Development reason failure
+_Python3_Development_REASON_FAILURE:INTERNAL=
+//Path to a program.
+_Python3_EXECUTABLE:INTERNAL=C:/Users/simon/AppData/Local/Programs/Python/Python311/python.exe
+//Path to a program.
+_Python3_EXECUTABLE_DEBUG:INTERNAL=_Python3_EXECUTABLE_DEBUG-NOTFOUND
+//Python3 Properties
+_Python3_INTERPRETER_PROPERTIES:INTERNAL=Python;3;11;0;64;32;<none>;cp311-win_amd64;;C:\Users\simon\AppData\Local\Programs\Python\Python311\Lib;C:\Users\simon\AppData\Local\Programs\Python\Python311\Lib;C:\Users\simon\AppData\Local\Programs\Python\Python311\Lib\site-packages;C:\Users\simon\AppData\Local\Programs\Python\Python311\Lib\site-packages
+_Python3_INTERPRETER_SIGNATURE:INTERNAL=0f858f7f6665478ce19913812fcf14bc
+//NumPy reason failure
+_Python3_NumPy_REASON_FAILURE:INTERNAL=
 

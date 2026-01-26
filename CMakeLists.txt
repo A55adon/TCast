@@ -99,18 +99,23 @@ foreach(dll ${DLL_FILES})
     )
 endforeach()
 
+find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
-# Always copy assets on build
-#file(GLOB_RECURSE ASSET_FILES "${CMAKE_SOURCE_DIR}/assets/*")
-add_custom_target(copy_assets ALL
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-        "${CMAKE_SOURCE_DIR}/assets"
-        "$<TARGET_FILE_DIR:TCast>/assets"
-        DEPENDS ${ASSET_FILES}
-        COMMENT "Copying assets..."
+file(GLOB_RECURSE ASSET_FILES
+        ${CMAKE_SOURCE_DIR}/assets/*
 )
+
+add_custom_target(process_assets ALL
+        COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_SOURCE_DIR}/src/rcss_preprocessor.py
+        ${CMAKE_SOURCE_DIR}/assets
+        $<TARGET_FILE_DIR:TCast>/assets
+        DEPENDS ${ASSET_FILES}
+        COMMENT "Processing assets (RCSS preprocessing + copy)"
+)
+
 
 target_compile_definitions(TCast PRIVATE VERSION=\"0.0.1\")
 
 
-add_dependencies(TCast copy_assets)
+add_dependencies(TCast process_assets)

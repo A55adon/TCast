@@ -463,6 +463,9 @@ TCast.exe: CMakeFiles/TCast.dir/link.txt
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\TCast.dir\link.txt --verbose=$(VERBOSE)
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold "Copying DLLs..."
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/build-mingw/librmlui.dll C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/build-mingw/librmlui_debugger.dll C:/Users/simon/Desktop/Code/TCast/libs/GLFW/lib/glfw3.dll C:/Users/simon/Desktop/Code/TCast/libs/freetype_x64-windows/libfreetype-6.dll C:/Users/simon/Desktop/Code/TCast/libs/glew-2.1.0/bin/Release/Win32/glew32.dll C:/Users/simon/Desktop/Code/TCast/libs/default/libstdc++-6.dll C:/Users/simon/Desktop/Code/TCast/libs/default/libgcc_s_seh-1.dll C:/Users/simon/Desktop/Code/TCast/libs/default/libwinpthread-1.dll C:/Users/simon/Desktop/Code/TCast/libs/default/libbrotlidec.dll C:/Users/simon/Desktop/Code/TCast/libs/default/libharfbuzz-0.dll C:/Users/simon/Desktop/Code/TCast/libs/default/libpng16-16.dll C:/Users/simon/Desktop/Code/TCast/libs/default/zlib1.dll C:/Users/simon/Desktop/Code/TCast/libs/default/libbz2-1.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
+	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/avcodec-62.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
+	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/avformat-62.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
+	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/avutil-60.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/edit.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/glew32.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/glfw3.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
@@ -475,6 +478,7 @@ TCast.exe: CMakeFiles/TCast.dir/link.txt
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libasprintf-0.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libatomic-1.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libb2-1.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
+	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libbluray-3.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libboost_atomic-mt.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libboost_charconv-mt.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libboost_chrono-mt.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
@@ -526,9 +530,11 @@ TCast.exe: CMakeFiles/TCast.dir/link.txt
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libgcc_s_seh-1.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libgirepository-2.0-0.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libglib-2.0-0.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
+	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libgme.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libgmodule-2.0-0.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libgmp-10.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libgmpxx-4.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
+	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libgnutls-30.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libgobject-2.0-0.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libgomp-1.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libgraphite2.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
@@ -547,6 +553,7 @@ TCast.exe: CMakeFiles/TCast.dir/link.txt
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/liblz4.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/liblzma-5.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libmenuw6.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
+	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libmodplug-1.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libmpc-3.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libmpdec++-4.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libmpdec-4.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
@@ -591,6 +598,7 @@ TCast.exe: CMakeFiles/TCast.dir/link.txt
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libwinpthread-1.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libxml2-2.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/libzstd.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
+	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/swscale-9.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 	C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E copy_if_different C:/Users/simon/Desktop/Code/TCast/libs/other/zlib1.dll C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 
 # Rule to build all files generated by this target.

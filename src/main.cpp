@@ -41,32 +41,32 @@ int main() {
 
     std::filesystem::path path = Utilities::getRecentPath();
     if (path != "" && std::filesystem::exists(path)) {
-        projectPath = path;
+        current_project_path = path;
         std::ifstream jFile(path / "saveData.json");
         nlohmann::json j;
         jFile >> j;
 
-        from_json(j, saveData);
-        std::cout << saveData.path << std::endl;
+        from_json(j, save_data);
+        std::cout << save_data.path << std::endl;
 
-        if ((getWindow().document = getWindow().context->LoadDocument("assets/interface.rml"))) {
-            setInterfaceEventListeners();
-            getWindow().document->Show();
+        if ((get_window().document = get_window().context->LoadDocument("assets/interface.rml"))) {
+            set_interface_event_listeners();
+            get_window().document->Show();
 
         }
 
     } else {
-        if ((getWindow().document = getWindow().context->LoadDocument("assets/startup.rml"))) {
+        if ((get_window().document = get_window().context->LoadDocument("assets/startup.rml"))) {
             std::cout << "Loading Startup..." << std::endl;
-            setStartupEventListeners();
-            getWindow().document->Show();
+            set_startup_event_listeners();
+            get_window().document->Show();
         }
     }
 
     glfwSetWindowSizeCallback(Backend::GetWindow(), GLFWwindowsizefun(resize_callback));
 
-    while (getWindow().running) {
-        getWindow().update();
+    while (get_window().running) {
+        get_window().update();
     }
     return 0;
 }

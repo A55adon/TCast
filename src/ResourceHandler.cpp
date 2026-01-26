@@ -17,8 +17,8 @@ bool ResourceHandler::initResources() {
     std::filesystem::create_directories(getRelativeVideoPath());
     std::filesystem::create_directories(getRelativeThumbnailPath());
 
-    if (!std::filesystem::exists(saveData.path / saveData.projectName / "resourceData.json"))
-        std::ofstream file(saveData.path / saveData.projectName / "resourceData.json");
+    if (!std::filesystem::exists(save_data.path / save_data.name / "resourceData.json"))
+        std::ofstream file(save_data.path / save_data.name / "resourceData.json");
 
     if (!loadResources()) {
         return false;
@@ -31,7 +31,7 @@ bool ResourceHandler::initResources() {
 }
 
 bool ResourceHandler::loadResources() {
-    const std::filesystem::path filePath = saveData.path / saveData.projectName / "resourceData.json";
+    const std::filesystem::path filePath = save_data.path / save_data.name / "resourceData.json";
     std::ifstream file(filePath);
 
     if (!file.is_open()) {
@@ -53,7 +53,7 @@ bool ResourceHandler::loadResources() {
 }
 
 bool ResourceHandler::saveResources() {
-    const std::filesystem::path filePath = saveData.path / saveData.projectName / "resourceData.json";
+    const std::filesystem::path filePath = save_data.path / save_data.name / "resourceData.json";
     std::ofstream file(filePath);
 
     if (!file.is_open()) {
@@ -226,15 +226,15 @@ bool ResourceHandler::verifyResources() {
 }
 
 std::filesystem::path ResourceHandler::getRelativeImagePath() {
-    return saveData.path / saveData.projectName / "resources" / "images";
+    return save_data.path / save_data.name / "resources" / "images";
 }
 
 std::filesystem::path ResourceHandler::getRelativeVideoPath() {
-    return saveData.path / saveData.projectName / "resources" / "videos";
+    return save_data.path / save_data.name / "resources" / "videos";
 }
 
 std::filesystem::path ResourceHandler::getRelativeThumbnailPath() {
-    return saveData.path / saveData.projectName / "resources" / "videos" / "thumbnails";
+    return save_data.path / save_data.name / "resources" / "videos" / "thumbnails";
 }
 
 std::string ResourceHandler::getFileExtension(std::string in) {

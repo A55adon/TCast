@@ -18,26 +18,26 @@ extern "C" {
 }
 
 // JSON serialization implementations
-void to_json(json &j, const SaveData &d) {
+void to_json(json &j, const st_save_data &d) {
     j = json{
-            {"projectName", d.projectName},
-            {"projectorCount", d.projectorCount},
+            {"projectName", d.name},
+            {"projectorCount", d.projector_amount},
             {"description", d.description},
             {"path", d.path},
             {"version", d.version}
     };
 }
 
-void to_json(json &j, const SceneData &s) {
+void to_json(json &j, const st_scene_data &s) {
     j = json{
-        {"sceneName", s.sceneName},
+        {"sceneName", s.name},
         {"sources", s.sources},
-        {"splitSources", s.splitSources},
-        {"connections", s.connection}
+        {"splitSources", s.split_sources},
+        {"connections", s.connections}
     };
 }
 
-void to_json(json &j, const SceneManager &m) {
+void to_json(json &j, const st_scene_manager &m) {
     j = json{
             {"scenes", m.scenes}
     };
@@ -62,22 +62,22 @@ void to_json(json &j, const ResourceManager &rm) {
     };
 }
 
-void from_json(const json &j, SaveData &d) {
-    j.at("projectName").get_to(d.projectName);
-    j.at("projectorCount").get_to(d.projectorCount);
+void from_json(const json &j, st_save_data &d) {
+    j.at("projectName").get_to(d.name);
+    j.at("projectorCount").get_to(d.projector_amount);
     j.at("description").get_to(d.description);
     j.at("path").get_to(d.path);
     j.at("version").get_to(d.version);
 }
 
-void from_json(const json &j, SceneData &s) {
-    j.at("sceneName").get_to(s.sceneName);
+void from_json(const json &j, st_scene_data &s) {
+    j.at("sceneName").get_to(s.name);
     j.at("sources").get_to(s.sources);
-    j.at("splitSources").get_to(s.splitSources);
-    j.at("connections").get_to(s.connection);
+    j.at("splitSources").get_to(s.split_sources);
+    j.at("connections").get_to(s.connections);
 }
 
-void from_json(const json &j, SceneManager &m) {
+void from_json(const json &j, st_scene_manager &m) {
     j.at("scenes").get_to(m.scenes);
 }
 
@@ -483,7 +483,7 @@ bool Utilities::validateString(std::string &value) {
 void Utilities::showPopup(const std::string& msg, bool isError) {
     using namespace Rml;
 
-    ElementDocument* doc = getWindow().document;
+    ElementDocument* doc = get_window().document;
     if (!doc) return;
 
     // Create or get container
@@ -646,7 +646,7 @@ bool Utilities::convertToPng(const std::string& src, const std::string& dst) {
 }
 
 Rml::Element* getEl(const std::string& str) {
-    if (Rml::Element* temp = getWindow().document->GetElementById(str))
+    if (Rml::Element* temp = get_window().document->GetElementById(str))
         return temp;
 
     std::cerr << "Coulnd not get element " << str << std::endl;

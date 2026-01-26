@@ -20,5 +20,5 @@ public:
     static void setupProjectorContextMenu();
     static void setupProjection();
 };
-void setStartupEventListeners();
-void setInterfaceEventListeners();
+void set_startup_event_listeners();
+void set_interface_event_listeners();

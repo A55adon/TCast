@@ -49,11 +49,11 @@ public:
             if (attr) index = std::stoi(attr->Get<Rml::String>().c_str());
 
             if (action == "rename") {
-                showSceneRenameDialog(index);
+                show_scene_rename_dialog(index);
             } else if (action == "delete") {
-                deleteScene(index);
+                delete_scene(index);
             } else if (action == "duplicate") {
-                duplicateScene(index);
+                duplicate_scene(index);
             }
 
             contextMenu->SetProperty("display", "none");
@@ -87,7 +87,7 @@ public:
             }
         } else if (button == 0) { // Left click
             std::cout << "Left click on scene: " << sceneIndex << std::endl;
-            selectScene(sceneIndex);
+            select_scene(sceneIndex);
         }
     }
 };
@@ -107,10 +107,10 @@ public:
             if (attr) id = std::stoi(attr->Get<Rml::String>().c_str());
 
             if (action == "rename") {
-                showResourceRenameDialog(id);
+                show_resource_rename_dialog(id);
             } else if (action == "delete") {
                 //TODO: sure?
-                deleteResource(id);
+                delete_resource(id);
             }
 
             contextMenu->SetProperty("display", "none");
@@ -148,7 +148,7 @@ public:
                 contextMenu->SetProperty("display", "block");
             }
         } else if (button == 0) { // Left click
-            selectResource(resourceIndex);
+            select_resource(resourceIndex);
         }
     }
 
@@ -169,7 +169,7 @@ public:
             if (attr) index = std::stoi(attr->Get<Rml::String>().c_str());
 
             if (action == "selectResource") {
-                showProjectorResourceSelection(index);
+                show_projector_resource_selection(index);
             }
 
             contextMenu->SetProperty("display", "none");
@@ -207,7 +207,7 @@ public:
             //    contextMenu->SetProperty("top", Rml::ToString(mouse_y) + "px");
             //    contextMenu->SetProperty("display", "block");
             //}
-                showProjectorResourceSelection(projectorIndex);
+                show_projector_resource_selection(projectorIndex);
         } else if (button == 0) { // Left click
             //Todo: Drag to move or connect
         }
@@ -222,12 +222,12 @@ public:
     ConnectHandler(int i) : index(i) {}
 
     void ProcessEvent(Rml::Event& event) override {
-        if (sceneManager.scenes[activeSceneIndex].connection[index] == 1) {
-            disconnect(index);
-            sceneManager.scenes[activeSceneIndex].connection[index] = 0;
-        } else if (!sceneManager.scenes[activeSceneIndex].sources[index].empty()){
-            connect(index);
-            sceneManager.scenes[activeSceneIndex].connection[index] = 1;
+        if (scene_manager.scenes[active_scene_index].connections[index] == 1) {
+            disconnect_projectors(index);
+            scene_manager.scenes[active_scene_index].connections[index] = 0;
+        } else if (!scene_manager.scenes[active_scene_index].sources[index].empty()){
+            connect_projectors(index);
+            scene_manager.scenes[active_scene_index].connections[index] = 1;
         }
     }
 };

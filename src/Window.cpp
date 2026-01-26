@@ -109,23 +109,23 @@ void Window::update()
             // Save Data Tab
             if (ImGui::BeginTabItem("Save Data")) {
                 ImGui::SeparatorText("Project Information");
-                ImGui::Text("Project Name: %s", saveData.projectName.c_str());
-                ImGui::Text("Description: %s", saveData.description.c_str());
-                ImGui::Text("Projector Count: %d", saveData.projectorCount);
-                ImGui::Text("Path: %s", saveData.path.string().c_str());
-                ImGui::Text("Version: %s", saveData.version.c_str());
+                ImGui::Text("Project Name: %s", save_data.name.c_str());
+                ImGui::Text("Description: %s", save_data.description.c_str());
+                ImGui::Text("Projector Count: %d", save_data.projector_amount);
+                ImGui::Text("Path: %s", save_data.path.string().c_str());
+                ImGui::Text("Version: %s", save_data.version.c_str());
 
                 // Project path
                 ImGui::SeparatorText("Current Project Path");
-                ImGui::Text("%s", projectPath.string().c_str());
+                ImGui::Text("%s", current_project_path.string().c_str());
 
                 ImGui::EndTabItem();
             }
 
             // Scenes Tab
             if (ImGui::BeginTabItem("Scenes")) {
-                ImGui::Text("Active Scene Index: %d", activeSceneIndex);
-                ImGui::Text("Total Scenes: %zu", sceneManager.scenes.size());
+                ImGui::Text("Active Scene Index: %d", active_scene_index);
+                ImGui::Text("Total Scenes: %zu", scene_manager.scenes.size());
 
                 if (ImGui::BeginTable("ScenesTable", 4, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg)) {
                     ImGui::TableSetupColumn("Index");
@@ -134,13 +134,13 @@ void Window::update()
                     ImGui::TableSetupColumn("Connections");
                     ImGui::TableHeadersRow();
 
-                    for (int i = 0; i < sceneManager.scenes.size(); i++) {
-                        const auto& scene = sceneManager.scenes[i];
+                    for (int i = 0; i < scene_manager.scenes.size(); i++) {
+                        const auto& scene = scene_manager.scenes[i];
                         ImGui::TableNextRow();
 
                         // Index
                         ImGui::TableSetColumnIndex(0);
-                        if (i == activeSceneIndex) {
+                        if (i == active_scene_index) {
                             ImGui::TextColored(ImVec4(0, 1, 0, 1), "▶ %d", i);
                         } else {
                             ImGui::Text("%d", i);
@@ -148,7 +148,7 @@ void Window::update()
 
                         // Name
                         ImGui::TableSetColumnIndex(1);
-                        ImGui::Text("%s", scene.sceneName.c_str());
+                        ImGui::Text("%s", scene.name.c_str());
 
                         // Sources count
                         ImGui::TableSetColumnIndex(2);
@@ -156,7 +156,7 @@ void Window::update()
 
                         // Connections
                         ImGui::TableSetColumnIndex(3);
-                        ImGui::Text("%zu", scene.connection.size());
+                        ImGui::Text("%zu", scene.connections.size());
 
                         // Details button
                         if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(0)) {
@@ -167,9 +167,9 @@ void Window::update()
                 }
 
                 // Scene details for selected scene
-                if (activeSceneIndex >= 0 && activeSceneIndex < sceneManager.scenes.size()) {
+                if (active_scene_index >= 0 && active_scene_index < scene_manager.scenes.size()) {
                     ImGui::SeparatorText("Active Scene Details");
-                    const auto& scene = sceneManager.scenes[activeSceneIndex];
+                    const auto& scene = scene_manager.scenes[active_scene_index];
 
                     if (ImGui::BeginTable("SceneSources", 3, ImGuiTableFlags_Borders)) {
                         ImGui::TableSetupColumn("Projector");
@@ -177,7 +177,7 @@ void Window::update()
                         ImGui::TableSetupColumn("Connection");
                         ImGui::TableHeadersRow();
 
-                        for (int i = 0; i < saveData.projectorCount; i++) {
+                        for (int i = 0; i < save_data.projector_amount; i++) {
                             ImGui::TableNextRow();
 
                             // Projector index
@@ -194,8 +194,8 @@ void Window::update()
 
                             // Connection
                             ImGui::TableSetColumnIndex(2);
-                            if (i < scene.connection.size()) {
-                                if (scene.connection[i] == 1) {
+                            if (i < scene.connections.size()) {
+                                if (scene.connections[i] == 1) {
                                     ImGui::TextColored(ImVec4(0, 1, 0, 1), "Connected");
                                 } else {
                                     ImGui::Text("Disconnected");
@@ -213,7 +213,7 @@ void Window::update()
             if (ImGui::BeginTabItem("Resources")) {
                 auto resources = ResourceHandler::getResources();
                 ImGui::Text("Total Resources: %zu", resources.size());
-                ImGui::Text("Active Resource Index: %d", activeResourceIndex);
+                ImGui::Text("Active Resource Index: %d", active_resource_index);
 
                 if (ImGui::BeginTable("ResourcesTable", 6, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg)) {
                     ImGui::TableSetupColumn("ID");
@@ -229,7 +229,7 @@ void Window::update()
 
                         // ID
                         ImGui::TableSetColumnIndex(0);
-                        if (resource.id == activeResourceIndex) {
+                        if (resource.id == active_resource_index) {
                             ImGui::TextColored(ImVec4(0, 1, 0, 1), "%d", resource.id);
                         } else {
                             ImGui::Text("%d", resource.id);
@@ -484,12 +484,12 @@ void Window::update()
                 ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
 
                 ImGui::SeparatorText("Paths");
-                ImGui::Text("Project Path: %s", projectPath.string().c_str());
+                ImGui::Text("Project Path: %s", current_project_path.string().c_str());
 
                 ImGui::SeparatorText("Flags");
-                ImGui::Checkbox("Create Recent Path", &createRecentPath);
-                ImGui::Text("Active Scene Index: %d", activeSceneIndex);
-                ImGui::Text("Active Resource Index: %d", activeResourceIndex);
+                ImGui::Checkbox("Create Recent Path", &create_recent_path);
+                ImGui::Text("Active Scene Index: %d", active_scene_index);
+                ImGui::Text("Active Resource Index: %d", active_resource_index);
 
                 ImGui::EndTabItem();
             }

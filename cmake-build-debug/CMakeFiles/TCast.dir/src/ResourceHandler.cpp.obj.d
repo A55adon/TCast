@@ -436,6 +436,24 @@ CMakeFiles/TCast.dir/src/ResourceHandler.cpp.obj: \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/EventListener.h \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/ElementDocument.h \
  C:/Users/simon/Desktop/Code/TCast/include/global.h \
+ C:/msys64/mingw64/include/c++/15.2.0/regex \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/regex_constants.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/regex_error.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/regex_automaton.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/regex_automaton.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/regex_scanner.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/regex_scanner.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/regex_compiler.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/regex_compiler.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/regex.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/regex.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/regex_executor.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/regex_executor.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/set \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/stl_set.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/stl_multiset.h \
+ C:/msys64/mingw64/include/c++/15.2.0/iostream \
+ C:/msys64/mingw64/include/c++/15.2.0/chrono \
  C:/msys64/mingw64/include/shobjidl.h C:/msys64/mingw64/include/rpc.h \
  C:/msys64/mingw64/include/windows.h \
  C:/msys64/mingw64/include/sdkddkver.h C:/msys64/mingw64/include/excpt.h \
@@ -673,29 +691,10 @@ CMakeFiles/TCast.dir/src/ResourceHandler.cpp.obj: \
  C:/msys64/mingw64/include/propkeydef.h \
  C:/msys64/mingw64/include/objectarray.h \
  C:/msys64/mingw64/include/sherrors.h \
- C:/msys64/mingw64/include/commctrl.h \
- C:/msys64/mingw64/include/c++/15.2.0/regex \
- C:/msys64/mingw64/include/c++/15.2.0/bits/regex_constants.h \
- C:/msys64/mingw64/include/c++/15.2.0/bits/regex_error.h \
- C:/msys64/mingw64/include/c++/15.2.0/bits/regex_automaton.h \
- C:/msys64/mingw64/include/c++/15.2.0/bits/regex_automaton.tcc \
- C:/msys64/mingw64/include/c++/15.2.0/bits/regex_scanner.h \
- C:/msys64/mingw64/include/c++/15.2.0/bits/regex_scanner.tcc \
- C:/msys64/mingw64/include/c++/15.2.0/bits/regex_compiler.h \
- C:/msys64/mingw64/include/c++/15.2.0/bits/regex_compiler.tcc \
- C:/msys64/mingw64/include/c++/15.2.0/bits/regex.h \
- C:/msys64/mingw64/include/c++/15.2.0/bits/regex.tcc \
- C:/msys64/mingw64/include/c++/15.2.0/bits/regex_executor.h \
- C:/msys64/mingw64/include/c++/15.2.0/bits/regex_executor.tcc \
- C:/msys64/mingw64/include/shlobj.h C:/msys64/mingw64/include/shlguid.h \
- C:/msys64/mingw64/include/isguids.h C:/msys64/mingw64/include/exdisp.h \
- C:/msys64/mingw64/include/shldisp.h \
+ C:/msys64/mingw64/include/commctrl.h C:/msys64/mingw64/include/shlobj.h \
+ C:/msys64/mingw64/include/shlguid.h C:/msys64/mingw64/include/isguids.h \
+ C:/msys64/mingw64/include/exdisp.h C:/msys64/mingw64/include/shldisp.h \
  C:/msys64/mingw64/include/knownfolders.h \
- C:/msys64/mingw64/include/c++/15.2.0/set \
- C:/msys64/mingw64/include/c++/15.2.0/bits/stl_set.h \
- C:/msys64/mingw64/include/c++/15.2.0/bits/stl_multiset.h \
- C:/msys64/mingw64/include/c++/15.2.0/iostream \
- C:/msys64/mingw64/include/c++/15.2.0/chrono \
  C:/Users/simon/Desktop/Code/TCast/include/Shell.h \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Input.h \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Types.h \

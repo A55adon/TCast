@@ -12,6 +12,6 @@ C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -DCM
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
 -- Found Python3: C:/Users/simon/AppData/Local/Programs/Python/Python311/python.exe (found version "3.11.0") found components: Interpreter
--- Configuring done (3.1s)
+-- Configuring done (2.2s)
 -- Generating done (0.1s)
 -- Build files have been written to: C:/Users/simon/Desktop/Code/TCast/cmake-build-debug

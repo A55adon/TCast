@@ -1,0 +1,31 @@
+{
+    "scenes": [
+        {
+            "connections": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "sceneName": "q43585697",
+            "sources": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "splitSources": [
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\q43585697\\resources\\images\\image_png_2.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\q43585697\\resources\\images\\image_png_2.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\q43585697\\resources\\images\\image_png_2.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\q43585697\\resources\\images\\image_png_2.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\q43585697\\resources\\images\\image_png_2.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\q43585697\\resources\\images\\image_png_2.png"
+            ]
+        }
+    ]
+}

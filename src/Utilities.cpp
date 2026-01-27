@@ -94,6 +94,18 @@ void from_json(const json &j, ResourceManager &rm) {
     j.at("resources").get_to(rm.resources);
 }
 
+int Utilities::getResIDFromPath(const std::filesystem::path &path) {
+    return ResourceHandler::getResourceIdByPath(path.string());
+}
+
+fs::path Utilities::getResPathFromID(int id) {
+    return ResourceHandler::getResource(id).path;
+}
+
+Resource * Utilities::getResFromID(int id) {
+    return &ResourceHandler::getResource(id);
+}
+
 // Utilities class implementations
 std::string Utilities::browseFolder() {
     std::string result;

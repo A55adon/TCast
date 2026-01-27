@@ -3,6 +3,8 @@
 #include "global.h"
 
 using json = nlohmann::json;
+namespace fs = std::filesystem;
+using RH = ResourceHandler;
 
 // JSON serialization declarations
 void to_json(json &j, const st_save_data &d);
@@ -19,26 +21,44 @@ void from_json(const json &j, ResourceManager &rm);
 
 class Utilities {
 public:
+    // simple ResourceHandler acces
+    static int getResIDFromPath(const fs::path &path);
+    static fs::path getResPathFromID(int id);
+    static Resource* getResFromID(int id);
+
+    // File IO
     static std::string browseFolder();
     static std::string browseTCTFile();
     static std::string browseImageOrMp4();
+
+    // Image conversion
     static bool convertToPng(const std::string& src, const std::string& dst);
-    static std::string getExecutablePath();
-    static std::string getSaveFolderPath();
-    static std::string toBackwardSlashes(const std::string &path);
-    static std::filesystem::path getRecentPath();
     static bool downscaleAndCrop169(const std::string& inputPath, const std::string& outputPath);
     static bool cropImagePart(float start, float end, const std::string& inputPath, const std::string& outputPath);
     static bool extractMp4Thumbnail( const std::string& videoPath, const std::string& outPngPath);
     static bool saveRgbToPng(const unsigned char* rgbData, int width, int height, const std::string& outPath);
 
+    // Getters
+    static std::string getExecutablePath();
+    static std::string getSaveFolderPath();
+    static std::string toBackwardSlashes(const std::string &path);
+    static fs::path getRecentPath();
+
+    // Other
     static void showPopup(const std::string& msg, bool isError = false);
     static bool validateString(std::string &value);
     static void showError(const std::string & msg);
     static void showInfo(std::string msg);
 
-    static bool isImageExt(const std::filesystem::path& p);
-    static bool isMp4Ext(const std::filesystem::path& p);
+    // Verification
+    static bool isImageExt(const fs::path& p);
+    static bool isMp4Ext(const fs::path& p);
+
+    // HTML/CSS parser interface functions
+    static Rml::Element getElement(std::string id);
+    static void setClass(std::string id, std::string Class);
+    //static void addEventListener(std::string id, EventListener ev);
 };
 
+// TODO: remove
 Rml::Element* getEl(const std::string &str);

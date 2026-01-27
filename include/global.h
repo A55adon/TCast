@@ -27,6 +27,10 @@
 
 using json = nlohmann::json;
 namespace fs = std::filesystem;
+// U = Utilities
+// UIMgr = UIManager
+// UIStp = UISetup
+
 /*
  * main:
  *  - render loop

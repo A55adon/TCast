@@ -1,0 +1,31 @@
+{
+    "scenes": [
+        {
+            "connections": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "sceneName": "23w54er576lk",
+            "sources": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "splitSources": [
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\23w54er576lk\\resources\\images\\image_png_4.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\23w54er576lk\\resources\\images\\image_png_4.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\23w54er576lk\\resources\\images\\image_png_4.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\23w54er576lk\\resources\\images\\image_png_4.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\23w54er576lk\\resources\\images\\image_png_4.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\23w54er576lk\\resources\\images\\image_png_4.png"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "maxId": 3,
+    "resources": [
+        {
+            "id": 0,
+            "isVideo": false,
+            "name": "container",
+            "path": "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\q43585697\\resources\\images\\image_png_2.png",
+            "thumbnail_id": -1
+        },
+        {
+            "id": 1,
+            "isVideo": false,
+            "name": "wall",
+            "path": "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\q43585697\\resources\\images\\image_png_2.png",
+            "thumbnail_id": -1
+        },
+        {
+            "id": 2,
+            "isVideo": false,
+            "name": "brick-texture",
+            "path": "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\q43585697\\resources\\images\\image_png_3.png",
+            "thumbnail_id": -1
+        }
+    ]
+}

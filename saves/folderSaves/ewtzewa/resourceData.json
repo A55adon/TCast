@@ -1,0 +1,26 @@
+{
+    "maxId": 3,
+    "resources": [
+        {
+            "id": 0,
+            "isVideo": false,
+            "name": "images",
+            "path": "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\ewtzewa\\resources\\images\\image_png_1.png",
+            "thumbnail_id": -1
+        },
+        {
+            "id": 1,
+            "isVideo": false,
+            "name": "Untitled (2)",
+            "path": "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\ewtzewa\\resources\\images\\image_png_2.png",
+            "thumbnail_id": -1
+        },
+        {
+            "id": 2,
+            "isVideo": false,
+            "name": "nigger",
+            "path": "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\ewtzewa\\resources\\images\\image_png_3.png",
+            "thumbnail_id": -1
+        }
+    ]
+}

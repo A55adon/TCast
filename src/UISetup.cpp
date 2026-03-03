@@ -2,16 +2,16 @@
 
 #include "ResourceHandler.h"
 
-void set_startup_event_listeners() {
+void setStartupEventListeners() {
     UISetup::setupTabListeners();
     UISetup::setupBrowseButtons();
     UISetup::setupProjectActions();
     UISetup::setupProjectSelection();
 
     // Set default directory
-    if (auto *el = get_window().document->GetElementById("project-dir-input")) {
+    if (auto *el = getWindow().document->GetElementById("project-dir-input")) {
         if (auto *input = dynamic_cast<Rml::ElementFormControl *>(el)) {
-            input->SetValue(Utilities::toBackwardSlashes(Utilities::getSaveFolderPath()));
+            input->SetValue(Utilities::toBackwardSlashes(Utilities::getSaveFolderPath()).string());
         }
     }
 
@@ -62,34 +62,34 @@ void UISetup::setupTabListeners() {
 void setInput(const std::string& id, const std::string& value) {
     auto* el = getEl(id);
     if (auto* input = dynamic_cast<Rml::ElementFormControl*>(el)) {
-        input->SetValue(Utilities::toBackwardSlashes(value));
+        input->SetValue(Utilities::toBackwardSlashes(value).string());
     }
 }
 void UISetup::setupBrowseButtons() {
     if (auto* btn = getEl("browse-folder-btn")) {
         btn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
-            auto folder = Utilities::browseFolder();
+            auto folder = Utilities::browseFolder().string();
             if (!folder.empty()) setInput("load-dir-input", folder);
         }));
     }
 
     if (auto* btn = getEl("browse-load-btn")) {
         btn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
-            auto folder = Utilities::browseFolder();
+            auto folder = Utilities::browseFolder().string();
             if (!folder.empty()) setInput("load-dir-input", folder);
         }));
     }
 
     if (auto* btn = getEl("browse-tct-btn")) {
         btn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
-            auto file = Utilities::browseTCTFile();
+            auto file = Utilities::browseTCTFile().string();
             if (!file.empty()) setInput("load-dir-input", file);
         }));
     }
 
     if (auto* btn = getEl("browse-btn")) {
         btn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
-            auto folder = Utilities::browseFolder();
+            auto folder = Utilities::browseFolder().string();
             if (!folder.empty()) setInput("project-dir-input", folder);
         }));
     }
@@ -99,12 +99,12 @@ void UISetup::setupProjectActions() {
     if (auto *saveNewProjectBtn = getEl("save-btn")) {
         saveNewProjectBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
             if (UIManager::createProject()) {
-                get_window().document->Hide();
+                getWindow().document->Hide();
                 std::cout << "Project created: " << save_data.name << std::endl;
-                if ((get_window().document = get_window().context->LoadDocument("assets/interface.rml"))) {
-                    get_window().document->Show();
+                if ((getWindow().document = getWindow().context->LoadDocument("assets/interface.rml"))) {
+                    getWindow().document->Show();
                 }
-                set_interface_event_listeners();
+                setInterfaceEventListeners();
             }
             // TODO: Add user feedback
         }));
@@ -114,12 +114,12 @@ void UISetup::setupProjectActions() {
     if (auto *loadProjectBtn = getEl("load-btn")) {
         loadProjectBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
             if (UIManager::loadProject()) {
-                get_window().document->Hide();
+                getWindow().document->Hide();
                 std::cout << "Project loaded: " << save_data.name << std::endl;
-                if ((get_window().document = get_window().context->LoadDocument("assets/interface.rml"))) {
-                    get_window().document->Show();
+                if ((getWindow().document = getWindow().context->LoadDocument("assets/interface.rml"))) {
+                    getWindow().document->Show();
                 }
-                set_interface_event_listeners();
+                setInterfaceEventListeners();
             }
             // TODO: Add user feedback
         }));
@@ -128,9 +128,9 @@ void UISetup::setupProjectActions() {
     if (auto* slider = getEl("projector-count-input")) {
         slider->AddEventListener(Rml::EventId::Change, new ButtonHandler([] {
             auto* sliderEl = dynamic_cast<Rml::ElementFormControl*>(
-                get_window().document->GetElementById("projector-count-input"));
+                getWindow().document->GetElementById("projector-count-input"));
 
-            auto* valueEl = get_window().document->GetElementById("projector-count-value");
+            auto* valueEl = getWindow().document->GetElementById("projector-count-value");
 
             if (sliderEl && valueEl) {
                 int value = static_cast<int>(std::stof(sliderEl->GetValue()));
@@ -144,7 +144,7 @@ void UISetup::setupProjectActions() {
 void UISetup::setupProjectSelection() {
     for (int i = 1; i <= 5; i++) {
         std::string id = "folder-proj-" + std::to_string(i);
-        if (auto *proj = get_window().document->GetElementById(id)) {
+        if (auto *proj = getWindow().document->GetElementById(id)) {
             proj->AddEventListener(Rml::EventId::Click, new ButtonHandler(
                                        [name = proj->GetInnerRML()] {
                                            UIManager::setSelectedProject(name);
@@ -152,7 +152,7 @@ void UISetup::setupProjectSelection() {
         }
 
         id = "tct-proj-" + std::to_string(i);
-        if (auto *proj = get_window().document->GetElementById(id)) {
+        if (auto *proj = getWindow().document->GetElementById(id)) {
             proj->AddEventListener(Rml::EventId::Click, new ButtonHandler(
                                        [name = proj->GetInnerRML()] {
                                            UIManager::setSelectedProject(name);
@@ -161,13 +161,13 @@ void UISetup::setupProjectSelection() {
     }
 }
 
-void set_interface_event_listeners() {
+void setInterfaceEventListeners() {
     ResourceHandler::initResources();
 
     if (!UIManager::loadScenesData()) {
         std::cerr << "Failed to load scenesData" << std::endl;
     }
-    if (auto *projectname = get_window().document->GetElementById("project-name")) {
+    if (auto *projectname = getWindow().document->GetElementById("project-name")) {
         std::cout << "[Info] Setting project name: " << save_data.name << std::endl;
         projectname->SetInnerRML(save_data.name);
     }
@@ -218,13 +218,29 @@ void UISetup::setupFileDropdownListeners() {
         }));
     }
 
+    if (auto* el = getEl("file-dropdown-save-as")) {
+        el->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
+            std::filesystem::path path1= Utilities::browseFolder();
+            std::filesystem::path path2 = save_data.path / save_data.name;
+            try {
+                fs::copy(path2, path1 / save_data.name, fs::copy_options::recursive);
+                Utilities::showPopup("[" + path2.string() + "] gespeichert unter [" + (path2 / save_data.path/ save_data.name).string() + "]");
+            } catch (const std::filesystem::filesystem_error& e) {
+                Utilities::showError(e.what());
+                Utilities::showError("[" + path2.string() + "] konnte nicht unter [" + (path2 / save_data.path/ save_data.name).string() + "] gespeichert werden!");
+            }
+        }));
+    }
+
     if (auto* el = getEl("file-dropdown-exportproject")) {
         el->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
             try {
+                std::filesystem::path destination = Utilities::browseFolder();
+
                 std::string fullPath = save_data.path.string() + "\\" + save_data.name;
 
                 if (std::filesystem::exists(fullPath + ".tct"))
-                    std::filesystem::remove_all(fullPath + ".tct");
+                    std::filesystem::remove(fullPath + ".tct");
 
                 std::string command =
                     "powershell Compress-Archive -Path \"" + fullPath +
@@ -237,6 +253,9 @@ void UISetup::setupFileDropdownListeners() {
                 }
 
                 std::filesystem::rename(fullPath + ".zip", fullPath + ".tct");
+
+                std::filesystem::copy(fullPath + ".tct", destination);
+
                 std::cout << "File " << save_data.name
                           << ".tct exported successfully to: "
                           << save_data.path.string() << '\n';
@@ -249,7 +268,59 @@ void UISetup::setupFileDropdownListeners() {
 
     if (auto* el = getEl("file-dropdown-importproject")) {
         el->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
-            // TODO
+
+            try {
+                std::filesystem::path sourceFile = Utilities::browseTCTFile();
+
+                if (!std::filesystem::exists(sourceFile))
+                    return;
+
+                char buffer[MAX_PATH];
+                GetModuleFileNameA(NULL, buffer, MAX_PATH);
+                std::filesystem::path exeDir = std::filesystem::path(buffer).parent_path();
+
+                std::filesystem::path savesDir = exeDir.parent_path() / "saves" / "folderSaves";
+
+                if (!std::filesystem::exists(savesDir))
+                    std::filesystem::create_directories(savesDir);
+
+                std::filesystem::path copiedTct = savesDir / sourceFile.filename();
+
+                std::filesystem::copy_file(
+                    sourceFile,
+                    copiedTct,
+                    std::filesystem::copy_options::overwrite_existing
+                );
+
+                std::filesystem::path zipPath = copiedTct;
+                zipPath.replace_extension(".zip");
+
+                std::filesystem::rename(copiedTct, zipPath);
+
+                std::filesystem::path extractPath = savesDir / zipPath.stem();
+
+                std::string command =
+                    "powershell -NoProfile -Command \"Expand-Archive -Path '" +
+                    zipPath.string() +
+                    "' -DestinationPath '" +
+                    extractPath.string() +
+                    "' -Force\"";
+
+                int result = std::system(command.c_str());
+                if (result != 0) {
+                    std::cerr << "Failed to unzip folder. Exit code: " << result << '\n';
+                    return;
+                }
+
+                std::filesystem::remove(zipPath);
+
+                std::cout << "Project imported successfully.\n";
+
+                UIManager::loadProject(extractPath);
+
+            } catch (const std::filesystem::filesystem_error& e) {
+                std::cerr << "Filesystem error: " << e.what() << '\n';
+            }
         }));
     }
 
@@ -271,7 +342,7 @@ void UISetup::setupSceneManagement() {
     if (auto *addSceneButton = getEl("add-scene-btn")) {
         addSceneButton->AddEventListener(Rml::EventId::Click,
                                          new ButtonHandler([]() {
-                                             scene_manager.scenes.emplace_back(st_scene_data{
+                                             scene_manager.scenes.emplace_back(SceneData{
                                                  "Szene " + std::to_string(scene_manager.scenes.size() + 1),
                                                  {}
                                              });
@@ -285,7 +356,7 @@ void UISetup::setupSceneManagement() {
         sceneButtonsArrowUp->AddEventListener(Rml::EventId::Click,
             new ButtonHandler([]() {
                 if (active_scene_index != -1 && active_scene_index != 0) {
-                    st_scene_data temp = scene_manager.scenes[active_scene_index - 1];
+                    SceneData temp = scene_manager.scenes[active_scene_index - 1];
                     scene_manager.scenes[active_scene_index - 1] = scene_manager.scenes[active_scene_index];
                     scene_manager.scenes[active_scene_index] = temp;
                     active_scene_index--;
@@ -299,7 +370,7 @@ void UISetup::setupSceneManagement() {
         sceneButtonsArrowDown->AddEventListener(Rml::EventId::Click,
             new ButtonHandler([]() {
                 if (active_scene_index != -1 && active_scene_index != scene_manager.scenes.size() - 1) {
-                    st_scene_data temp = scene_manager.scenes[active_scene_index + 1];
+                    SceneData temp = scene_manager.scenes[active_scene_index + 1];
                     scene_manager.scenes[active_scene_index + 1] = scene_manager.scenes[active_scene_index];
                     scene_manager.scenes[active_scene_index] = temp;
                     active_scene_index++;
@@ -326,16 +397,16 @@ void UISetup::setupSceneManagement() {
 void UISetup::setupSceneContextMenu() {
     // Rename button in context menu
     if (auto *contextRename = getEl("scene-context-rename")) {
-        contextRename->AddEventListener(Rml::EventId::Click, new SceneContextMenuHandler(get_window().document, "rename"));
+        contextRename->AddEventListener(Rml::EventId::Click, new SceneContextMenuHandler(getWindow().document, "rename"));
     }
 
     if (auto *contextDelete = getEl("scene-context-delete")) {
-        contextDelete->AddEventListener(Rml::EventId::Click, new SceneContextMenuHandler(get_window().document, "delete"));
+        contextDelete->AddEventListener(Rml::EventId::Click, new SceneContextMenuHandler(getWindow().document, "delete"));
     }
 
     if (auto *contextDuplicate = getEl("scene-context-duplicate")) {
         contextDuplicate->AddEventListener(Rml::EventId::Click,
-                                           new SceneContextMenuHandler(get_window().document, "duplicate"));
+                                           new SceneContextMenuHandler(getWindow().document, "duplicate"));
     }
 
     if (auto *body = getEl("body")) {
@@ -346,7 +417,7 @@ void UISetup::setupSceneContextMenu() {
         }));
     }
 
-    get_window().document->AddEventListener(Rml::EventId::Keydown, new KeyEventHandler([](Rml::Event &event) {
+    getWindow().document->AddEventListener(Rml::EventId::Keydown, new KeyEventHandler([](Rml::Event &event) {
         if (event.GetParameter<int>("key_identifier", 0) == Rml::Input::KI_ESCAPE) {
             if (auto *contextMenu = getEl("sceneContextMenu")) {
                 contextMenu->SetProperty("display", "none");
@@ -457,11 +528,11 @@ void UISetup::setupResourcePanel() {
 void UISetup::setupResourceContextMenu() {
     // Rename button in context menu
     if (auto *contextRename = getEl("resource-context-rename")) {
-        contextRename->AddEventListener(Rml::EventId::Click, new ResourceContextMenuHandler(get_window().document, "rename"));
+        contextRename->AddEventListener(Rml::EventId::Click, new ResourceContextMenuHandler(getWindow().document, "rename"));
     }
 
     if (auto *contextDelete = getEl("resource-context-delete")) {
-        contextDelete->AddEventListener(Rml::EventId::Click, new ResourceContextMenuHandler(get_window().document, "delete"));
+        contextDelete->AddEventListener(Rml::EventId::Click, new ResourceContextMenuHandler(getWindow().document, "delete"));
     }
 
     if (auto *body = getEl("body")) {
@@ -472,7 +543,7 @@ void UISetup::setupResourceContextMenu() {
         }));
     }
 
-    get_window().document->AddEventListener(Rml::EventId::Keydown, new KeyEventHandler([](Rml::Event &event) {
+    getWindow().document->AddEventListener(Rml::EventId::Keydown, new KeyEventHandler([](Rml::Event &event) {
         if (event.GetParameter<int>("key_identifier", 0) == Rml::Input::KI_ESCAPE) {
             if (auto *contextMenu = getEl("resourceContextMenu")) {
                 contextMenu->SetProperty("display", "none");
@@ -489,7 +560,7 @@ void UISetup::setupProjectors() {
 void UISetup::setupProjectorContextMenu() {
     // Select Resource button in context menu
     if (auto *contextRename = getEl("projector-context-selectResource")) {
-        contextRename->AddEventListener(Rml::EventId::Click, new ProjectorContextMenuHandler(get_window().document, "selectResource"));
+        contextRename->AddEventListener(Rml::EventId::Click, new ProjectorContextMenuHandler(getWindow().document, "selectResource"));
     }
 
 
@@ -501,7 +572,7 @@ void UISetup::setupProjectorContextMenu() {
         }));
     }
 
-    get_window().document->AddEventListener(Rml::EventId::Keydown, new KeyEventHandler([](Rml::Event &event) {
+    getWindow().document->AddEventListener(Rml::EventId::Keydown, new KeyEventHandler([](Rml::Event &event) {
         if (event.GetParameter<int>("key_identifier", 0) == Rml::Input::KI_ESCAPE) {
             if (auto *contextMenu = getEl("projectorContextMenu")) {
                 contextMenu->SetProperty("display", "none");

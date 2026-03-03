@@ -356,7 +356,7 @@ void Projector::initGLObjects() {
 
 void Projector::loadTexture(const std::string& path) {
     int w, h, c;
-    stbi_set_flip_vertically_on_load(true);
+    //stbi_set_flip_vertically_on_load(true);
     unsigned char* data = stbi_load(path.c_str(), &w, &h, &c, 4);
     if (!data) {
         std::cerr << "Failed to load texture: " << path << std::endl;

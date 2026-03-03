@@ -5,8 +5,6 @@
  * - image with spaces can lead to a crash
  * - loading a project without a path crashes
  * - window resize makes projector size 0
- * - video splitting restarts at like 60%
- * - video playback is laggy
 
  * Todo:
  *  - |installer
@@ -17,15 +15,17 @@
  *  - |Update Checking
  *  - |drag n drop upload
  *  - problem two resources with the same name override each other
- *  - split video
  *  - renaming or deleting a resource shows white images
- *  - trying to change source when resource is deleted it crashes
+ *  - trying to change source when resource is deleted it crashes -> request missing
  *  - resource name clipping
  *  - visuals
+ *  - show outdated projects
  *  - |multiselect
  *  - |drag n drop resource selection
  *  - |request missing
  *  - cleanup
+ *  - long scene names
+ *  - split on other thread
 */
 
 #include "UISetup.h"
@@ -49,24 +49,24 @@ int main() {
         from_json(j, save_data);
         std::cout << save_data.path << std::endl;
 
-        if ((get_window().document = get_window().context->LoadDocument("assets/interface.rml"))) {
-            set_interface_event_listeners();
-            get_window().document->Show();
+        if ((getWindow().document = getWindow().context->LoadDocument("assets/interface.rml"))) {
+            setInterfaceEventListeners();
+            getWindow().document->Show();
 
         }
 
     } else {
-        if ((get_window().document = get_window().context->LoadDocument("assets/startup.rml"))) {
+        if ((getWindow().document = getWindow().context->LoadDocument("assets/startup.rml"))) {
             std::cout << "Loading Startup..." << std::endl;
-            set_startup_event_listeners();
-            get_window().document->Show();
+            setStartupEventListeners();
+            getWindow().document->Show();
         }
     }
 
     glfwSetWindowSizeCallback(Backend::GetWindow(), GLFWwindowsizefun(resize_callback));
 
-    while (get_window().running) {
-        get_window().update();
+    while (getWindow().running) {
+        getWindow().update();
     }
     return 0;
 }

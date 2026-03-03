@@ -113,7 +113,7 @@ void UIManager::fixFolderStructure(const std::filesystem::path &savePath) {
 bool UIManager::saveJsonToFile(const std::filesystem::path &savePath, const json &data) {
     std::ofstream file(savePath);
     if (!file.is_open()) {
-        if (auto *el = get_window().document->GetElementById("error-text")) {
+        if (auto *el = getWindow().document->GetElementById("error-text")) {
             el->SetInnerRML("Konnte json nicht Speichern!");
         }
         return false;
@@ -123,7 +123,7 @@ bool UIManager::saveJsonToFile(const std::filesystem::path &savePath, const json
     file.close();
 
     if (!std::filesystem::exists(savePath)) {
-        if (auto *el = get_window().document->GetElementById("error-text")) {
+        if (auto *el = getWindow().document->GetElementById("error-text")) {
             el->SetInnerRML("JSON-Datei wurde nicht erstellt!");
         }
         return false;
@@ -162,7 +162,7 @@ bool UIManager::loadProject() {
     try {
         json j;
         file >> j;
-        save_data = j.get<st_save_data>();
+        save_data = j.get<SaveData>();
     } catch (const std::exception &e) {
         Utilities::showError("Fehler beim Lesen von: saveData.json");
         return false;
@@ -179,7 +179,7 @@ bool UIManager::loadProject() {
     try {
         json j;
         scenesFile >> j;
-        scene_manager = j.get<st_scene_manager>();
+        scene_manager = j.get<SceneManager>();
     } catch (const std::exception &e) {
         Utilities::showError("Fehler beim Lesen von: scenesData.json");
         return false;
@@ -219,7 +219,7 @@ bool UIManager::loadProject(const std::filesystem::path& loadPath) {
     try {
         json j;
         file >> j;
-        save_data = j.get<st_save_data>();
+        save_data = j.get<SaveData>();
     } catch (const std::exception &e) {
         Utilities::showError("Fehler beim Lesen von: saveData.json");
         return false;
@@ -236,7 +236,7 @@ bool UIManager::loadProject(const std::filesystem::path& loadPath) {
     try {
         json j;
         scenesFile >> j;
-        scene_manager = j.get<st_scene_manager>();
+        scene_manager = j.get<SceneManager>();
     } catch (const std::exception &e) {
         Utilities::showError("Fehler beim Lesen von: scenesData.json");
         return false;
@@ -245,6 +245,15 @@ bool UIManager::loadProject(const std::filesystem::path& loadPath) {
     for (auto& scene : scene_manager.scenes) {
         scene.connections.resize(save_data.projector_amount);
     }
+
+    ResourceHandler::loadResources();
+
+    refreshProjectors();
+    refreshScenes();
+    refreshResourcePanel();
+
+    if (auto el = getEl("project-name"))
+        el->SetInnerRML(save_data.name);
 
     // Create recent path file
     if (create_recent_path)
@@ -374,7 +383,7 @@ void UIManager::refreshScenes() {
         }
 
         for (int i = 0; i < scene_manager.scenes.size(); ++i) {
-            Rml::ElementPtr child = get_window().document->CreateElement("div");
+            Rml::ElementPtr child = getWindow().document->CreateElement("div");
             child->SetClass("scene-item", true);
             child->SetId("scene-item-" + std::to_string(i)); // Add ID for targeting
 
@@ -387,7 +396,7 @@ void UIManager::refreshScenes() {
             child->SetInnerRML(scene_manager.scenes[i].name);
 
             // Add event listener
-            child->AddEventListener(Rml::EventId::Mouseup, new SceneItemHandler(get_window().document, i));
+            child->AddEventListener(Rml::EventId::Mouseup, new SceneItemHandler(getWindow().document, i));
 
             sceneList->AppendChild(std::move(child));
         }
@@ -432,18 +441,18 @@ void UIManager::populateFolders(const std::string& path) {
         std::string fullPath   = entry.path().string();
 
         // Folder row
-        Rml::ElementPtr folderDiv = get_window().document->CreateElement("div");
+        Rml::ElementPtr folderDiv = getWindow().document->CreateElement("div");
         folderDiv->SetAttribute("class", "sample-project");
 
         // Folder name
-        Rml::ElementPtr nameSpan = get_window().document->CreateElement("span");
+        Rml::ElementPtr nameSpan = getWindow().document->CreateElement("span");
         nameSpan->SetInnerRML(folderName);
         folderDiv->AppendChild(std::move(nameSpan));
 
-        Rml::ElementPtr trashBtn = get_window().document->CreateElement("div");
+        Rml::ElementPtr trashBtn = getWindow().document->CreateElement("div");
         trashBtn->SetAttribute("class", "trash-btn");
 
-        Rml::ElementPtr trashIcon = get_window().document->CreateElement("img");
+        Rml::ElementPtr trashIcon = getWindow().document->CreateElement("img");
         trashIcon->SetAttribute("src", "trash.svg");
         trashIcon->SetAttribute("class", "trash-icon");
         trashBtn->AppendChild(std::move(trashIcon));
@@ -458,27 +467,27 @@ void UIManager::populateFolders(const std::string& path) {
 
         folderDiv->AddEventListener(Rml::EventId::Click, new ButtonHandler(
             [fullPath] {
-                if (auto *inputEl = get_window().document->GetElementById("load-dir-input")) {
+                if (auto *inputEl = getWindow().document->GetElementById("load-dir-input")) {
                     if (auto *input = dynamic_cast<Rml::ElementFormControl *>(inputEl)) {
-                        input->SetValue(Utilities::toBackwardSlashes(fullPath));
+                        input->SetValue(Utilities::toBackwardSlashes(fullPath).string());
                     }
                 }
             }
         ));
         folderDiv->AddEventListener(Rml::EventId::Dblclick, new ButtonHandler(
             [fullPath] {
-                if (auto *inputEl = get_window().document->GetElementById("load-dir-input")) {
+                if (auto *inputEl = getWindow().document->GetElementById("load-dir-input")) {
                     if (auto *input = dynamic_cast<Rml::ElementFormControl *>(inputEl)) {
-                        input->SetValue(Utilities::toBackwardSlashes(fullPath));
+                        input->SetValue(Utilities::toBackwardSlashes(fullPath).string());
                     }
                 }
                 if (loadProject()) {
-                    get_window().document->Hide();
+                    getWindow().document->Hide();
                     std::cout << "Project loaded: " << save_data.name << std::endl;
-                    if ((get_window().document = get_window().context->LoadDocument("assets/interface.rml"))) {
-                        get_window().document->Show();
+                    if ((getWindow().document = getWindow().context->LoadDocument("assets/interface.rml"))) {
+                        getWindow().document->Show();
                     }
-                    set_interface_event_listeners();
+                    setInterfaceEventListeners();
                 }
             }
         ));
@@ -509,7 +518,7 @@ bool UIManager::loadScenesData() {
         }
 
         for (const auto& sceneJson : j["scenes"]) {
-            st_scene_data scene;
+            SceneData scene;
 
             scene.name =
                 sceneJson.value("sceneName", "Unnamed Scene");
@@ -552,10 +561,10 @@ bool UIManager::loadScenesData() {
     return true;
 }
 void UIManager::switchToStartup() {
-    if ((get_window().document = get_window().context->LoadDocument("assets/startup.rml"))) {
+    if ((getWindow().document = getWindow().context->LoadDocument("assets/startup.rml"))) {
         scene_manager.scenes.clear();
-        set_startup_event_listeners();
-        get_window().document->Show();
+        setStartupEventListeners();
+        getWindow().document->Show();
     }
 }
 
@@ -571,13 +580,13 @@ void UIManager::refreshResourcePanel()
     int i = 0;
     for (const Resource& r : resources)
     {
-        if (!r.isVideo && r.name.size() >= 10 &&
+        if (!r.is_video && r.name.size() >= 10 &&
         r.name.compare(r.name.size() - 10, 10, "_thumbnail") == 0)
             continue;
 
         std::filesystem::path previewImage;
 
-        if (r.isVideo)
+        if (r.is_video)
         {
             // find thumbnail resource
             const Resource* thumb = nullptr;
@@ -604,16 +613,16 @@ void UIManager::refreshResourcePanel()
             previewImage = r.path;
         }
 
-        Rml::ElementPtr item = get_window().document->CreateElement("div");
+        Rml::ElementPtr item = getWindow().document->CreateElement("div");
         item->SetAttribute("class", "resource-item");
         item->SetAttribute("id", "resource-item-" + std::to_string(r.id));
 
-        Rml::ElementPtr img = get_window().document->CreateElement("img");
+        Rml::ElementPtr img = getWindow().document->CreateElement("img");
         img->SetAttribute("src", previewImage.string());
         img->SetAttribute("alt", "Resource");
 
-        Rml::ElementPtr p = get_window().document->CreateElement("p");
-        p->AppendChild(get_window().document->CreateTextNode(r.name));
+        Rml::ElementPtr p = getWindow().document->CreateElement("p");
+        p->AppendChild(getWindow().document->CreateTextNode(r.name));
 
         item->AppendChild(std::move(img));
         item->AppendChild(std::move(p));
@@ -624,7 +633,7 @@ void UIManager::refreshResourcePanel()
         const int resourceId = r.id;
         item->AddEventListener(
             Rml::EventId::Mouseup,
-            new ResourceItemHandler(get_window().document, resourceId)
+            new ResourceItemHandler(getWindow().document, resourceId)
         );
 
         resourceList->AppendChild(std::move(item));
@@ -716,7 +725,7 @@ void UIManager::refreshProjectors() {
 
     for (int i = 0; i < n; ++i) {
         // ---- PROJECTOR wrapper (fixed px size so inner can maintain 16:9) ----
-        Rml::ElementPtr projector = get_window().document->CreateElement("div");
+        Rml::ElementPtr projector = getWindow().document->CreateElement("div");
         projector->SetClass("projector", true);
         projector->SetId("projector-" + std::to_string(i));
 
@@ -731,7 +740,7 @@ void UIManager::refreshProjectors() {
         projector->SetProperty("overflow", "hidden");
 
         // create an inner element that will hold the background image and preserve aspect ratio
-        Rml::ElementPtr inner = get_window().document->CreateElement("div");
+        Rml::ElementPtr inner = getWindow().document->CreateElement("div");
         inner->SetClass("projector-inner", true);
         inner->SetProperty("width", "100%");
         inner->SetProperty("height", "100%");
@@ -755,7 +764,7 @@ void UIManager::refreshProjectors() {
             }
 
             // apply the image to the inner element (background-size: cover is in RCSS)
-            inner->SetAttribute("style", "decorator: image(" + src + ");");
+            inner->SetProperty("decorator", "image(\"" + src + "\")");
         } else {
             // fall back text centered inside inner
             inner->SetInnerRML("Projector " + std::to_string(i + 1));
@@ -765,14 +774,14 @@ void UIManager::refreshProjectors() {
         projector->AppendChild(std::move(inner));
 
         // click handler for selecting projector
-        projector->AddEventListener(Rml::EventId::Mouseup, new ProjectorHandler(get_window().document, i));
+        projector->AddEventListener(Rml::EventId::Mouseup, new ProjectorHandler(getWindow().document, i));
 
         // add wrapper to the grid
         projectorGrid->AppendChild(std::move(projector));
 
         // ---- CONNECT BUTTON (except after last projector) ----
         if (i < n - 1) {
-            Rml::ElementPtr connectBtn = get_window().document->CreateElement("div");
+            Rml::ElementPtr connectBtn = getWindow().document->CreateElement("div");
             connectBtn->SetClass("connect-btn", true);
 
             if (scene_manager.scenes[active_scene_index].connections[i] == 1)
@@ -942,13 +951,13 @@ void UIManager::regenerateSplitSources()
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //Context menus
 
-void select_scene(const int index) {
+void selectScene(const int index) {
     std::cout << "Selecting scene: " << index << " (previously: " << active_scene_index << ")" << std::endl;
     active_scene_index = index;
     UIManager::refreshScenes();
     UIManager::refreshProjectors();
 }
-void show_scene_rename_dialog(int sceneIndex) {
+void showSceneRenameDialog(int sceneIndex) {
     if (sceneIndex < 0 || sceneIndex >= (int) scene_manager.scenes.size()) {
         std::cerr << "[Error] Invalid scene index for rename: " << sceneIndex << std::endl;
         return;
@@ -965,11 +974,11 @@ void show_scene_rename_dialog(int sceneIndex) {
         sceneItem->SetClass("renaming", true);
 
         // Create container for input and button
-        Rml::ElementPtr container = get_window().document->CreateElement("div");
+        Rml::ElementPtr container = getWindow().document->CreateElement("div");
         container->SetClass("rename-container", true);
 
         // Create input field
-        Rml::ElementPtr input = get_window().document->CreateElement("input");
+        Rml::ElementPtr input = getWindow().document->CreateElement("input");
         input->SetAttribute("type", "text");
         input->SetAttribute("value", currentName);
         input->SetId("rename-input-" + std::to_string(sceneIndex));
@@ -985,7 +994,7 @@ void show_scene_rename_dialog(int sceneIndex) {
         }, true));
 
         // Create OK button
-        Rml::ElementPtr okButton = get_window().document->CreateElement("button");
+        Rml::ElementPtr okButton = getWindow().document->CreateElement("button");
         okButton->SetInnerRML("OK");
         okButton->SetId("rename-ok-" + std::to_string(sceneIndex));
         okButton->SetClass("rename-ok-button", true);
@@ -1007,7 +1016,7 @@ void show_scene_rename_dialog(int sceneIndex) {
                                             event.StopPropagation(); // Stop the Enter key from propagating
 
                                             // Simulate OK button click when Enter is pressed
-                                            if (auto *okButton = get_window().document->GetElementById(
+                                            if (auto *okButton = getWindow().document->GetElementById(
                                                 "rename-ok-" + std::to_string(sceneIndex))) {
                                                 okButton->Click();
                                             }
@@ -1017,7 +1026,7 @@ void show_scene_rename_dialog(int sceneIndex) {
         // Add event listener for OK button functionality
         okButton->AddEventListener(Rml::EventId::Click, new ButtonHandler([sceneIndex, currentName] {
             //std::cout << "OK button clicked for scene: " << sceneIndex << std::endl;
-            if (auto *inputEl = get_window().document->GetElementById("rename-input-" + std::to_string(sceneIndex))) {
+            if (auto *inputEl = getWindow().document->GetElementById("rename-input-" + std::to_string(sceneIndex))) {
                 if (auto *input = dynamic_cast<Rml::ElementFormControl *>(inputEl)) {
                     std::string newName = input->GetValue();
 
@@ -1059,14 +1068,14 @@ void show_scene_rename_dialog(int sceneIndex) {
         sceneItem->AppendChild(std::move(container));
 
         // Focus the input field
-        if (auto *inputEl = get_window().document->GetElementById("rename-input-" + std::to_string(sceneIndex))) {
+        if (auto *inputEl = getWindow().document->GetElementById("rename-input-" + std::to_string(sceneIndex))) {
             if (auto *input = dynamic_cast<Rml::ElementFormControl *>(inputEl)) {
                 input->Focus();
             }
         }
     }
 }
-void delete_scene(int sceneIndex) {
+void deleteScene(int sceneIndex) {
     std::cout << "Delete scene: " << sceneIndex << std::endl;
     if (sceneIndex >= 0 && sceneIndex < (int) scene_manager.scenes.size()) {
         scene_manager.scenes.erase(scene_manager.scenes.begin() + sceneIndex);
@@ -1085,10 +1094,10 @@ void delete_scene(int sceneIndex) {
     }
 }
 
-void duplicate_scene(int sceneIndex) {
+void duplicateScene(int sceneIndex) {
     std::cout << "Duplicate scene: " << sceneIndex << std::endl;
     if (sceneIndex >= 0 && sceneIndex < (int)scene_manager.scenes.size()) {
-        st_scene_data newScene = scene_manager.scenes[sceneIndex];
+        SceneData newScene = scene_manager.scenes[sceneIndex];
 
         std::string baseName = newScene.name;
         std::regex copyRegex(R"( \(Copy(?: \d+)?\)$)");
@@ -1117,7 +1126,7 @@ void duplicate_scene(int sceneIndex) {
         UIManager::refreshScenes();
     }
 }
-void show_resource_rename_dialog(int id) {
+void showResourceRenameDialog(int id) {
     // Use the new ResourceHandler method
     std::optional<Resource> resourceOpt = ResourceHandler::getResource(id);
 
@@ -1148,16 +1157,16 @@ void show_resource_rename_dialog(int id) {
             itemEl->AppendChild(std::move(existingImg));
         }
 
-        Rml::ElementPtr container = get_window().document->CreateElement("div");
+        Rml::ElementPtr container = getWindow().document->CreateElement("div");
         container->SetClass("rename-container", true);
 
-        Rml::ElementPtr input = get_window().document->CreateElement("input");
+        Rml::ElementPtr input = getWindow().document->CreateElement("input");
         input->SetAttribute("type", "text");
         input->SetAttribute("value", currentName);
         input->SetId("rename-input-" + std::to_string(id));
         input->SetClass("rename-input", true);
 
-        Rml::ElementPtr okButton = get_window().document->CreateElement("button");
+        Rml::ElementPtr okButton = getWindow().document->CreateElement("button");
         okButton->SetInnerRML("OK");
         okButton->SetClass("rename-ok-button", true);
 
@@ -1166,7 +1175,7 @@ void show_resource_rename_dialog(int id) {
         itemEl->AppendChild(std::move(container));
 
         // Focus input
-        if (auto* inputEl = get_window().document->GetElementById("rename-input-" + std::to_string(id))) {
+        if (auto* inputEl = getWindow().document->GetElementById("rename-input-" + std::to_string(id))) {
             if (auto* inputField = dynamic_cast<Rml::ElementFormControl*>(inputEl)) {
                 inputField->Focus();
             }
@@ -1176,7 +1185,7 @@ void show_resource_rename_dialog(int id) {
         if (auto* containerEl = itemEl->GetChild(itemEl->GetNumChildren() - 1)) {
             if (auto* okEl = containerEl->GetChild(1)) {
                 okEl->AddEventListener(Rml::EventId::Click, new ButtonHandler([id, filePath, currentName] {
-                    if (auto* inputEl = get_window().document->GetElementById("rename-input-" + std::to_string(id))) {
+                    if (auto* inputEl = getWindow().document->GetElementById("rename-input-" + std::to_string(id))) {
                         if (auto* inputField = dynamic_cast<Rml::ElementFormControl*>(inputEl)) {
                             std::string newName = inputField->GetValue();
                             if (!newName.empty() && newName != currentName) {
@@ -1225,19 +1234,19 @@ void show_resource_rename_dialog(int id) {
     }
 }
 
-void delete_resource(int id) {
+void deleteResource(int id) {
     ResourceHandler::deleteResource(id);
     UIManager::refreshResourcePanel();
 }
-void select_resource(int index){
+void selectResource(int index){
     std::cout << "Selecting Resource: " << index << " (previously: " << active_resource_index << ")" << std::endl;
     active_resource_index = index;
     UIManager::refreshResourcePanel();
 }
 
-void show_projector_resource_selection(int index)
+void showProjectorResourceSelection(int index)
 {
-    auto* doc = get_window().document;
+    auto* doc = getWindow().document;
     if (!doc) return;
 
     if (auto* existing = getEl("projector-resource-overlay")) {
@@ -1334,13 +1343,13 @@ void show_projector_resource_selection(int index)
     for (const Resource& r : resources) {
 
         // skip thumbnail resources
-        if (!r.isVideo && r.name.size() >= 10 &&
+        if (!r.is_video && r.name.size() >= 10 &&
             r.name.compare(r.name.size() - 10, 10, "_thumbnail") == 0)
             continue;
 
         std::filesystem::path previewImage;
 
-        if (r.isVideo) {
+        if (r.is_video) {
             // find thumbnail resource
             const Resource* thumb = nullptr;
             for (const Resource& candidate : resources) {
@@ -1411,7 +1420,7 @@ void show_projector_resource_selection(int index)
     if (auto* body = getEl("body")) body->AppendChild(std::move(overlay));
 }
 
-void connect_projectors(int index) {
+void connectProjectors(int index) {
     if (index < 0 || index >= save_data.projector_amount - 1)
         return;
 
@@ -1427,7 +1436,7 @@ void connect_projectors(int index) {
     UIManager::saveProject();
 }
 
-void disconnect_projectors(int index) {
+void disconnectProjectors(int index) {
     scene_manager.scenes[active_scene_index].connections[index] = 0;
 
     // regenerate splits for the scene

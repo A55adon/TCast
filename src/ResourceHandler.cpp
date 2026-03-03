@@ -1,146 +1,151 @@
-#include <fstream>
-#include <nlohmann/json.hpp>
-
 #include "ResourceHandler.h"
-
-#include "EventListener.h"
 #include "Utilities.h"
 
 #include "global.h"
 
 using json = nlohmann::json;
+using U = Utilities;
 
-ResourceManager ResourceHandler::rm;
+// Static variable initialization
+ResourceManager ResourceHandler::resourceManager;
 
+// Initializes Resource Handler
 bool ResourceHandler::initResources() {
-    std::filesystem::create_directories(getRelativeImagePath());
-    std::filesystem::create_directories(getRelativeVideoPath());
-    std::filesystem::create_directories(getRelativeThumbnailPath());
+    fs::create_directories(getRelativeImagePath());
+    fs::create_directories(getRelativeVideoPath());
+    fs::create_directories(getRelativeThumbnailPath());
 
-    if (!std::filesystem::exists(save_data.path / save_data.name / "resourceData.json"))
-        std::ofstream file(save_data.path / save_data.name / "resourceData.json");
+    if (!fs::exists(getRelativeResourceData()))
+        std::ofstream file(getRelativeResourceData());
 
     if (!loadResources()) {
+        LOG_ERR("RH", "Couldn't load resource data in initResources()");
         return false;
     }
     if (!verifyResources()) {
+        LOG_INFO("RH", "Couldn't verify all resources - removing missing ones in initResources()");
+        deleteMissingResources();
         return false;
     }
 
     return true;
 }
 
+// Loads from resourceData.json to resourceManager
 bool ResourceHandler::loadResources() {
-    const std::filesystem::path filePath = save_data.path / save_data.name / "resourceData.json";
-    std::ifstream file(filePath);
+    std::ifstream file(getRelativeResourceData());
 
     if (!file.is_open()) {
-        std::cerr << "Could not open file " << filePath.string() << std::endl;
-        Utilities::showError("Datei " + filePath.string() + " konnte nicht geöffnet werden!");
+        const std::string msg =  "Could not open file[" + getRelativeResourceData().string() + "] in loadResources()";
+        LOG_INFO("RH", msg);
+        U::showError("Datei " + getRelativeResourceData().string() + " konnte nicht geöffnet werden!");
         return false;
     }
 
-    if (std::filesystem::file_size(filePath) == 0) {
-        rm.maxId = 0;
-        rm.resources.clear();
+    if (fs::file_size(getRelativeResourceData()) == 0) {
+        resourceManager.max_id = 0;
+        resourceManager.resources.clear();
         return true;
     }
 
     json j;
     file >> j;
-    rm = j.get<ResourceManager>();
+    resourceManager = j.get<ResourceManager>();
     return true;
 }
 
-bool ResourceHandler::saveResources() {
-    const std::filesystem::path filePath = save_data.path / save_data.name / "resourceData.json";
-    std::ofstream file(filePath);
+// Saves resourceManager to resourceData.json
+bool ResourceHandler::saveResources() {;
+    std::ofstream file(getRelativeResourceData());
 
     if (!file.is_open()) {
-        std::cerr << "Could not open file " << filePath.string() << std::endl;
-        Utilities::showError("Datei " + filePath.string() + " konnte nicht geöffnet werden!");
+        const std::string msg = "Couldn't open file[" + getRelativeResourceData().string() + "] in saveResources()";
+        LOG_INFO("RH", msg);
+        U::showError("Datei " + getRelativeResourceData().string() + " konnte nicht geöffnet werden!");
         return false;
     }
 
-    json j = rm;
+    const json j = resourceManager;
     file << j.dump(4);
 
     return true;
 }
 
-Resource& ResourceHandler::createResource(std::filesystem::path path, std::string name)
+// Creates new Resource
+Resource& ResourceHandler::createResource(const fs::path& path, const std::string &name)
 {
-    if (!std::filesystem::exists(path)) {
-        throw std::runtime_error("Resource file does not exist: " + path.string());
+    if (!fs::exists(path)) {
+        LOG_ERR("RH", "File[" + path.string() + "] doesn't exist");
+        U::showError("Datei " + path.string() + " existiert nicht!");
     }
 
     Resource r;
-    r.id = rm.maxId++;
+    r.id = resourceManager.max_id++;
     r.name = name;
     r.thumbnail_id = -1;
 
-    const std::string ext = getFileExtension(path.string());
-
     try {
-        if (ext == ".mp4") {
-            r.isVideo = true;
+        if (getFileExtension(path.string()) == ".mp4") {
+            r.is_video = true;
 
-            r.path = getRelativeVideoPath() / ("video_mp4_" + std::to_string(rm.maxId) + ".mp4");
+            r.path = getRelativeVideoPath() / ("video_mp4_" + std::to_string(resourceManager.max_id) + ".mp4");
 
-            std::filesystem::create_directories(r.path.parent_path());
-            std::filesystem::copy_file(
+            fs::create_directories(r.path.parent_path());
+            fs::copy_file(
                 path,
                 r.path,
-                std::filesystem::copy_options::overwrite_existing
+                fs::copy_options::overwrite_existing
             );
 
-            const auto thumbPath = getRelativeThumbnailPath() / ("image_png_tumbnail" + std::to_string(rm.maxId) + ".png");
-            std::filesystem::create_directories(thumbPath.parent_path());
+            const fs::path thumbPath = getRelativeThumbnailPath() / ("image_png_thumbnail" + std::to_string(resourceManager.max_id) + ".png");
+            fs::create_directories(thumbPath.parent_path());
 
-            if (Utilities::extractMp4Thumbnail(path.string(), thumbPath.string())) {
+            if (U::extractMp4Thumbnail(path.string(), thumbPath.string())) {
                 Resource thumb;
-                thumb.id = rm.maxId++;
+                thumb.id = resourceManager.max_id++;
                 thumb.name = name + "_thumbnail";
                 thumb.path = thumbPath;
-                thumb.isVideo = false;
+                thumb.is_video = false;
                 thumb.thumbnail_id = -1;
 
-                rm.resources.push_back(thumb);
+                resourceManager.resources.push_back(thumb);
                 r.thumbnail_id = thumb.id;
             }
             else {
-                Utilities::showError("Thumbnail could not be generated for " + path.string());
+                LOG_ERR("RH", "Thumbnail couldn't be generated for " + path.string() + " in createResource()");
+                U::showError("Thumbnail konnte nicht erstellt werden für " + path.string());
             }
         }
         else {
-            r.isVideo = false;
+            r.is_video = false;
 
-            r.path = getRelativeImagePath() / ("image_png_" + std::to_string(rm.maxId) + ".png");
+            r.path = getRelativeImagePath() / ("image_png_" + std::to_string(resourceManager.max_id) + ".png");
 
-            std::filesystem::create_directories(r.path.parent_path());
+            fs::create_directories(r.path.parent_path());
 
-            if (!Utilities::convertToPng(path.string(), r.path.string())) {
-                throw std::runtime_error("Image conversion failed: " + path.string());
+            if (!U::convertToPng(path.string(), r.path.string())) {
+                LOG_ERR("RH", "Couldn't convert " + path.string() + " to PNG in createResource()");
+                U::showError("Konnte " + path.string() + " nicht in PNG umwandeln");
             }
         }
 
-        rm.resources.push_back(r);
+        resourceManager.resources.push_back(r);
         saveResources();
-        return rm.resources.back();
+        return resourceManager.resources.back();
     }
     catch (const std::exception& e) {
-        std::cerr << "[ResourceHandler] " << e.what() << std::endl;
-        throw;
+        LOG_ERR("RH", std::string("Couldn't create Resource in createResource() - ") + e.what());
     }
 }
 
-void ResourceHandler::deleteResource(int id)
+// Deletes resource
+void ResourceHandler::deleteResource(const int id)
 {
-    auto& resources = rm.resources;
+    auto& resources = resourceManager.resources;
 
-    for (auto& res : resources) {
+    for (const auto& res : resources) {
         if (res.id == id)
-            if (res.isVideo)
+            if (res.is_video)
                 deleteResource(res.thumbnail_id);
     }
     resources.erase(
@@ -156,87 +161,101 @@ void ResourceHandler::deleteResource(int id)
     saveResources();
 }
 
-Resource& ResourceHandler::getResource(int id)
+// Returns reference of wanted resource
+Resource& ResourceHandler::getResource(const int id)
 {
-    for (auto& r : rm.resources) {
+    for (auto& r : resourceManager.resources) {
         if (r.id == id)
             return r;
     }
-    throw std::runtime_error("Resource not found: id=" + std::to_string(id));
+    LOG_ERR("RH", "Couldn't get Resource[" + id + std::string("] in getResource()"));
 }
 
-std::vector<Resource> ResourceHandler::getResources() {
-    return rm.resources;
+// Returns vector of all resource references
+std::vector<Resource>& ResourceHandler::getResources() {
+    return resourceManager.resources;
 }
+// Creates a split part from the source resource from start to end % on x-axis
+int ResourceHandler::createSplitResource(int source_id, float start, float end, const std::string& name_suffix) {
+    const Resource& src = getResource(source_id);
 
-int ResourceHandler::createSplitResource(int sourceId, float start, float end, const std::string& nameSuffix) {
-    Resource& src = getResource(sourceId);
+    if (!fs::exists(src.path)) {
+        LOG_ERR("RH", "File[" + src.path.string() + "] does not exist in createSplitResource()");
+        return -1;
+    }
 
-    if (!std::filesystem::exists(src.path))
-        throw std::runtime_error("Source resource missing: " + src.path.string());
+    if (getFileExtension(src.path.string()) != ".png") {
+        LOG_ERR("RH", "File[" + src.path.string() + "] is not a .png in createSplitResource()");
+        return -1;
+    }
 
-    std::string ext = getFileExtension(src.path.string());
-    if (ext != ".png") // Only handle images for cropping
-        throw std::runtime_error("Splits only supported for images");
+    const fs::path splitPath = getRelativeImagePath() / (src.name + "_" + name_suffix + ".png");
+    fs::create_directories(splitPath.parent_path());
 
-    // Build path for split image
-    std::filesystem::path splitPath = getRelativeImagePath() / (src.name + "_" + nameSuffix + ".png");
-    std::filesystem::create_directories(splitPath.parent_path());
+    if (!Utilities::cropImagePart(start, end, src.path.string(), splitPath.string())) {
+        LOG_ERR("RH", "File[" + src.path.string() + "] couldn't be split in createSplitResource()");
+        return -1;
+    }
 
-    // Crop the image
-    if (!Utilities::cropImagePart(start, end, src.path.string(), splitPath.string()))
-        throw std::runtime_error("Failed to crop image: " + src.path.string());
-
-    // Register as a resource
     Resource r;
-    r.id = rm.maxId++;
-    r.name = src.name + "_" + nameSuffix;
+    r.id = resourceManager.max_id++;
+    r.name = src.name + "_" + name_suffix;
     r.path = splitPath;
-    r.isVideo = false;
+    r.is_video = false;
     r.thumbnail_id = -1;
 
-    rm.resources.push_back(r);
+    resourceManager.resources.push_back(r);
     saveResources();
 
     return r.id;
 }
-
-
-
-int ResourceHandler::getResourceIdByPath(const std::string& path) {
-    for (auto& r : rm.resources) {
+// Returns resource path from id
+int ResourceHandler::getResourceIdByPath(const fs::path& path) {
+    for (auto& r : resourceManager.resources) {
         if (r.path == path)
             return r.id;
     }
-    throw std::runtime_error("Resource not found for path: " + path);
+    LOG_ERR("RH", "No resource found for " + path.string() + " in getResourceIdByPath()");
+    return -1;
 }
 
+// Checks if all registered resources exist
 bool ResourceHandler::verifyResources() {
-    for(auto& resource : rm.resources) {
-        if (!std::filesystem::exists(resource.path)) {
-            //std::string path = requestMissingResource(resource.id);
-            //if (path.empty()) { // no new path given
+    bool missing = false;
+    for(auto& resource : resourceManager.resources) {
+        if (!fs::exists(resource.path)) {
+            missing = true;
+        }
+    }
+    return missing;
+}
+
+// Deletes all resources that are registerd but not found
+bool ResourceHandler::deleteMissingResources() {
+    for(auto& resource : resourceManager.resources) {
+        if (!fs::exists(resource.path)) {
             deleteResource(resource.id);
-            //} else { // new path given
-            //    resource.path = path;
-            //}
         }
     }
     return true;
 }
 
-std::filesystem::path ResourceHandler::getRelativeImagePath() {
+fs::path ResourceHandler::getRelativeImagePath() {
     return save_data.path / save_data.name / "resources" / "images";
 }
 
-std::filesystem::path ResourceHandler::getRelativeVideoPath() {
+fs::path ResourceHandler::getRelativeVideoPath() {
     return save_data.path / save_data.name / "resources" / "videos";
 }
 
-std::filesystem::path ResourceHandler::getRelativeThumbnailPath() {
+fs::path ResourceHandler::getRelativeThumbnailPath() {
     return save_data.path / save_data.name / "resources" / "videos" / "thumbnails";
 }
 
-std::string ResourceHandler::getFileExtension(std::string in) {
-    return std::filesystem::path(in).extension().string(); // return like ".png"
+fs::path ResourceHandler::getRelativeResourceData() {
+    return save_data.path / save_data.name / "resourceData.json";
+}
+
+std::string ResourceHandler::getFileExtension(const std::string in) {
+    return fs::path(in).extension().string(); // e.g. .png
 }

@@ -3,7 +3,7 @@
         <title>TCast</title>
         <link type="text/rcss" href="startup.rcss"/>
     </head>
-    <body class="window">
+    <body id="body" class="window">
     <h1>TCast - Start</h1>
 
     <div class="project-settings-div">
@@ -42,7 +42,7 @@
                 <input id="project-dir-input" type="text" />
                 <button id="browse-btn" class="action-btn">Ändern</button>
             </div>
-            <button id="save-btn" class="action-btn">Weiter</button>
+            <button id="save-btn" class="action-btn">Projekt Erstellen</button>
         </div>
 
         <!-- Load Project -->

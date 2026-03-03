@@ -9,6 +9,7 @@
 #include "imgui/backends/imgui_impl_opengl3.h"
 #include "global.h"
 #include "ResourceHandler.h"
+#include "Utilities.h"
 
 static bool showDebugWindow = false;
 Window::Window(const int window_width, const int window_height): document(nullptr)
@@ -241,7 +242,7 @@ void Window::update()
 
                         // Type
                         ImGui::TableSetColumnIndex(2);
-                        if (resource.isVideo) {
+                        if (resource.is_video) {
                             ImGui::TextColored(ImVec4(1, 0.5f, 0, 1), "Video");
                         } else {
                             ImGui::Text("Image");
@@ -490,6 +491,19 @@ void Window::update()
                 ImGui::Checkbox("Create Recent Path", &create_recent_path);
                 ImGui::Text("Active Scene Index: %d", active_scene_index);
                 ImGui::Text("Active Resource Index: %d", active_resource_index);
+
+                if (ImGui::Button("Create Debug Popup small")) {
+                    Utilities::showInfo("Test message");
+                }
+                if (ImGui::Button("Create Debug Popup big")) {
+                    Utilities::showInfo("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.");
+                }
+                if (ImGui::Button("Create Debug Error Popup small")){
+                    Utilities::showError("Test message");
+                }
+                if (ImGui::Button("Create Debug Error Popup big")) {
+                    Utilities::showError("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.");
+                }
 
                 ImGui::EndTabItem();
             }

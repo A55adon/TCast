@@ -405,13 +405,15 @@ CMakeFiles/TCast.dir/src/Window.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/codecvt \
  C:/msys64/mingw64/include/c++/15.2.0/bits/fs_dir.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/fs_ops.h \
- C:/Users/simon/Desktop/Code/TCast/include/stb_image.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavformat/avformat.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec_par.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/avutil.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/common.h \
- C:/msys64/mingw64/include/inttypes.h \
- C:/msys64/mingw64/include/c++/15.2.0/math.h \
+ C:/msys64/mingw64/include/c++/15.2.0/fstream \
+ C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/basic_file.h \
+ C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++io.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/fstream.tcc \
+ C:/Users/simon/Desktop/Code/TCast/include/nlohmann/json.hpp \
+ C:/msys64/mingw64/include/c++/15.2.0/forward_list \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/forward_list.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/forward_list.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/valarray \
  C:/msys64/mingw64/include/c++/15.2.0/cmath \
  C:/msys64/mingw64/include/math.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/specfun.h \
@@ -427,6 +429,30 @@ CMakeFiles/TCast.dir/src/Window.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/tr1/poly_hermite.tcc \
  C:/msys64/mingw64/include/c++/15.2.0/tr1/poly_laguerre.tcc \
  C:/msys64/mingw64/include/c++/15.2.0/tr1/riemann_zeta.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/valarray_array.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/valarray_array.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/valarray_before.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/slice_array.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/valarray_after.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/gslice.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/gslice_array.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/mask_array.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/indirect_array.h \
+ C:/msys64/mingw64/include/c++/15.2.0/version \
+ C:/msys64/mingw64/include/c++/15.2.0/cassert \
+ C:/msys64/mingw64/include/assert.h \
+ C:/msys64/mingw64/include/c++/15.2.0/optional \
+ C:/msys64/mingw64/include/c++/15.2.0/numeric \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/stl_numeric.h \
+ C:/msys64/mingw64/include/c++/15.2.0/pstl/glue_numeric_defs.h \
+ C:/msys64/mingw64/include/c++/15.2.0/any \
+ C:/Users/simon/Desktop/Code/TCast/include/stb_image.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavformat/avformat.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec_par.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/avutil.h \
+ C:/Users/simon/Desktop/Code/TCast/include/libavutil/common.h \
+ C:/msys64/mingw64/include/inttypes.h \
+ C:/msys64/mingw64/include/c++/15.2.0/math.h \
  C:/Users/simon/Desktop/Code/TCast/include/libavutil/attributes.h \
  C:/Users/simon/Desktop/Code/TCast/include/libavutil/error.h \
  C:/Users/simon/Desktop/Code/TCast/include/libavutil/macros.h \
@@ -493,7 +519,6 @@ CMakeFiles/TCast.dir/src/Window.cpp.obj: \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/SystemInterface.h \
  C:/Users/simon/Desktop/Code/TCast/include/imgui/imgui.h \
  C:/Users/simon/Desktop/Code/TCast/include/imgui/imconfig.h \
- C:/msys64/mingw64/include/assert.h \
  C:/Users/simon/Desktop/Code/TCast/include/imgui/backends/imgui_impl_glfw.h \
  C:/Users/simon/Desktop/Code/TCast/include/imgui/backends/imgui_impl_opengl3.h \
  C:/Users/simon/Desktop/Code/TCast/include/global.h \
@@ -513,31 +538,6 @@ CMakeFiles/TCast.dir/src/Window.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/set \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_set.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_multiset.h \
- C:/msys64/mingw64/include/c++/15.2.0/fstream \
- C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/basic_file.h \
- C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++io.h \
- C:/msys64/mingw64/include/c++/15.2.0/bits/fstream.tcc \
- C:/Users/simon/Desktop/Code/TCast/include/nlohmann/json.hpp \
- C:/msys64/mingw64/include/c++/15.2.0/forward_list \
- C:/msys64/mingw64/include/c++/15.2.0/bits/forward_list.h \
- C:/msys64/mingw64/include/c++/15.2.0/bits/forward_list.tcc \
- C:/msys64/mingw64/include/c++/15.2.0/valarray \
- C:/msys64/mingw64/include/c++/15.2.0/bits/valarray_array.h \
- C:/msys64/mingw64/include/c++/15.2.0/bits/valarray_array.tcc \
- C:/msys64/mingw64/include/c++/15.2.0/bits/valarray_before.h \
- C:/msys64/mingw64/include/c++/15.2.0/bits/slice_array.h \
- C:/msys64/mingw64/include/c++/15.2.0/bits/valarray_after.h \
- C:/msys64/mingw64/include/c++/15.2.0/bits/gslice.h \
- C:/msys64/mingw64/include/c++/15.2.0/bits/gslice_array.h \
- C:/msys64/mingw64/include/c++/15.2.0/bits/mask_array.h \
- C:/msys64/mingw64/include/c++/15.2.0/bits/indirect_array.h \
- C:/msys64/mingw64/include/c++/15.2.0/version \
- C:/msys64/mingw64/include/c++/15.2.0/cassert \
- C:/msys64/mingw64/include/c++/15.2.0/optional \
- C:/msys64/mingw64/include/c++/15.2.0/numeric \
- C:/msys64/mingw64/include/c++/15.2.0/bits/stl_numeric.h \
- C:/msys64/mingw64/include/c++/15.2.0/pstl/glue_numeric_defs.h \
- C:/msys64/mingw64/include/c++/15.2.0/any \
  C:/msys64/mingw64/include/shobjidl.h C:/msys64/mingw64/include/rpc.h \
  C:/msys64/mingw64/include/windows.h \
  C:/msys64/mingw64/include/sdkddkver.h C:/msys64/mingw64/include/excpt.h \
@@ -776,4 +776,5 @@ CMakeFiles/TCast.dir/src/Window.cpp.obj: \
  C:/msys64/mingw64/include/shlguid.h C:/msys64/mingw64/include/isguids.h \
  C:/msys64/mingw64/include/exdisp.h C:/msys64/mingw64/include/shldisp.h \
  C:/msys64/mingw64/include/knownfolders.h \
- C:/Users/simon/Desktop/Code/TCast/include/Shell.h
+ C:/Users/simon/Desktop/Code/TCast/include/Shell.h \
+ C:/Users/simon/Desktop/Code/TCast/include/Utilities.h

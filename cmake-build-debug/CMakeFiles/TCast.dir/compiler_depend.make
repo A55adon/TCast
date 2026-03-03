@@ -4324,6 +4324,7 @@ CMakeFiles/TCast.dir/src/Projector.cpp.obj: C:/Users/simon/Desktop/Code/TCast/sr
   C:/Users/simon/Desktop/Code/TCast/include/libswscale/swscale.h \
   C:/Users/simon/Desktop/Code/TCast/include/libswscale/version.h \
   C:/Users/simon/Desktop/Code/TCast/include/libswscale/version_major.h \
+  C:/Users/simon/Desktop/Code/TCast/include/nlohmann/json.hpp \
   C:/Users/simon/Desktop/Code/TCast/include/stb_image.h \
   C:/Users/simon/Desktop/Code/TCast/libs/GLFW/include/GLFW/glfw3.h \
   C:/Users/simon/Desktop/Code/TCast/libs/glad/include/KHR/khrplatform.h \
@@ -4334,11 +4335,16 @@ CMakeFiles/TCast.dir/src/Projector.cpp.obj: C:/Users/simon/Desktop/Code/TCast/sr
   C:/msys64/mingw64/include/_mingw_stat64.h \
   C:/msys64/mingw64/include/_mingw_stdarg.h \
   C:/msys64/mingw64/include/_timeval.h \
+  C:/msys64/mingw64/include/assert.h \
   C:/msys64/mingw64/include/c++/15.2.0/algorithm \
+  C:/msys64/mingw64/include/c++/15.2.0/any \
+  C:/msys64/mingw64/include/c++/15.2.0/array \
   C:/msys64/mingw64/include/c++/15.2.0/atomic \
+  C:/msys64/mingw64/include/c++/15.2.0/backward/auto_ptr.h \
   C:/msys64/mingw64/include/c++/15.2.0/backward/binders.h \
   C:/msys64/mingw64/include/c++/15.2.0/bit \
   C:/msys64/mingw64/include/c++/15.2.0/bits/algorithmfwd.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/align.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/alloc_traits.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/allocated_ptr.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/allocator.h \
@@ -4356,16 +4362,26 @@ CMakeFiles/TCast.dir/src/Projector.cpp.obj: C:/Users/simon/Desktop/Code/TCast/sr
   C:/msys64/mingw64/include/c++/15.2.0/bits/cpp_type_traits.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/cxxabi_forced.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/cxxabi_init_exception.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/enable_special_members.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/erase_if.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/exception.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/exception_defines.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/exception_ptr.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/forward_list.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/forward_list.tcc \
   C:/msys64/mingw64/include/c++/15.2.0/bits/fs_dir.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/fs_fwd.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/fs_ops.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/fs_path.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/fstream.tcc \
   C:/msys64/mingw64/include/c++/15.2.0/bits/functexcept.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/functional_hash.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/gslice.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/gslice_array.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/hash_bytes.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/hashtable.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/hashtable_policy.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/indirect_array.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/invoke.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/ios_base.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/istream.tcc \
@@ -4377,11 +4393,13 @@ CMakeFiles/TCast.dir/src/Projector.cpp.obj: C:/Users/simon/Desktop/Code/TCast/sr
   C:/msys64/mingw64/include/c++/15.2.0/bits/locale_facets_nonio.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/locale_facets_nonio.tcc \
   C:/msys64/mingw64/include/c++/15.2.0/bits/localefwd.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/mask_array.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/memory_resource.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/memoryfwd.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/move.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/nested_exception.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/new_allocator.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/node_handle.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/ostream.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/ostream.tcc \
   C:/msys64/mingw64/include/c++/15.2.0/bits/ostream_insert.h \
@@ -4394,10 +4412,13 @@ CMakeFiles/TCast.dir/src/Projector.cpp.obj: C:/Users/simon/Desktop/Code/TCast/sr
   C:/msys64/mingw64/include/c++/15.2.0/bits/refwrap.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/requires_hosted.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/shared_ptr.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/shared_ptr_atomic.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/shared_ptr_base.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/slice_array.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/specfun.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/sstream.tcc \
   C:/msys64/mingw64/include/c++/15.2.0/bits/std_abs.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/std_function.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/std_mutex.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/std_thread.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_algo.h \
@@ -4409,10 +4430,17 @@ CMakeFiles/TCast.dir/src/Projector.cpp.obj: C:/Users/simon/Desktop/Code/TCast/sr
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_iterator.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_iterator_base_funcs.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_iterator_base_types.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_map.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_multimap.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_numeric.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_pair.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_raw_storage_iter.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_relops.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_tempbuf.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_tree.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_uninitialized.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_vector.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/stream_iterator.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/streambuf.tcc \
   C:/msys64/mingw64/include/c++/15.2.0/bits/streambuf_iterator.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/string_view.tcc \
@@ -4421,17 +4449,24 @@ CMakeFiles/TCast.dir/src/Projector.cpp.obj: C:/Users/simon/Desktop/Code/TCast/sr
   C:/msys64/mingw64/include/c++/15.2.0/bits/uniform_int_dist.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/unique_lock.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/unique_ptr.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/unordered_map.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/uses_allocator.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/uses_allocator_args.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/utility.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/valarray_after.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/valarray_array.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/valarray_array.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/valarray_before.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/vector.tcc \
   C:/msys64/mingw64/include/c++/15.2.0/bits/version.h \
+  C:/msys64/mingw64/include/c++/15.2.0/cassert \
   C:/msys64/mingw64/include/c++/15.2.0/cctype \
   C:/msys64/mingw64/include/c++/15.2.0/cerrno \
   C:/msys64/mingw64/include/c++/15.2.0/chrono \
   C:/msys64/mingw64/include/c++/15.2.0/clocale \
   C:/msys64/mingw64/include/c++/15.2.0/cmath \
   C:/msys64/mingw64/include/c++/15.2.0/codecvt \
+  C:/msys64/mingw64/include/c++/15.2.0/compare \
   C:/msys64/mingw64/include/c++/15.2.0/concepts \
   C:/msys64/mingw64/include/c++/15.2.0/cstddef \
   C:/msys64/mingw64/include/c++/15.2.0/cstdint \
@@ -4452,20 +4487,30 @@ CMakeFiles/TCast.dir/src/Projector.cpp.obj: C:/Users/simon/Desktop/Code/TCast/sr
   C:/msys64/mingw64/include/c++/15.2.0/ext/string_conversions.h \
   C:/msys64/mingw64/include/c++/15.2.0/ext/type_traits.h \
   C:/msys64/mingw64/include/c++/15.2.0/filesystem \
+  C:/msys64/mingw64/include/c++/15.2.0/forward_list \
+  C:/msys64/mingw64/include/c++/15.2.0/fstream \
+  C:/msys64/mingw64/include/c++/15.2.0/functional \
   C:/msys64/mingw64/include/c++/15.2.0/initializer_list \
   C:/msys64/mingw64/include/c++/15.2.0/iomanip \
   C:/msys64/mingw64/include/c++/15.2.0/ios \
   C:/msys64/mingw64/include/c++/15.2.0/iosfwd \
   C:/msys64/mingw64/include/c++/15.2.0/iostream \
   C:/msys64/mingw64/include/c++/15.2.0/istream \
+  C:/msys64/mingw64/include/c++/15.2.0/iterator \
   C:/msys64/mingw64/include/c++/15.2.0/limits \
   C:/msys64/mingw64/include/c++/15.2.0/locale \
+  C:/msys64/mingw64/include/c++/15.2.0/map \
   C:/msys64/mingw64/include/c++/15.2.0/math.h \
+  C:/msys64/mingw64/include/c++/15.2.0/memory \
   C:/msys64/mingw64/include/c++/15.2.0/mutex \
   C:/msys64/mingw64/include/c++/15.2.0/new \
+  C:/msys64/mingw64/include/c++/15.2.0/numeric \
+  C:/msys64/mingw64/include/c++/15.2.0/optional \
   C:/msys64/mingw64/include/c++/15.2.0/ostream \
   C:/msys64/mingw64/include/c++/15.2.0/pstl/execution_defs.h \
   C:/msys64/mingw64/include/c++/15.2.0/pstl/glue_algorithm_defs.h \
+  C:/msys64/mingw64/include/c++/15.2.0/pstl/glue_memory_defs.h \
+  C:/msys64/mingw64/include/c++/15.2.0/pstl/glue_numeric_defs.h \
   C:/msys64/mingw64/include/c++/15.2.0/pstl/pstl_config.h \
   C:/msys64/mingw64/include/c++/15.2.0/ratio \
   C:/msys64/mingw64/include/c++/15.2.0/sstream \
@@ -4491,10 +4536,16 @@ CMakeFiles/TCast.dir/src/Projector.cpp.obj: C:/Users/simon/Desktop/Code/TCast/sr
   C:/msys64/mingw64/include/c++/15.2.0/tuple \
   C:/msys64/mingw64/include/c++/15.2.0/type_traits \
   C:/msys64/mingw64/include/c++/15.2.0/typeinfo \
+  C:/msys64/mingw64/include/c++/15.2.0/unordered_map \
+  C:/msys64/mingw64/include/c++/15.2.0/utility \
+  C:/msys64/mingw64/include/c++/15.2.0/valarray \
   C:/msys64/mingw64/include/c++/15.2.0/vector \
+  C:/msys64/mingw64/include/c++/15.2.0/version \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/atomic_word.h \
+  C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/basic_file.h \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++allocator.h \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++config.h \
+  C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++io.h \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++locale.h \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/cpu_defines.h \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/ctype_base.h \
@@ -4553,7 +4604,6 @@ CMakeFiles/TCast.dir/src/Projector.cpp.obj: C:/Users/simon/Desktop/Code/TCast/sr
   C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/syslimits.h
 
 CMakeFiles/TCast.dir/src/ResourceHandler.cpp.obj: C:/Users/simon/Desktop/Code/TCast/src/ResourceHandler.cpp \
-  C:/Users/simon/Desktop/Code/TCast/include/EventListener.h \
   C:/Users/simon/Desktop/Code/TCast/include/Projector.h \
   C:/Users/simon/Desktop/Code/TCast/include/ResourceHandler.h \
   C:/Users/simon/Desktop/Code/TCast/include/Shell.h \
@@ -7561,6 +7611,7 @@ CMakeFiles/TCast.dir/src/Window.cpp.obj: C:/Users/simon/Desktop/Code/TCast/src/W
   C:/Users/simon/Desktop/Code/TCast/include/Projector.h \
   C:/Users/simon/Desktop/Code/TCast/include/ResourceHandler.h \
   C:/Users/simon/Desktop/Code/TCast/include/Shell.h \
+  C:/Users/simon/Desktop/Code/TCast/include/Utilities.h \
   C:/Users/simon/Desktop/Code/TCast/include/Window.h \
   C:/Users/simon/Desktop/Code/TCast/include/glad/glad.h \
   C:/Users/simon/Desktop/Code/TCast/include/global.h \

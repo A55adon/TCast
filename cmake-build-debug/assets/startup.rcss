@@ -342,3 +342,36 @@ scrollbarvertical {
 .projector-grid {
     gap: 15px; /* Increased from 10px */
 }
+
+.toast-container {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100vh;  /* Takes up almost full screen height */
+    overflow-y: auto;            /* Enables vertical scrolling */
+    z-index: 9999;
+}
+
+.toast {
+    flex-shrink: 0;
+    min-height: 25px;
+    color: #ffffff;
+    font-size: 1.5rem;
+    background-color: #4f7fb3;
+    border-width: 3px;
+    border-color: #2f5f99;
+    padding: 10px 20px;
+    border-radius: 8px;
+    width: 300px;
+    min-height: 25px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.toast-error {
+    background-color: #c0392b;
+    border-color: #8e2b21;
+}

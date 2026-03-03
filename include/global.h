@@ -57,8 +57,12 @@ namespace fs = std::filesystem;
  *  - clickhandlers for context menus etc.
  */
 
+#define LOG(tag,msg) std::cout << "[" << tag << "|DEBUG]" << ": " << msg << std::endl;
+#define LOG_INFO(tag,msg) std::clog << "[" << tag << "|INFO]" << ": " << msg << std::endl;
+#define LOG_ERR(tag,msg) std::cerr << "[" << tag << "|ERROR]" << ": " << msg << std::endl;
+
 // General Project data
-struct st_save_data {
+struct SaveData {
     std::string name;
     int projector_amount = -1; // [1-6] //TODO: check for -1 error values
     std::string description;
@@ -67,26 +71,26 @@ struct st_save_data {
 };
 
 // Data per scene
-struct st_scene_data {
+struct SceneData {
     std::string name;
     std::vector<std::string> sources; // [0] would be the path of the resource of the first projector //TODO: use ID //TODO: make array
     std::vector<std::string> split_sources; // for displaying split sources in the preview //TODO: replace by rendering half textures //TODO: make array
     std::vector<SplitInfo> split_info; // for projectors //TODO: make array
     std::vector<int> connections; //TODO: make array
 
-    st_scene_data() = default;
+    SceneData() = default;
 
-    st_scene_data(std::string  name, std::vector<std::string> src)
+    SceneData(std::string  name, std::vector<std::string> src)
         : name(std::move(name)), sources(std::move(src)) {}
 };
 
 // TODO: replace with vector in ST_saveData
-struct st_scene_manager {
-    std::vector<st_scene_data> scenes;
+struct SceneManager {
+    std::vector<SceneData> scenes;
 };
 
 // Get main app window //TODO: make utility function
-inline Window& get_window() {
+inline Window& getWindow() {
     static Window window(1920,1080);
     return window;
 }
@@ -95,29 +99,29 @@ inline Window& get_window() {
 // TODO: fix from indices to IDs
 // TODO: for consitency make it use eiter rename and show rename dialog in scene and resources or not in both
 // Scene context menu
-void rename_scene(int index);
-void delete_scene(int index);
-void duplicate_scene(int index);
-void select_scene(int index);
-void show_scene_rename_dialog(int index);
+void renameScene(int index);
+void deleteScene(int index);
+void duplicateScene(int index);
+void selectScene(int index);
+void showSceneRenameDialog(int index);
 
 // Resource context menu
-void show_resource_rename_dialog(int id);
-void delete_resource(int id);
-void select_resource(int index);
+void showResourceRenameDialog(int id);
+void deleteResource(int id);
+void selectResource(int index);
 
 // Projectors
-void connect_projectors(int index);
-void disconnect_projectors(int index);
-void show_projector_resource_selection(int index);
+void connectProjectors(int index);
+void disconnectProjectors(int index);
+void showProjectorResourceSelection(int index);
 
 // For switching in UI helper functions //TODO: could be possible in a better way
-void set_startup_event_listeners();
-void set_interface_event_listeners();
+void setStartupEventListeners();
+void setInterfaceEventListeners();
 
 // Global Variables
-inline st_save_data save_data;
-inline st_scene_manager scene_manager;
+inline SaveData save_data;
+inline SceneManager scene_manager;
 inline bool create_recent_path = false; // creates a recent.path file in the saves dir so that the last used project is opened automatically when the program is restared
 inline fs::path current_project_path; // path of currently loaded path //TODO: note if that is with proj name or not, i guess not but find out
 

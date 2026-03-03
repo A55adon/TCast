@@ -2,26 +2,17 @@
     "scenes": [
         {
             "connections": [
-                1,
-                0,
-                0,
                 0,
                 0,
                 0
             ],
             "sceneName": "test",
             "sources": [
-                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\test\\resources\\test.mp4",
-                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\test\\resources\\test.mp4",
-                "",
                 "",
                 "",
                 ""
             ],
             "splitSources": [
-                "",
-                "",
-                "",
                 "",
                 "",
                 ""

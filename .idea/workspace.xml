@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="BackendCodeEditorMiscSettings">
-    <option name="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue" value="16" type="long" />
+    <option name="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue" value="18" type="long" />
     <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
     <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
     <option name="/Default/Housekeeping/LiveTemplatesHousekeeping/HotspotSessionHintIsShown/@EntryValue" value="true" type="bool" />
@@ -31,159 +31,203 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1152f206-875e-46cb-bb3e-fd323fcd6a4a" name="Changes" comment="save">
+    <list default="true" id="1152f206-875e-46cb-bb3e-fd323fcd6a4a" name="Changes" comment="Refractored ResourceHandler and Utilities">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2026-01-26T20-20-58-0733.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CMakeDetermineCompilerABI_C.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CompilerIdC/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CompilerIdC/a.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CompilerIdCXX/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CompilerIdCXX/a.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/interface.rcss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/interface.rcss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/interface.rml" beforeDir="false" afterPath="$PROJECT_DIR$/assets/interface.rml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/startup.rcss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/startup.rcss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/startup.rml" beforeDir="false" afterPath="$PROJECT_DIR$/assets/startup.rml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-37d8fb435084128f861f.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-219599e80af384074d5a.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-6b8265facdf003202e26.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-TCast-Debug-e54a70e69915a7ae5248.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/compiler_depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/compiler_depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/compiler_depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/compiler_depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/flags.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/objects.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/EventListener.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/EventListener.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/EventListener.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/EventListener.cpp.obj.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Projector.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Projector.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Projector.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Projector.cpp.obj.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/ResourceHandler.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/ResourceHandler.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/ResourceHandler.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/ResourceHandler.cpp.obj.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UIManager.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UIManager.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UIManager.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UIManager.cpp.obj.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UISetup.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UISetup.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UISetup.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/UISetup.cpp.obj.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Utilities.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Utilities.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Utilities.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Utilities.cpp.obj.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Window.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Window.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Window.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/Window.cpp.obj.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/main.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/main.cpp.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCast.dir/src/main.cpp.obj.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/process_assets.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/process_assets.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/SDL2.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/SPIRV.dll" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/TCast.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/TCast.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/avdevice-62.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/avfilter-11.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/glslang.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libIex-3_4.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libIlmThread-3_4.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libImath-3_2.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libLerc.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libOpenEXR-3_4.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libOpenEXRCore-3_4.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libOpenEXRUtil-3_4.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libPyImath_Python3_13-3_2.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libSPIRV-Tools-diff.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libSPIRV-Tools-link.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libSPIRV-Tools-lint.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libSPIRV-Tools-opt.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libSPIRV-Tools-shared.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libSPIRV-Tools.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libSvtAv1Enc-3.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libaom.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libass-9.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libcaca++-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libcaca-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libcairo-2.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libcairo-gobject-2.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libcairo-script-interpreter-2.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libcppdap.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libcrypto-3-x64.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libdatrie-1.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libdav1d-7.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libdeflate.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libdovi.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libexif-12.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libfontconfig-1.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libfribidi-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libgdk_pixbuf-2.0-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libgif-7.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libgio-2.0-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libglslang-default-resource-limits.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libgme - Copy.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libgnutls-openssl-27.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libgnutlsxx-30.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libgsm.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libharfbuzz-subset-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libhdr10plus.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libhogweed-6.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libhwy.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libhwy_contrib.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libhwy_test.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libisl-23.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libjbig-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libjxl.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libjxl_cms.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libjxl_threads.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/liblc3-1.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/liblcms2-2.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/liblcms2_fast_float-2.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/liblzo2-2.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libmp3lame-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libnettle-8.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libngtcp2-16.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libngtcp2_crypto_gnutls-8.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libngtcp2_crypto_ossl-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libngtcp2_crypto_ossl.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libopenal-1.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libopencore-amrnb-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libopencore-amrwb-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libopenjp2-7.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libopenjph-0.26.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libopenjpip-7.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libopus-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libpango-1.0-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libpangocairo-1.0-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libpangoft2-1.0-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libpangowin32-1.0-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libpixman-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libpkgconf-7.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libplacebo-351.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libpython3.13.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/librav1e.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/librsvg-2-2.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/librtmp-1.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libsfml-audio-3.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libsfml-graphics-3.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libsfml-network-3.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libsfml-system-3.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libsfml-window-3.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libshaderc_shared.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libsharpyuv-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libsoxr-lsr.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libsoxr.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libspeex-1.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libspeexdsp-1.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libspirv-cross-c-shared.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libsqlite3-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libsrt.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libssh.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libthai-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libtheora-1.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libtheoradec-2.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libtheoraenc-2.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libtiff-6.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libtiffxx-6.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libunibreak-6.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libunistring-5.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libvidstab.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libvpl-2.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libvpx-1.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libwebp-7.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libwebpdecoder-3.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libwebpdemux-2.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libwebpmux-3.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libx264-165.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libx265-215.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libxml2-16.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libzimg-2.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libzvbi-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/swresample-6.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/tcl86.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/tk86.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/vulkan-1.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/xvidcore.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/assets/interface.rcss" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/assets/interface.rcss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/assets/interface.rml" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/assets/interface.rml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/assets/startup.rcss" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/assets/startup.rcss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/assets/startup.rml" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/assets/startup.rml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/EventListener.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/EventListener.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ResourceHandler.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/ResourceHandler.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/UISetup.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/UISetup.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/Utilities.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/Utilities.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/global.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/global.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/23w54er576lk/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/23w54er576lk/resources/images/image_png_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/23w54er576lk/resources/images/image_png_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/23w54er576lk/resources/videos/thumbnails/image_png_tumbnail2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/23w54er576lk/resources/videos/video_mp4_2.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/23w54er576lk/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/23w54er576lk/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/3jweg/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/3jweg/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/3jweg/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/4jerasv/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/4jerasv/resources/images/image_png_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/4jerasv/resources/images/image_png_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/4jerasv/resources/videos/thumbnails/image_png_tumbnail3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/4jerasv/resources/videos/video_mp4_3.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/4jerasv/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/4jerasv/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/TCast sample/resources/WhatsApp Image 2026-01-15 at 18.48.22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/TCast sample/resources/nigger.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/TCast sample/resources/test.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/TCast sample/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/TCast sample/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/images/image_png_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/images/image_png_11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/images/image_png_12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/images/image_png_13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/images/image_png_14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/images/image_png_15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/images/image_png_16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/images/image_png_19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/images/image_png_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/images/image_png_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/images/image_png_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/splits/scene_0_proj_0_0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/splits/scene_0_proj_0_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/splits/scene_0_proj_0_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/splits/scene_0_proj_0_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/splits/scene_1_proj_23_0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/splits/scene_1_proj_23_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/splits/scene_1_proj_23_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/videos/thumbnails/image_png_tumbnail17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/videos/thumbnails/image_png_tumbnail4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/videos/thumbnails/image_png_tumbnail7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/videos/thumbnails/image_png_tumbnail9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/videos/video_mp4_17.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/videos/video_mp4_4.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/videos/video_mp4_7.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/resources/videos/video_mp4_9.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/dsfgwaddawdaweg/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/ewtzewa/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/ewtzewa/resources/images/image_png_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/ewtzewa/resources/images/image_png_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/ewtzewa/resources/images/image_png_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/ewtzewa/resources/splits/scene_0_proj_7_0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/ewtzewa/resources/splits/scene_0_proj_7_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/ewtzewa/resources/splits/scene_0_proj_7_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/ewtzewa/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/ewtzewa/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/q43585697/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/q43585697/resources/images/image_png_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/q43585697/resources/images/image_png_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/q43585697/resources/images/image_png_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/q43585697/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/q43585697/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/qwahsd/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/qwahsd/resources/images/image_png_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/qwahsd/resources/images/image_png_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/qwahsd/resources/images/image_png_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/qwahsd/resources/images/image_png_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/qwahsd/resources/splits/scene_0_proj_4_0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/qwahsd/resources/splits/scene_0_proj_4_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/qwahsd/resources/splits/scene_0_proj_4_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/qwahsd/resources/videos/thumbnails/image_png_tumbnail5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/qwahsd/resources/videos/video_mp4_5.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/qwahsd/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/qwahsd/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/tct/resources/back2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/tct/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/tct/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/tct/temp/0.000000_0.333333_0_15_temp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/tct/temp/0.333333_0.666667_0_15_temp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/tct/temp/0.666667_1.000000_0_15_temp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test nigga balls/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test nigga balls/resources/images/WhatsApp Image 2026-01-15 at 18.48.22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test nigga balls/resources/images/test_thumbnail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test nigga balls/resources/images/untitled.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test nigga balls/resources/videos/test.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test nigga balls/resources/videos/thumbnails/test.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test nigga balls/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test nigga balls/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test/resources/test.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test/resources/thumbs/test.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test/resources/thumbs/test.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test/resources/untitleddww.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test/saveData.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/folderSaves/test/saveData.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test/scenesData.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/folderSaves/test/scenesData.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test12634i6576o8p79/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test12634i6576o8p79/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test12634i6576o8p79/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test142/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test142/resources/images/WhatsApp Image 2026-01-15 at 18.48.22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test142/resources/images/button-left.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test142/resources/images/test_thumbnail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test142/resources/videos/test.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test142/resources/videos/thumbnails/test.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test142/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test142/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test1423/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test1423/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test1423/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test2/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test2/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test2/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test2346t/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test2346t/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test2346t/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test43/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test43/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test43/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test53643/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test53643/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test53643/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test6/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test6/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/test6/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/testqwjnwe/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/testqwjnwe/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/testqwjnwe/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/testt321/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/testt321/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/testt321/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/testteaw/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/testteaw/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/testteaw/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/testwtqe/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/testwtqe/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/testwtqe/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wawafawafw/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wawafawafw/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wawafawafw/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/weff/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/weff/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/weff/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wesrdftgzhujko/resourceData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wesrdftgzhujko/saveData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/folderSaves/wesrdftgzhujko/scenesData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Projector.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Projector.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ResourceHandler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ResourceHandler.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UIManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/UIManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UISetup.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/UISetup.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Utilities.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utilities.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Window.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Window.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -215,6 +259,78 @@
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/include/EventListener.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/include/Projector.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/include/UIManager.h" root0="FORCE_HIGHLIGHTING" />
@@ -231,46 +347,49 @@
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="34Fu0kZYduBynT2brbacEf1vZCD" />
+  <component name="ProjectStatusUIService">{
+  &quot;uiKindId&quot;: &quot;Widget&quot;
+}</component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;CMake Application.TCast.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/simon/Desktop/Code/TCast&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "CMake Application.TCast.executor": "Run",
+    "RunOnceActivity.RadMigrateCodeStyle": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.west.config.association.type.startup.service": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "C:/Users/simon/Desktop/Code/TCast",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.stylelint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "settings.sync",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mariadb&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mariadb"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\simon\Desktop\Code\TCast\assets" />
@@ -281,11 +400,6 @@
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.TCast">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TCast" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="TCast" TARGET_NAME="TCast" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="TCast" RUN_TARGET_NAME="TCast">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -297,8 +411,8 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="CMake Application.process_assets" />
       <item itemvalue="CMake Application.TCast" />
+      <item itemvalue="CMake Application.process_assets" />
     </list>
   </component>
   <component name="TaskManager">
@@ -361,6 +475,12 @@
       <workItem from="1769362931308" duration="319000" />
       <workItem from="1769367618686" duration="2836000" />
       <workItem from="1769445166762" duration="9199000" />
+      <workItem from="1769605156450" duration="9448000" />
+      <workItem from="1769710043392" duration="6180000" />
+      <workItem from="1769801905124" duration="8275000" />
+      <workItem from="1769811946045" duration="68000" />
+      <workItem from="1772564522642" duration="3736000" />
+      <workItem from="1772569628109" duration="2147000" />
     </task>
     <task id="LOCAL-00001" summary="Added different dependencies">
       <option name="closed" value="true" />
@@ -678,7 +798,6 @@
       <path value="$PROJECT_DIR$/libs/SDL" />
       <path value="$PROJECT_DIR$/include/stb" />
     </ignored-roots>
-    <MESSAGE value="fixed cmakelists to include the default dlls" />
     <MESSAGE value="newly created scenes are now saved" />
     <MESSAGE value="refactor: reorganize header files and add scene management functionality" />
     <MESSAGE value="implement scene renaming functionality with UI updates" />
@@ -703,7 +822,19 @@
     <MESSAGE value="Added dependencies" />
     <MESSAGE value="Added all dependencies" />
     <MESSAGE value="save" />
-    <option name="LAST_COMMIT_MESSAGE" value="save" />
+    <MESSAGE value="Refractored ResourceHandler and Utilities" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refractored ResourceHandler and Utilities" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/UISetup.cpp</url>
+          <line>273</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

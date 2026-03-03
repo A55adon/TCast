@@ -115,7 +115,7 @@ add_custom_target(process_assets ALL
 )
 
 
-target_compile_definitions(TCast PRIVATE VERSION=\"0.0.1\")
+target_compile_definitions(TCast PRIVATE VERSION=\"1.1.1\")
 
 
 add_dependencies(TCast process_assets)

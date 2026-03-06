@@ -32,20 +32,21 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1152f206-875e-46cb-bb3e-fd323fcd6a4a" name="Changes" comment="fixed missing dlls 2">
+    <list default="true" id="1152f206-875e-46cb-bb3e-fd323fcd6a4a" name="Changes" comment="fixed missing dlls 3">
+      <change afterPath="$PROJECT_DIR$/cmake/CopyDependencyDLLs.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/cache-v2" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/cmakeFiles-v1" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/codemodel-v2" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/toolchains-v1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-75f94bc122c04161b7c9.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-87615ba4f43297f0d998.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-edca60b7c8193d95a45f.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-c6a55afbf226a2a6b90d.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-9e3d5713862bd3c81031.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/directory-.-Debug-d0094a50bb2071803777.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2026-03-06T15-35-54-0504.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-TCast-Debug-67c7766513edab7afe12.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-process_assets-Debug-5549a7428cb035e5057e.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2026-03-06T15-46-30-0759.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-TCast-Debug-29b2bb60e10d9f0da400.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-process_assets-Debug-d0bf1a78cea5b5c6ebd2.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/toolchains-v1-54860b9d11f52350504d.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.0.2/CMakeCCompiler.cmake" beforeDir="false" />
@@ -243,8 +244,11 @@
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/glew32.dll" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/glfw3.dll" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/libfreetype-6.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libgcc_s_seh-1.dll" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/librmlui.dll" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/librmlui_debugger.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libstdc++-6.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/libwinpthread-1.dll" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/swresample-6.dll" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/swscale-9.dll" beforeDir="false" />
     </list>
@@ -448,7 +452,7 @@
       <workItem from="1772656342318" duration="4777000" />
       <workItem from="1772744189646" duration="478000" />
       <workItem from="1772744700986" duration="1914000" />
-      <workItem from="1772809849639" duration="2116000" />
+      <workItem from="1772809849639" duration="2423000" />
     </task>
     <task id="LOCAL-00001" summary="Added different dependencies">
       <option name="closed" value="true" />
@@ -770,7 +774,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772811569692</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="fixed missing dlls 3">
+      <option name="closed" value="true" />
+      <created>1772812043983</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1772812043983</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -798,7 +810,6 @@
       <path value="$PROJECT_DIR$/libs/SDL" />
       <path value="$PROJECT_DIR$/include/stb" />
     </ignored-roots>
-    <MESSAGE value="add global header and update scene data structure; modify UI elements" />
     <MESSAGE value="Save" />
     <MESSAGE value="Refractored new save load and create functions + helpers" />
     <MESSAGE value="Refractored new save load and create functions + helpers 2" />
@@ -823,7 +834,8 @@
     <MESSAGE value="Changed cmakelists to only include required dlls" />
     <MESSAGE value="fixed missing dlls" />
     <MESSAGE value="fixed missing dlls 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed missing dlls 2" />
+    <MESSAGE value="fixed missing dlls 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed missing dlls 3" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

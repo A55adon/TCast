@@ -2530,66 +2530,6 @@
 			"value" : "FALSE"
 		},
 		{
-			"name" : "FFMPEG_DLL_avcodec-62",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Path to a file."
-				}
-			],
-			"type" : "FILEPATH",
-			"value" : "C:/msys64/mingw64/bin/avcodec-62.dll"
-		},
-		{
-			"name" : "FFMPEG_DLL_avformat-62",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Path to a file."
-				}
-			],
-			"type" : "FILEPATH",
-			"value" : "C:/msys64/mingw64/bin/avformat-62.dll"
-		},
-		{
-			"name" : "FFMPEG_DLL_avutil-60",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Path to a file."
-				}
-			],
-			"type" : "FILEPATH",
-			"value" : "C:/msys64/mingw64/bin/avutil-60.dll"
-		},
-		{
-			"name" : "FFMPEG_DLL_swresample-6",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Path to a file."
-				}
-			],
-			"type" : "FILEPATH",
-			"value" : "C:/msys64/mingw64/bin/swresample-6.dll"
-		},
-		{
-			"name" : "FFMPEG_DLL_swscale-9",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Path to a file."
-				}
-			],
-			"type" : "FILEPATH",
-			"value" : "C:/msys64/mingw64/bin/swscale-9.dll"
-		},
-		{
 			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig",
 			"properties" : 
 			[
@@ -2648,6 +2588,18 @@
 			],
 			"type" : "FILEPATH",
 			"value" : "C:/msys64/mingw64/bin/libwinpthread-1.dll"
+		},
+		{
+			"name" : "OBJDUMP",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/msys64/mingw64/bin/objdump.exe"
 		},
 		{
 			"name" : "PKG_CONFIG_ARGN",

@@ -131,23 +131,22 @@ set(FFMPEG_DLL_NAMES
         swresample-6
 )
 
-set(FFMPEG_DLLS "")
-foreach(DLL_NAME ${FFMPEG_DLL_NAMES})
-    find_file(FFMPEG_DLL_${DLL_NAME}
-            NAMES "${DLL_NAME}.dll"
-            PATHS
-            "C:/msys64/mingw64/bin"
-            "C:/msys2/mingw64/bin"
-            NO_DEFAULT_PATH
-    )
-    if(FFMPEG_DLL_${DLL_NAME})
-        list(APPEND FFMPEG_DLLS "${FFMPEG_DLL_${DLL_NAME}}")
-    else()
-        message(WARNING "Could not find DLL: ${DLL_NAME}.dll")
-    endif()
-endforeach()
+# Automatically find all required DLLs using objdump
+find_program(OBJDUMP objdump HINTS "C:/msys64/mingw64/bin" "C:/msys2/mingw64/bin")
 
-message(STATUS "FFmpeg DLLs to copy: ${FFMPEG_DLLS}")
+if(OBJDUMP)
+    add_custom_command(TARGET TCast POST_BUILD
+            COMMAND ${CMAKE_COMMAND}
+            -DOBJDUMP=${OBJDUMP}
+            -DTARGET_EXE=$<TARGET_FILE:TCast>
+            -DSEARCH_PATH=C:/msys64/mingw64/bin
+            -DOUT_DIR=$<TARGET_FILE_DIR:TCast>
+            -P "${CMAKE_SOURCE_DIR}/cmake/CopyDependencyDLLs.cmake"
+            COMMENT "Copying all dependency DLLs..."
+    )
+else()
+    message(WARNING "objdump not found, DLLs won't be copied automatically")
+endif()
 
 # Copy DLLs when building TCast
 add_custom_command(TARGET TCast POST_BUILD
@@ -157,7 +156,6 @@ add_custom_command(TARGET TCast POST_BUILD
         "${CMAKE_SOURCE_DIR}/libs/GLFW/lib/glfw3.dll"
         "${CMAKE_SOURCE_DIR}/libs/freetype_x64-windows/libfreetype-6.dll"
         "${CMAKE_SOURCE_DIR}/libs/glew-2.1.0/bin/Release/Win32/glew32.dll"
-        ${FFMPEG_DLLS}
         ${MINGW_DLLS}
         $<TARGET_FILE_DIR:TCast>
         COMMENT "Copying DLLs..."

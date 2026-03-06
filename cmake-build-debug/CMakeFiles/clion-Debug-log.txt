@@ -21,8 +21,7 @@ C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -DCM
 -- Checking for module 'libswscale'
 --   Found libswscale, version 9.1.100
 -- MinGW DLLs to copy: C:/msys64/mingw64/bin/libgcc_s_seh-1.dll;C:/msys64/mingw64/bin/libstdc++-6.dll;C:/msys64/mingw64/bin/libwinpthread-1.dll
--- FFmpeg DLLs to copy: C:/msys64/mingw64/bin/avutil-60.dll;C:/msys64/mingw64/bin/avcodec-62.dll;C:/msys64/mingw64/bin/avformat-62.dll;C:/msys64/mingw64/bin/swscale-9.dll;C:/msys64/mingw64/bin/swresample-6.dll
 -- Found Python3: C:/Users/simon/AppData/Local/Programs/Python/Python311/python.exe (found version "3.11.0") found components: Interpreter
--- Configuring done (6.1s)
+-- Configuring done (6.5s)
 -- Generating done (0.1s)
 -- Build files have been written to: C:/Users/simon/Desktop/Code/TCast/cmake-build-debug

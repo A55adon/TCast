@@ -99,6 +99,29 @@ target_link_options(TCast PRIVATE
         $<$<CONFIG:Release>:-s>
 )
 
+set(MINGW_DLL_NAMES
+        libgcc_s_seh-1
+        libstdc++-6
+        libwinpthread-1
+)
+
+set(MINGW_DLLS "")
+foreach(DLL_NAME ${MINGW_DLL_NAMES})
+    find_file(MINGW_DLL_${DLL_NAME}
+            NAMES "${DLL_NAME}.dll"
+            PATHS
+            "C:/msys64/mingw64/bin"
+            "C:/msys2/mingw64/bin"
+            NO_DEFAULT_PATH
+    )
+    if(MINGW_DLL_${DLL_NAME})
+        list(APPEND MINGW_DLLS "${MINGW_DLL_${DLL_NAME}}")
+    else()
+        message(WARNING "Could not find MinGW DLL: ${DLL_NAME}.dll")
+    endif()
+endforeach()
+
+message(STATUS "MinGW DLLs to copy: ${MINGW_DLLS}")
 
 set(FFMPEG_DLL_NAMES
         avutil-60
@@ -135,6 +158,7 @@ add_custom_command(TARGET TCast POST_BUILD
         "${CMAKE_SOURCE_DIR}/libs/freetype_x64-windows/libfreetype-6.dll"
         "${CMAKE_SOURCE_DIR}/libs/glew-2.1.0/bin/Release/Win32/glew32.dll"
         ${FFMPEG_DLLS}
+        ${MINGW_DLLS}
         $<TARGET_FILE_DIR:TCast>
         COMMENT "Copying DLLs..."
 )

@@ -254,6 +254,15 @@ FFMPEG_DLL_swresample-6:FILEPATH=C:/msys64/mingw64/bin/swresample-6.dll
 //Path to a file.
 FFMPEG_DLL_swscale-9:FILEPATH=C:/msys64/mingw64/bin/swscale-9.dll
 
+//Path to a file.
+MINGW_DLL_libgcc_s_seh-1:FILEPATH=C:/msys64/mingw64/bin/libgcc_s_seh-1.dll
+
+//Path to a file.
+MINGW_DLL_libstdc++-6:FILEPATH=C:/msys64/mingw64/bin/libstdc++-6.dll
+
+//Path to a file.
+MINGW_DLL_libwinpthread-1:FILEPATH=C:/msys64/mingw64/bin/libwinpthread-1.dll
+
 //Arguments to supply to pkg-config
 PKG_CONFIG_ARGN:STRING=
 

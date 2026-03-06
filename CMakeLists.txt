@@ -99,6 +99,32 @@ target_link_options(TCast PRIVATE
         $<$<CONFIG:Release>:-s>
 )
 
+
+set(FFMPEG_DLL_NAMES
+        avutil-60
+        avcodec-62
+        avformat-62
+        swscale-9
+        swresample-6
+)
+
+set(FFMPEG_DLLS "")
+foreach(DLL_NAME ${FFMPEG_DLL_NAMES})
+    find_file(FFMPEG_DLL_${DLL_NAME}
+            NAMES "${DLL_NAME}.dll"
+            PATHS
+            "C:/msys64/mingw64/bin"
+            "C:/msys2/mingw64/bin"
+            NO_DEFAULT_PATH
+    )
+    if(FFMPEG_DLL_${DLL_NAME})
+        list(APPEND FFMPEG_DLLS "${FFMPEG_DLL_${DLL_NAME}}")
+    else()
+        message(WARNING "Could not find DLL: ${DLL_NAME}.dll")
+    endif()
+endforeach()
+
+
 # Copy DLLs when building TCast
 add_custom_command(TARGET TCast POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
@@ -107,11 +133,10 @@ add_custom_command(TARGET TCast POST_BUILD
         "${CMAKE_SOURCE_DIR}/libs/GLFW/lib/glfw3.dll"
         "${CMAKE_SOURCE_DIR}/libs/freetype_x64-windows/libfreetype-6.dll"
         "${CMAKE_SOURCE_DIR}/libs/glew-2.1.0/bin/Release/Win32/glew32.dll"
+        ${FFMPEG_DLLS}
         $<TARGET_FILE_DIR:TCast>
         COMMENT "Copying DLLs..."
 )
-
-
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
 file(GLOB_RECURSE ASSET_FILES

@@ -1,0 +1,2 @@
+"C:/msys64/mingw64/bin/gcc-ar.exe" qc libfoo.a CMakeFiles/foo.dir/foo.c.obj
+"C:/msys64/mingw64/bin/gcc-ranlib.exe" libfoo.a

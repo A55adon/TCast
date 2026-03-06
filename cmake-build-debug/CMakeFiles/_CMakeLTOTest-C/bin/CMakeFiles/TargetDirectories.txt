@@ -1,0 +1,4 @@
+C:/Users/simon/Desktop/Code/TCast/cmake-build-debug/CMakeFiles/_CMakeLTOTest-C/bin/CMakeFiles/foo.dir
+C:/Users/simon/Desktop/Code/TCast/cmake-build-debug/CMakeFiles/_CMakeLTOTest-C/bin/CMakeFiles/boo.dir
+C:/Users/simon/Desktop/Code/TCast/cmake-build-debug/CMakeFiles/_CMakeLTOTest-C/bin/CMakeFiles/edit_cache.dir
+C:/Users/simon/Desktop/Code/TCast/cmake-build-debug/CMakeFiles/_CMakeLTOTest-C/bin/CMakeFiles/rebuild_cache.dir

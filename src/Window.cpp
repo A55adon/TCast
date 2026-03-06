@@ -1,17 +1,37 @@
 #include "Window.h"
 #include "Shell.h"
+#ifdef NDEBUG
+#else
 #include "RmlUi/Debugger.h"
+#endif
 #include "RmlUi_Backend.h"
 
 #include <iostream>
+//#ifdef NDEBUG
+//#else
 #include "imgui/imgui.h"
 #include "imgui/backends/imgui_impl_glfw.h"
 #include "imgui/backends/imgui_impl_opengl3.h"
+//#endif
 #include "global.h"
 #include "ResourceHandler.h"
+#include "UIManager.h"
 #include "Utilities.h"
 
 static bool showDebugWindow = false;
+
+void drop_callback(GLFWwindow* window, int count, const char** paths)
+{
+    for (int i = 0; i < count; i++)
+    {
+        std::string path = paths[i];
+
+        std::cout << "Dropped file: " << path << std::endl;
+
+        // trigger event in your program
+    }
+}
+
 Window::Window(const int window_width, const int window_height): document(nullptr)
 {
     if (!ShellRml::Initialize())
@@ -40,9 +60,10 @@ Window::Window(const int window_width, const int window_height): document(nullpt
         ShellRml::Shutdown();
         exit(1);
     }
-
+#ifdef NDEBUG
+#else
     Rml::Debugger::Initialise(context);
-
+#endif
     const std::vector<ShellRml::FontFace> font_faces = {
         {"LatoLatin-Regular.ttf", false},
         {"ComicSans-Regular.ttf", true}
@@ -52,7 +73,8 @@ Window::Window(const int window_width, const int window_height): document(nullpt
     ShellRml::LoadFonts(font_faces);
 
     glfwMaximizeWindow(Backend::GetWindow());
-
+//#ifdef NDEBUG
+//#else
     // Initialize ImGui
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -61,13 +83,17 @@ Window::Window(const int window_width, const int window_height): document(nullpt
 
     // Style
     ImGui::StyleColorsDark();
-
     // Setup Platform/Renderer backends
     ImGui_ImplGlfw_InitForOpenGL(Backend::GetWindow(), true);
     ImGui_ImplOpenGL3_Init("#version 330");
+//#endif
+
+    glfwSetDropCallback(Backend::GetWindow(), drop_callback);
 
     running = true;
 }
+
+
 
 Window::~Window()
 {
@@ -84,6 +110,8 @@ void Window::update()
     context->Update();
     Backend::BeginFrame();
     context->Render();
+//#ifdef NDEBUG
+//#else
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
@@ -492,6 +520,18 @@ void Window::update()
                 ImGui::Text("Active Scene Index: %d", active_scene_index);
                 ImGui::Text("Active Resource Index: %d", active_resource_index);
 
+                ImGui::SeparatorText("Refresh");
+                if (ImGui::Button("Refresh Scenes")) {
+                    UIManager::refreshScenes();
+                }
+                if (ImGui::Button("Refresh Resources")) {
+                    UIManager::refreshResourcePanel();
+                }
+                if (ImGui::Button("Refresh Projectors")) {
+                    UIManager::refreshProjectors();
+                }
+
+                ImGui::SeparatorText("Popups");
                 if (ImGui::Button("Create Debug Popup small")) {
                     Utilities::showInfo("Test message");
                 }
@@ -518,10 +558,12 @@ void Window::update()
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-    Backend::PresentFrame();
+
     ImGuiIO& io = ImGui::GetIO();
     if (io.WantCaptureMouse || io.WantCaptureKeyboard) {
         // You might want to block RmlUi input when ImGui is capturing
     }
+//#endif
+    Backend::PresentFrame();
     glfwMakeContextCurrent(Backend::GetWindow());
 }

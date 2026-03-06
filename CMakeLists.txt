@@ -1,7 +1,12 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.21)
 project(TCast)
+set(BUILD_SHARED_LIBS OFF)
 
-set(CMAKE_CXX_STANDARD 17)
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Release CACHE STRING "" FORCE)
+endif()
+
+
 
 set(SOURCES
         src/main.cpp
@@ -31,6 +36,18 @@ set(SOURCES
 
 add_executable(TCast ${SOURCES})
 
+target_compile_options(TCast PRIVATE
+        $<$<CONFIG:Release>:-O3 -march=native -DNDEBUG>
+)
+
+include(CheckIPOSupported)
+check_ipo_supported(RESULT ipo_supported)
+
+if(ipo_supported)
+    set_property(TARGET TCast PROPERTY INTERPROCEDURAL_OPTIMIZATION_RELEASE TRUE)
+endif()
+
+
 target_include_directories(TCast PRIVATE
         ${CMAKE_SOURCE_DIR}/include
         ${CMAKE_SOURCE_DIR}/include/stb
@@ -44,6 +61,7 @@ target_include_directories(TCast PRIVATE
         ${CMAKE_SOURCE_DIR}/include
         ${CMAKE_SOURCE_DIR}/include/imgui
         ${CMAKE_SOURCE_DIR}/include/imgui/backends
+
 )
 
 link_directories(
@@ -52,21 +70,33 @@ link_directories(
         "${CMAKE_SOURCE_DIR}/libs/glew-2.1.0/lib/Release/x64"
 )
 
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(AVFORMAT REQUIRED libavformat)
+pkg_check_modules(AVCODEC REQUIRED libavcodec)
+pkg_check_modules(AVUTIL REQUIRED libavutil)
+pkg_check_modules(SWSCALE REQUIRED libswscale)
+
+list(REMOVE_ITEM AVFORMAT_LIBRARIES dl)
+list(REMOVE_ITEM AVCODEC_LIBRARIES dl)
+list(REMOVE_ITEM AVUTIL_LIBRARIES dl)
+list(REMOVE_ITEM SWSCALE_LIBRARIES dl)
+
 target_link_libraries(TCast
-        "${CMAKE_SOURCE_DIR}/libs/RmlUi/build-mingw/librmlui.dll.a"
-        "${CMAKE_SOURCE_DIR}/libs/RmlUi/build-mingw/librmlui_debugger.dll.a"
+        ${CMAKE_SOURCE_DIR}/libs/RmlUi/build-mingw/librmlui.dll.a
+        $<$<CONFIG:Debug>:${CMAKE_SOURCE_DIR}/libs/RmlUi/build-mingw/librmlui_debugger.dll.a>
         "${CMAKE_SOURCE_DIR}/libs/GLFW/lib/libglfw3.dll.a"
         "${CMAKE_SOURCE_DIR}/libs/glew-2.1.0/lib/Release/x64/glew32.lib"
         opengl32
         Shlwapi
-        avformat
-        avcodec
-        avutil
-        swscale
+        ${AVFORMAT_LIBRARIES}
+        ${AVCODEC_LIBRARIES}
+        ${AVUTIL_LIBRARIES}
+        ${SWSCALE_LIBRARIES}
 )
 
-link_directories(
-        C:/msys64/mingw64/lib
+
+target_link_options(TCast PRIVATE
+        $<$<CONFIG:Release>:-s>
 )
 
 # Copy DLLs when building TCast
@@ -77,27 +107,10 @@ add_custom_command(TARGET TCast POST_BUILD
         "${CMAKE_SOURCE_DIR}/libs/GLFW/lib/glfw3.dll"
         "${CMAKE_SOURCE_DIR}/libs/freetype_x64-windows/libfreetype-6.dll"
         "${CMAKE_SOURCE_DIR}/libs/glew-2.1.0/bin/Release/Win32/glew32.dll"
-        "${CMAKE_SOURCE_DIR}/libs/default/libstdc++-6.dll"
-        "${CMAKE_SOURCE_DIR}/libs/default/libgcc_s_seh-1.dll"
-        "${CMAKE_SOURCE_DIR}/libs/default/libwinpthread-1.dll"
-        "${CMAKE_SOURCE_DIR}/libs/default/libbrotlidec.dll"
-        "${CMAKE_SOURCE_DIR}/libs/default/libharfbuzz-0.dll"
-        "${CMAKE_SOURCE_DIR}/libs/default/libpng16-16.dll"
-        "${CMAKE_SOURCE_DIR}/libs/default/zlib1.dll"
-        "${CMAKE_SOURCE_DIR}/libs/default/libbz2-1.dll"
         $<TARGET_FILE_DIR:TCast>
-        COMMENT "Copying DLLs..."#
+        COMMENT "Copying DLLs..."
 )
 
-# Copy only .dll files from libs/bin to the build output directory
-file(GLOB DLL_FILES "${CMAKE_SOURCE_DIR}/libs/other/*.dll")
-foreach(dll ${DLL_FILES})
-    add_custom_command(TARGET TCast POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            "${dll}"
-            "$<TARGET_FILE_DIR:TCast>"
-    )
-endforeach()
 
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
@@ -114,6 +127,14 @@ add_custom_target(process_assets ALL
         COMMENT "Processing assets (RCSS preprocessing + copy)"
 )
 
+add_custom_command(TARGET TCast POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E echo "Copying runtime DLLs"
+        COMMAND ${CMAKE_COMMAND}
+        -DDLLS="$<JOIN:$<TARGET_RUNTIME_DLLS:TCast>,|>"
+        -DOUT_DIR="$<TARGET_FILE_DIR:TCast>"
+        -P "${CMAKE_SOURCE_DIR}/cmake/CopyRuntimeDLLs.cmake"
+        COMMAND_EXPAND_LISTS
+)
 
 target_compile_definitions(TCast PRIVATE VERSION=\"1.1.1\")
 

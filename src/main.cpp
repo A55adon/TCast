@@ -14,24 +14,24 @@
  *  - if clicking on new project or loadproject have the ability to go back
  *  - |Update Checking
  *  - |drag n drop upload
- *  - problem two resources with the same name override each other
- *  - renaming or deleting a resource shows white images
- *  - trying to change source when resource is deleted it crashes -> request missing
  *  - resource name clipping
  *  - visuals
- *  - show outdated projects
+ *  - |show outdated projects
  *  - |multiselect
  *  - |drag n drop resource selection
  *  - |request missing
  *  - cleanup
  *  - long scene names
  *  - split on other thread
+ *  - fix svg rendering
 */
 
 #include "UISetup.h"
 #include "Shell.h"
 #include "RmlUi/Debugger.h"
 #include "RmlUi_Backend.h"
+#include <future>
+
 
 void resize_callback() {
     UIManager::refreshProjectors();
@@ -50,16 +50,17 @@ int main() {
         std::cout << save_data.path << std::endl;
 
         if ((getWindow().document = getWindow().context->LoadDocument("assets/interface.rml"))) {
-            setInterfaceEventListeners();
+            std::cout << "Loading Interface..." << std::endl;
             getWindow().document->Show();
+            auto future = std::async(std::launch::async, setInterfaceEventListeners);
 
         }
 
     } else {
         if ((getWindow().document = getWindow().context->LoadDocument("assets/startup.rml"))) {
             std::cout << "Loading Startup..." << std::endl;
-            setStartupEventListeners();
             getWindow().document->Show();
+            setStartupEventListeners();
         }
     }
 

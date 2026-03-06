@@ -239,6 +239,12 @@ CMAKE_TAPI:FILEPATH=CMAKE_TAPI-NOTFOUND
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
+//Arguments to supply to pkg-config
+PKG_CONFIG_ARGN:STRING=
+
+//pkg-config executable
+PKG_CONFIG_EXECUTABLE:FILEPATH=C:/msys64/mingw64/bin/pkg-config.exe
+
 //Value Computed by CMake
 TCast_BINARY_DIR:STATIC=C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
 
@@ -248,11 +254,128 @@ TCast_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 TCast_SOURCE_DIR:STATIC=C:/Users/simon/Desktop/Code/TCast
 
+//Path to a library.
+pkgcfg_lib_AVCODEC_avcodec:FILEPATH=C:/msys64/mingw64/lib/libavcodec.dll.a
+
+//Path to a library.
+pkgcfg_lib_AVFORMAT_avformat:FILEPATH=C:/msys64/mingw64/lib/libavformat.dll.a
+
+//Path to a library.
+pkgcfg_lib_AVUTIL_avutil:FILEPATH=C:/msys64/mingw64/lib/libavutil.dll.a
+
+//Path to a library.
+pkgcfg_lib_SWSCALE_swscale:FILEPATH=C:/msys64/mingw64/lib/libswscale.dll.a
+
 
 ########################
 # INTERNAL cache entries
 ########################
 
+AVCODEC_CFLAGS:INTERNAL=-IC:/msys64/mingw64/bin/../include
+AVCODEC_CFLAGS_I:INTERNAL=
+AVCODEC_CFLAGS_OTHER:INTERNAL=
+AVCODEC_FOUND:INTERNAL=1
+AVCODEC_INCLUDEDIR:INTERNAL=C:/msys64/mingw64/bin/../include
+AVCODEC_INCLUDE_DIRS:INTERNAL=C:/msys64/mingw64/bin/../include
+AVCODEC_LDFLAGS:INTERNAL=-LC:/msys64/mingw64/bin/../lib;-lavcodec
+AVCODEC_LDFLAGS_OTHER:INTERNAL=
+AVCODEC_LIBDIR:INTERNAL=C:/msys64/mingw64/bin/../lib
+AVCODEC_LIBRARIES:INTERNAL=avcodec
+AVCODEC_LIBRARY_DIRS:INTERNAL=C:/msys64/mingw64/bin/../lib
+AVCODEC_LIBS:INTERNAL=
+AVCODEC_LIBS_L:INTERNAL=
+AVCODEC_LIBS_OTHER:INTERNAL=
+AVCODEC_LIBS_PATHS:INTERNAL=
+AVCODEC_MODULE_NAME:INTERNAL=libavcodec
+AVCODEC_PREFIX:INTERNAL=C:/msys64/mingw64/bin/..
+AVCODEC_STATIC_CFLAGS:INTERNAL=-IC:/msys64/mingw64/bin/../include
+AVCODEC_STATIC_CFLAGS_I:INTERNAL=
+AVCODEC_STATIC_CFLAGS_OTHER:INTERNAL=
+AVCODEC_STATIC_INCLUDE_DIRS:INTERNAL=C:/msys64/mingw64/bin/../include
+AVCODEC_STATIC_LDFLAGS:INTERNAL=-LC:/msys64/mingw64/bin/../lib;-lavcodec;-lvpx;-lm;-lvpx;-lm;-lvpx;-lm;-lvpx;-lm;-lwebpmux;-liconv;-lm;-latomic;-llzma;-ldav1d;-lopencore-amrwb;-lrsvg-2;-lgdk_pixbuf-2.0;-lgio-2.0;-lcairo;-lgobject-2.0;-lglib-2.0;-lintl;-lzvbi;-lintl;-lpthread;-lm;-lws2_32;-liconv;-lpng;-lz;-laom;-lgsm;-ljxl;-ljxl_threads;-llc3;-lmp3lame;-lm;-lopencore-amrnb;-lopenjp2;-lopus;-lrav1e;-lspeex;-lSvtAv1Enc;-ltheoraenc;-ltheoradec;-logg;-lvorbis;-lvorbisenc;-lwebp;-lx264;-lx265;-lxvidcore;-lmfuuid;-lole32;-lstrmiids;-lshaderc_shared;-lole32;-luser32;-lz;-lva;-ldl;-lvpl;-lole32;-lgdi32;-luuid;-lswresample;-lm;-lsoxr;-latomic;-lavutil;-lva_win32;-lva;-lm;-lvpl;-lole32;-lgdi32;-luuid;-luser32;-lva;-lbcrypt;-latomic;-ldl
+AVCODEC_STATIC_LDFLAGS_OTHER:INTERNAL=
+AVCODEC_STATIC_LIBDIR:INTERNAL=
+AVCODEC_STATIC_LIBRARIES:INTERNAL=avcodec;vpx;m;vpx;m;vpx;m;vpx;m;webpmux;iconv;m;atomic;lzma;dav1d;opencore-amrwb;rsvg-2;gdk_pixbuf-2.0;gio-2.0;cairo;gobject-2.0;glib-2.0;intl;zvbi;intl;pthread;m;ws2_32;iconv;png;z;aom;gsm;jxl;jxl_threads;lc3;mp3lame;m;opencore-amrnb;openjp2;opus;rav1e;speex;SvtAv1Enc;theoraenc;theoradec;ogg;vorbis;vorbisenc;webp;x264;x265;xvidcore;mfuuid;ole32;strmiids;shaderc_shared;ole32;user32;z;va;dl;vpl;ole32;gdi32;uuid;swresample;m;soxr;atomic;avutil;va_win32;va;m;vpl;ole32;gdi32;uuid;user32;va;bcrypt;atomic;dl
+AVCODEC_STATIC_LIBRARY_DIRS:INTERNAL=C:/msys64/mingw64/bin/../lib
+AVCODEC_STATIC_LIBS:INTERNAL=
+AVCODEC_STATIC_LIBS_L:INTERNAL=
+AVCODEC_STATIC_LIBS_OTHER:INTERNAL=
+AVCODEC_STATIC_LIBS_PATHS:INTERNAL=
+AVCODEC_VERSION:INTERNAL=62.11.100
+AVCODEC_libavcodec_INCLUDEDIR:INTERNAL=
+AVCODEC_libavcodec_LIBDIR:INTERNAL=
+AVCODEC_libavcodec_PREFIX:INTERNAL=
+AVCODEC_libavcodec_VERSION:INTERNAL=
+AVFORMAT_CFLAGS:INTERNAL=-IC:/msys64/mingw64/bin/../include
+AVFORMAT_CFLAGS_I:INTERNAL=
+AVFORMAT_CFLAGS_OTHER:INTERNAL=
+AVFORMAT_FOUND:INTERNAL=1
+AVFORMAT_INCLUDEDIR:INTERNAL=C:/msys64/mingw64/bin/../include
+AVFORMAT_INCLUDE_DIRS:INTERNAL=C:/msys64/mingw64/bin/../include
+AVFORMAT_LDFLAGS:INTERNAL=-LC:/msys64/mingw64/bin/../lib;-lavformat
+AVFORMAT_LDFLAGS_OTHER:INTERNAL=
+AVFORMAT_LIBDIR:INTERNAL=C:/msys64/mingw64/bin/../lib
+AVFORMAT_LIBRARIES:INTERNAL=avformat
+AVFORMAT_LIBRARY_DIRS:INTERNAL=C:/msys64/mingw64/bin/../lib
+AVFORMAT_LIBS:INTERNAL=
+AVFORMAT_LIBS_L:INTERNAL=
+AVFORMAT_LIBS_OTHER:INTERNAL=
+AVFORMAT_LIBS_PATHS:INTERNAL=
+AVFORMAT_MODULE_NAME:INTERNAL=libavformat
+AVFORMAT_PREFIX:INTERNAL=C:/msys64/mingw64/bin/..
+AVFORMAT_STATIC_CFLAGS:INTERNAL=-IC:/msys64/mingw64/bin/../include
+AVFORMAT_STATIC_CFLAGS_I:INTERNAL=
+AVFORMAT_STATIC_CFLAGS_OTHER:INTERNAL=
+AVFORMAT_STATIC_INCLUDE_DIRS:INTERNAL=C:/msys64/mingw64/bin/../include
+AVFORMAT_STATIC_LDFLAGS:INTERNAL=-LC:/msys64/mingw64/bin/../lib;-lavformat;-lm;-latomic;-lxml2;-lbz2;-lgme;-lmodplug;-lbluray;-lz;-lgnutls;-lrtmp;-lz;-lgmp;-lgnutls;-lhogweed;-lnettle;-lsrt;-lws2_32;-lssh;-lavcodec;-lvpx;-lm;-lvpx;-lm;-lvpx;-lm;-lvpx;-lm;-lwebpmux;-liconv;-lm;-latomic;-llzma;-ldav1d;-lopencore-amrwb;-lrsvg-2;-lgdk_pixbuf-2.0;-lgio-2.0;-lcairo;-lgobject-2.0;-lglib-2.0;-lintl;-lzvbi;-lintl;-lpthread;-lm;-lws2_32;-liconv;-lpng;-lz;-laom;-lgsm;-ljxl;-ljxl_threads;-llc3;-lmp3lame;-lm;-lopencore-amrnb;-lopenjp2;-lopus;-lrav1e;-lspeex;-lSvtAv1Enc;-ltheoraenc;-ltheoradec;-logg;-lvorbis;-lvorbisenc;-lwebp;-lx264;-lx265;-lxvidcore;-lmfuuid;-lole32;-lstrmiids;-lshaderc_shared;-lole32;-luser32;-lz;-lva;-ldl;-lvpl;-lole32;-lgdi32;-luuid;-lswresample;-lm;-lsoxr;-latomic;-lavutil;-lva_win32;-lva;-lm;-lvpl;-lole32;-lgdi32;-luuid;-luser32;-lva;-lbcrypt;-latomic;-ldl
+AVFORMAT_STATIC_LDFLAGS_OTHER:INTERNAL=
+AVFORMAT_STATIC_LIBDIR:INTERNAL=
+AVFORMAT_STATIC_LIBRARIES:INTERNAL=avformat;m;atomic;xml2;bz2;gme;modplug;bluray;z;gnutls;rtmp;z;gmp;gnutls;hogweed;nettle;srt;ws2_32;ssh;avcodec;vpx;m;vpx;m;vpx;m;vpx;m;webpmux;iconv;m;atomic;lzma;dav1d;opencore-amrwb;rsvg-2;gdk_pixbuf-2.0;gio-2.0;cairo;gobject-2.0;glib-2.0;intl;zvbi;intl;pthread;m;ws2_32;iconv;png;z;aom;gsm;jxl;jxl_threads;lc3;mp3lame;m;opencore-amrnb;openjp2;opus;rav1e;speex;SvtAv1Enc;theoraenc;theoradec;ogg;vorbis;vorbisenc;webp;x264;x265;xvidcore;mfuuid;ole32;strmiids;shaderc_shared;ole32;user32;z;va;dl;vpl;ole32;gdi32;uuid;swresample;m;soxr;atomic;avutil;va_win32;va;m;vpl;ole32;gdi32;uuid;user32;va;bcrypt;atomic;dl
+AVFORMAT_STATIC_LIBRARY_DIRS:INTERNAL=C:/msys64/mingw64/bin/../lib
+AVFORMAT_STATIC_LIBS:INTERNAL=
+AVFORMAT_STATIC_LIBS_L:INTERNAL=
+AVFORMAT_STATIC_LIBS_OTHER:INTERNAL=
+AVFORMAT_STATIC_LIBS_PATHS:INTERNAL=
+AVFORMAT_VERSION:INTERNAL=62.3.100
+AVFORMAT_libavformat_INCLUDEDIR:INTERNAL=
+AVFORMAT_libavformat_LIBDIR:INTERNAL=
+AVFORMAT_libavformat_PREFIX:INTERNAL=
+AVFORMAT_libavformat_VERSION:INTERNAL=
+AVUTIL_CFLAGS:INTERNAL=-IC:/msys64/mingw64/bin/../include
+AVUTIL_CFLAGS_I:INTERNAL=
+AVUTIL_CFLAGS_OTHER:INTERNAL=
+AVUTIL_FOUND:INTERNAL=1
+AVUTIL_INCLUDEDIR:INTERNAL=C:/msys64/mingw64/bin/../include
+AVUTIL_INCLUDE_DIRS:INTERNAL=C:/msys64/mingw64/bin/../include
+AVUTIL_LDFLAGS:INTERNAL=-LC:/msys64/mingw64/bin/../lib;-lavutil
+AVUTIL_LDFLAGS_OTHER:INTERNAL=
+AVUTIL_LIBDIR:INTERNAL=C:/msys64/mingw64/bin/../lib
+AVUTIL_LIBRARIES:INTERNAL=avutil
+AVUTIL_LIBRARY_DIRS:INTERNAL=C:/msys64/mingw64/bin/../lib
+AVUTIL_LIBS:INTERNAL=
+AVUTIL_LIBS_L:INTERNAL=
+AVUTIL_LIBS_OTHER:INTERNAL=
+AVUTIL_LIBS_PATHS:INTERNAL=
+AVUTIL_MODULE_NAME:INTERNAL=libavutil
+AVUTIL_PREFIX:INTERNAL=C:/msys64/mingw64/bin/..
+AVUTIL_STATIC_CFLAGS:INTERNAL=-IC:/msys64/mingw64/bin/../include
+AVUTIL_STATIC_CFLAGS_I:INTERNAL=
+AVUTIL_STATIC_CFLAGS_OTHER:INTERNAL=
+AVUTIL_STATIC_INCLUDE_DIRS:INTERNAL=C:/msys64/mingw64/bin/../include
+AVUTIL_STATIC_LDFLAGS:INTERNAL=-LC:/msys64/mingw64/bin/../lib;-lavutil;-lva_win32;-lva;-lm;-lvpl;-lole32;-lgdi32;-luuid;-luser32;-lva;-lbcrypt;-latomic;-ldl
+AVUTIL_STATIC_LDFLAGS_OTHER:INTERNAL=
+AVUTIL_STATIC_LIBDIR:INTERNAL=
+AVUTIL_STATIC_LIBRARIES:INTERNAL=avutil;va_win32;va;m;vpl;ole32;gdi32;uuid;user32;va;bcrypt;atomic;dl
+AVUTIL_STATIC_LIBRARY_DIRS:INTERNAL=C:/msys64/mingw64/bin/../lib
+AVUTIL_STATIC_LIBS:INTERNAL=
+AVUTIL_STATIC_LIBS_L:INTERNAL=
+AVUTIL_STATIC_LIBS_OTHER:INTERNAL=
+AVUTIL_STATIC_LIBS_PATHS:INTERNAL=
+AVUTIL_VERSION:INTERNAL=60.8.100
+AVUTIL_libavutil_INCLUDEDIR:INTERNAL=
+AVUTIL_libavutil_LIBDIR:INTERNAL=
+AVUTIL_libavutil_PREFIX:INTERNAL=
+AVUTIL_libavutil_VERSION:INTERNAL=
 //ADVANCED property for variable: CMAKE_ADDR2LINE
 CMAKE_ADDR2LINE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_AR
@@ -409,8 +532,49 @@ CMAKE_STRIP-ADVANCED:INTERNAL=1
 CMAKE_TAPI-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//Details about finding PkgConfig
+FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[C:/msys64/mingw64/bin/pkg-config.exe][v2.5.1()]
 //Details about finding Python3
 FIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[C:/Users/simon/AppData/Local/Programs/Python/Python311/python.exe][found components: Interpreter ][v3.11.0()]
+//ADVANCED property for variable: PKG_CONFIG_ARGN
+PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
+PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
+SWSCALE_CFLAGS:INTERNAL=-IC:/msys64/mingw64/bin/../include
+SWSCALE_CFLAGS_I:INTERNAL=
+SWSCALE_CFLAGS_OTHER:INTERNAL=
+SWSCALE_FOUND:INTERNAL=1
+SWSCALE_INCLUDEDIR:INTERNAL=C:/msys64/mingw64/bin/../include
+SWSCALE_INCLUDE_DIRS:INTERNAL=C:/msys64/mingw64/bin/../include
+SWSCALE_LDFLAGS:INTERNAL=-LC:/msys64/mingw64/bin/../lib;-lswscale
+SWSCALE_LDFLAGS_OTHER:INTERNAL=
+SWSCALE_LIBDIR:INTERNAL=C:/msys64/mingw64/bin/../lib
+SWSCALE_LIBRARIES:INTERNAL=swscale
+SWSCALE_LIBRARY_DIRS:INTERNAL=C:/msys64/mingw64/bin/../lib
+SWSCALE_LIBS:INTERNAL=
+SWSCALE_LIBS_L:INTERNAL=
+SWSCALE_LIBS_OTHER:INTERNAL=
+SWSCALE_LIBS_PATHS:INTERNAL=
+SWSCALE_MODULE_NAME:INTERNAL=libswscale
+SWSCALE_PREFIX:INTERNAL=C:/msys64/mingw64/bin/..
+SWSCALE_STATIC_CFLAGS:INTERNAL=-IC:/msys64/mingw64/bin/../include
+SWSCALE_STATIC_CFLAGS_I:INTERNAL=
+SWSCALE_STATIC_CFLAGS_OTHER:INTERNAL=
+SWSCALE_STATIC_INCLUDE_DIRS:INTERNAL=C:/msys64/mingw64/bin/../include
+SWSCALE_STATIC_LDFLAGS:INTERNAL=-LC:/msys64/mingw64/bin/../lib;-lswscale;-lm;-latomic;-lavutil;-lva_win32;-lva;-lm;-lvpl;-lole32;-lgdi32;-luuid;-luser32;-lva;-lbcrypt;-latomic;-ldl
+SWSCALE_STATIC_LDFLAGS_OTHER:INTERNAL=
+SWSCALE_STATIC_LIBDIR:INTERNAL=
+SWSCALE_STATIC_LIBRARIES:INTERNAL=swscale;m;atomic;avutil;va_win32;va;m;vpl;ole32;gdi32;uuid;user32;va;bcrypt;atomic;dl
+SWSCALE_STATIC_LIBRARY_DIRS:INTERNAL=C:/msys64/mingw64/bin/../lib
+SWSCALE_STATIC_LIBS:INTERNAL=
+SWSCALE_STATIC_LIBS_L:INTERNAL=
+SWSCALE_STATIC_LIBS_OTHER:INTERNAL=
+SWSCALE_STATIC_LIBS_PATHS:INTERNAL=
+SWSCALE_VERSION:INTERNAL=9.1.100
+SWSCALE_libswscale_INCLUDEDIR:INTERNAL=
+SWSCALE_libswscale_LIBDIR:INTERNAL=
+SWSCALE_libswscale_PREFIX:INTERNAL=
+SWSCALE_libswscale_VERSION:INTERNAL=
 //Compiler reason failure
 _Python3_Compiler_REASON_FAILURE:INTERNAL=
 //Development reason failure
@@ -424,4 +588,21 @@ _Python3_INTERPRETER_PROPERTIES:INTERNAL=Python;3;11;0;64;32;<none>;cp311-win_am
 _Python3_INTERPRETER_SIGNATURE:INTERNAL=0f858f7f6665478ce19913812fcf14bc
 //NumPy reason failure
 _Python3_NumPy_REASON_FAILURE:INTERNAL=
+__pkg_config_arguments_AVCODEC:INTERNAL=REQUIRED;libavcodec
+__pkg_config_arguments_AVFORMAT:INTERNAL=REQUIRED;libavformat
+__pkg_config_arguments_AVUTIL:INTERNAL=REQUIRED;libavutil
+__pkg_config_arguments_SWSCALE:INTERNAL=REQUIRED;libswscale
+__pkg_config_checked_AVCODEC:INTERNAL=1
+__pkg_config_checked_AVFORMAT:INTERNAL=1
+__pkg_config_checked_AVUTIL:INTERNAL=1
+__pkg_config_checked_SWSCALE:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_AVCODEC_avcodec
+pkgcfg_lib_AVCODEC_avcodec-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_AVFORMAT_avformat
+pkgcfg_lib_AVFORMAT_avformat-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_AVUTIL_avutil
+pkgcfg_lib_AVUTIL_avutil-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_SWSCALE_swscale
+pkgcfg_lib_SWSCALE_swscale-ADVANCED:INTERNAL=1
+prefix_result:INTERNAL=C:/msys64/mingw64/bin/../lib
 

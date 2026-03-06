@@ -716,15 +716,13 @@ void UIManager::refreshProjectors() {
     projectorGrid->SetProperty("overflow-x", "auto");
     projectorGrid->SetProperty("overflow-x", "visible");
 
-
-    // ensure scene arrays sizes
     for (auto& scene : scene_manager.scenes) {
         scene.connections.resize(n);
     }
     scene_manager.scenes[active_scene_index].split_sources.resize(n);
 
     for (int i = 0; i < n; ++i) {
-        // ---- PROJECTOR wrapper (fixed px size so inner can maintain 16:9) ----
+        // projector wrapper
         Rml::ElementPtr projector = getWindow().document->CreateElement("div");
         projector->SetClass("projector", true);
         projector->SetId("projector-" + std::to_string(i));
@@ -745,29 +743,46 @@ void UIManager::refreshProjectors() {
         inner->SetProperty("width", "100%");
         inner->SetProperty("height", "100%");
 
-        if (i < scene_manager.scenes[active_scene_index].sources.size()
-            && !scene_manager.scenes[active_scene_index].sources[i].empty())
+        if (i < scene_manager.scenes[active_scene_index].sources.size())
         {
-            std::string src;
+            auto& scene = scene_manager.scenes[active_scene_index];
 
-            if (i < scene_manager.scenes[active_scene_index].split_sources.size()
-                && !scene_manager.scenes[active_scene_index].split_sources[i].empty())
+            std::string& baseSrc = scene.sources[i];
+            std::string& splitSrc =
+                (i < scene.split_sources.size())
+                ? scene.split_sources[i]
+                : baseSrc;
+
+            if (!baseSrc.empty() && !std::filesystem::exists(baseSrc))
             {
-                src = scene_manager.scenes[active_scene_index].split_sources[i];
-            } else {
-                src = scene_manager.scenes[active_scene_index].sources[i];
-            }
+                baseSrc = "";
+                if (i < scene.split_sources.size())
+                    splitSrc = "";
 
-            std::filesystem::path p(src);
-            if (p.extension() == ".mp4") {
-                src = (p.parent_path() / "thumbs" / (p.stem().string() + ".png")).string();
-            }
+                if (i < scene.connections.size())
+                    scene.connections[i] = 0;
 
-            // apply the image to the inner element (background-size: cover is in RCSS)
-            inner->SetProperty("decorator", "image(\"" + src + "\")");
-        } else {
-            // fall back text centered inside inner
-            inner->SetInnerRML("Projector " + std::to_string(i + 1));
+                if (i > 0 && i - 1 < scene.connections.size())
+                    scene.connections[i - 1] = 0;
+            }
+            else if (!baseSrc.empty())
+            {
+                std::string src = !splitSrc.empty() ? splitSrc : baseSrc;
+
+                std::filesystem::path p(src);
+                if (p.extension() == ".mp4")
+                    src = (p.parent_path() / "thumbs" /
+                          (p.stem().string() + ".png")).string();
+
+                if (std::filesystem::exists(src))
+                {
+                    inner->SetProperty("decorator", "image(\"" + src + "\")");
+                }
+                else
+                {
+                    splitSrc = "";
+                }
+            }
         }
 
         // attach the inner to the wrapper
@@ -1237,6 +1252,7 @@ void showResourceRenameDialog(int id) {
 void deleteResource(int id) {
     ResourceHandler::deleteResource(id);
     UIManager::refreshResourcePanel();
+    UIManager::refreshProjectors();
 }
 void selectResource(int index){
     std::cout << "Selecting Resource: " << index << " (previously: " << active_resource_index << ")" << std::endl;

@@ -17,8 +17,7 @@
                 <button id= "file-dropdown-closeprogramm">Beenden</button>
             </div>
         </div>
-        <div class="menu-item">Einstellungen
-        </div>
+        <div class="menu-item" id= "settings">Einstellungen</div>
         <div class="menu-item">Hilfe
             <div class="dropdown">
                 <button>Dokumentation</button>
@@ -89,6 +88,174 @@
                     </div>
                     <div class="resource-list" id="resource-list">
 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="settings-overlay" style="display:none">
+        <div class="settings-header">
+            <h2>Einstellungen</h2>
+            <button id="settings-close" class="close-button">X</button>
+        </div>
+
+        <div class="settings-content">
+            <!-- Allgemein Section -->
+            <div class="settings-section">
+                <h3>Allgemein</h3>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-name">Automatische Updates</span>
+                        <span class="setting-description">Automatisch nach Updates suchen und installieren</span>
+                    </div>
+                    <div class="setting-control">
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="auto-updates" class="setting-checkbox"/>
+                            <label for="auto-updates" class="checkbox-label"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-name">Automatisch letztes Projekt öffnen</span>
+                        <span class="setting-description">Beim Start das zuletzt geöffnete Projekt laden</span>
+                    </div>
+                    <div class="setting-control">
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="auto-last-project" class="setting-checkbox" checked/>
+                            <label for="auto-last-project" class="checkbox-label"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setting-item project-rename-item">
+                    <div class="setting-info">
+                        <span class="setting-name">Aktuelles Projekt umbenennen</span>
+                        <span class="setting-description">Namen des geöffneten Projekts ändern</span>
+                    </div>
+                    <div class="setting-control rename-control">
+                        <input type="text" class="rename-input" value="Mein Projekt" placeholder="Projektname"/>
+                        <button class="rename-apply">Apply</button>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-name">Projekt löschen</span>
+                        <span class="setting-description warning-text">Aktuelles Projekt dauerhaft entfernen</span>
+                    </div>
+                    <div class="setting-control">
+                        <button class="action-button danger">Löschen</button>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-name">Im Explorer öffnen</span>
+                        <span class="setting-description">Projektordner im Datei-Explorer anzeigen</span>
+                    </div>
+                    <div class="setting-control">
+                        <button class="action-button">Öffnen</button>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-name">Projekt reparieren</span>
+                        <span class="setting-description">Beschädigte Projektdateien wiederherstellen</span>
+                    </div>
+                    <div class="setting-control">
+                        <button class="action-button">Reparieren</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Anzeige Section -->
+            <div class="settings-section">
+                <h3>Anzeige</h3>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-name">VSync</span>
+                        <span class="setting-description">Bildwiederholrate mit Monitor synchronisieren</span>
+                    </div>
+                    <div class="setting-control">
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="vsync" class="setting-checkbox" checked/>
+                            <label for="vsync" class="checkbox-label"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-name">FPS Limit</span>
+                        <span class="setting-description">Maximale Bildwiederholrate begrenzen</span>
+                    </div>
+                    <div class="setting-control">
+                        <select class="setting-select">
+                            <option value="30">30 FPS</option>
+                            <option value="60" selected>60 FPS</option>
+                            <option value="120">120 FPS</option>
+                            <option value="144">144 FPS</option>
+                            <option value="0">Unbegrenzt</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-name">Vollbild</span>
+                        <span class="setting-description">Im Vollbildmodus ausführen</span>
+                    </div>
+                    <div class="setting-control">
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="fullscreen" class="setting-checkbox"/>
+                            <label for="fullscreen" class="checkbox-label"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Erweitert Section -->
+            <div class="settings-section">
+                <h3>Erweitert</h3>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-name">Debug-Modus</span>
+                        <span class="setting-description">Erweiterte Debug-Informationen anzeigen</span>
+                    </div>
+                    <div class="setting-control">
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="debug-mode" class="setting-checkbox"/>
+                            <label for="debug-mode" class="checkbox-label"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-name">Unnötige Dateien löschen</span>
+                        <span class="setting-description warning-text">Temporäre und Cache-Dateien bereinigen</span>
+                    </div>
+                    <div class="setting-control">
+                        <button class="action-button danger">Jetzt bereinigen</button>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-name">Automatische Bereinigung</span>
+                        <span class="setting-description">Täglich temporäre Dateien automatisch löschen</span>
+                    </div>
+                    <div class="setting-control">
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="auto-cleanup" class="setting-checkbox"/>
+                            <label for="auto-cleanup" class="checkbox-label"></label>
+                        </div>
                     </div>
                 </div>
             </div>

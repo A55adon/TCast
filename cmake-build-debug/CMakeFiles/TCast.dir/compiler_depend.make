@@ -7054,6 +7054,7 @@ CMakeFiles/TCast.dir/src/Utilities.cpp.obj: C:/Users/simon/Desktop/Code/TCast/sr
   C:/msys64/mingw64/include/c++/15.2.0/bits/allocated_ptr.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/allocator.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/atomic_base.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/atomic_futex.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/atomic_lockfree_defines.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/basic_ios.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/basic_ios.tcc \
@@ -7195,6 +7196,7 @@ CMakeFiles/TCast.dir/src/Utilities.cpp.obj: C:/Users/simon/Desktop/Code/TCast/sr
   C:/msys64/mingw64/include/c++/15.2.0/codecvt \
   C:/msys64/mingw64/include/c++/15.2.0/compare \
   C:/msys64/mingw64/include/c++/15.2.0/concepts \
+  C:/msys64/mingw64/include/c++/15.2.0/condition_variable \
   C:/msys64/mingw64/include/c++/15.2.0/cstddef \
   C:/msys64/mingw64/include/c++/15.2.0/cstdint \
   C:/msys64/mingw64/include/c++/15.2.0/cstdio \
@@ -7218,6 +7220,7 @@ CMakeFiles/TCast.dir/src/Utilities.cpp.obj: C:/Users/simon/Desktop/Code/TCast/sr
   C:/msys64/mingw64/include/c++/15.2.0/forward_list \
   C:/msys64/mingw64/include/c++/15.2.0/fstream \
   C:/msys64/mingw64/include/c++/15.2.0/functional \
+  C:/msys64/mingw64/include/c++/15.2.0/future \
   C:/msys64/mingw64/include/c++/15.2.0/initializer_list \
   C:/msys64/mingw64/include/c++/15.2.0/iomanip \
   C:/msys64/mingw64/include/c++/15.2.0/ios \
@@ -7366,6 +7369,9 @@ CMakeFiles/TCast.dir/src/Utilities.cpp.obj: C:/Users/simon/Desktop/Code/TCast/sr
   C:/msys64/mingw64/include/oleauto.h \
   C:/msys64/mingw64/include/oleidl.h \
   C:/msys64/mingw64/include/playsoundapi.h \
+  C:/msys64/mingw64/include/png.h \
+  C:/msys64/mingw64/include/pngconf.h \
+  C:/msys64/mingw64/include/pnglibconf.h \
   C:/msys64/mingw64/include/poppack.h \
   C:/msys64/mingw64/include/process.h \
   C:/msys64/mingw64/include/processenv.h \
@@ -7417,6 +7423,7 @@ CMakeFiles/TCast.dir/src/Utilities.cpp.obj: C:/Users/simon/Desktop/Code/TCast/sr
   C:/msys64/mingw64/include/securityappcontainer.h \
   C:/msys64/mingw64/include/securitybaseapi.h \
   C:/msys64/mingw64/include/servprov.h \
+  C:/msys64/mingw64/include/setjmp.h \
   C:/msys64/mingw64/include/shellapi.h \
   C:/msys64/mingw64/include/sherrors.h \
   C:/msys64/mingw64/include/shldisp.h \
@@ -7446,6 +7453,7 @@ CMakeFiles/TCast.dir/src/Utilities.cpp.obj: C:/Users/simon/Desktop/Code/TCast/sr
   C:/msys64/mingw64/include/time.h \
   C:/msys64/mingw64/include/timeapi.h \
   C:/msys64/mingw64/include/timezoneapi.h \
+  C:/msys64/mingw64/include/turbojpeg.h \
   C:/msys64/mingw64/include/tvout.h \
   C:/msys64/mingw64/include/unknwn.h \
   C:/msys64/mingw64/include/unknwnbase.h \
@@ -7608,9 +7616,11 @@ CMakeFiles/TCast.dir/src/Utilities.cpp.obj: C:/Users/simon/Desktop/Code/TCast/sr
   C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/xtestintrin.h
 
 CMakeFiles/TCast.dir/src/Window.cpp.obj: C:/Users/simon/Desktop/Code/TCast/src/Window.cpp \
+  C:/Users/simon/Desktop/Code/TCast/include/EventListener.h \
   C:/Users/simon/Desktop/Code/TCast/include/Projector.h \
   C:/Users/simon/Desktop/Code/TCast/include/ResourceHandler.h \
   C:/Users/simon/Desktop/Code/TCast/include/Shell.h \
+  C:/Users/simon/Desktop/Code/TCast/include/UIManager.h \
   C:/Users/simon/Desktop/Code/TCast/include/Utilities.h \
   C:/Users/simon/Desktop/Code/TCast/include/Window.h \
   C:/Users/simon/Desktop/Code/TCast/include/glad/glad.h \
@@ -8569,6 +8579,7 @@ CMakeFiles/TCast.dir/src/main.cpp.obj: C:/Users/simon/Desktop/Code/TCast/src/mai
   C:/msys64/mingw64/include/c++/15.2.0/bits/allocated_ptr.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/allocator.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/atomic_base.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/atomic_futex.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/atomic_lockfree_defines.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/basic_ios.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/basic_ios.tcc \
@@ -8710,6 +8721,7 @@ CMakeFiles/TCast.dir/src/main.cpp.obj: C:/Users/simon/Desktop/Code/TCast/src/mai
   C:/msys64/mingw64/include/c++/15.2.0/codecvt \
   C:/msys64/mingw64/include/c++/15.2.0/compare \
   C:/msys64/mingw64/include/c++/15.2.0/concepts \
+  C:/msys64/mingw64/include/c++/15.2.0/condition_variable \
   C:/msys64/mingw64/include/c++/15.2.0/cstddef \
   C:/msys64/mingw64/include/c++/15.2.0/cstdint \
   C:/msys64/mingw64/include/c++/15.2.0/cstdio \
@@ -8733,6 +8745,7 @@ CMakeFiles/TCast.dir/src/main.cpp.obj: C:/Users/simon/Desktop/Code/TCast/src/mai
   C:/msys64/mingw64/include/c++/15.2.0/forward_list \
   C:/msys64/mingw64/include/c++/15.2.0/fstream \
   C:/msys64/mingw64/include/c++/15.2.0/functional \
+  C:/msys64/mingw64/include/c++/15.2.0/future \
   C:/msys64/mingw64/include/c++/15.2.0/initializer_list \
   C:/msys64/mingw64/include/c++/15.2.0/iomanip \
   C:/msys64/mingw64/include/c++/15.2.0/ios \
@@ -9762,6 +9775,8 @@ C:/msys64/mingw64/include/sec_api/stdlib_s.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/tr1/poly_hermite.tcc:
 
+C:/msys64/mingw64/include/c++/15.2.0/bits/atomic_futex.h:
+
 C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/TextShapingContext.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/cwctype:
@@ -10160,6 +10175,8 @@ C:/msys64/mingw64/include/sdkddkver.h:
 
 C:/msys64/mingw64/include/cguid.h:
 
+C:/msys64/mingw64/include/c++/15.2.0/condition_variable:
+
 C:/msys64/mingw64/include/commdlg.h:
 
 C:/msys64/mingw64/include/concurrencysal.h:
@@ -10428,6 +10445,8 @@ C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/emmintrin.h:
 
 C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/enqcmdintrin.h:
 
+C:/msys64/mingw64/include/pngconf.h:
+
 C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/fma4intrin.h:
 
 C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/fmaintrin.h:
@@ -10610,6 +10629,8 @@ C:/Users/simon/Desktop/Code/TCast/include/libavutil/frame.h:
 
 C:/Users/simon/Desktop/Code/TCast/include/libavutil/hwcontext.h:
 
+C:/msys64/mingw64/include/pnglibconf.h:
+
 C:/Users/simon/Desktop/Code/TCast/include/libavutil/imgutils.h:
 
 C:/Users/simon/Desktop/Code/TCast/include/libavutil/log.h:
@@ -10683,6 +10704,8 @@ C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Elements/Element
 C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/EventInstancer.h:
 
 C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/EventListener.h:
+
+C:/msys64/mingw64/include/png.h:
 
 C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/EventListenerInstancer.h:
 
@@ -10792,6 +10815,8 @@ C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++io.h:
 
 C:/msys64/mingw64/include/commctrl.h:
 
+C:/msys64/mingw64/include/turbojpeg.h:
+
 C:/msys64/mingw64/include/propsys.h:
 
 C:/msys64/mingw64/include/shlguid.h:
@@ -10801,5 +10826,9 @@ C:/msys64/mingw64/include/shlobj.h:
 C:/Users/simon/Desktop/Code/TCast/src/UISetup.cpp:
 
 C:/Users/simon/Desktop/Code/TCast/src/Utilities.cpp:
+
+C:/msys64/mingw64/include/c++/15.2.0/future:
+
+C:/msys64/mingw64/include/setjmp.h:
 
 C:/Users/simon/Desktop/Code/TCast/src/nanosvg_impl.cpp:

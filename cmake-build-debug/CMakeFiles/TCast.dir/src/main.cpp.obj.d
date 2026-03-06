@@ -781,4 +781,7 @@ CMakeFiles/TCast.dir/src/main.cpp.obj: \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Include/RmlUi/Core/Platform.h \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Backends/RmlUi_Backend.h \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/RenderInterface.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/SystemInterface.h
+ C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/SystemInterface.h \
+ C:/msys64/mingw64/include/c++/15.2.0/future \
+ C:/msys64/mingw64/include/c++/15.2.0/condition_variable \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/atomic_futex.h

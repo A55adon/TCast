@@ -2,11 +2,5 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/saves/folderSaves/test121/Code/Arbeitstracker" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/saves/folderSaves/test121/Code/Arduino/Arduino_GFX" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/saves/folderSaves/test121/Code/Arduino/DEMO_LVGL_vs" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/saves/folderSaves/trea124/Code/Arbeitstracker" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/saves/folderSaves/trea124/Code/Arduino/Arduino_GFX" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/saves/folderSaves/trea124/Code/Arduino/DEMO_LVGL_vs" vcs="Git" />
   </component>
 </project>

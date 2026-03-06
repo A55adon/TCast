@@ -6,5 +6,5 @@ CXX_DEFINES = -DVERSION=\"1.1.1\"
 
 CXX_INCLUDES = @CMakeFiles/TCast.dir/includes_CXX.rsp
 
-CXX_FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+CXX_FLAGS = -g -fdiagnostics-color=always
 

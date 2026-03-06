@@ -71,7 +71,6 @@ bool ResourceHandler::saveResources() {;
     return true;
 }
 
-// Creates new Resource
 Resource& ResourceHandler::createResource(const fs::path& path, const std::string &name)
 {
     if (!fs::exists(path)) {
@@ -123,7 +122,15 @@ Resource& ResourceHandler::createResource(const fs::path& path, const std::strin
 
             fs::create_directories(r.path.parent_path());
 
-            if (!U::convertToPng(path.string(), r.path.string())) {
+            // For single image, create a vector with one job and call batch function
+            std::vector<std::pair<fs::path, fs::path>> jobs = {
+                {path, r.path}
+            };
+
+            U::convertMultipleToPng(jobs);
+
+            // Verify the conversion worked
+            if (!fs::exists(r.path)) {
                 LOG_ERR("RH", "Couldn't convert " + path.string() + " to PNG in createResource()");
                 U::showError("Konnte " + path.string() + " nicht in PNG umwandeln");
             }
@@ -144,6 +151,22 @@ void ResourceHandler::deleteResource(const int id)
     auto& resources = resourceManager.resources;
 
     for (const auto& res : resources) {
+        if (res.id == id) {
+            fs::path p1 = getRelativeImagePath() / res.path;
+            fs::path p2 = getRelativeVideoPath() / res.path;
+            fs::path p3 = getRelativeThumbnailPath() / res.path;
+
+            fs::remove(p1);
+            fs::remove(p2);
+            fs::remove(p3);
+
+            if (res.is_video) {
+                deleteResource(res.thumbnail_id);
+            }
+        }
+    }
+
+    for (const auto& res : resources) {
         if (res.id == id)
             if (res.is_video)
                 deleteResource(res.thumbnail_id);
@@ -158,6 +181,7 @@ void ResourceHandler::deleteResource(const int id)
         ),
         resources.end()
     );
+
     saveResources();
 }
 

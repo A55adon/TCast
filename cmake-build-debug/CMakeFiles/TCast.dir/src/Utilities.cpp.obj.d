@@ -775,4 +775,10 @@ CMakeFiles/TCast.dir/src/Utilities.cpp.obj: \
  C:/Users/simon/Desktop/Code/TCast/include/stb/stb_image_resize2.h \
  C:/Users/simon/Desktop/Code/TCast/include/EventListener.h \
  C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/EventListener.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/ElementDocument.h
+ C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/ElementDocument.h \
+ C:/msys64/mingw64/include/c++/15.2.0/future \
+ C:/msys64/mingw64/include/c++/15.2.0/condition_variable \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/atomic_futex.h \
+ C:/msys64/mingw64/include/png.h C:/msys64/mingw64/include/pnglibconf.h \
+ C:/msys64/mingw64/include/pngconf.h C:/msys64/mingw64/include/setjmp.h \
+ C:/msys64/mingw64/include/turbojpeg.h

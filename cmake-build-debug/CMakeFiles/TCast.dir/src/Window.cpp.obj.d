@@ -777,4 +777,8 @@ CMakeFiles/TCast.dir/src/Window.cpp.obj: \
  C:/msys64/mingw64/include/exdisp.h C:/msys64/mingw64/include/shldisp.h \
  C:/msys64/mingw64/include/knownfolders.h \
  C:/Users/simon/Desktop/Code/TCast/include/Shell.h \
- C:/Users/simon/Desktop/Code/TCast/include/Utilities.h
+ C:/Users/simon/Desktop/Code/TCast/include/UIManager.h \
+ C:/Users/simon/Desktop/Code/TCast/include/Utilities.h \
+ C:/Users/simon/Desktop/Code/TCast/include/EventListener.h \
+ C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/EventListener.h \
+ C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/ElementDocument.h

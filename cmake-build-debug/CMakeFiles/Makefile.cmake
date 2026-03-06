@@ -16,12 +16,20 @@ set(CMAKE_MAKEFILE_DEPENDS
   "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/CMakeRCInformation.cmake"
   "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/CMakeSystemSpecificInformation.cmake"
   "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/CMakeSystemSpecificInitialize.cmake"
+  "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/CheckIPOSupported.cmake"
+  "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/CheckIPOSupported/CMakeLists-C.txt.in"
+  "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/CheckIPOSupported/CMakeLists-CXX.txt.in"
+  "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/CheckIPOSupported/foo.c"
+  "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/CheckIPOSupported/foo.cpp"
+  "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/CheckIPOSupported/main.c"
+  "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/CheckIPOSupported/main.cpp"
   "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
   "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/Compiler/GNU-C.cmake"
   "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/Compiler/GNU-CXX.cmake"
   "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/Compiler/GNU.cmake"
   "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/FindPackageHandleStandardArgs.cmake"
   "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/FindPackageMessage.cmake"
+  "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/FindPkgConfig.cmake"
   "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/FindPython/Support.cmake"
   "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/FindPython3.cmake"
   "C:/Users/simon/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-4.0/Modules/Internal/CMakeCLinkerInformation.cmake"
@@ -58,6 +66,12 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
+  "CMakeFiles/_CMakeLTOTest-CXX/src/CMakeLists.txt"
+  "CMakeFiles/_CMakeLTOTest-CXX/src/foo.cpp"
+  "CMakeFiles/_CMakeLTOTest-CXX/src/main.cpp"
+  "CMakeFiles/_CMakeLTOTest-C/src/CMakeLists.txt"
+  "CMakeFiles/_CMakeLTOTest-C/src/foo.c"
+  "CMakeFiles/_CMakeLTOTest-C/src/main.c"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 

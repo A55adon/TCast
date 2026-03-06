@@ -188,6 +188,13 @@ void setInterfaceEventListeners() {
 
 void UISetup::setupDropdownListeners() {
     setupFileDropdownListeners();
+    getEl("settings")->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
+        getEl("settings-overlay")->SetAttribute("style", "display: block");
+    }));
+    getEl("settings-close")->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
+        getEl("settings-overlay")->SetAttribute("style", "display: none");
+    }));
+
 }
 void UISetup::setupFileDropdownListeners() {
     if (auto* el = getEl("file-dropdown-newproject")) {

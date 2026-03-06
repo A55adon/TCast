@@ -32,6 +32,7 @@ public:
     static std::string browseImageOrMp4();
 
     // Image conversion
+    static void convertMultipleToPng(const std::vector<std::pair<fs::path, fs::path>>& jobs);
     static bool convertToPng(const fs::path& src, const fs::path& dst);
     static bool downscaleAndCrop169(const fs::path& inputPath, const fs::path& outputPath);
     static bool cropImagePart(float start, float end, const fs::path& inputPath, const fs::path& outputPath);

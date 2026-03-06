@@ -8,6 +8,12 @@
 #include "stb_image_write.h"
 #include "stb_image_resize2.h"
 #include "EventListener.h"
+#include <windows.h>
+#include <vector>
+#include <future>
+#include <png.h>
+#include <turbojpeg.h>
+
 
 extern "C" {
 #include <libavformat/avformat.h>
@@ -253,230 +259,266 @@ fs::path Utilities::getRecentPath() {
 }
 
 // Copies an input image, turns it to 16:9 format, saves it in the output Path
-bool Utilities::downscaleAndCrop169(const fs::path &inputPath, const fs::path &outputPath) {
+bool Utilities::downscaleAndCrop169(const fs::path& inputPath,
+                                    const fs::path& outputPath)
+{
+    const auto t0 = std::chrono::high_resolution_clock::now();
+
     int w, h, channels;
-    unsigned char* img = stbi_load(inputPath.string().c_str(), &w, &h, &channels, 4);
-    if (!img) {
-        std::string msg = "Couldn't load image[" + inputPath.string() + "] in downscaleAndCrop 16:9";
-        LOG_ERR("Utilities", msg);
+
+    unsigned char* img = stbi_load(
+        inputPath.string().c_str(),
+        &w, &h, &channels,
+        0
+    );
+
+    if (!img)
         return false;
-    }
-
-    int in_channels = 4;
-
-    int targetW = w;
-    int targetH = h;
 
     constexpr int maxW = 1920;
     constexpr int maxH = 1080;
-
-    // Determine if downscaling is needed
     constexpr float aspect = 16.0f / 9.0f;
+
     const float imgAspect = static_cast<float>(w) / h;
 
-    if (w > maxW || h > maxH) {
-        if (imgAspect >= aspect) {
-            targetW = maxW;
-            targetH = static_cast<int>(std::round(targetW / aspect));
-        } else {
-            targetH = maxH;
-            targetW = static_cast<int>(std::round(targetH * aspect));
+    int cropW = w;
+    int cropH = h;
+
+    if (imgAspect > aspect)
+        cropW = static_cast<int>(h * aspect);
+    else
+        cropH = static_cast<int>(w / aspect);
+
+    const int offX = (w - cropW) / 2;
+    const int offY = (h - cropH) / 2;
+
+    const bool needResize = cropW > maxW || cropH > maxH;
+
+    int finalW = cropW;
+    int finalH = cropH;
+
+    if (needResize)
+    {
+        if ((float)cropW / cropH > aspect)
+        {
+            finalW = maxW;
+            finalH = static_cast<int>(finalW / aspect);
         }
-    } else {
-        // For images smaller than 1920x1080, just adjust crop to 16:9
-        if (imgAspect >= aspect) {
-            targetW = static_cast<int>(std::round(h * aspect));
-            targetH = h;
-        } else {
-            targetH = static_cast<int>(std::round(w / aspect));
-            targetW = w;
+        else
+        {
+            finalH = maxH;
+            finalW = static_cast<int>(finalH * aspect);
         }
     }
 
-    // Center crop coordinates
-    const int offX = std::max(0, (w - targetW) / 2);
-    const int offY = std::max(0, (h - targetH) / 2);
+    std::vector<unsigned char> output(finalW * finalH * channels);
 
-    std::vector<unsigned char> cropped(targetW * targetH * in_channels);
+    const unsigned char* croppedStart =
+        img + (offY * w + offX) * channels;
 
-    for (int y = 0; y < targetH; ++y) {
-        unsigned char* dst_row = cropped.data() + y * targetW * in_channels;
-        const unsigned char* src_row = img + ((offY + y) * w + offX) * in_channels;
-        memcpy(dst_row, src_row, static_cast<size_t>(targetW * in_channels));
+    if (!needResize)
+    {
+        for (int y = 0; y < cropH; ++y)
+        {
+            memcpy(
+                output.data() + y * cropW * channels,
+                croppedStart + y * w * channels,
+                cropW * channels
+            );
+        }
+    }
+    else
+    {
+        stbir_resize(
+            croppedStart,
+            cropW, cropH, w * channels,
+            output.data(),
+            finalW, finalH, finalW * channels,
+            channels == 4 ? STBIR_RGBA : STBIR_RGB,
+            STBIR_TYPE_UINT8,
+            STBIR_EDGE_CLAMP,
+            STBIR_FILTER_BOX
+        );
     }
 
     stbi_image_free(img);
 
-    // If the cropped size exceeds 1920x1080, downscale to fit
-    if (targetW > maxW || targetH > maxH) {
-        const int finalW = std::min(targetW, maxW);
-        const int finalH = std::min(targetH, maxH);
-        std::vector<unsigned char> finalImg(finalW * finalH * in_channels);
+    stbi_write_png_compression_level = 0;
 
-        stbir_resize(
-            cropped.data(), targetW, targetH, targetW * in_channels,
-            finalImg.data(), finalW, finalH, finalW * in_channels,
-            STBIR_RGBA,
-            STBIR_TYPE_UINT8,
-            STBIR_EDGE_CLAMP,
-            STBIR_FILTER_DEFAULT
-        );
+    const int ok = stbi_write_png(
+        outputPath.string().c_str(),
+        finalW,
+        finalH,
+        channels,
+        output.data(),
+        finalW * channels
+    );
 
-        targetW = finalW;
-        targetH = finalH;
-        cropped.swap(finalImg);
-    }
+    const auto t1 = std::chrono::high_resolution_clock::now();
+    const double ms =
+        std::chrono::duration<double, std::milli>(t1 - t0).count();
 
-    const int write_ok = stbi_write_png(outputPath.string().c_str(), targetW, targetH, in_channels, cropped.data(), targetW * in_channels);
-    return write_ok != 0;
+    std::cout << "downscaleAndCrop169 finished in "
+              << ms
+              << " ms\n";
+
+    return ok != 0;
 }
-
 // Copies an input image, cuts it of so it starts on x-axis start percentage to end percentage and saves it in the output path
-bool Utilities::cropImagePart(const float start, const float end, const fs::path& inputPath, const fs::path& outputPath){
-    if (start < 0.f || end > 1.f || start >= end) {
-        LOG_ERR("Utilities", "Invalid start or end input in cropImagePart()");
+bool Utilities::cropImagePart(float start, float end,
+                              const fs::path& inputPath,
+                              const fs::path& outputPath)
+{
+    if (start < 0.f || end > 1.f || start >= end)
         return false;
-    }
 
-    int srcW, srcH, _;
-    unsigned char* src = stbi_load(inputPath.string().c_str(), &srcW, &srcH, &_, 4);
-    if (!src) {
-        std::string msg = "Couldn't load image [" + inputPath.string() + "] in cropImagePart()";
-        LOG_ERR("Utilities", msg);
+    int srcW, srcH, channels;
+
+    unsigned char* src = stbi_load(
+        inputPath.string().c_str(),
+        &srcW, &srcH, &channels,
+        0
+    );
+
+    if (!src)
         return false;
-    }
 
-    constexpr int channels = 4;
-
-    const int cropX0 = static_cast<int>(srcW * start);
-    const int cropX1 = static_cast<int>(srcW * end);
+    const int cropX0 = int(srcW * start);
+    const int cropX1 = int(srcW * end);
     const int cropW  = cropX1 - cropX0;
 
     if (cropW <= 0) {
         stbi_image_free(src);
-        std::string msg = "Cropped image [" + inputPath.string() + "has invalid width in cropImagePath()";
-        LOG_ERR("Utilities", msg);
         return false;
     }
 
     const int outW = cropW;
-    const int outH = static_cast<int>(cropW * 9.f / 16.f);
+    const int outH = int(outW * 9.f / 16.f);
+
+    // Only use needed source height
+    const int cropH = std::min(srcH, int(cropW * 9.f / 16.f));
+    const int offY  = (srcH - cropH) / 2;
 
     std::vector<unsigned char> out(outW * outH * channels);
 
-    for (int y = 0; y < outH; ++y) {
-        const int srcY = std::min(
-            static_cast<int>((float)y * srcH / outH),
-            srcH - 1
-        );
-
-        const unsigned char* srcRow =
-            src + (srcY * srcW + cropX0) * channels;
-
-        unsigned char* dstRow =
-            out.data() + y * outW * channels;
-
-        memcpy(dstRow, srcRow, outW * channels);
-    }
+    stbir_resize(
+        src + (offY * srcW + cropX0) * channels,
+        cropW,
+        cropH,
+        srcW * channels,
+        out.data(),
+        outW,
+        outH,
+        outW * channels,
+        channels == 4 ? STBIR_RGBA : STBIR_RGB,
+        STBIR_TYPE_UINT8,
+        STBIR_EDGE_CLAMP,
+        STBIR_FILTER_BOX
+    );
 
     stbi_image_free(src);
 
-    // FAST PNG write
-    stbi_write_png_compression_level = 1;
+    stbi_write_png_compression_level = 0;
 
-    const bool ok = stbi_write_png(
+    return stbi_write_png(
         outputPath.string().c_str(),
         outW,
         outH,
         channels,
         out.data(),
         outW * channels
-    );
-
-    return ok;
+    ) != 0;
 }
-
 // Takes the first frame from the video path and saves it as png in output path
-bool Utilities::extractMp4Thumbnail(const fs::path &videoPath, const fs::path &outPngPath) {
-
+bool Utilities::extractMp4Thumbnail(const fs::path& videoPath,
+                                     const fs::path& outPngPath)
+{
     AVFormatContext* fmt = nullptr;
-
-    if (avformat_open_input(&fmt, videoPath.string().c_str(), nullptr, nullptr) < 0) {
-        const std::string msg = "Couldn't load video[" + videoPath.string() + "] in extractMp4Thumbnail()";
-        LOG_ERR("Utilities", msg)
+    if (avformat_open_input(&fmt, videoPath.string().c_str(), nullptr, nullptr) < 0)
         return false;
-    }
 
-    if (avformat_find_stream_info(fmt, nullptr) < 0) {
-        const std::string msg = "Video[" + videoPath.string() + "] has 0 content in extractMp4Thumbnail()";
-        LOG_ERR("Utilities", msg)
+    if (avformat_find_stream_info(fmt, nullptr) < 0)
         return false;
-    }
 
     int videoStream = -1;
-    for (unsigned i = 0; i < fmt->nb_streams; i++) {
+    for (unsigned i = 0; i < fmt->nb_streams; ++i)
         if (fmt->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_VIDEO) {
             videoStream = i;
             break;
         }
-    }
-    if (videoStream == -1) {
-        const std::string msg = "Couldn't start video[" + videoPath.string() + "] stream in extractMp4Thumbnail()";
-        LOG_ERR("Utilities", msg)
-        return false;
-    }
 
-    const AVCodecParameters* params = fmt->streams[videoStream]->codecpar;
-    const AVCodec* codec = avcodec_find_decoder(params->codec_id);
-    if (!codec) {
-        const std::string msg = "Couldn't decode video[" + videoPath.string() + "] in extractMp4Thumbnail()";
-        LOG_ERR("Utilities", msg)
+    if (videoStream == -1)
         return false;
-    }
+
+    AVCodecParameters* params = fmt->streams[videoStream]->codecpar;
+    const AVCodec* codec = avcodec_find_decoder(params->codec_id);
+    if (!codec)
+        return false;
 
     AVCodecContext* ctx = avcodec_alloc_context3(codec);
     avcodec_parameters_to_context(ctx, params);
     avcodec_open2(ctx, codec, nullptr);
 
+    av_seek_frame(fmt, videoStream, 0, AVSEEK_FLAG_BACKWARD);
+    avcodec_flush_buffers(ctx);
+
     AVPacket* packet = av_packet_alloc();
     AVFrame* frame = av_frame_alloc();
-    AVFrame* rgb = av_frame_alloc();
+    AVFrame* rgb   = av_frame_alloc();
 
     SwsContext* sws = sws_getContext(
         ctx->width, ctx->height, ctx->pix_fmt,
         ctx->width, ctx->height, AV_PIX_FMT_RGB24,
-        SWS_BILINEAR, nullptr, nullptr, nullptr
+        SWS_FAST_BILINEAR,
+        nullptr, nullptr, nullptr
     );
 
     const int bufSize = av_image_get_buffer_size(
         AV_PIX_FMT_RGB24, ctx->width, ctx->height, 1
     );
-    uint8_t *buffer = static_cast<uint8_t *>(av_malloc(bufSize));
-    av_image_fill_arrays(rgb->data, rgb->linesize, buffer,
-                          AV_PIX_FMT_RGB24, ctx->width, ctx->height, 1);
+
+    uint8_t* buffer = (uint8_t*)av_malloc(bufSize);
+    av_image_fill_arrays(
+        rgb->data, rgb->linesize,
+        buffer,
+        AV_PIX_FMT_RGB24,
+        ctx->width, ctx->height,
+        1
+    );
 
     bool gotFrame = false;
 
-    while (av_read_frame(fmt, packet) >= 0 && !gotFrame) {
-        if (packet->stream_index == videoStream) {
-            if (avcodec_send_packet(ctx, packet) == 0) {
-                if (avcodec_receive_frame(ctx, frame) == 0) {
+    while (av_read_frame(fmt, packet) >= 0 && !gotFrame)
+    {
+        if (packet->stream_index == videoStream)
+        {
+            if (avcodec_send_packet(ctx, packet) == 0)
+            {
+                while (avcodec_receive_frame(ctx, frame) == 0)
+                {
                     sws_scale(
                         sws,
-                        frame->data, frame->linesize,
-                        0, ctx->height,
-                        rgb->data, rgb->linesize
+                        frame->data,
+                        frame->linesize,
+                        0,
+                        ctx->height,
+                        rgb->data,
+                        rgb->linesize
                     );
 
-                    // save RGB → PNG
-                    saveRgbToPng(
-                        rgb->data[0],
+                    stbi_write_png_compression_level = 0;
+
+                    stbi_write_png(
+                        outPngPath.string().c_str(),
                         ctx->width,
                         ctx->height,
-                        outPngPath.string()
+                        3,
+                        rgb->data[0],
+                        rgb->linesize[0]
                     );
 
                     gotFrame = true;
+                    break;
                 }
             }
         }
@@ -738,20 +780,96 @@ std::string Utilities::browseImageOrMp4() // Also more than 1 image
     return joined;
 }
 
-// Takes input image, converts it to png and saves it in dst
-bool Utilities::convertToPng(const fs::path& src, const fs::path& dst) {
-    int w, h, channels;
-    stbi_uc* data = stbi_load(src.string().c_str(), &w, &h, &channels, 4);  // always RGBA
+static thread_local std::vector<unsigned char> tls_fileBuffer;
 
-    if (!data) {
-        LOG_ERR("Utilities", "no data in convertToPng()");
+bool Utilities::convertToPng(const fs::path& src, const fs::path& dst)
+{
+    // --- Use CreateFile for direct Windows API access (fastest) ---
+    HANDLE hFile = CreateFileW(
+        src.c_str(),
+        GENERIC_READ,
+        FILE_SHARE_READ,
+        NULL,
+        OPEN_EXISTING,
+        FILE_ATTRIBUTE_NORMAL | FILE_FLAG_SEQUENTIAL_SCAN,
+        NULL
+    );
+
+    if (hFile == INVALID_HANDLE_VALUE) return false;
+
+    // Get file size
+    LARGE_INTEGER fileSize;
+    GetFileSizeEx(hFile, &fileSize);
+
+    if (fileSize.QuadPart == 0) {
+        CloseHandle(hFile);
         return false;
     }
 
-    const int success = stbi_write_png(dst.string().c_str(), w, h, 4, data, w * 4);
-    stbi_image_free(data);
+    // Reuse thread-local buffer to avoid allocations
+    tls_fileBuffer.resize(fileSize.QuadPart);
 
+    DWORD bytesRead;
+    BOOL readResult = ReadFile(hFile, tls_fileBuffer.data(), fileSize.QuadPart, &bytesRead, NULL);
+    CloseHandle(hFile);
+
+    if (!readResult || bytesRead != fileSize.QuadPart) return false;
+
+    // --- Decode image ---
+    int w, h, channels;
+    stbi_uc* data = stbi_load_from_memory(
+        tls_fileBuffer.data(),
+        fileSize.QuadPart,
+        &w, &h, &channels,
+        0
+    );
+
+    if (!data) return false;
+
+    // --- Fastest PNG write ---
+    stbi_write_png_compression_level = 0; // No compression
+
+    // Use direct write with no compression
+    int success = stbi_write_png(
+        dst.string().c_str(),
+        w, h, channels,
+        data,
+        w * channels
+    );
+
+    stbi_image_free(data);
     return success != 0;
+}
+
+// Batch processing with controlled parallelism
+void Utilities::convertMultipleToPng(const std::vector<std::pair<fs::path, fs::path>>& jobs)
+{
+    // Get optimal number of threads
+    const size_t numThreads = std::thread::hardware_concurrency();
+
+    // Split jobs among threads
+    std::vector<std::future<void>> futures;
+    futures.reserve(numThreads);
+
+    size_t jobsPerThread = (jobs.size() + numThreads - 1) / numThreads;
+
+    for (size_t t = 0; t < numThreads; ++t) {
+        size_t start = t * jobsPerThread;
+        size_t end = std::min(start + jobsPerThread, jobs.size());
+
+        if (start >= jobs.size()) break;
+
+        futures.push_back(std::async(std::launch::async, [&jobs, start, end]() {
+            for (size_t i = start; i < end; ++i) {
+                convertToPng(jobs[i].first, jobs[i].second);
+            }
+        }));
+    }
+
+    // Wait for all threads
+    for (auto& future : futures) {
+        future.wait();
+    }
 }
 
 // Gets a Rml::Element from ID

@@ -124,6 +124,7 @@ foreach(DLL_NAME ${FFMPEG_DLL_NAMES})
     endif()
 endforeach()
 
+message(STATUS "FFmpeg DLLs to copy: ${FFMPEG_DLLS}")
 
 # Copy DLLs when building TCast
 add_custom_command(TARGET TCast POST_BUILD

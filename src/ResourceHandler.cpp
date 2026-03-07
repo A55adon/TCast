@@ -23,7 +23,7 @@ bool ResourceHandler::initResources() {
         return false;
     }
     if (!verifyResources()) {
-        LOG_INFO("RH", "Couldn't verify all resources - removing missing ones in initResources()");
+        LOG_INFO("RH", "Couldn't verify all resources -> removing missing ones in initResources()");
         deleteMissingResources();
         return false;
     }
@@ -249,6 +249,7 @@ bool ResourceHandler::verifyResources() {
     for(auto& resource : resourceManager.resources) {
         if (!fs::exists(resource.path)) {
             missing = true;
+            LOG_INFO("RH", resource.name);
         }
     }
     return missing;

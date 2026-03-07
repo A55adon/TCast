@@ -68,17 +68,12 @@ include CMakeFiles/process_assets.dir/progress.make
 CMakeFiles/process_assets: C:/Users/simon/Desktop/Code/TCast/assets/ComicSans-Regular.ttf
 CMakeFiles/process_assets: C:/Users/simon/Desktop/Code/TCast/assets/LatoLatin-Bold.ttf
 CMakeFiles/process_assets: C:/Users/simon/Desktop/Code/TCast/assets/LatoLatin-Regular.ttf
-CMakeFiles/process_assets: C:/Users/simon/Desktop/Code/TCast/assets/arrow-down.svg
-CMakeFiles/process_assets: C:/Users/simon/Desktop/Code/TCast/assets/arrow-up.svg
 CMakeFiles/process_assets: C:/Users/simon/Desktop/Code/TCast/assets/interface.rcss
 CMakeFiles/process_assets: C:/Users/simon/Desktop/Code/TCast/assets/interface.rml
 CMakeFiles/process_assets: C:/Users/simon/Desktop/Code/TCast/assets/logo.png
-CMakeFiles/process_assets: C:/Users/simon/Desktop/Code/TCast/assets/play.svg
 CMakeFiles/process_assets: C:/Users/simon/Desktop/Code/TCast/assets/rml.rcss
 CMakeFiles/process_assets: C:/Users/simon/Desktop/Code/TCast/assets/startup.rcss
 CMakeFiles/process_assets: C:/Users/simon/Desktop/Code/TCast/assets/startup.rml
-CMakeFiles/process_assets: C:/Users/simon/Desktop/Code/TCast/assets/stop.svg
-CMakeFiles/process_assets: C:/Users/simon/Desktop/Code/TCast/assets/test.jpg
 CMakeFiles/process_assets: C:/Users/simon/Desktop/Code/TCast/assets/trash.svg
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=C:\Users\simon\Desktop\Code\TCast\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Processing assets (RCSS preprocessing + copy)"
 	C:\Users\simon\AppData\Local\Programs\Python\Python311\python.exe C:/Users/simon/Desktop/Code/TCast/src/rcss_preprocessor.py C:/Users/simon/Desktop/Code/TCast/assets C:/Users/simon/Desktop/Code/TCast/cmake-build-debug/assets

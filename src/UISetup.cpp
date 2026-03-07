@@ -1,6 +1,7 @@
 #include "UISetup.h"
 
 #include "ResourceHandler.h"
+#include "RmlUi_Backend.h"
 
 void setStartupEventListeners() {
     UISetup::setupTabListeners();
@@ -37,27 +38,27 @@ void UISetup::setupTabListeners() {
         }));
     }
 
-    if (auto* tabFolder = getEl("tab-folder")) {
-        tabFolder->AddEventListener(Rml::EventId::Click, new ButtonHandler([tabFolder] {
-            getEl("tab-folder-div")->SetProperty("display", "flex");
-            getEl("tab-tct-div")->SetProperty("display", "none");
-            getEl("browse-folder-btn")->SetProperty("display", "block");
-            getEl("browse-tct-btn")->SetProperty("display", "none");
-            tabFolder->SetClassNames("tab-button active");
-            getEl("tab-tct")->SetClassNames("tab-button");
-        }));
-    }
+    //if (auto* tabFolder = getEl("tab-folder")) {
+    //    tabFolder->AddEventListener(Rml::EventId::Click, new ButtonHandler([tabFolder] {
+    //        getEl("tab-folder-div")->SetProperty("display", "flex");
+    //        getEl("tab-tct-div")->SetProperty("display", "none");
+    //        getEl("browse-folder-btn")->SetProperty("display", "block");
+    //        getEl("browse-tct-btn")->SetProperty("display", "none");
+    //        tabFolder->SetClassNames("tab-button active");
+    //        getEl("tab-tct")->SetClassNames("tab-button");
+    //    }));
+    //}
 
-    if (auto* tabTct = getEl("tab-tct")) {
-        tabTct->AddEventListener(Rml::EventId::Click, new ButtonHandler([tabTct] {
-            getEl("tab-folder-div")->SetProperty("display", "none");
-            getEl("tab-tct-div")->SetProperty("display", "flex");
-            getEl("browse-folder-btn")->SetProperty("display", "none");
-            getEl("browse-tct-btn")->SetProperty("display", "block");
-            tabTct->SetClassNames("tab-button active");
-            getEl("tab-folder")->SetClassNames("tab-button");
-        }));
-    }
+    //if (auto* tabTct = getEl("tab-tct")) {
+    //    tabTct->AddEventListener(Rml::EventId::Click, new ButtonHandler([tabTct] {
+    //        getEl("tab-folder-div")->SetProperty("display", "none");
+    //        getEl("tab-tct-div")->SetProperty("display", "flex");
+    //        getEl("browse-folder-btn")->SetProperty("display", "none");
+    //        getEl("browse-tct-btn")->SetProperty("display", "block");
+    //        tabTct->SetClassNames("tab-button active");
+    //        getEl("tab-folder")->SetClassNames("tab-button");
+    //    }));
+    //}
 }
 void setInput(const std::string& id, const std::string& value) {
     auto* el = getEl(id);
@@ -66,12 +67,12 @@ void setInput(const std::string& id, const std::string& value) {
     }
 }
 void UISetup::setupBrowseButtons() {
-    if (auto* btn = getEl("browse-folder-btn")) {
-        btn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
-            auto folder = Utilities::browseFolder().string();
-            if (!folder.empty()) setInput("load-dir-input", folder);
-        }));
-    }
+    //if (auto* btn = getEl("browse-folder-btn")) {
+    //    btn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
+    //        auto folder = Utilities::browseFolder().string();
+    //        if (!folder.empty()) setInput("load-dir-input", folder);
+    //    }));
+    //}
 
     if (auto* btn = getEl("browse-load-btn")) {
         btn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
@@ -80,12 +81,12 @@ void UISetup::setupBrowseButtons() {
         }));
     }
 
-    if (auto* btn = getEl("browse-tct-btn")) {
-        btn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
-            auto file = Utilities::browseTCTFile().string();
-            if (!file.empty()) setInput("load-dir-input", file);
-        }));
-    }
+    //if (auto* btn = getEl("browse-tct-btn")) {
+    //    btn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
+    //        auto file = Utilities::browseTCTFile().string();
+    //        if (!file.empty()) setInput("load-dir-input", file);
+    //    }));
+    //}
 
     if (auto* btn = getEl("browse-btn")) {
         btn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
@@ -100,7 +101,7 @@ void UISetup::setupProjectActions() {
         saveNewProjectBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
             if (UIManager::createProject()) {
                 getWindow().document->Hide();
-                std::cout << "Project created: " << save_data.name << std::endl;
+                LOG_INFO("UISetup","Project created: " + (save_data.path / save_data.name).string());
                 if ((getWindow().document = getWindow().context->LoadDocument("assets/interface.rml"))) {
                     getWindow().document->Show();
                 }
@@ -115,7 +116,7 @@ void UISetup::setupProjectActions() {
         loadProjectBtn->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
             if (UIManager::loadProject()) {
                 getWindow().document->Hide();
-                std::cout << "Project loaded: " << save_data.name << std::endl;
+                LOG_INFO("UISetup","Project loaded: " + save_data.name);
                 if ((getWindow().document = getWindow().context->LoadDocument("assets/interface.rml"))) {
                     getWindow().document->Show();
                 }
@@ -162,13 +163,63 @@ void UISetup::setupProjectSelection() {
 }
 
 void setInterfaceEventListeners() {
+
+    getWindow().document->AddEventListener(Rml::EventId::Mousemove,
+    new MouseEventHandler([](Rml::Event& event) {
+        if (!drag.active) return;
+
+        double mx, my;
+        glfwGetCursorPos(Backend::GetWindow(), &mx, &my);
+
+        if (!drag.ghostVisible) {
+            // Check if moved enough to be a drag
+            double dx = mx - drag.startX;
+            double dy = my - drag.startY;
+            if (dx*dx + dy*dy < 36.0) return; // 6px threshold
+
+            // Now create the ghost
+            drag.ghostVisible = true;
+            auto* doc = getWindow().document;
+            if (!doc) return;
+
+            Rml::ElementPtr g = doc->CreateElement("div");
+            g->SetId("drag-ghost");
+            g->SetAttribute("style",
+                "position:fixed;pointer-events:none;z-index:9999;"
+                "width:80px;height:80px;opacity:0.75;border-radius:6px;"
+                "border:2px solid #3498db;overflow:hidden;"
+                "left:" + std::to_string(int(mx - 40)) + "px;"
+                "top:"  + std::to_string(int(my - 40)) + "px;");
+
+            Rml::ElementPtr gImg = doc->CreateElement("img");
+            gImg->SetAttribute("src", drag.imagePath);
+            gImg->SetAttribute("style", "width:100%;height:100%;object-fit:cover;");
+            g->AppendChild(std::move(gImg));
+
+            drag.ghost = g.get();
+            if (auto* body = getEl("body"))
+                body->AppendChild(std::move(g));
+            return;
+        }
+
+        // Ghost already visible — just reposition it
+        drag.ghost->SetProperty("left", std::to_string(int(mx - 40)) + "px");
+        drag.ghost->SetProperty("top",  std::to_string(int(my - 40)) + "px");
+    }));
+
+    // Cancel drag on mouseup anywhere (projectors will stop propagation on success)
+    getWindow().document->AddEventListener(Rml::EventId::Mouseup,
+        new ButtonHandler([] {
+            if (drag.active) endDrag();
+        }));
+
     ResourceHandler::initResources();
 
     if (!UIManager::loadScenesData()) {
         std::cerr << "Failed to load scenesData" << std::endl;
     }
     if (auto *projectname = getWindow().document->GetElementById("project-name")) {
-        std::cout << "[Info] Setting project name: " << save_data.name << std::endl;
+        LOG_INFO("UISetup","Setting project name: " + save_data.name);
         projectname->SetInnerRML(save_data.name);
     }
 
@@ -263,12 +314,12 @@ void UISetup::setupFileDropdownListeners() {
 
                 std::filesystem::copy(fullPath + ".tct", destination);
 
-                std::cout << "File " << save_data.name
-                          << ".tct exported successfully to: "
-                          << save_data.path.string() << '\n';
+                LOG_INFO("UISetup","File " + save_data.name
+                          + ".tct exported successfully to: "
+                          + save_data.path.string());
 
             } catch (const std::filesystem::filesystem_error& e) {
-                std::cerr << "Filesystem error: " << e.what() << '\n';
+                 LOG_ERR("main",(std::string)"Filesystem error: " + e.what());
             }
         }));
     }
@@ -315,18 +366,18 @@ void UISetup::setupFileDropdownListeners() {
 
                 int result = std::system(command.c_str());
                 if (result != 0) {
-                    std::cerr << "Failed to unzip folder. Exit code: " << result << '\n';
+                     LOG_INFO("UISetup","Failed to unzip folder. Exit code: " + result);
                     return;
                 }
 
                 std::filesystem::remove(zipPath);
 
-                std::cout << "Project imported successfully.\n";
+                 LOG_INFO("UISetup","Project imported successfully");
 
                 UIManager::loadProject(extractPath);
 
             } catch (const std::filesystem::filesystem_error& e) {
-                std::cerr << "Filesystem error: " << e.what() << '\n';
+                 LOG_ERR("UISetup",(std::string)"Filesystem error: " + e.what());
             }
         }));
     }
@@ -397,9 +448,6 @@ void UISetup::setupSceneManagement() {
             UIManager::saveProject(current_project_path);
             UIManager::refreshScenes();
         }));
-
-
-    std::cout << "Scenes count: " << scene_manager.scenes.size() << std::endl;
 }
 void UISetup::setupSceneContextMenu() {
     // Rename button in context menu
@@ -621,35 +669,36 @@ void UISetup::setupProjection() {
                         Resource& resource = ResourceHandler::getResource(splitInfo.resourceId);
                         resourcePath = resource.path.string();
 
-                        std::cout << "Launching projector " << i
-                                  << " with resource: " << resourcePath
-                                  << " (ID: " << splitInfo.resourceId << ")"
-                                  << " Split: " << (splitInfo.isSplit ? "Yes" : "No");
+                        LOG_INFO("UISetup",
+                            "Launching projector " + std::to_string(i) +
+                            " with resource: " + resourcePath +
+                            " (ID: " + std::to_string(splitInfo.resourceId) + ")" +
+                            " Split: " + std::string(splitInfo.isSplit ? "Yes" : "No")
+                        );
 
                         if (splitInfo.isSplit) {
-                            std::cout << " Range: " << splitInfo.start << " - " << splitInfo.end;
+                            //std::cout << " Range: " << splitInfo.start << " - " << splitInfo.end;
                         }
-                        std::cout << std::endl;
 
                         // Create projector with split info
                         auto p = new Projector(i + 1, resourcePath, splitInfo);
                         projectors.push_back(p);
                     } else {
-                        std::cout << "No resource ID for projector " << i << std::endl;
+                        //std::cout << "No resource ID for projector " << i << std::endl;
                         // Create empty projector or skip
                         projectors.push_back(nullptr);
                     }
                 } catch (const std::exception& e) {
-                    std::cerr << "Error launching projector " << i << ": " << e.what() << std::endl;
+                    LOG_ERR("UISetup", "Error launching projector " + std::to_string(i) + ": " + e.what());
                     projectors.push_back(nullptr);
                 }
             } else {
-                std::cout << "No split info for projector " << i << std::endl;
+                LOG_ERR("UISetup", "No split info for projector " + std::to_string(i));
                 projectors.push_back(nullptr);
             }
         }
 
-        std::cout << "[Info] Projectors started, count: " << projectors.size() << std::endl;
+        LOG_INFO("UISetup", "[Info] Projectors started, count: " + projectors.size());
     }));
 
     auto *stop = getEl("stop-projection");
@@ -672,6 +721,6 @@ void UISetup::setupProjection() {
         }
 
         projectors.clear();
-        std::cout << "[Info] Projectors stopped" << std::endl;
+        LOG_INFO("UISetup","Projectors stopped");
     }));
 }

@@ -1,6 +1,7 @@
 #include "UIManager.h"
 
 #include "ResourceHandler.h"
+#include "RmlUi_Backend.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // Saving Functions
@@ -9,11 +10,10 @@
 bool UIManager::saveProject() {
     std::filesystem::path savePath = save_data.path / save_data.name;
     if (!std::filesystem::exists(savePath)) {
-        std::cout << "[Error] Failed to save project at: " << savePath << std::endl;
+        LOG_ERR("UIManager","Failed to save project at: " + savePath.string());
     }
     if (!verifyFolderStructure(savePath)) {
-        //TODO: Warn user about fixing folder structure
-        std::cout << "Folder structure off, fixing it" << std::endl;
+        LOG_INFO("UIManager","Folder structure wrong -> fixing it");
         // For now just fix it
         fixFolderStructure(savePath);
     }
@@ -23,7 +23,7 @@ bool UIManager::saveProject() {
         std::filesystem::path saveDataPath = savePath / "saveData.json";
         json j = save_data;
         if (!saveJsonToFile(saveDataPath, j)) {
-            std::cerr << "[Error] Failed to save saveData.json to file" << std::endl;
+            LOG_ERR("UIManager","Failed to save saveData.json to file");
             return false;
         }
     }
@@ -33,13 +33,13 @@ bool UIManager::saveProject() {
         std::filesystem::path scenePath = savePath / "scenesData.json";
         if (scene_manager.scenes.empty()) {
             // Create default scene
-            std::cout << "No scenes found, creating default scene" << std::endl;
+            LOG_INFO("UIManager","No scenes found, creating default scene");
             scene_manager.scenes.push_back({save_data.name, {}});
         }
 
         json j = scene_manager;
         if (!saveJsonToFile(scenePath, j)) {
-            std::cerr << "[Error] Failed to save scenesData.json to file" << std::endl;
+            LOG_ERR("UIManager","Failed to save scenesData.json to file");
             return false;
         }
     }
@@ -51,9 +51,7 @@ bool UIManager::saveProject() {
 // Saves to specified path
 bool UIManager::saveProject(const std::filesystem::path &savePath) {
     if (!verifyFolderStructure(savePath)) {
-        //TODO: Warn user about fixing folder structure
-        std::cout << "Folder structure off, fixing it" << std::endl;
-        // For now just fix it
+        LOG_INFO("UIManager","Folder structure wrong -> fixing it");
         fixFolderStructure(savePath);
     }
 
@@ -62,7 +60,7 @@ bool UIManager::saveProject(const std::filesystem::path &savePath) {
         std::filesystem::path saveDataPath = savePath / "saveData.json";
         json j = save_data;
         if (!saveJsonToFile(saveDataPath, j)) {
-            std::cerr << "[Error] Failed to save saveData.json to file" << std::endl;
+            LOG_ERR("UIManager","Failed to save saveData.json to file");
             return false;
         }
     }
@@ -72,13 +70,13 @@ bool UIManager::saveProject(const std::filesystem::path &savePath) {
         std::filesystem::path scenePath = savePath / "scenesData.json";
         if (scene_manager.scenes.empty()) {
             // Create default scene
-            std::cout << "No scenes found, creating default scene" << std::endl;
+            LOG_INFO("UIManager","No scenes found, creating default scene");
             scene_manager.scenes.push_back({save_data.name, {}});
         }
 
         json j = scene_manager;
         if (!saveJsonToFile(scenePath, j)) {
-            std::cerr << "[Error] Failed to save scenesData.json to file" << std::endl;
+            LOG_ERR("UIManager","Failed to save scenesData.json to file");
             return false;
         }
     }
@@ -193,7 +191,7 @@ bool UIManager::loadProject() {
     if (create_recent_path)
         createRecentPathFile(path);
     else
-        std::cout << "Skipping creation of recent path" << std::endl;
+        LOG_INFO("UIManager","Skipping creation of recent path");
 
     return true;
 }
@@ -259,7 +257,7 @@ bool UIManager::loadProject(const std::filesystem::path& loadPath) {
     if (create_recent_path)
         createRecentPathFile(current_project_path);
     else
-        std::cout << "Skipping creation of recent path" << std::endl;
+        LOG_INFO("UIManager","Skipping creation of recent path");
 
     return true;
 }
@@ -343,7 +341,7 @@ bool UIManager::createProject() {
     if (create_recent_path)
         createRecentPathFile(fullProjectPath);
     else
-        std::cout << "Skipping creation of recent path" << std::endl;
+        LOG_INFO("UIManager","Skipping creation of recent path");
 
     return true;
 }
@@ -363,12 +361,12 @@ bool UIManager::createRecentPathFile(const std::filesystem::path &savePath) {
     std::filesystem::path recentFile = saveDir / "recent.path";
     std::ofstream recent(recentFile, std::ios::out | std::ios::binary);
     if (!recent) {
-        std::cerr << "Failed to create " << recentFile << "\n";
+        LOG_ERR("UIManager","Failed to create " << recentFile);
         return false;
     }
 
     recent << savePath.string();
-    std::cout << "Created " << recentFile << " with path: " << savePath << "\n";
+    LOG_INFO("UIManager","Created " + recentFile.string() + " with path: " << savePath);
     return true;
 }
 
@@ -483,7 +481,7 @@ void UIManager::populateFolders(const std::string& path) {
                 }
                 if (loadProject()) {
                     getWindow().document->Hide();
-                    std::cout << "Project loaded: " << save_data.name << std::endl;
+                    LOG_INFO("UIManager","Project loaded: " + save_data.name);
                     if ((getWindow().document = getWindow().context->LoadDocument("assets/interface.rml"))) {
                         getWindow().document->Show();
                     }
@@ -498,11 +496,11 @@ void UIManager::populateFolders(const std::string& path) {
 }
 
 bool UIManager::loadScenesData() {
-    std::cout << "[Info] Loading scenes data" << std::endl;
+    LOG_INFO("UIManager", "Loading scenes data...");
 
     std::ifstream file(current_project_path / "scenesData.json");
     if (!file.is_open()) {
-        std::cerr << "[Info] Couldn't open scenesData.json" << std::endl;
+        LOG_INFO("UIManager", "Couldn't open scenesData.json");
         return false;
     }
 
@@ -513,7 +511,7 @@ bool UIManager::loadScenesData() {
         file >> j;
 
         if (!j.contains("scenes") || !j["scenes"].is_array()) {
-            std::cerr << "[Helper] Invalid scenesData.json format" << std::endl;
+            LOG_INFO("UIManager", "Invalid scenesData.json format");
             return false;
         }
 
@@ -545,17 +543,11 @@ bool UIManager::loadScenesData() {
         }
 
     } catch (const std::exception& e) {
-        std::cerr << " Error parsing JSON: " << e.what() << std::endl;
+       LOG_ERR("UIManager", static_cast<std::string>("Error parsing JSON:") + e.what());
         return false;
     }
 
-    std::cout << "Loaded "
-              << scene_manager.scenes.size()
-              << " scenes" << std::endl;
-
-    //for (int i = 0; i < saveData.projectorCount - 1; i++) {
-    //    std::cout << sceneManager.scenes[0].connection[i] << " connection" << std::endl;
-    //}
+    LOG_INFO("UIManager", "Loaded " + std::to_string(scene_manager.scenes.size()) + " scenes");
 
     refreshScenes();
     return true;
@@ -629,6 +621,23 @@ void UIManager::refreshResourcePanel()
 
         if (i == active_resource_index)
             item->SetClass("active", true);
+
+        const int   rid       = r.id;
+        const std::string image = previewImage.string();
+
+        item->AddEventListener(Rml::EventId::Mousedown,
+    new ButtonHandler([rid, image] {
+        drag.active      = true;
+        drag.ghostVisible = false;
+        drag.resourceId  = rid;
+        drag.imagePath   = image;
+
+        double mx, my;
+        glfwGetCursorPos(Backend::GetWindow(), &mx, &my);
+        drag.startX = mx;
+        drag.startY = my;
+        // ghost is NOT created here anymore
+    }));
 
         const int resourceId = r.id;
         item->AddEventListener(
@@ -787,9 +796,22 @@ void UIManager::refreshProjectors() {
 
         // attach the inner to the wrapper
         projector->AppendChild(std::move(inner));
-
-        // click handler for selecting projector
-        projector->AddEventListener(Rml::EventId::Mouseup, new ProjectorHandler(getWindow().document, i));
+                // click handler for selecting projector
+                // Replace the existing projector Mouseup listener with this:
+                projector->AddEventListener(Rml::EventId::Mouseup,
+            new ButtonHandler([i] {
+                if (drag.active && drag.ghostVisible && drag.resourceId != -1) {
+                    // real drag-drop
+                    auto& scene = scene_manager.scenes[active_scene_index];
+                    scene.sources.resize(save_data.projector_amount);
+                    scene.sources[i] = drag.imagePath;
+                    endDrag();
+                    refreshProjectors();
+                    saveProject();
+                    regenerateSplitSources();
+                }
+                // if ghostVisible is false it was just a click, do nothing extra
+            }, true));
 
         // add wrapper to the grid
         projectorGrid->AppendChild(std::move(projector));
@@ -898,13 +920,13 @@ void UIManager::regenerateSplitSources()
                     scene.split_info[groupStart + k] = splitInfo;
                     scene.split_sources[groupStart + k] = out.string();
 
-                    std::cout << "Created split " << groupStart + k
-                              << ": " << start << " - " << end
-                              << " (Resource ID: " << splitInfo.resourceId << ")"
-                              << std::endl;
+                    //std::cout << "Created split " << groupStart + k
+                    //          << ": " << start << " - " << end
+                    //          << " (Resource ID: " << splitInfo.resourceId << ")"
+                    //          << std::endl;
                 } catch (const std::exception& e) {
-                    std::cerr << "Error creating split for projector " << groupStart + k
-                              << ": " << e.what() << std::endl;
+                    LOG_ERR("UIManager","Error creating split for projector " + groupStart + std::to_string(k)
+                              + ": " + e.what());
                 }
             }
         }
@@ -932,12 +954,12 @@ void UIManager::regenerateSplitSources()
                 scene.split_info[groupStart] = splitInfo;
                 scene.split_sources[groupStart] = leftSource;
 
-                std::cout << "Full resource for projector " << groupStart
-                          << " (Resource ID: " << splitInfo.resourceId << ")"
-                          << std::endl;
+                //std::cout << "Full resource for projector " << groupStart
+                //          << " (Resource ID: " << splitInfo.resourceId << ")"
+                //          << std::endl;
             } catch (const std::exception& e) {
-                std::cerr << "Error getting resource ID for projector " << groupStart
-                          << ": " << e.what() << std::endl;
+                 LOG_INFO("UIManager","Error getting resource ID for projector " + groupStart
+                          + (std::string)": " + e.what());
             }
         }
         else
@@ -950,7 +972,7 @@ void UIManager::regenerateSplitSources()
             splitInfo.end = 1.0f;
 
             scene.split_info[groupStart] = splitInfo;
-            std::cout << "No resource for projector " << groupStart << std::endl;
+             LOG_INFO("UIManager","No resource for projector " + std::to_string(groupStart));
         }
 
         i += groupLength;
@@ -961,20 +983,18 @@ void UIManager::regenerateSplitSources()
     saveProject();
 }
 
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //Context menus
 
 void selectScene(const int index) {
-    std::cout << "Selecting scene: " << index << " (previously: " << active_scene_index << ")" << std::endl;
+    //std::cout << "Selecting scene: " << index << " (previously: " << active_scene_index << ")" << std::endl;
     active_scene_index = index;
     UIManager::refreshScenes();
     UIManager::refreshProjectors();
 }
 void showSceneRenameDialog(int sceneIndex) {
     if (sceneIndex < 0 || sceneIndex >= (int) scene_manager.scenes.size()) {
-        std::cerr << "[Error] Invalid scene index for rename: " << sceneIndex << std::endl;
+        //std::cerr << "[Error] Invalid scene index for rename: " << sceneIndex << std::endl;
         return;
     }
 
@@ -1059,7 +1079,7 @@ void showSceneRenameDialog(int sceneIndex) {
                     } else {
                         // If invalid, restore original name
                         scene_manager.scenes[sceneIndex].name = currentName;
-                        std::cout << "[Error] Rename cancelled or invalid name" << std::endl;
+                         LOG_INFO("UIManager","Rename cancelled or invalid name");
                     }
 
                     // Always refresh to show the updated name
@@ -1070,11 +1090,11 @@ void showSceneRenameDialog(int sceneIndex) {
 
         // Also stop propagation on the container itself
         container->AddEventListener(Rml::EventId::Click, new ButtonHandler([] {
-            std::cout << "Container click - propagation stopped" << std::endl;
+            //std::cout << "Container click - propagation stopped" << std::endl;
         }, true));
 
         container->AddEventListener(Rml::EventId::Mouseup, new ButtonHandler([] {
-            std::cout << "Container mouseup - propagation stopped" << std::endl;
+            //std::cout << "Container mouseup - propagation stopped" << std::endl;
         }, true));
 
         // Append input and button to container, then container to scene item
@@ -1091,7 +1111,7 @@ void showSceneRenameDialog(int sceneIndex) {
     }
 }
 void deleteScene(int sceneIndex) {
-    std::cout << "Delete scene: " << sceneIndex << std::endl;
+     LOG_INFO("UIManager","Deleting scene: " + sceneIndex);
     if (sceneIndex >= 0 && sceneIndex < (int) scene_manager.scenes.size()) {
         scene_manager.scenes.erase(scene_manager.scenes.begin() + sceneIndex);
 
@@ -1110,7 +1130,7 @@ void deleteScene(int sceneIndex) {
 }
 
 void duplicateScene(int sceneIndex) {
-    std::cout << "Duplicate scene: " << sceneIndex << std::endl;
+     LOG_INFO("main","Duplicating scene: " + sceneIndex);
     if (sceneIndex >= 0 && sceneIndex < (int)scene_manager.scenes.size()) {
         SceneData newScene = scene_manager.scenes[sceneIndex];
 
@@ -1208,7 +1228,7 @@ void showResourceRenameDialog(int id) {
                                 ResourceHandler::getResource(id).name = newName;
 
                                 if (true) {
-                                    std::cout << "Successfully renamed resource " << id << " to: " << newName << std::endl;
+                                     LOG_INFO("UIManager","Renamed resource " + id + (std::string)" to: " + newName);
 
                                     // Update the UI
                                     UIManager::refreshResourcePanel();
@@ -1255,7 +1275,7 @@ void deleteResource(int id) {
     UIManager::refreshProjectors();
 }
 void selectResource(int index){
-    std::cout << "Selecting Resource: " << index << " (previously: " << active_resource_index << ")" << std::endl;
+    //std::cout << "Selecting Resource: " << index << " (previously: " << active_resource_index << ")" << std::endl;
     active_resource_index = index;
     UIManager::refreshResourcePanel();
 }

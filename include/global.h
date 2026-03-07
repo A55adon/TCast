@@ -58,7 +58,7 @@ namespace fs = std::filesystem;
  */
 
 #define LOG(tag,msg) std::cout << "[" << tag << "|DEBUG]" << ": " << msg << std::endl;
-#define LOG_INFO(tag,msg) std::clog << "[" << tag << "|INFO]" << ": " << msg << std::endl;
+#define LOG_INFO(tag,msg) std::cout << "[" << tag << "|INFO]" << ": " << msg << std::endl;
 #define LOG_ERR(tag,msg) std::cerr << "[" << tag << "|ERROR]" << ": " << msg << std::endl;
 
 // General Project data

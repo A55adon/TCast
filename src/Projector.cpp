@@ -374,7 +374,7 @@ void Projector::loadTexture(const std::string& path) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
     stbi_image_free(data);
-    std::cout << "Loaded texture: " << path << " (" << w << "x" << h << ")" << std::endl;
+    //std::cout << "Loaded texture: " << path << " (" << w << "x" << h << ")" << std::endl;
 }
 
 void Projector::updateSplitUniforms() {
@@ -523,8 +523,8 @@ bool Projector::initVideo(const std::string& path) {
 
     timeBase = av_q2d(formatCtx->streams[videoStreamIndex]->time_base);
 
-    std::cout << "Loaded video: " << path << " (" << codecCtx->width << "x" << codecCtx->height
-              << "), Duration: " << videoDuration << "s" << std::endl;
+    //std::cout << "Loaded video: " << path << " (" << codecCtx->width << "x" << codecCtx->height
+    //          << "), Duration: " << videoDuration << "s" << std::endl;
     return true;
 }
 

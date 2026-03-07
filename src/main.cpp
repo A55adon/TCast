@@ -47,10 +47,10 @@ int main() {
         jFile >> j;
 
         from_json(j, save_data);
-        std::cout << save_data.path << std::endl;
+        LOG_INFO("main","save_data.path");
 
         if ((getWindow().document = getWindow().context->LoadDocument("assets/interface.rml"))) {
-            std::cout << "Loading Interface..." << std::endl;
+             LOG_INFO("main","Loading Interface...");
             getWindow().document->Show();
             auto future = std::async(std::launch::async, setInterfaceEventListeners);
 
@@ -58,7 +58,7 @@ int main() {
 
     } else {
         if ((getWindow().document = getWindow().context->LoadDocument("assets/startup.rml"))) {
-            std::cout << "Loading Startup..." << std::endl;
+             LOG_INFO("main","No recent path -> loading startup...");
             getWindow().document->Show();
             setStartupEventListeners();
         }

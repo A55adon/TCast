@@ -21,7 +21,7 @@ void from_json(const json &j, ResourceManager &rm);
 
 class Utilities {
 public:
-    // simple ResourceHandler access
+    // ResourceHandler access
     static int getResIDFromPath(const fs::path &path);
     static fs::path getResPathFromID(int id);
     static Resource* getResFromID(int id);
@@ -30,6 +30,10 @@ public:
     static fs::path browseFolder();
     static fs::path browseTCTFile();
     static std::string browseImageOrMp4();
+    static fs::path toBackwardSlashes(const fs::path &path);
+
+    static void handleFileDragNDrop(int count, const char** paths);
+
 
     // Image conversion
     static void convertMultipleToPng(const std::vector<std::pair<fs::path, fs::path>>& jobs);
@@ -42,7 +46,7 @@ public:
     // Getters
     static fs::path getExecutablePath();
     static fs::path getSaveFolderPath();
-    static fs::path toBackwardSlashes(const fs::path &path);
+
     static fs::path getRecentPath();
 
     // Other

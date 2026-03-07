@@ -60,6 +60,13 @@ public:
         }
     }
 };
+
+struct MouseEventHandler : Rml::EventListener {
+    std::function<void(Rml::Event&)> callback;
+    explicit MouseEventHandler(std::function<void(Rml::Event&)> cb) : callback(std::move(cb)) {}
+    void ProcessEvent(Rml::Event& event) override { callback(event); }
+};
+
 class SceneItemHandler : public Rml::EventListener {
     Rml::ElementDocument* document;
     int sceneIndex;
@@ -71,7 +78,7 @@ public:
         int button = event.GetParameter<int>("button", 0);
         if (button == 1) { // Right click
             event.StopPropagation();
-            std::cout << "Right click on scene: " << sceneIndex << std::endl;
+            //std::cout << "Right click on scene: " << sceneIndex << std::endl;
 
             if (auto* contextMenu = document->GetElementById("sceneContextMenu")) {
                 contextMenu->SetAttribute("data-target-scene", std::to_string(sceneIndex));
@@ -81,12 +88,12 @@ public:
                 contextMenu->SetProperty("top", Rml::ToString(mouse_y) + "px");
                 contextMenu->SetProperty("display", "block");
 
-                std::cout << "Context menu shown at: " << mouse_x << ", " << mouse_y << std::endl;
+                //std::cout << "Context menu shown at: " << mouse_x << ", " << mouse_y << std::endl;
             } else {
-                std::cout << "Context menu not found!" << std::endl;
+                LOG_ERR("EventListener", "Context menu not found!");
             }
         } else if (button == 0) { // Left click
-            std::cout << "Left click on scene: " << sceneIndex << std::endl;
+            //std::cout << "Left click on scene: " << sceneIndex << std::endl;
             selectScene(sceneIndex);
         }
     }
@@ -137,7 +144,7 @@ public:
 
         if (button == 1) { // Right click
             event.StopPropagation();
-            std::cout << "Right click on resource: " << resourceIndex << std::endl;
+            //std::cout << "Right click on resource: " << resourceIndex << std::endl;
 
             if (auto* contextMenu = document->GetElementById("resourceContextMenu")) {
                 contextMenu->SetAttribute("data-target-resource", std::to_string(resourceIndex));
@@ -197,7 +204,7 @@ public:
 
         if (button == 1) { // Right click
             event.StopPropagation();
-            std::cout << "Right click on projector: " << projectorIndex << std::endl;
+            //std::cout << "Right click on projector: " << projectorIndex << std::endl;
 
             //if (auto* contextMenu = document->GetElementById("projectorContextMenu")) {
             //    contextMenu->SetAttribute("data-target-projector", std::to_string(projectorIndex));

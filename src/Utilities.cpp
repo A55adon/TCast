@@ -219,6 +219,36 @@ fs::path Utilities::toBackwardSlashes(const fs::path& path) {
     return fs::path(fixed);
 }
 
+void Utilities::handleFileDragNDrop(int count, const char** paths) {
+    auto* dialog = getEl("add-resource-dialog");
+    auto* fileInput = getEl("resource-file");
+    auto* nameInput = getEl("resource-name");
+
+    if (!dialog) {
+        LOG_INFO("Utilities", "File add dialog not found, probably in startup mode");
+        return;
+    }
+
+    std::string pathList;
+    std::string nameList;
+
+    for (int i = 0; i < count; ++i) {
+        std::filesystem::path p(paths[i]);
+
+        if (i > 0) {
+            pathList += ",";
+            nameList += ",";
+        }
+
+        pathList += p.string();
+        nameList += p.filename().string();
+    }
+
+    dialog->SetAttribute("style", "display:flex;");
+    fileInput->SetAttribute("value", pathList);
+    nameInput->SetAttribute("value", nameList);
+}
+
 // Returns the content of recent.path from /saves if it exists, else returns ""
 fs::path Utilities::getRecentPath() {
     static const fs::path recentFilePath = "../saves/recent.path";
@@ -358,9 +388,9 @@ bool Utilities::downscaleAndCrop169(const fs::path& inputPath,
     const double ms =
         std::chrono::duration<double, std::milli>(t1 - t0).count();
 
-    std::cout << "downscaleAndCrop169 finished in "
-              << ms
-              << " ms\n";
+    //std::cout << "downscaleAndCrop169 finished in "
+    //          << ms
+    //          << " ms\n";
 
     return ok != 0;
 }

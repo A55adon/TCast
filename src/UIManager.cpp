@@ -793,25 +793,29 @@ void UIManager::refreshProjectors() {
                 }
             }
         }
-
-        // attach the inner to the wrapper
         projector->AppendChild(std::move(inner));
-                // click handler for selecting projector
-                // Replace the existing projector Mouseup listener with this:
-                projector->AddEventListener(Rml::EventId::Mouseup,
-            new ButtonHandler([i] {
-                if (drag.active && drag.ghostVisible && drag.resourceId != -1) {
-                    // real drag-drop
-                    auto& scene = scene_manager.scenes[active_scene_index];
-                    scene.sources.resize(save_data.projector_amount);
-                    scene.sources[i] = drag.imagePath;
-                    endDrag();
-                    refreshProjectors();
-                    saveProject();
-                    regenerateSplitSources();
+
+        projector->AddEventListener(Rml::EventId::Mouseup,
+            new MouseEventHandler([i](Rml::Event& event) {
+                int button = event.GetParameter<int>("button", 0);
+
+                if (button == 1) {
+                    // Right-click → open resource picker
+                    event.StopPropagation();
+                    showProjectorResourceSelection(i);
+                } else if (button == 0) {
+                    // Left-click: finish a drag-drop if one is in progress
+                    if (drag.active && drag.ghostVisible && drag.resourceId != -1) {
+                        auto& scene = scene_manager.scenes[active_scene_index];
+                        scene.sources.resize(save_data.projector_amount);
+                        scene.sources[i] = drag.imagePath;
+                        endDrag();
+                        refreshProjectors();
+                        saveProject();
+                        regenerateSplitSources();
+                    }
                 }
-                // if ghostVisible is false it was just a click, do nothing extra
-            }, true));
+            }));
 
         // add wrapper to the grid
         projectorGrid->AppendChild(std::move(projector));

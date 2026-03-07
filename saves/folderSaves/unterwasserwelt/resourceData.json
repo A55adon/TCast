@@ -1,0 +1,19 @@
+{
+    "maxId": 2,
+    "resources": [
+        {
+            "id": 0,
+            "isVideo": false,
+            "name": "äendesga-64-32x",
+            "path": "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\unterwasserwelt\\resources\\images\\image_png_1.png",
+            "thumbnail_id": -1
+        },
+        {
+            "id": 1,
+            "isVideo": false,
+            "name": "plost-century-32x",
+            "path": "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\unterwasserwelt\\resources\\images\\image_png_2.png",
+            "thumbnail_id": -1
+        }
+    ]
+}

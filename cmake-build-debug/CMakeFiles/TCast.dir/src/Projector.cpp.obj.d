@@ -1,6 +1,6 @@
 CMakeFiles/TCast.dir/src/Projector.cpp.obj: \
- C:\Users\simon\Desktop\Code\TCast\src\Projector.cpp \
- C:/Users/simon/Desktop/Code/TCast/include/Projector.h \
+ C:\Users\Felix\CLionProjects\TCast\src\Projector.cpp \
+ C:/Users/Felix/CLionProjects/TCast/include/Projector.h \
  C:/msys64/mingw64/include/c++/15.2.0/atomic \
  C:/msys64/mingw64/include/c++/15.2.0/bits/version.h \
  C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++config.h \
@@ -20,7 +20,6 @@ CMakeFiles/TCast.dir/src/Projector.cpp.obj: \
  C:/msys64/mingw64/include/_mingw_mac.h \
  C:/msys64/mingw64/include/_mingw_secapi.h \
  C:/msys64/mingw64/include/vadefs.h \
- C:/msys64/mingw64/include/sdks/_mingw_ddk.h \
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stddef.h \
  C:/msys64/mingw64/include/stddef.h \
  C:/msys64/mingw64/include/c++/15.2.0/string \
@@ -32,6 +31,8 @@ CMakeFiles/TCast.dir/src/Projector.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/cwchar \
  C:/msys64/mingw64/include/wchar.h \
  C:/msys64/mingw64/include/corecrt_stdio_config.h \
+ C:/msys64/mingw64/include/corecrt_wconio.h \
+ C:/msys64/mingw64/include/sec_api/wconio_s.h \
  C:/msys64/mingw64/include/corecrt_wstdlib.h \
  C:/msys64/mingw64/include/corecrt_wctype.h \
  C:/msys64/mingw64/include/_mingw_off_t.h \
@@ -168,10 +169,10 @@ CMakeFiles/TCast.dir/src/Projector.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/bits/ostream.tcc \
  C:/msys64/mingw64/include/c++/15.2.0/istream \
  C:/msys64/mingw64/include/c++/15.2.0/bits/istream.tcc \
- C:/Users/simon/Desktop/Code/TCast/include/glad/glad.h \
- C:/Users/simon/Desktop/Code/TCast/libs/glad/include/KHR/khrplatform.h \
- C:/Users/simon/Desktop/Code/TCast/libs/GLFW/include/GLFW/glfw3.h \
- C:/Users/simon/Desktop/Code/TCast/include/ResourceHandler.h \
+ C:/Users/Felix/CLionProjects/TCast/include/glad/glad.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/glad/include/KHR/khrplatform.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/GLFW/include/GLFW/glfw3.h \
+ C:/Users/Felix/CLionProjects/TCast/include/ResourceHandler.h \
  C:/msys64/mingw64/include/c++/15.2.0/filesystem \
  C:/msys64/mingw64/include/c++/15.2.0/bits/fs_fwd.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/fs_path.h \
@@ -198,7 +199,7 @@ CMakeFiles/TCast.dir/src/Projector.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/basic_file.h \
  C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++io.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/fstream.tcc \
- C:/Users/simon/Desktop/Code/TCast/include/nlohmann/json.hpp \
+ C:/Users/Felix/CLionProjects/TCast/include/nlohmann/json.hpp \
  C:/msys64/mingw64/include/c++/15.2.0/algorithm \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_algo.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/algorithmfwd.h \
@@ -271,64 +272,64 @@ CMakeFiles/TCast.dir/src/Projector.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_numeric.h \
  C:/msys64/mingw64/include/c++/15.2.0/pstl/glue_numeric_defs.h \
  C:/msys64/mingw64/include/c++/15.2.0/any \
- C:/Users/simon/Desktop/Code/TCast/include/stb_image.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavformat/avformat.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec_par.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/avutil.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/common.h \
+ C:/Users/Felix/CLionProjects/TCast/include/stb_image.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavformat/avformat.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/codec_par.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/avutil.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/common.h \
  C:/msys64/mingw64/include/inttypes.h \
  C:/msys64/mingw64/include/c++/15.2.0/math.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/attributes.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/error.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/macros.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/avconfig.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/version.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/mem.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/rational.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/mathematics.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/intfloat.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/log.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/attributes.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/error.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/macros.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/avconfig.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/version.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/mem.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/rational.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/mathematics.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/intfloat.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/log.h \
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stdarg.h \
  C:/msys64/mingw64/include/stdarg.h \
  C:/msys64/mingw64/include/_mingw_stdarg.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/pixfmt.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/channel_layout.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/rational.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/pixfmt.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec_id.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/samplefmt.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/version_major.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/defs.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/packet.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/attributes.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/buffer.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/dict.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/version.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/version_major.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/defs.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/packet.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/log.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavformat/avio.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavformat/version_major.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavformat/version.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavformat/version_major.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/frame.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/avutil.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/buffer.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/channel_layout.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/dict.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/samplefmt.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/hwcontext.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/frame.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec_id.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/avcodec.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/version.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec_desc.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec_par.h \
- C:/Users/simon/Desktop/Code/TCast/include/libswscale/swscale.h \
- C:/Users/simon/Desktop/Code/TCast/include/libswscale/version_major.h \
- C:/Users/simon/Desktop/Code/TCast/include/libswscale/version.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/imgutils.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/pixdesc.h
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/pixfmt.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/channel_layout.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/rational.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/pixfmt.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/codec_id.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/samplefmt.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/version_major.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/defs.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/packet.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/attributes.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/buffer.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/dict.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/version.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/version_major.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/defs.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/packet.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/log.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavformat/avio.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavformat/version_major.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavformat/version.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavformat/version_major.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/frame.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/avutil.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/buffer.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/channel_layout.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/dict.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/samplefmt.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/codec.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/hwcontext.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/frame.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/codec_id.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/avcodec.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/codec.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/version.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/codec_desc.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/codec_par.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libswscale/swscale.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libswscale/version_major.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libswscale/version.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/imgutils.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/pixdesc.h

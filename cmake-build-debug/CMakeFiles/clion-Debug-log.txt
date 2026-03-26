@@ -1,4 +1,4 @@
-C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=C:/msys64/mingw64/bin/gcc.exe -DCMAKE_CXX_COMPILER=C:/msys64/mingw64/bin/g++.exe -G "MinGW Makefiles" -S C:\Users\simon\Desktop\Code\TCast -B C:\Users\simon\Desktop\Code\TCast\cmake-build-debug
+C:\Users\Felix\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=C:/msys64/mingw64/bin/gcc.exe -DCMAKE_CXX_COMPILER=C:/msys64/mingw64/bin/g++.exe -G "MinGW Makefiles" -S C:\Users\Felix\CLionProjects\TCast -B C:\Users\Felix\CLionProjects\TCast\cmake-build-debug
 -- The C compiler identification is GNU 15.2.0
 -- The CXX compiler identification is GNU 15.2.0
 -- Detecting C compiler ABI info
@@ -21,7 +21,7 @@ C:\Users\simon\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -DCM
 -- Checking for module 'libswscale'
 --   Found libswscale, version 9.1.100
 -- MinGW DLLs to copy: C:/msys64/mingw64/bin/libgcc_s_seh-1.dll;C:/msys64/mingw64/bin/libstdc++-6.dll;C:/msys64/mingw64/bin/libwinpthread-1.dll
--- Found Python3: C:/Users/simon/AppData/Local/Programs/Python/Python311/python.exe (found version "3.11.0") found components: Interpreter
--- Configuring done (14.6s)
--- Generating done (1.8s)
--- Build files have been written to: C:/Users/simon/Desktop/Code/TCast/cmake-build-debug
+-- Found Python3: C:/Users/Felix/CLionProjects/TCast/.venv/Scripts/python.exe (found version "3.14.0") found components: Interpreter
+-- Configuring done (6.7s)
+-- Generating done (0.1s)
+-- Build files have been written to: C:/Users/Felix/CLionProjects/TCast/cmake-build-debug

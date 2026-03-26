@@ -552,10 +552,13 @@ void Window::update()
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
+    if (ImGui::IsKeyPressed(ImGuiKey_F8)) {
+        Rml::Debugger::SetVisible(!Rml::Debugger::IsVisible());
+    }
 
     ImGuiIO& io = ImGui::GetIO();
     if (io.WantCaptureMouse || io.WantCaptureKeyboard) {
-        // You might want to block RmlUi input when ImGui is capturing
+
     }
 #endif
     Backend::PresentFrame();

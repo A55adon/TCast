@@ -47,7 +47,7 @@
         <div class="main-area">
             <div class="main-top-bar">
                 <div class="logo">
-                    <img src="logo.png" alt="Logo" />
+                    <img src="t-cast.svg" alt="Logo" />
                 </div>
 
                 <h1 id="project-name" >Error-No-Project-Name-Found</h1>

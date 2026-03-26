@@ -1,9 +1,9 @@
 CMakeFiles/TCast.dir/src/UISetup.cpp.obj: \
- C:\Users\simon\Desktop\Code\TCast\src\UISetup.cpp \
- C:/Users/simon/Desktop/Code/TCast/include/UISetup.h \
- C:/Users/simon/Desktop/Code/TCast/include/UIManager.h \
- C:/Users/simon/Desktop/Code/TCast/include/Utilities.h \
- C:/Users/simon/Desktop/Code/TCast/include/global.h \
+ C:\Users\Felix\CLionProjects\TCast\src\UISetup.cpp \
+ C:/Users/Felix/CLionProjects/TCast/include/UISetup.h \
+ C:/Users/Felix/CLionProjects/TCast/include/UIManager.h \
+ C:/Users/Felix/CLionProjects/TCast/include/Utilities.h \
+ C:/Users/Felix/CLionProjects/TCast/include/global.h \
  C:/msys64/mingw64/include/c++/15.2.0/string \
  C:/msys64/mingw64/include/c++/15.2.0/bits/requires_hosted.h \
  C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++config.h \
@@ -20,8 +20,11 @@ CMakeFiles/TCast.dir/src/UISetup.cpp.obj: \
  C:/msys64/mingw64/include/_mingw_mac.h \
  C:/msys64/mingw64/include/_mingw_secapi.h \
  C:/msys64/mingw64/include/vadefs.h \
- C:/msys64/mingw64/include/sdks/_mingw_ddk.h \
  C:/msys64/mingw64/include/corecrt_stdio_config.h \
+ C:/msys64/mingw64/include/corecrt_wconio.h \
+ C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stddef.h \
+ C:/msys64/mingw64/include/stddef.h C:/msys64/mingw64/include/crtdefs.h \
+ C:/msys64/mingw64/include/sec_api/wconio_s.h \
  C:/msys64/mingw64/include/corecrt_wstdlib.h \
  C:/msys64/mingw64/include/corecrt_wctype.h \
  C:/msys64/mingw64/include/_mingw_off_t.h \
@@ -42,8 +45,7 @@ CMakeFiles/TCast.dir/src/UISetup.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/bits/localefwd.h \
  C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++locale.h \
  C:/msys64/mingw64/include/c++/15.2.0/clocale \
- C:/msys64/mingw64/include/locale.h C:/msys64/mingw64/include/crtdefs.h \
- C:/msys64/mingw64/include/stdio.h \
+ C:/msys64/mingw64/include/locale.h C:/msys64/mingw64/include/stdio.h \
  C:/msys64/mingw64/include/sec_api/stdio_s.h \
  C:/msys64/mingw64/include/c++/15.2.0/iosfwd \
  C:/msys64/mingw64/include/c++/15.2.0/cctype \
@@ -97,8 +99,6 @@ CMakeFiles/TCast.dir/src/UISetup.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/bits/basic_string.tcc \
  C:/msys64/mingw64/include/c++/15.2.0/bits/memory_resource.h \
  C:/msys64/mingw64/include/c++/15.2.0/cstddef \
- C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stddef.h \
- C:/msys64/mingw64/include/stddef.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/uses_allocator.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/uses_allocator_args.h \
  C:/msys64/mingw64/include/c++/15.2.0/tuple \
@@ -226,7 +226,7 @@ CMakeFiles/TCast.dir/src/UISetup.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/bits/fstream.tcc \
  C:/msys64/mingw64/include/c++/15.2.0/iostream \
  C:/msys64/mingw64/include/c++/15.2.0/chrono \
- C:/Users/simon/Desktop/Code/TCast/include/nlohmann/json.hpp \
+ C:/Users/Felix/CLionProjects/TCast/include/nlohmann/json.hpp \
  C:/msys64/mingw64/include/c++/15.2.0/functional \
  C:/msys64/mingw64/include/c++/15.2.0/unordered_map \
  C:/msys64/mingw64/include/c++/15.2.0/bits/unordered_map.h \
@@ -527,181 +527,181 @@ CMakeFiles/TCast.dir/src/UISetup.cpp.obj: \
  C:/msys64/mingw64/include/shlguid.h C:/msys64/mingw64/include/isguids.h \
  C:/msys64/mingw64/include/exdisp.h C:/msys64/mingw64/include/shldisp.h \
  C:/msys64/mingw64/include/knownfolders.h \
- C:/Users/simon/Desktop/Code/TCast/include/Shell.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Input.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Types.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Include/RmlUi/Config/Config.h \
+ C:/Users/Felix/CLionProjects/TCast/include/Shell.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Input.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Types.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/Include/RmlUi/Config/Config.h \
  C:/msys64/mingw64/include/c++/15.2.0/list \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_list.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/list.tcc \
  C:/msys64/mingw64/include/c++/15.2.0/queue \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_queue.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Include/RmlUi/Core/Containers/itlib/flat_map.hpp \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Include/RmlUi/Core/Containers/itlib/flat_set.hpp \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Include/RmlUi/Core/Containers/robin_hood.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Traits.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Debug.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Header.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Platform.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Colour.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Colour.inl \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Matrix4.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Math.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Vector4.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Vector3.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Vector3.inl \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Vector4.inl \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Matrix4.inl \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/ObserverPtr.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Rectangle.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Vector2.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Vector2.inl \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Span.h \
- C:/Users/simon/Desktop/Code/TCast/include/Window.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Animation.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/ID.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Tween.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Types.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Box.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/CallbackTexture.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/UniqueRenderResource.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/CompiledFilterShader.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/ComputedValues.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Animation.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Element.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Box.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Core.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Event.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Dictionary.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Variant.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/TypeConverter.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Log.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/StringUtilities.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/TypeConverter.inl \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Variant.inl \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/ScriptInterface.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/StyleTypes.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Property.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/NumericValue.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Unit.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/RenderBox.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/ScrollTypes.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Transform.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/TransformPrimitive.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Element.inl \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/Include/RmlUi/Core/Containers/itlib/flat_map.hpp \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/Include/RmlUi/Core/Containers/itlib/flat_set.hpp \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/Include/RmlUi/Core/Containers/robin_hood.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Traits.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Debug.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Header.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Platform.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Colour.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Colour.inl \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Matrix4.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Math.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Vector4.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Vector3.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Vector3.inl \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Vector4.inl \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Matrix4.inl \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/ObserverPtr.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Rectangle.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Vector2.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Vector2.inl \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Span.h \
+ C:/Users/Felix/CLionProjects/TCast/include/Window.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Animation.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/ID.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Tween.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Types.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Box.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/CallbackTexture.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/UniqueRenderResource.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/CompiledFilterShader.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/ComputedValues.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Animation.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Element.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Box.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Core.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Event.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Dictionary.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Variant.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/TypeConverter.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Log.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/StringUtilities.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/TypeConverter.inl \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Variant.inl \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/ScriptInterface.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/StyleTypes.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Property.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/NumericValue.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Unit.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/RenderBox.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/ScrollTypes.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Transform.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/TransformPrimitive.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Element.inl \
  C:/msys64/mingw64/include/c++/15.2.0/cfloat \
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/float.h \
  C:/msys64/mingw64/include/float.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Context.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Input.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/ContextInstancer.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/ConvolutionFilter.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Core.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/DataModelHandle.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/DataStructHandle.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/DataTypeRegister.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/DataTypes.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/DataVariable.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/DataTypeRegister.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/DataTypes.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/DataVariable.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/DecorationTypes.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Decorator.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/EffectSpecification.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/PropertySpecification.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/PropertyIdSet.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/PropertyDictionary.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Texture.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/EffectSpecification.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Element.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/ElementDocument.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/ElementInstancer.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Profiling.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/ElementScroll.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/ElementText.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Geometry.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/CompiledFilterShader.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Mesh.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Vertex.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/ElementUtilities.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/RenderManager.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/CallbackTexture.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/RenderInterface.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/StableVector.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Event.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/EventInstancer.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/EventListener.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/EventListenerInstancer.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Factory.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/XMLParser.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/BaseXMLParser.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/FileInterface.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Filter.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/FontEffect.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/FontGlyph.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/FontEffectInstancer.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/FontEngineInterface.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/FontMetrics.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/TextShapingContext.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/FontGlyph.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Geometry.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Header.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/ID.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Input.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Log.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Math.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Mesh.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/MeshUtilities.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/NumericValue.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Plugin.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/PropertiesIteratorView.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Property.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/PropertyDefinition.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/PropertyParser.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/PropertyDictionary.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/PropertyIdSet.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/PropertyParser.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/PropertySpecification.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/RenderInterface.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/RenderManager.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Spritesheet.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/StringUtilities.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/StyleSheet.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Spritesheet.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/StyleSheetTypes.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Factory.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Utilities.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/StyleSheetContainer.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/StyleSheetSpecification.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/StyleTypes.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/SystemInterface.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/TextShapingContext.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Texture.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Transform.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/TransformPrimitive.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Tween.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/TypeConverter.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Types.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/UniqueRenderResource.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Unit.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Vertex.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/XMLNodeHandler.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/XMLParser.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Elements/ElementForm.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Include/RmlUi/Core/Element.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Include/RmlUi/Core/Header.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Elements/ElementFormControl.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Elements/ElementFormControlInput.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Elements/ElementFormControl.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Elements/ElementFormControlSelect.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Elements/ElementFormControlTextArea.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Elements/ElementProgress.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Include/RmlUi/Core/Geometry.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Include/RmlUi/Core/Spritesheet.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Include/RmlUi/Core/Texture.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/Elements/ElementTabSet.h \
- C:/Users/simon/Desktop/Code/TCast/include/Projector.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Context.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Input.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/ContextInstancer.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/ConvolutionFilter.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Core.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/DataModelHandle.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/DataStructHandle.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/DataTypeRegister.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/DataTypes.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/DataVariable.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/DataTypeRegister.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/DataTypes.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/DataVariable.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/DecorationTypes.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Decorator.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/EffectSpecification.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/PropertySpecification.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/PropertyIdSet.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/PropertyDictionary.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Texture.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/EffectSpecification.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Element.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/ElementDocument.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/ElementInstancer.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Profiling.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/ElementScroll.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/ElementText.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Geometry.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/CompiledFilterShader.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Mesh.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Vertex.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/ElementUtilities.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/RenderManager.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/CallbackTexture.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/RenderInterface.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/StableVector.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Event.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/EventInstancer.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/EventListener.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/EventListenerInstancer.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Factory.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/XMLParser.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/BaseXMLParser.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/FileInterface.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Filter.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/FontEffect.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/FontGlyph.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/FontEffectInstancer.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/FontEngineInterface.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/FontMetrics.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/TextShapingContext.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/FontGlyph.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Geometry.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Header.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/ID.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Input.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Log.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Math.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Mesh.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/MeshUtilities.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/NumericValue.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Plugin.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/PropertiesIteratorView.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Property.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/PropertyDefinition.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/PropertyParser.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/PropertyDictionary.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/PropertyIdSet.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/PropertyParser.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/PropertySpecification.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/RenderInterface.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/RenderManager.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Spritesheet.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/StringUtilities.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/StyleSheet.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Spritesheet.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/StyleSheetTypes.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Factory.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Utilities.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/StyleSheetContainer.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/StyleSheetSpecification.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/StyleTypes.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/SystemInterface.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/TextShapingContext.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Texture.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Transform.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/TransformPrimitive.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Tween.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/TypeConverter.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Types.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/UniqueRenderResource.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Unit.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Vertex.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/XMLNodeHandler.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/XMLParser.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Elements/ElementForm.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/Include/RmlUi/Core/Element.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/Include/RmlUi/Core/Header.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Elements/ElementFormControl.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Elements/ElementFormControlInput.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Elements/ElementFormControl.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Elements/ElementFormControlSelect.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Elements/ElementFormControlTextArea.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Elements/ElementProgress.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/Include/RmlUi/Core/Geometry.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/Include/RmlUi/Core/Spritesheet.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/Include/RmlUi/Core/Texture.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/Elements/ElementTabSet.h \
+ C:/Users/Felix/CLionProjects/TCast/include/Projector.h \
  C:/msys64/mingw64/include/c++/15.2.0/atomic \
  C:/msys64/mingw64/include/c++/15.2.0/thread \
  C:/msys64/mingw64/include/c++/15.2.0/bits/std_thread.h \
@@ -709,71 +709,71 @@ CMakeFiles/TCast.dir/src/UISetup.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/mutex \
  C:/msys64/mingw64/include/c++/15.2.0/bits/std_mutex.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/unique_lock.h \
- C:/Users/simon/Desktop/Code/TCast/include/glad/glad.h \
- C:/Users/simon/Desktop/Code/TCast/libs/glad/include/KHR/khrplatform.h \
- C:/Users/simon/Desktop/Code/TCast/libs/GLFW/include/GLFW/glfw3.h \
- C:/Users/simon/Desktop/Code/TCast/include/ResourceHandler.h \
- C:/Users/simon/Desktop/Code/TCast/include/stb_image.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavformat/avformat.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec_par.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/avutil.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/common.h \
+ C:/Users/Felix/CLionProjects/TCast/include/glad/glad.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/glad/include/KHR/khrplatform.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/GLFW/include/GLFW/glfw3.h \
+ C:/Users/Felix/CLionProjects/TCast/include/ResourceHandler.h \
+ C:/Users/Felix/CLionProjects/TCast/include/stb_image.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavformat/avformat.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/codec_par.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/avutil.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/common.h \
  C:/msys64/mingw64/include/inttypes.h \
  C:/msys64/mingw64/include/c++/15.2.0/math.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/attributes.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/error.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/macros.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/avconfig.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/version.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/mem.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/rational.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/mathematics.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/intfloat.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/log.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/pixfmt.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/channel_layout.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/rational.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/pixfmt.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec_id.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/samplefmt.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/version_major.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/defs.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/packet.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/attributes.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/buffer.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/dict.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/version.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/version_major.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/defs.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/packet.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/log.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavformat/avio.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavformat/version_major.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavformat/version.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavformat/version_major.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/frame.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/avutil.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/buffer.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/channel_layout.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/dict.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/samplefmt.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/hwcontext.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/frame.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec_id.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/avcodec.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/version.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec_desc.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavcodec/codec_par.h \
- C:/Users/simon/Desktop/Code/TCast/include/libswscale/swscale.h \
- C:/Users/simon/Desktop/Code/TCast/include/libswscale/version_major.h \
- C:/Users/simon/Desktop/Code/TCast/include/libswscale/version.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/imgutils.h \
- C:/Users/simon/Desktop/Code/TCast/include/libavutil/pixdesc.h \
- C:/Users/simon/Desktop/Code/TCast/include/EventListener.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/EventListener.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/ElementDocument.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/Backends/RmlUi_Backend.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/RenderInterface.h \
- C:/Users/simon/Desktop/Code/TCast/libs/RmlUi/include/RmlUi/Core/SystemInterface.h
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/attributes.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/error.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/macros.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/avconfig.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/version.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/mem.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/rational.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/mathematics.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/intfloat.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/log.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/pixfmt.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/channel_layout.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/rational.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/pixfmt.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/codec_id.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/samplefmt.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/version_major.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/defs.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/packet.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/attributes.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/buffer.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/dict.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/version.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/version_major.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/defs.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/packet.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/log.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavformat/avio.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavformat/version_major.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavformat/version.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavformat/version_major.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/frame.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/avutil.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/buffer.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/channel_layout.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/dict.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/samplefmt.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/codec.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/hwcontext.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/frame.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/codec_id.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/avcodec.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/codec.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/version.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/codec_desc.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavcodec/codec_par.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libswscale/swscale.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libswscale/version_major.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libswscale/version.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/imgutils.h \
+ C:/Users/Felix/CLionProjects/TCast/include/libavutil/pixdesc.h \
+ C:/Users/Felix/CLionProjects/TCast/include/EventListener.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/EventListener.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/ElementDocument.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/Backends/RmlUi_Backend.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/RenderInterface.h \
+ C:/Users/Felix/CLionProjects/TCast/libs/RmlUi/include/RmlUi/Core/SystemInterface.h

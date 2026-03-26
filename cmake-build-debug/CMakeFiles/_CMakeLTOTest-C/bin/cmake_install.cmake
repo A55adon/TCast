@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/simon/Desktop/Code/TCast/cmake-build-debug/CMakeFiles/_CMakeLTOTest-C/src
+# Install script for directory: C:/Users/Felix/CLionProjects/TCast/cmake-build-debug/CMakeFiles/_CMakeLTOTest-C/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -35,7 +35,7 @@ endif()
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "C:/Users/simon/Desktop/Code/TCast/cmake-build-debug/CMakeFiles/_CMakeLTOTest-C/bin/install_local_manifest.txt"
+  file(WRITE "C:/Users/Felix/CLionProjects/TCast/cmake-build-debug/CMakeFiles/_CMakeLTOTest-C/bin/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
 if(CMAKE_INSTALL_COMPONENT)
@@ -51,6 +51,6 @@ else()
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "C:/Users/simon/Desktop/Code/TCast/cmake-build-debug/CMakeFiles/_CMakeLTOTest-C/bin/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "C:/Users/Felix/CLionProjects/TCast/cmake-build-debug/CMakeFiles/_CMakeLTOTest-C/bin/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

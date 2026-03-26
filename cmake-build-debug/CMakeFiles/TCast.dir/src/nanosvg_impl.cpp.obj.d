@@ -1,12 +1,11 @@
 CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj: \
- C:\Users\simon\Desktop\Code\TCast\src\nanosvg_impl.cpp \
- C:/Users/simon/Desktop/Code/TCast/include/nanosvg.h \
+ C:\Users\Felix\CLionProjects\TCast\src\nanosvg_impl.cpp \
+ C:/Users/Felix/CLionProjects/TCast/include/nanosvg.h \
  C:/msys64/mingw64/include/string.h C:/msys64/mingw64/include/crtdefs.h \
  C:/msys64/mingw64/include/corecrt.h C:/msys64/mingw64/include/_mingw.h \
  C:/msys64/mingw64/include/_mingw_mac.h \
  C:/msys64/mingw64/include/_mingw_secapi.h \
  C:/msys64/mingw64/include/vadefs.h \
- C:/msys64/mingw64/include/sdks/_mingw_ddk.h \
  C:/msys64/mingw64/include/sec_api/string_s.h \
  C:/msys64/mingw64/include/c++/15.2.0/stdlib.h \
  C:/msys64/mingw64/include/c++/15.2.0/cstdlib \
@@ -68,5 +67,5 @@ CMakeFiles/TCast.dir/src/nanosvg_impl.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/tr1/poly_hermite.tcc \
  C:/msys64/mingw64/include/c++/15.2.0/tr1/poly_laguerre.tcc \
  C:/msys64/mingw64/include/c++/15.2.0/tr1/riemann_zeta.tcc \
- C:/Users/simon/Desktop/Code/TCast/include/nanosvgrast.h \
- C:/Users/simon/Desktop/Code/TCast/include/nanosvg.h
+ C:/Users/Felix/CLionProjects/TCast/include/nanosvgrast.h \
+ C:/Users/Felix/CLionProjects/TCast/include/nanosvg.h

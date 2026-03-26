@@ -1,0 +1,70 @@
+{
+    "scenes": [
+        {
+            "connections": [
+                0
+            ],
+            "sceneName": "aaaasfsxcfgvsfg",
+            "sources": [
+                ""
+            ],
+            "splitSources": [
+                ""
+            ]
+        },
+        {
+            "connections": [],
+            "sceneName": "Szene 2",
+            "sources": [],
+            "splitSources": []
+        },
+        {
+            "connections": [],
+            "sceneName": "Szene 3",
+            "sources": [],
+            "splitSources": []
+        },
+        {
+            "connections": [],
+            "sceneName": "Szene 4",
+            "sources": [],
+            "splitSources": []
+        },
+        {
+            "connections": [],
+            "sceneName": "Szene 5",
+            "sources": [],
+            "splitSources": []
+        },
+        {
+            "connections": [],
+            "sceneName": "Szene 6",
+            "sources": [],
+            "splitSources": []
+        },
+        {
+            "connections": [],
+            "sceneName": "Szene 7",
+            "sources": [],
+            "splitSources": []
+        },
+        {
+            "connections": [],
+            "sceneName": "Szene 8",
+            "sources": [],
+            "splitSources": []
+        },
+        {
+            "connections": [],
+            "sceneName": "Szene 9",
+            "sources": [],
+            "splitSources": []
+        },
+        {
+            "connections": [],
+            "sceneName": "Szene 10",
+            "sources": [],
+            "splitSources": []
+        }
+    ]
+}

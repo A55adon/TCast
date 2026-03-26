@@ -1,4 +1,0 @@
-C:/Users/Felix/CLionProjects/TCast/cmake-build-debug/CMakeFiles/TCast.dir
-C:/Users/Felix/CLionProjects/TCast/cmake-build-debug/CMakeFiles/process_assets.dir
-C:/Users/Felix/CLionProjects/TCast/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Felix/CLionProjects/TCast/cmake-build-debug/CMakeFiles/rebuild_cache.dir

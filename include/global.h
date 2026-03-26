@@ -72,11 +72,11 @@ struct SaveData {
 
 // Data per scene
 struct SceneData {
-    std::string name;
-    std::vector<std::string> sources; // [0] would be the path of the resource of the first projector //TODO: use ID //TODO: make array
-    std::vector<std::string> split_sources; // for displaying split sources in the preview //TODO: replace by rendering half textures //TODO: make array
-    std::vector<SplitInfo> split_info; // for projectors //TODO: make array
-    std::vector<int> connections; //TODO: make array
+    std::string name = "Default";
+    std::vector<std::string> sources = {}; // [0] would be the path of the resource of the first projector //TODO: use ID //TODO: make array
+    std::vector<std::string> split_sources = {}; // for displaying split sources in the preview //TODO: replace by rendering half textures //TODO: make array
+    std::vector<SplitInfo> split_info = {}; // for projectors //TODO: make array
+    std::vector<int> connections = {}; //TODO: make array
 
     SceneData() = default;
 

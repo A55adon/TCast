@@ -1,0 +1,31 @@
+{
+    "scenes": [
+        {
+            "connections": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+            ],
+            "sceneName": "test",
+            "sources": [
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\test\\resources\\images\\image_png_2.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\test\\resources\\images\\image_png_2.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\test\\resources\\images\\image_png_1.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\test\\resources\\images\\image_png_4.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\test\\resources\\images\\image_png_4.png",
+                ""
+            ],
+            "splitSources": [
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\test\\resources\\splits\\scene_0_proj_0_0.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\test\\resources\\splits\\scene_0_proj_0_1.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\test\\resources\\images\\image_png_1.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\test\\resources\\splits\\scene_0_proj_0_3.png",
+                "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\test\\resources\\splits\\scene_0_proj_0_4.png",
+                ""
+            ]
+        }
+    ]
+}

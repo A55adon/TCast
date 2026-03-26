@@ -142,6 +142,13 @@ Resource& ResourceHandler::createResource(const fs::path& path, const std::strin
     }
     catch (const std::exception& e) {
         LOG_ERR("RH", std::string("Couldn't create Resource in createResource() - ") + e.what());
+        static Resource discard;
+        discard.id = -1;
+        discard.name = "invalidResource";
+        discard.path = "";
+        discard.is_video = false;
+        discard.thumbnail_id = -1;
+        return discard;
     }
 }
 
@@ -192,7 +199,14 @@ Resource& ResourceHandler::getResource(const int id)
         if (r.id == id)
             return r;
     }
-    LOG_ERR("RH", "Couldn't get Resource[" + id + std::string("] in getResource()"));
+    LOG_ERR("RH", "Couldn't get Resource[" + std::to_string(id) + std::string("] in getResource()"));
+    static Resource discard;
+    discard.id = -1;
+    discard.name = "invalidResource";
+    discard.path = "";
+    discard.is_video = false;
+    discard.thumbnail_id = -1;
+    return discard;
 }
 
 // Returns vector of all resource references

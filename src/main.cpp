@@ -1,29 +1,18 @@
 /*
  * Known Bugs:
- * - when creating a new project or loading a project from the dropdown of the main interface it does not switch to that project automatically
- * - creating a project with a existing name crashes
- * - image with spaces can lead to a crash
- * - loading a project without a path crashes
- * - window resize makes projector size 0
-
  * Todo:
- *  - |installer
- *  - settings
- *  - ->dont have a recent path as a setting
- *  - feedback for exporting importing saving loading etc
+ *  - feedback
  *  - if clicking on new project or loadproject have the ability to go back
  *  - |Update Checking
- *  - |drag n drop upload
  *  - resource name clipping
  *  - visuals
- *  - |show outdated projects
  *  - |multiselect
- *  - |drag n drop resource selection
+ *  - drag n drop resource selection
  *  - |request missing
  *  - cleanup
  *  - long scene names
  *  - split on other thread
- *  - fix svg rendering
+ *  - ~fix svg rendering
 */
 
 #include "UISetup.h"
@@ -32,8 +21,10 @@
 #include "RmlUi_Backend.h"
 #include <future>
 
-
-void resize_callback() {
+void resize_callback(GLFWwindow* window, int width, int height)
+{
+    getWindow().context->SetDimensions(Rml::Vector2i(width, height));
+    getWindow().context->Update();
     UIManager::refreshProjectors();
 }
 
@@ -64,7 +55,7 @@ int main() {
         }
     }
 
-    glfwSetWindowSizeCallback(Backend::GetWindow(), GLFWwindowsizefun(resize_callback));
+    glfwSetWindowSizeCallback(Backend::GetWindow(), resize_callback);
 
     while (getWindow().running) {
         getWindow().update();

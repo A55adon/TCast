@@ -72,6 +72,8 @@ bool UIManager::saveProject(const std::filesystem::path &savePath) {
             // Create default scene
             LOG_INFO("UIManager","No scenes found, creating default scene");
             scene_manager.scenes.push_back({save_data.name, {}});
+            refreshScenes();
+            refreshProjectors();
         }
 
         json j = scene_manager;
@@ -654,6 +656,10 @@ void UIManager::refreshProjectors() {
     auto* projectorGrid = getEl("projectorGrid");
     if (!projectorGrid) return;
 
+    if (scene_manager.scenes.empty()) return;
+    active_scene_index = std::min(active_scene_index, (int)scene_manager.scenes.size() - 1);
+    active_scene_index = std::max(active_scene_index, 0);
+
     // remove all children
     while (projectorGrid->GetNumChildren() > 0)
         projectorGrid->RemoveChild(projectorGrid->GetChild(0));
@@ -728,7 +734,9 @@ void UIManager::refreshProjectors() {
     for (auto& scene : scene_manager.scenes) {
         scene.connections.resize(n);
     }
-    scene_manager.scenes[active_scene_index].split_sources.resize(n);
+    auto& activeScene = scene_manager.scenes[active_scene_index];
+    activeScene.sources.resize(n);
+    activeScene.split_sources.resize(n);
 
     for (int i = 0; i < n; ++i) {
         // projector wrapper
@@ -1114,23 +1122,29 @@ void showSceneRenameDialog(int sceneIndex) {
         }
     }
 }
+
 void deleteScene(int sceneIndex) {
-     LOG_INFO("UIManager","Deleting scene: " + sceneIndex);
-    if (sceneIndex >= 0 && sceneIndex < (int) scene_manager.scenes.size()) {
-        scene_manager.scenes.erase(scene_manager.scenes.begin() + sceneIndex);
+    LOG_INFO("UIManager", "Deleting scene: " + std::to_string(sceneIndex));
 
-        // Update active scene index
-        if (active_scene_index == sceneIndex) {
-            active_scene_index = -1; // No scene selected
-        } else if (active_scene_index > sceneIndex) {
-            active_scene_index--; // Adjust index after deletion
-        }
+    if (sceneIndex < 0 || sceneIndex >= (int)scene_manager.scenes.size())
+        return;
 
-        // Save changes and refresh UI
-        std::filesystem::path fullProjectPath = std::filesystem::path(save_data.path) / save_data.name;
-        UIManager::saveProject(fullProjectPath);
-        UIManager::refreshScenes();
-    }
+    scene_manager.scenes.erase(scene_manager.scenes.begin() + sceneIndex);
+
+    // Always keep at least one scene
+    if (scene_manager.scenes.empty())
+        scene_manager.scenes.emplace_back("default scene", std::vector<std::string>{});
+
+    // Clamp active index — never let it be -1 or out of range
+    if (active_scene_index >= sceneIndex)
+        active_scene_index = std::max(0, active_scene_index - 1);
+    active_scene_index = std::min(active_scene_index,
+                                  (int)scene_manager.scenes.size() - 1);
+
+    std::filesystem::path fullProjectPath = std::filesystem::path(save_data.path) / save_data.name;
+    UIManager::saveProject(fullProjectPath);
+    UIManager::refreshScenes();
+    UIManager::refreshProjectors();
 }
 
 void duplicateScene(int sceneIndex) {

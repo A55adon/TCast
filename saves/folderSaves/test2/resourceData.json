@@ -1,0 +1,12 @@
+{
+    "maxId": 1,
+    "resources": [
+        {
+            "id": 0,
+            "isVideo": false,
+            "name": "garbo_kino_entwurf",
+            "path": "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\test2\\resources\\images\\image_png_1.png",
+            "thumbnail_id": -1
+        }
+    ]
+}

@@ -38,10 +38,21 @@ function h(value) {
 
 function pathToFileUrl(path) {
   if (!path) return "";
-  if (/^(file|https?):\/\//i.test(path)) return path;
-  let normalized = path.replaceAll("\\", "/");
-  if (/^[A-Za-z]:/.test(normalized)) normalized = "/" + normalized;
-  return encodeURI("file://" + normalized).replaceAll("#", "%23");
+  if (/^https?:\/\//i.test(path)) return path;
+
+  let normalized = path
+      .replace(/^\\\\\?\\/, "")
+      .replaceAll("\\", "/")
+      .replace(/^\//, "");
+
+  // Windows drive letter: C:/path → https://asset.c/path
+  if (normalized[1] === ":") {
+    const drive = normalized[0].toLowerCase();
+    const rest = normalized.slice(2).replace(/^\//, "");
+    return `https://asset.${drive}/${rest}`;
+  }
+
+  return `https://asset./${normalized}`;
 }
 
 function shortPath(path) {
@@ -87,37 +98,88 @@ async function run(command, payload = {}, options = {}) {
   }
 }
 
+function bindTitleBar() {
+  // Window control buttons
+  document.getElementById("minimize-window")?.addEventListener("click", () => {
+    invoke("minimize_window");
+  });
+
+  document.getElementById("maximize-window")?.addEventListener("click", () => {
+    invoke("maximize_window");
+  });
+
+  document.getElementById("close-window")?.addEventListener("click", () => {
+    // Stop projection if running, then close
+    invoke("stop_projection").finally(() => {
+      invoke("close_window");
+    });
+  });
+
+  // Double-click on title bar to maximize
+  document.querySelector(".title-bar")?.addEventListener("dblclick", (e) => {
+    // Only maximize if double-clicking on the draggable area
+    if (
+        e.target.closest(".title-bar-center") ||
+        (!e.target.closest("button") &&
+            !e.target.closest(".menu-item") &&
+            !e.target.closest(".dropdown"))
+    ) {
+      invoke("maximize_window");
+    }
+  });
+
+  // Setup window dragging
+  setupTitleBarDrag();
+
+  // Bind menu items in title bar
+  document.querySelectorAll("[data-menu]").forEach(button => {
+    button.addEventListener("click", () => handleMenu(button.dataset.menu));
+  });
+
+  document.querySelectorAll("[data-diagnostic]").forEach(button => {
+    button.addEventListener("click", () => {
+      appState.diagnostics = button.dataset.diagnostic;
+      render();
+    });
+  });
+}
+
 function render() {
   const root = document.getElementById("app");
   const snap = appState.snapshot;
   if (!snap?.current_project_path) {
     root.innerHTML = renderStartup();
     bindStartup();
+    bindTitleBar();  // Always bind title bar events
   } else {
     root.innerHTML = renderWorkspace();
     bindWorkspace();
+    bindTitleBar();  // Always bind title bar events
   }
 }
-
 function renderStartup() {
   const snap = appState.snapshot || { projects: [], default_saves_path: "" };
   const projects = snap.projects || [];
   return `
-    <main class="startup">
-      <div class="startup-panel">
-        <section class="brand-block">
-          <div class="brand-name">TCast</div>
-          <div class="brand-subtitle">Theatre scene control for one to six projector outputs, rewritten as a Rust app with a regular HTML and CSS interface.</div>
-        </section>
-        <section class="startup-box">
-          <div class="tabs">
-            <button class="tab ${appState.startupTab === "new" ? "active" : ""}" data-tab="new">Neues Projekt</button>
-            <button class="tab ${appState.startupTab === "load" ? "active" : ""}" data-tab="load">Projekt laden</button>
-          </div>
-          ${appState.startupTab === "new" ? renderNewProjectForm(snap) : renderLoadProjectForm(projects)}
-        </section>
-      </div>
-    </main>
+    <div class="app-shell">
+      ${renderTitleBar()}
+      <main class="startup">
+        <div class="startup-panel">
+          <section class="brand-block">
+            <div class="brand-name">TCast</div>
+            <div class="brand-subtitle">TCast ist eine moderne Theater- und Projektionsoftware zur Steuerung von Beamern, Szenen und Medieninhalten. Mehrere Projektoren können live synchron verwaltet und einzelnen Szenen zugewiesen werden. Bilder, Videos und Effekte lassen sich per Drag-and-drop organisieren und steuern.</div>
+            <div class="brand-copyright">© Simon Wagner & Felix Eckinger</div>
+          </section>
+          <section class="startup-box">
+            <div class="tabs">
+              <button class="tab ${appState.startupTab === "new" ? "active" : ""}" data-tab="new">Neues Projekt</button>
+              <button class="tab ${appState.startupTab === "load" ? "active" : ""}" data-tab="load">Projekt laden</button>
+            </div>
+            ${appState.startupTab === "new" ? renderNewProjectForm(snap) : renderLoadProjectForm(projects)}
+          </section>
+        </div>
+      </main>
+    </div>
   `;
 }
 
@@ -133,7 +195,7 @@ function renderNewProjectForm(snap) {
         <input id="project-count" type="range" min="1" max="6" step="1" value="1" />
       </div>
       <div class="field">
-        <label class="label-row" for="project-description"><span>Beschreibung</span></label>
+        <label class="label-row" for="project-description"><span>Beschreibung (max 180)</span></label>
         <textarea id="project-description" maxlength="180"></textarea>
       </div>
       <div class="field">
@@ -182,17 +244,26 @@ function renderProjectRow(project) {
 
 function renderWorkspace() {
   const snap = appState.snapshot;
+
   return `
-    <div class="app-shell">
+    ${renderTitleBar()}
       ${renderMenu()}
+
       <main class="workspace">
         ${renderScenes()}
+
+        <div class="panel-resizer-x" id="scene-resizer"></div>
+
         <section class="main">
           ${renderTopbar()}
           ${renderProjectors()}
+        
+          <div class="panel-resizer-y" id="resources-resizer"></div>
+        
           ${renderResources()}
         </section>
       </main>
+
       ${appState.modal ? renderModal() : ""}
       ${appState.diagnostics ? renderDiagnostics() : ""}
     </div>
@@ -204,21 +275,26 @@ function renderMenu() {
     <nav class="menu-bar">
       <div class="menu-item">Datei
         <div class="dropdown">
-          <button data-menu="new">Neues Projekt</button>
-          <button data-menu="load">Projekt öffnen</button>
+          <button data-menu="new">Projekt wechseln</button>
           <button data-menu="save">Speichern</button>
           <button data-menu="save-as">Speichern unter...</button>
-          <button data-menu="import">Importieren (.tct)</button>
           <button data-menu="export">Exportieren (.tct)</button>
-          <button data-menu="close">Projekt Schließen</button>
+          <button data-menu="close">Projekt schließen</button>
         </div>
       </div>
-      <div class="menu-item"><button class="ghost" id="diagnostics-toggle">Diagnose</button></div>
-      <div class="menu-item"><button class="ghost" id="open-folder">Ordner</button></div>
+
+      <div class="menu-item">Debugging
+        <div class="dropdown">
+          <button data-diagnostic="project">Project Data</button>
+          <button data-diagnostic="projection">Projection</button>
+          <button data-diagnostic="log">Log</button>
+          <button data-diagnostic="resources">Resources</button>
+          <button data-diagnostic="scene">Scenes</button>
+        </div>
+      </div>
     </nav>
   `;
 }
-
 function renderScenes() {
   const snap = appState.snapshot;
   const scenes = snap.scenes || [];
@@ -226,7 +302,22 @@ function renderScenes() {
     <aside class="scene-panel">
       <div class="section-head">
         <div class="section-title">Szenen</div>
-        <button class="icon-button primary" id="add-scene" title="Szene hinzufügen">+</button>
+        <button class="icon-button primary" id="add-scene" title="Szene hinzufügen">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 5v14"/>
+            <path d="M5 12h14"/>
+          </svg>
+        </button>
       </div>
       <div class="scene-list">
         ${scenes.map((scene, index) => `
@@ -235,18 +326,77 @@ function renderScenes() {
               <span class="scene-name">${h(scene.sceneName || scene.name)}</span>
             </button>
             <div class="scene-actions">
-              <button class="icon-button scene-rename" data-index="${index}" title="Umbenennen">R</button>
-              <button class="icon-button scene-copy" data-index="${index}" title="Klonen">C</button>
-              <button class="icon-button danger scene-delete" data-index="${index}" title="Löschen">X</button>
+              <button class="icon-button scene-rename" data-index="${index}" title="Umbenennen">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 20h9"/>
+                  <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+                </svg>
+              </button>
+              
+              <button class="icon-button scene-copy" data-index="${index}" title="Klonen">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="9" y="9" width="13" height="13" rx="2"/>
+                  <rect x="2" y="2" width="13" height="13" rx="2"/>
+                </svg>
+              </button>
+              
+              <button class="icon-button danger scene-delete" data-index="${index}" title="Löschen">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 6h18"/>
+                  <path d="M8 6V4h8v2"/>
+                  <path d="M19 6l-1 14H6L5 6"/>
+                  <path d="M10 11v6"/>
+                  <path d="M14 11v6"/>
+                </svg>
+              </button>
             </div>
           </div>
         `).join("")}
       </div>
       <div class="scene-footer">
-        <button id="scene-up">Hoch</button>
-        <button id="scene-down">Runter</button>
-        <button class="danger" id="scene-clear">Alle löschen</button>
-        <button id="refresh-snapshot">Aktualisieren</button>
+        <div class="scene-actions-center">
+          <button id="scene-up" title="Nach oben">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 15l-6-6-6 6"/>
+            </svg>
+          </button>
+      
+          <button id="scene-down" title="Nach unten">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </aside>
   `;
@@ -262,9 +412,29 @@ function renderTopbar() {
         <p>${h(save?.description || snap.current_project_path)}</p>
       </div>
       <div class="top-actions">
-        <button class="primary" id="start-projection">Start</button>
-        <button class="danger" id="stop-projection">Stop</button>
-        <button id="save-now">Speichern</button>
+        <button class="primary icon-button" id="start-projection" title="Start">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        
+        <button class="danger icon-button" id="stop-projection" title="Stop">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <rect x="6" y="6" width="12" height="12" rx="1"/>
+          </svg>
+        </button>
       </div>
     </header>
   `;
@@ -321,19 +491,29 @@ function renderProjectors() {
 
 function renderProjector(view) {
   const resource = resourceForSource(view.source);
-  const previewUrl = sourceToUrl(view.preview || view.source);
+  const srcUrl = sourceToUrl(view.source);
   const isVideo = resource?.is_video || /\.(mp4|avi|mov|mkv|flv|webm)$/i.test(view.source);
-  const span = Math.max(0.0001, view.end - view.start);
-  const width = 100 / span;
-  const left = -view.start / span * 100;
+  let mediaHtml = '';
+  if (srcUrl) {
+    if (view.isSplit) {
+      const span = Math.max(0.0001, view.end - view.start);
+      const width = 100 / span;
+      const left = -view.start / span * 100;
+      mediaHtml = isVideo
+          ? `<video src="${h(srcUrl)}" muted loop playsinline style="width:${width}%; left:${left}%;"></video>`
+          : `<img src="${h(srcUrl)}" alt="" style="width:${width}%; left:${left}%;" />`;
+    } else {
+      mediaHtml = isVideo
+          ? `<video src="${h(srcUrl)}" muted loop playsinline></video>`
+          : `<img src="${h(srcUrl)}" alt="" />`;
+    }
+  } else {
+    mediaHtml = `<div class="projector-empty">Kein Bild</div>`;
+  }
   return `
     <button class="projector" data-projector="${view.index}">
       <div class="projector-media">
-        ${previewUrl ? (
-          isVideo
-            ? `<video src="${h(previewUrl)}" style="width:${width}%;left:${left}%;" muted loop playsinline></video>`
-            : `<img src="${h(previewUrl)}" style="width:${width}%;left:${left}%;" alt="" />`
-        ) : `<div class="projector-empty">Kein Bild</div>`}
+        ${mediaHtml}
       </div>
       <div class="projector-label">Beamer ${view.index + 1}${view.isSplit ? ` · ${Math.round(view.start * 100)}-${Math.round(view.end * 100)}%` : ""}</div>
       <div class="projector-source">${h(resource?.name || shortPath(view.source) || "Ressource auswählen")}</div>
@@ -358,21 +538,27 @@ function renderResources() {
   `;
 }
 
+function changeProjectorCount(count) {
+  run("set_projector_count", { count }, { message: `Projektoranzahl auf ${count} gesetzt` });
+}
+
 function renderResource(resource) {
   return `
     <div class="resource-item ${appState.snapshot.active_resource_id === resource.id ? "active" : ""}" draggable="true" data-resource="${resource.id}">
-      <button class="resource-preview resource-select" data-resource="${resource.id}">
-        ${resource.is_video
-          ? `<video src="${h(resource.url)}" muted loop playsinline></video>`
-          : `<img src="${h(resource.preview_url)}" alt="" />`}
-      </button>
+      <div class="resource-thumb">
+        <button class="resource-preview resource-select" data-resource="${resource.id}">
+          ${resource.is_video
+      ? `<video src="${h(resource.url)}" muted loop playsinline></video>`
+      : `<img src="${h(resource.preview_url)}" alt="" />`}
+        </button>
+        <div class="resource-buttons">
+          <button class="resource-rename" data-resource="${resource.id}">Umbenennen</button>
+          <button class="danger resource-delete" data-resource="${resource.id}">Löschen</button>
+        </div>
+      </div>
       <div class="resource-meta">
         <div class="resource-name" title="${h(resource.name)}">${h(resource.name)}</div>
         <div class="resource-type">${resource.is_video ? "Video" : "Bild"}${resource.missing ? " · fehlt" : ""}</div>
-      </div>
-      <div class="resource-buttons">
-        <button class="resource-rename" data-resource="${resource.id}">Umbenennen</button>
-        <button class="danger resource-delete" data-resource="${resource.id}">Löschen</button>
       </div>
     </div>
   `;
@@ -417,13 +603,15 @@ function renderResourcePicker() {
         <h2 class="modal-title">Ressource für Beamer ${appState.modal.projectorIndex + 1}</h2>
         <div class="picker-list">
           <button class="picker-row picker-none">
-            <div class="resource-preview">None</div>
+            <div class="resource-thumb"></div>
             <div>Kein Bild</div>
           </button>
           ${resources.map(resource => `
             <button class="picker-row picker-resource" data-resource="${resource.id}">
-              <div class="resource-preview">
-                ${resource.is_video ? `<video src="${h(resource.url)}" muted playsinline></video>` : `<img src="${h(resource.preview_url)}" alt="" />`}
+              <div class="resource-thumb">
+                <div class="resource-preview">
+                  ${resource.is_video ? `<video src="${h(resource.url)}" muted playsinline></video>` : `<img src="${h(resource.preview_url)}" alt="" />`}
+                </div>
               </div>
               <div>
                 <div class="resource-name">${h(resource.name)}</div>
@@ -532,20 +720,169 @@ function bindStartup() {
   });
 }
 
+function setupPanelResize() {
+  const sceneResizer = document.getElementById("scene-resizer");
+  const resourcesResizer = document.getElementById("resources-resizer");
+
+  sceneResizer?.addEventListener("mousedown", event => {
+    event.preventDefault();
+
+    function move(e) {
+      const width = Math.max(180, Math.min(500, e.clientX));
+      document.documentElement.style.setProperty("--scene-width", width + "px");
+    }
+
+    function up() {
+      window.removeEventListener("mousemove", move);
+      window.removeEventListener("mouseup", up);
+    }
+
+    window.addEventListener("mousemove", move);
+    window.addEventListener("mouseup", up);
+  });
+
+  resourcesResizer?.addEventListener("mousedown", event => {
+    event.preventDefault();
+
+    function move(e) {
+      const height = Math.max(120, Math.min(500, window.innerHeight - e.clientY));
+      document.documentElement.style.setProperty("--resources-height", height + "px");
+    }
+
+    function up() {
+      window.removeEventListener("mousemove", move);
+      window.removeEventListener("mouseup", up);
+    }
+
+    window.addEventListener("mousemove", move);
+    window.addEventListener("mouseup", up);
+  });
+}
+
+function setupTitleBarDrag() {
+  const titleBar = document.querySelector(".title-bar");
+  if (!titleBar) return;
+
+  let isDragging = false;
+  let startX, startY;
+
+  titleBar.addEventListener("mousedown", (e) => {
+    // Don't start drag if clicking on interactive elements
+    if (
+        e.target.closest("button") ||
+        e.target.closest(".menu-item") ||
+        e.target.closest(".dropdown") ||
+        e.target.closest(".window-control") ||
+        e.target.closest("[data-menu]") ||
+        e.target.closest("[data-diagnostic]") ||
+        e.target.tagName === "BUTTON" ||
+        e.target.tagName === "INPUT" ||
+        e.target.tagName === "SELECT"
+    ) {
+      return;
+    }
+
+    isDragging = true;
+    startX = e.screenX;
+    startY = e.screenY;
+
+    e.preventDefault();
+  });
+
+  window.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+
+    const deltaX = e.screenX - startX;
+    const deltaY = e.screenY - startY;
+
+    // Send delta to backend for window movement
+    invoke("move_window", { deltaX, deltaY });
+
+    startX = e.screenX;
+    startY = e.screenY;
+  });
+
+  window.addEventListener("mouseup", () => {
+    isDragging = false;
+  });
+
+  // Also stop dragging if we lose focus
+  window.addEventListener("blur", () => {
+    isDragging = false;
+  });
+}
+
+function renderTitleBar() {
+  const hasProject = appState.snapshot?.current_project_path;
+
+  return `
+    <div class="title-bar">
+      <div class="title-bar-left">
+        ${hasProject ? `
+          <div class="menu-item">Datei
+            <div class="dropdown">
+              <button data-menu="new">Projekt wechseln</button>
+              <button data-menu="save">Speichern</button>
+              <button data-menu="save-as">Speichern unter...</button>
+              <button data-menu="export">Exportieren (.tct)</button>
+              <button data-menu="close">Projekt schließen</button>
+            </div>
+          </div>
+          <div class="menu-item">Debugging
+            <div class="dropdown">
+              <button data-diagnostic="project">Project Data</button>
+              <button data-diagnostic="projection">Projection</button>
+              <button data-diagnostic="log">Log</button>
+              <button data-diagnostic="resources">Resources</button>
+              <button data-diagnostic="scene">Scenes</button>
+            </div>
+          </div>
+        ` : ''}
+      </div>
+      
+      <div class="title-bar-center" title="Drag to move window">
+        <span class="title-text">TCast</span>
+      </div>
+      
+      <div class="title-bar-right">
+        <button class="window-control" id="minimize-window" title="Minimize">
+          <svg width="12" height="12" viewBox="0 0 12 12">
+            <rect x="0" y="5" width="12" height="1.5" fill="currentColor"/>
+          </svg>
+        </button>
+        <button class="window-control" id="maximize-window" title="Maximize">
+          <svg width="12" height="12" viewBox="0 0 12 12">
+            <rect x="1" y="1" width="10" height="10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          </svg>
+        </button>
+        <button class="window-control close" id="close-window" title="Close">
+          <svg width="12" height="12" viewBox="0 0 12 12">
+            <path d="M1 1L11 11M11 1L1 11" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  `;
+}
 function bindWorkspace() {
+
   document.querySelectorAll("[data-menu]").forEach(button => {
     button.addEventListener("click", () => handleMenu(button.dataset.menu));
   });
 
-  document.getElementById("diagnostics-toggle")?.addEventListener("click", () => {
-    appState.diagnostics = !appState.diagnostics;
-    render();
-  });
   document.getElementById("diagnostics-close")?.addEventListener("click", () => {
     appState.diagnostics = false;
     render();
   });
-  document.getElementById("open-folder")?.addEventListener("click", () => run("open_project_folder"));
+
+  document.querySelectorAll("[data-diagnostic]").forEach(button => {
+    button.addEventListener("click", () => {
+      appState.diagnostics = button.dataset.diagnostic;
+      render();
+    });
+  });
+
+  setupPanelResize();
 
   document.getElementById("add-scene")?.addEventListener("click", () => run("add_scene"));
   document.getElementById("scene-up")?.addEventListener("click", () => run("move_scene", { direction: -1 }));
@@ -621,15 +958,10 @@ function handleMenu(action) {
   if (action === "new") {
     appState.startupTab = "new";
     run("close_project");
-  } else if (action === "load") {
-    appState.startupTab = "load";
-    run("close_project");
   } else if (action === "save") {
     run("save_project", {}, { message: "Gespeichert" });
   } else if (action === "save-as") {
     run("save_as", {}, { message: "Kopie gespeichert" });
-  } else if (action === "import") {
-    run("import_project", {}, { message: "Projekt importiert" });
   } else if (action === "export") {
     run("export_project", {}, { message: "Projekt exportiert" });
   } else if (action === "close") {

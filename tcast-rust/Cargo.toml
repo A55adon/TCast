@@ -16,3 +16,4 @@ url = "2"
 walkdir = "2"
 wry = "0.55"
 zip = { version = "0.6", default-features = false, features = ["deflate"] }
+percent-encoding = "2"

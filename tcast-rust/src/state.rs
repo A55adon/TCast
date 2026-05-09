@@ -13,6 +13,11 @@ use std::fs;
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
+#[derive(Debug, Deserialize)]
+struct ProjectorCountPayload {
+    count: usize,
+}
+
 pub struct AppState {
     repo_root: PathBuf,
     default_saves_dir: PathBuf,
@@ -24,6 +29,7 @@ pub struct AppState {
     active_resource_id: Option<i32>,
     logs: Vec<LogEntry>,
     projection_active: bool,
+
 }
 
 impl AppState {
@@ -60,6 +66,18 @@ impl AppState {
         }
 
         Ok(state)
+    }
+
+    fn set_projector_count(&mut self, count: usize) -> Result<()> {
+        let count = count.clamp(1, 6);
+        let Some(save_data) = &mut self.save_data else {
+            bail!("no project loaded");
+        };
+        save_data.projector_amount = count;
+        self.ensure_scene_lengths();
+        self.save_project()?;
+        self.log_info(format!("Changed projector count to {}", count));
+        Ok(())
     }
 
     pub fn handle_command(&mut self, command: &str, payload: Value) -> Result<Value> {
@@ -174,6 +192,11 @@ impl AppState {
             }
             "open_project_folder" => {
                 self.open_project_folder()?;
+                Ok(json!(self.snapshot()))
+            }
+            "set_projector_count" => {
+                let payload: ProjectorCountPayload = serde_json::from_value(payload)?;
+                self.set_projector_count(payload.count)?;
                 Ok(json!(self.snapshot()))
             }
             other => bail!("unknown command: {other}"),
@@ -402,12 +425,12 @@ impl AppState {
 
     fn delete_project(&mut self, path: &Path) -> Result<()> {
         let path = normalize_path(path);
-        if !path.starts_with(&self.default_saves_dir) {
-            bail!(
-                "refusing to delete a project outside {}",
-                self.default_saves_dir.display()
-            );
-        }
+        //if !path.starts_with(&self.default_saves_dir) {
+        //    bail!(
+        //        "refusing to delete a project outside {}",
+        //        self.default_saves_dir.display()
+        //    );
+        //}
         if path.is_dir() {
             fs::remove_dir_all(&path).with_context(|| format!("deleting {}", path.display()))?;
         }
@@ -1196,7 +1219,13 @@ fn validate_text(value: &str, field: &str) -> Result<()> {
 }
 
 fn normalize_path(path: &Path) -> PathBuf {
-    path.canonicalize().unwrap_or_else(|_| path.to_path_buf())
+    match path.canonicalize() {
+        Ok(canon) => {
+            let s = canon.to_string_lossy();
+            PathBuf::from(s.strip_prefix(r"\\?\").unwrap_or(&s).to_string())
+        }
+        Err(_) => path.to_path_buf(),
+    }
 }
 
 fn paths_equal(left: &Path, right: &Path) -> bool {

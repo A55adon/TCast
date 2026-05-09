@@ -1,10 +1,15 @@
 use crate::model::ProjectionSpec;
+use std::path::PathBuf;
 
 const STYLE: &str = include_str!("../ui/styles.css");
 const SCRIPT: &str = include_str!("../ui/app.js");
 
-pub fn main_html() -> String {
-    format!(
+pub fn main_html_path() -> PathBuf {
+    let temp_dir = std::env::temp_dir().join("tcast");
+    std::fs::create_dir_all(&temp_dir).ok();
+    let path = temp_dir.join("main.html");
+
+    let html = format!(
         r#"<!doctype html>
 <html lang="de">
 <head>
@@ -18,12 +23,26 @@ pub fn main_html() -> String {
   <script>{SCRIPT}</script>
 </body>
 </html>"#
-    )
+    );
+
+    let write_file = match std::fs::read_to_string(&path) {
+        Ok(existing) => existing != html,
+        Err(_) => true, // Datei existiert nicht oder kann nicht gelesen werden
+    };
+
+    if write_file {
+        std::fs::write(&path, &html).expect("Failed to write main.html");
+    }
+    path
 }
 
-pub fn projection_html(spec: &ProjectionSpec) -> String {
+pub fn projection_html_path(spec: &ProjectionSpec, index: usize) -> PathBuf {
+    let temp_dir = std::env::temp_dir().join("tcast");
+    std::fs::create_dir_all(&temp_dir).ok();
+    let path = temp_dir.join(format!("projection_{}.html", index));
+
     let spec_json = serde_json::to_string(spec).expect("projection spec should serialize");
-    format!(
+    let html = format!(
         r#"<!doctype html>
 <html lang="de">
 <head>
@@ -107,5 +126,8 @@ pub fn projection_html(spec: &ProjectionSpec) -> String {
 </body>
 </html>"#,
         spec.label
-    )
+    );
+
+    std::fs::write(&path, &html).expect("Failed to write projection HTML");
+    path
 }

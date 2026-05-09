@@ -2749,6 +2749,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "image",
+ "percent-encoding",
  "rfd",
  "serde",
  "serde_json",

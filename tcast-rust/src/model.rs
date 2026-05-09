@@ -1,6 +1,5 @@
 use serde::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
-use url::Url;
 
 pub const APP_VERSION: &str = "2.0.0-rust";
 
@@ -136,9 +135,20 @@ pub struct IpcResponse {
 }
 
 pub fn file_url(path: &Path) -> String {
-    Url::from_file_path(path)
-        .map(|url| url.to_string())
-        .unwrap_or_else(|_| path.to_string_lossy().replace('\\', "/"))
+    let raw = path.to_string_lossy();
+    let stripped = raw.strip_prefix(r"\\?\").unwrap_or(&raw);
+    let s = stripped.replace('\\', "/");
+    let s = s.trim_start_matches('/');
+
+    // Windows: "C:/Users/..." → "https://asset.c/Users/..."
+    // Matches the format wry uses for its own URL conversion
+    if s.len() >= 2 && s.as_bytes()[1] == b':' && s.as_bytes()[0].is_ascii_alphabetic() {
+        let drive = (s.as_bytes()[0] as char).to_ascii_lowercase();
+        let rest = s[2..].trim_start_matches('/');
+        return format!("https://asset.{}/{}", drive, rest);
+    }
+
+    format!("https://asset./{}", s)
 }
 
 pub fn is_image_path(path: &Path) -> bool {

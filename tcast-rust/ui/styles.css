@@ -43,6 +43,11 @@ select {
   font: inherit;
 }
 
+input[type="range"] {
+  padding: 0;
+  min-height: auto;
+}
+
 button {
   border: 0;
   color: var(--text);
@@ -105,9 +110,19 @@ select:focus {
   position: relative;
   display: flex;
   align-items: center;
-  padding: 0 12px;
+  padding: 6px 12px;
   border-radius: 6px;
   color: var(--muted);
+}
+
+.menu-item::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 12px; /* Adjust this value to extend hover area */
+  z-index: 19;
 }
 
 .menu-item:hover {
@@ -115,15 +130,22 @@ select:focus {
   color: var(--text);
 }
 
+.icon-button svg {
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+
 .dropdown {
   display: none;
   position: absolute;
-  top: 31px;
+  top: 35px;
   left: 0;
   min-width: 210px;
   padding: 6px;
   background: var(--panel-2);
   border: 1px solid var(--line);
+  border-radius: 6px;
   box-shadow: var(--shadow);
   z-index: 20;
 }
@@ -149,9 +171,9 @@ select:focus {
   place-items: center;
   padding: 28px;
   background:
-    linear-gradient(90deg, rgba(228, 183, 59, .06), transparent 24%),
-    radial-gradient(circle at 80% 10%, rgba(90, 169, 230, .10), transparent 30%),
-    var(--bg);
+          linear-gradient(90deg, rgba(228, 183, 59, .06), transparent 24%),
+          radial-gradient(circle at 80% 10%, rgba(90, 169, 230, .10), transparent 30%),
+          var(--bg);
 }
 
 .startup-panel {
@@ -163,6 +185,8 @@ select:focus {
 
 .brand-block {
   padding: 8px 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .brand-name {
@@ -180,6 +204,13 @@ select:focus {
   line-height: 1.5;
 }
 
+.brand-copyright {
+  margin-top: auto;
+  padding-top: 24px;
+  color: var(--soft);
+  font-size: 13px;
+}
+
 .startup-box,
 .panel,
 .modal-box,
@@ -189,8 +220,17 @@ select:focus {
   border-radius: 8px;
 }
 
+.panel-resizer-x {
+  cursor: col-resize;
+  background: transparent;
+  transition: background .12s;
+}
+
+.panel-resizer-x:hover {
+  background: var(--line);
+}
+
 .startup-box {
-  min-height: 560px;
   display: grid;
   grid-template-rows: auto 1fr;
   overflow: hidden;
@@ -218,6 +258,7 @@ select:focus {
   display: grid;
   gap: 14px;
   padding: 18px;
+  align-content: start;
 }
 
 .field {
@@ -262,11 +303,25 @@ select:focus {
   border: 1px solid var(--line);
 }
 
+.project-pick {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.project-title,
+.project-meta {
+  white-space: nowrap;
+}
+
 .project-list {
   display: grid;
   gap: 8px;
+  min-height: 120px;
   max-height: 306px;
-  overflow: auto;
+  overflow-y: auto;
+  align-content: start;
 }
 
 .project-row {
@@ -278,6 +333,7 @@ select:focus {
   background: var(--panel-2);
   border: 1px solid transparent;
   border-radius: 6px;
+  min-height: 52px;
 }
 
 .project-row:hover {
@@ -299,9 +355,13 @@ select:focus {
 }
 
 .workspace {
+  height: calc(100vh - 38px);
   min-height: 0;
   display: grid;
-  grid-template-columns: 250px 1fr;
+  grid-template-columns:
+    var(--scene-width, 250px)
+    6px
+    1fr;
 }
 
 .scene-panel {
@@ -310,6 +370,7 @@ select:focus {
   grid-template-rows: auto 1fr auto;
   gap: 10px;
   padding: 12px;
+  padding-bottom: 0px;
   border-right: 1px solid var(--line);
   background: #111419;
 }
@@ -357,6 +418,31 @@ select:focus {
   gap: 4px;
 }
 
+.scene-actions-left {
+  display: flex;
+  gap: 6px;
+}
+
+.scene-footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  box-sizing: border-box;
+  border-top: 1px solid var(--line);
+}
+
+.scene-actions-center {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.scene-actions-center button {
+  flex: 1;
+}
+
 .icon-button {
   width: 32px;
   min-width: 32px;
@@ -365,17 +451,25 @@ select:focus {
   place-items: center;
 }
 
-.scene-footer {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-}
-
 .main {
   min-width: 0;
   min-height: 0;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) 230px;
+  grid-template-rows:
+    auto
+    minmax(0, 1fr)
+    6px
+    var(--resources-height, 230px);
+}
+
+.panel-resizer-y {
+  cursor: row-resize;
+  background: transparent;
+  transition: background .12s;
+}
+
+.panel-resizer-y:hover {
+  background: var(--line);
 }
 
 .topbar {
@@ -455,7 +549,8 @@ select:focus {
 .projector-media img,
 .projector-media video {
   position: absolute;
-  top: 0;
+  inset: 0;
+  width: 100%;
   height: 100%;
   object-fit: fill;
 }
@@ -512,8 +607,11 @@ select:focus {
   background: var(--gold);
 }
 
+/* ── Resource panel ───────────────────────────────────── */
+
 .resource-panel {
   min-height: 0;
+  overflow: hidden;
   display: grid;
   grid-template-rows: auto 1fr;
   border-top: 1px solid var(--line);
@@ -531,34 +629,51 @@ select:focus {
 .resource-list {
   min-height: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 10px;
   padding: 12px;
-  overflow: auto;
+  overflow-y: auto;
+  align-content: start;
 }
 
 .resource-item {
-  min-width: 0;
-  display: grid;
+  min-width: auto;
+  min-height: 155px;
+  display: flex;
+  flex-direction: column;
   gap: 6px;
-  padding: 8px;
+  padding: 6px;
   border: 1px solid transparent;
   border-radius: 8px;
   background: var(--panel);
+  overflow: hidden;
 }
 
 .resource-item.active {
   border-color: var(--gold);
 }
 
-.resource-preview {
+/* thumbnail container — holds the preview button + action overlay */
+.resource-thumb {
+  position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
   border-radius: 6px;
   overflow: hidden;
   background: #050607;
-  display: grid;
-  place-items: center;
+  flex-shrink: 0;
+}
+
+.resource-preview {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  display: block;
+  cursor: pointer;
 }
 
 .resource-preview img,
@@ -566,11 +681,38 @@ select:focus {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+}
+
+/* action buttons — invisible overlay, fades in on card hover */
+.resource-buttons {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  padding: 6px;
+  background: rgba(0, 0, 0, 0);
+  opacity: 0;
+  transition: opacity .15s, background .15s;
+}
+
+.resource-item:hover .resource-buttons {
+  opacity: 1;
+  background: rgba(0, 0, 0, .58);
+}
+
+.resource-buttons button {
+  flex: 1;
+  font-size: 11px;
+  min-height: 26px;
+  padding: 4px 6px;
 }
 
 .resource-meta {
   display: grid;
-  gap: 5px;
+  gap: 3px;
+  padding: 0 2px;
 }
 
 .resource-type {
@@ -578,11 +720,7 @@ select:focus {
   font-size: 11px;
 }
 
-.resource-buttons {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5px;
-}
+/* ── Modals & drawers ─────────────────────────────────── */
 
 .modal-overlay {
   position: fixed;
@@ -686,6 +824,8 @@ select:focus {
   color: #ffd4d7;
 }
 
+/* ── Toasts ───────────────────────────────────────────── */
+
 .toast-wrap {
   position: fixed;
   right: 12px;
@@ -719,4 +859,115 @@ select:focus {
 
 .hidden {
   display: none;
+}
+
+/* Custom title bar styles */
+.title-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: 38px;
+  background: #0b0d10;
+  border-bottom: 1px solid var(--line);
+  border-radius: 10px 10px 0 0;
+  -webkit-app-region: drag;  /* Make the title bar draggable */
+  user-select: none;
+  padding: 0 8px;
+}
+
+.title-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  -webkit-app-region: no-drag;  /* Allow interaction with buttons */
+}
+
+.title-bar-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-app-region: drag;
+}
+
+.title-text {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.title-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: flex-end;
+  -webkit-app-region: no-drag;
+}
+
+.window-control {
+  width: 32px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.window-control:hover {
+  background: var(--panel-2);
+  color: var(--text);
+}
+
+.window-control.close:hover {
+  background: #c42b1c;
+  color: white;
+}
+
+/* Rounded corners for the main container */
+.app-shell {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 38px 1fr;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* Adjust menu bar (remove old one) */
+.menu-bar {
+  display: none;  /* Hide old menu bar, now integrated into title bar */
+}
+
+/* Make sure the app has a border-radius */
+html, body {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+body {
+  background: transparent;  /* For transparency to work */
+}
+
+#app {
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* Improve title bar drag experience */
+.title-bar {
+  cursor: grab;
+}
+
+.title-bar:active {
+  cursor: grabbing;
+}
+
+/* Ensure buttons don't interfere with dragging */
+.title-bar button,
+.title-bar .menu-item {
+  cursor: pointer;
 }

@@ -1,0 +1,33 @@
+{
+  "projectName": "Sample Project",
+  "projectorCount": 6,
+  "projectorSettings": [
+    {
+      "aspect": "16:9",
+      "rotation": 0
+    },
+    {
+      "aspect": "16:9",
+      "rotation": 0
+    },
+    {
+      "aspect": "16:9",
+      "rotation": 0
+    },
+    {
+      "aspect": "16:9",
+      "rotation": 0
+    },
+    {
+      "aspect": "16:9",
+      "rotation": 0
+    },
+    {
+      "aspect": "16:9",
+      "rotation": 0
+    }
+  ],
+  "description": "Sample project to test functionality",
+  "path": "C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves",
+  "version": "2.0.0-rust"
+}

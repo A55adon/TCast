@@ -17,3 +17,7 @@ walkdir = "2"
 wry = "0.55"
 zip = { version = "0.6", default-features = false, features = ["deflate"] }
 percent-encoding = "2"
+raw-window-handle = "0.6.2"
+
+[target.'cfg(windows)'.dependencies]
+windows = { version = "0.58", features = ["Win32_UI_WindowsAndMessaging", "Win32_Foundation"] }

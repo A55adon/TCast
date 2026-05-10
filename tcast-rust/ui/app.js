@@ -115,6 +115,10 @@ function bindTitleBar() {
     });
   });
 
+  window.addEventListener("resize", () => {
+    updateMaximizeButton();
+  });
+
   // Double-click on title bar to maximize
   document.querySelector(".title-bar")?.addEventListener("dblclick", (e) => {
     // Only maximize if double-clicking on the draggable area
@@ -149,14 +153,17 @@ function render() {
   const snap = appState.snapshot;
   if (!snap?.current_project_path) {
     root.innerHTML = renderStartup();
+    bindTitleBar();
     bindStartup();
-    bindTitleBar();  // Always bind title bar events
+    setTimeout(updateMaximizeButton, 100); // Short delay to ensure DOM is ready
   } else {
     root.innerHTML = renderWorkspace();
     bindWorkspace();
-    bindTitleBar();  // Always bind title bar events
+    bindTitleBar();
+    setTimeout(updateMaximizeButton, 100);
   }
 }
+
 function renderStartup() {
   const snap = appState.snapshot || { projects: [], default_saves_path: "" };
   const projects = snap.projects || [];
@@ -240,6 +247,24 @@ function renderProjectRow(project) {
       <button type="button" class="danger project-delete">Löschen</button>
     </div>
   `;
+}
+
+function updateMaximizeButton() {
+  const btn = document.getElementById("maximize-window");
+  if (!btn) return;
+
+  invoke("get_window_state").then(data => {
+    const isMaximized = data?.maximized || false;
+    btn.innerHTML = isMaximized
+        ? `<svg width="12" height="12" viewBox="0 0 12 12">
+           <rect x="1.5" y="3" width="7" height="7" stroke="currentColor" stroke-width="1.5" fill="none"/>
+           <rect x="3.5" y="1" width="7" height="7" stroke="currentColor" stroke-width="1.5" fill="var(--bg)"/>
+         </svg>`
+        : `<svg width="12" height="12" viewBox="0 0 12 12">
+           <rect x="1" y="1" width="10" height="10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+         </svg>`;
+    btn.title = isMaximized ? "Restore" : "Maximize";
+  });
 }
 
 function renderWorkspace() {
@@ -552,14 +577,23 @@ function renderResource(resource) {
       : `<img src="${h(resource.preview_url)}" alt="" />`}
         </button>
         <div class="resource-buttons">
-          <button class="resource-rename" data-resource="${resource.id}">Umbenennen</button>
-          <button class="danger resource-delete" data-resource="${resource.id}">Löschen</button>
+          <button class="icon-button resource-rename" data-resource="${resource.id}" title="Umbenennen">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+            </svg>
+          </button>
+          <button class="icon-button danger resource-delete" data-resource="${resource.id}" title="Löschen">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="3 6 5 6 21 6"/>
+              <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+              <path d="M10 11v6M14 11v6"/>
+              <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+            </svg>
+          </button>
         </div>
       </div>
-      <div class="resource-meta">
-        <div class="resource-name" title="${h(resource.name)}">${h(resource.name)}</div>
-        <div class="resource-type">${resource.is_video ? "Video" : "Bild"}${resource.missing ? " · fehlt" : ""}</div>
-      </div>
+      <div class="resource-name" title="${h(resource.name)}">${h(resource.name)}</div>
     </div>
   `;
 }
@@ -760,56 +794,24 @@ function setupPanelResize() {
 }
 
 function setupTitleBarDrag() {
+  // Remove ALL custom drag handling
+  // The -webkit-app-region: drag in CSS will let Windows handle it natively
+
+  // Keep double-click to maximize
   const titleBar = document.querySelector(".title-bar");
-  if (!titleBar) return;
 
-  let isDragging = false;
-  let startX, startY;
-
-  titleBar.addEventListener("mousedown", (e) => {
-    // Don't start drag if clicking on interactive elements
-    if (
-        e.target.closest("button") ||
-        e.target.closest(".menu-item") ||
-        e.target.closest(".dropdown") ||
-        e.target.closest(".window-control") ||
-        e.target.closest("[data-menu]") ||
-        e.target.closest("[data-diagnostic]") ||
-        e.target.tagName === "BUTTON" ||
-        e.target.tagName === "INPUT" ||
-        e.target.tagName === "SELECT"
-    ) {
-      return;
-    }
-
-    isDragging = true;
-    startX = e.screenX;
-    startY = e.screenY;
-
-    e.preventDefault();
-  });
-
-  window.addEventListener("mousemove", (e) => {
-    if (!isDragging) return;
-
-    const deltaX = e.screenX - startX;
-    const deltaY = e.screenY - startY;
-
-    // Send delta to backend for window movement
-    invoke("move_window", { deltaX, deltaY });
-
-    startX = e.screenX;
-    startY = e.screenY;
-  });
-
-  window.addEventListener("mouseup", () => {
-    isDragging = false;
-  });
-
-  // Also stop dragging if we lose focus
-  window.addEventListener("blur", () => {
-    isDragging = false;
-  });
+  if (titleBar) {
+    titleBar.addEventListener("dblclick", (e) => {
+      if (
+          e.target.closest(".title-bar-center") ||
+          (!e.target.closest("button") &&
+              !e.target.closest(".menu-item") &&
+              !e.target.closest(".dropdown"))
+      ) {
+        invoke("maximize_window");
+      }
+    });
+  }
 }
 
 function renderTitleBar() {

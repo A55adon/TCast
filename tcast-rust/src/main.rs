@@ -20,6 +20,51 @@ use serde::Deserialize;
 #[cfg(target_os = "windows")]
 use wry::WebViewBuilderExtWindows;
 
+#[cfg(target_os = "windows")]
+use tao::platform::windows::WindowExtWindows;
+
+#[cfg(target_os = "windows")]
+mod windows_utils {
+    use windows::Win32::UI::WindowsAndMessaging::{
+        SetWindowLongPtrW, GetWindowLongPtrW, GWL_STYLE, GWL_EXSTYLE,
+        WS_THICKFRAME, WS_CAPTION, WS_SYSMENU,
+        WS_MAXIMIZEBOX, WS_MINIMIZEBOX,
+        WS_EX_APPWINDOW, WS_EX_WINDOWEDGE,
+        SetWindowPos, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SWP_FRAMECHANGED
+    };
+    use windows::Win32::Foundation::HWND;
+
+    pub fn enable_snap(hwnd: isize) {
+        unsafe {
+            let hwnd = HWND(hwnd as *mut _);
+            let mut style = GetWindowLongPtrW(hwnd, GWL_STYLE);
+            let mut ex_style = GetWindowLongPtrW(hwnd, GWL_EXSTYLE);
+
+            // Add styles needed for Aero Snap
+            style |= (WS_THICKFRAME.0 as isize)
+                | (WS_CAPTION.0 as isize)
+                | (WS_SYSMENU.0 as isize)
+                | (WS_MAXIMIZEBOX.0 as isize)
+                | (WS_MINIMIZEBOX.0 as isize);
+
+            // Add extended styles
+            ex_style |= (WS_EX_APPWINDOW.0 as isize)
+                | (WS_EX_WINDOWEDGE.0 as isize);
+
+            SetWindowLongPtrW(hwnd, GWL_STYLE, style);
+            SetWindowLongPtrW(hwnd, GWL_EXSTYLE, ex_style);
+
+            // Force window to update its frame
+            SetWindowPos(
+                hwnd,
+                None,
+                0, 0, 0, 0,
+                SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED
+            );
+        }
+    }
+}
+
 #[derive(Debug, Clone)]
 enum UserEvent {
     Ipc(String),
@@ -45,15 +90,8 @@ fn mime_for_path(path: &str) -> &'static str {
     "application/octet-stream"
 }
 
-/// Extrahiert den Dateipfad aus der Custom-Protocol-URI.
-/// Behandelt verschiedene Formate, die auf Windows auftreten können:
-/// - `asset://c/Users/...` (mit with_https_scheme)
-/// - `https://asset./c/Users/...` (ohne with_https_scheme)
-/// - `http://asset./c/Users/...`
-
+/// Extracts the file path from a custom protocol URI.
 fn extract_path_from_uri(uri: &str) -> String {
-    // wry with https_scheme maps asset://C:\path → https://asset.c/path
-    // Chromium may also strip trailing dot: https://asset./path → https://asset/path
     let decoded = percent_decode_str(uri).decode_utf8_lossy().to_string();
 
     let path = if let Some(rest) = decoded.strip_prefix("asset://") {
@@ -63,10 +101,9 @@ fn extract_path_from_uri(uri: &str) -> String {
             Some(pos) => pos,
             None => return String::new(),
         };
-        let authority = &rest[..slash]; // e.g. "asset.c", "asset.", "asset"
+        let authority = &rest[..slash];
         let path = &rest[slash + 1..];
 
-        // Drive letter encoded as subdomain: https://asset.c/Users/... → C:/Users/...
         if cfg!(windows) {
             if let Some(sub) = authority.strip_prefix("asset.") {
                 if sub.len() == 1 && sub.as_bytes()[0].is_ascii_alphabetic() {
@@ -80,7 +117,6 @@ fn extract_path_from_uri(uri: &str) -> String {
         return String::new();
     };
 
-    // Drive letter as path prefix: c/Users/... → C:/Users/...
     if cfg!(windows)
         && path.len() >= 2
         && path.as_bytes()[1] == b'/'
@@ -104,14 +140,20 @@ fn main() -> Result<()> {
         .with_title("TCast")
         .with_inner_size(LogicalSize::new(1280.0, 820.0))
         .with_min_inner_size(LogicalSize::new(960.0, 620.0))
-        .with_decorations(false)  // Remove native title bar
-        .with_transparent(true)   // Enable transparent background
+        .with_decorations(false)
+        .with_transparent(false)
         .build(&event_loop)
         .context("creating control window")?;
     let control_window_id = control_window.id();
 
+    // Enable Aero Snap BEFORE creating the webview
+    #[cfg(target_os = "windows")]
+    {
+        let hwnd = control_window.hwnd();
+        windows_utils::enable_snap(hwnd);
+    }
+
     let main_html_path = ui::main_html_path();
-    // Wichtig: URL ohne https://, da wir with_https_scheme verwenden
     let main_url = format!("asset://{}", main_html_path.display());
 
     let mut control_webview_builder = WebViewBuilder::new()
@@ -123,8 +165,6 @@ fn main() -> Result<()> {
         })
         .with_custom_protocol("asset".into(), |_webview_id, request| {
             let uri = request.uri().to_string();
-
-            // Entferne eventuelle Query-Parameter
             let path_str = extract_path_from_uri(&uri);
             let path_str = match path_str.find('?') {
                 Some(pos) => &path_str[..pos],
@@ -185,7 +225,7 @@ fn main() -> Result<()> {
                     &mut app_state,
                     &control_webview,
                     &mut projection_windows,
-                    &control_window,  // Add this
+                    &control_window,
                 );
             }
             Event::WindowEvent {
@@ -207,7 +247,6 @@ fn main() -> Result<()> {
                 ..
             } => {
                 if window_id == control_window_id {
-                    // Update maximize button state in UI
                     let is_maximized = control_window.is_maximized();
                     let script = format!(
                         "document.querySelector('#maximize-window')?.classList.toggle('maximized', {});",
@@ -267,7 +306,6 @@ fn process_ipc(
             app_state.log_info("Stopped projector outputs");
             Ok(json!(app_state.snapshot()))
         }
-        // Window control commands
         "minimize_window" => {
             control_window.set_minimized(true);
             Ok(json!({ "action": "minimized" }))
@@ -275,20 +313,23 @@ fn process_ipc(
         "maximize_window" => {
             let is_maximized = control_window.is_maximized();
             control_window.set_maximized(!is_maximized);
-            Ok(json!({ "action": "maximized", "state": !is_maximized }))
+            Ok(json!({
+                "action": if !is_maximized { "maximized" } else { "restored" },
+                "state": !is_maximized
+            }))
+        }
+        "get_window_state" => {
+            let is_maximized = control_window.is_maximized();
+            Ok(json!({
+                "maximized": is_maximized
+            }))
         }
         "close_window" => {
             std::process::exit(0);
         }
         "move_window" => {
-            // Handle window dragging
-            if let Ok(payload) = serde_json::from_value::<MoveWindowPayload>(message.payload) {
-                let current_pos = control_window.outer_position().unwrap_or_default();
-                let new_x = current_pos.x + payload.delta_x;
-                let new_y = current_pos.y + payload.delta_y;
-                control_window.set_outer_position(tao::dpi::PhysicalPosition::new(new_x, new_y));
-            }
-            Ok(json!({ "action": "moved" }))
+            control_window.drag_window();
+            Ok(json!({ "action": "dragging" }))
         }
         command => {
             let result = app_state.handle_command(command, message.payload);
@@ -330,7 +371,6 @@ fn create_projection_windows(
 ) -> Result<Vec<ProjectionWindow>> {
     let monitors: Vec<_> = target.available_monitors().collect();
 
-    // Find the primary monitor: the one whose position starts at (0, 0)
     let mut ordered_monitors = Vec::with_capacity(monitors.len());
     let primary_index = monitors.iter().position(|m| {
         let pos = m.position();
@@ -338,7 +378,6 @@ fn create_projection_windows(
     });
 
     if let Some(primary_idx) = primary_index {
-        // Put primary monitor first
         ordered_monitors.push(monitors[primary_idx].clone());
         for (i, monitor) in monitors.iter().enumerate() {
             if i != primary_idx {
@@ -346,33 +385,21 @@ fn create_projection_windows(
             }
         }
     } else {
-        // Fallback: keep original order
         ordered_monitors = monitors.clone();
-    }
-
-    // Debug output
-    println!("=== Available monitors (primary first): {} ===", ordered_monitors.len());
-    for (i, monitor) in ordered_monitors.iter().enumerate() {
-        println!("Monitor {}: {:?} - {:?}{}", i, monitor.name(), monitor.size(),
-                 if i == 0 { " (primary)" } else { "" });
-    }
-    println!("=== Specs: {} ===", specs.len());
-    for (i, spec) in specs.iter().enumerate() {
-        println!("Spec {}: index={}, label={}", i, spec.index, spec.label);
     }
 
     let mut windows = Vec::new();
     for (idx, spec) in specs.iter().enumerate() {
-        if idx >= ordered_monitors.len() {
-            println!("✗ No monitor available for projector '{}' (only {} monitors)",
+        let monitor_idx = idx + 1;
+        if monitor_idx >= ordered_monitors.len() {
+            println!("No monitor available for projector '{}' (only {} monitors)",
                      spec.label, ordered_monitors.len());
             continue;
         }
-        let monitor = &ordered_monitors[idx];
-        println!("Assigning projector '{}' to monitor {}: {:?}", spec.label, idx, monitor.name());
+        let monitor = &ordered_monitors[monitor_idx];
+        //println!("Assigning projector '{}' to monitor {}: {:?}", spec.label, idx, monitor.name());
 
         let fullscreen = Fullscreen::Borderless(Some(monitor.clone()));
-        println!("Creating fullscreen window on monitor: {:?}", monitor.name());
 
         let window = WindowBuilder::new()
             .with_title(format!("TCast {}", spec.label))
@@ -385,7 +412,7 @@ fn create_projection_windows(
             .build(target)
             .with_context(|| format!("creating {}", spec.label))?;
 
-        println!("✓ Window created for '{}'", spec.label);
+        //println!("✓ Window created for '{}'", spec.label);
 
         let proj_html = ui::projection_html_path(spec, idx);
         let proj_url = format!("asset://{}", proj_html.display());
@@ -448,7 +475,7 @@ fn create_projection_windows(
         });
     }
 
-    println!("=== Created {} projection windows ===", windows.len());
+    //println!("=== Created {} projection windows ===", windows.len());
     Ok(windows)
 }
 

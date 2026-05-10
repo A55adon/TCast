@@ -41,6 +41,8 @@ input,
 textarea,
 select {
   font: inherit;
+  font: inherit;
+  -webkit-app-region: no-drag;
 }
 
 input[type="range"] {
@@ -113,6 +115,7 @@ select:focus {
   padding: 6px 12px;
   border-radius: 6px;
   color: var(--muted);
+  -webkit-app-region: no-drag;
 }
 
 .menu-item::after {
@@ -221,9 +224,16 @@ select:focus {
 }
 
 .panel-resizer-x {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--scene-width, 250px);
+  width: 8px;
+  transform: translateX(-50%);
   cursor: col-resize;
   background: transparent;
   transition: background .12s;
+  z-index: 10;
 }
 
 .panel-resizer-x:hover {
@@ -358,10 +368,10 @@ select:focus {
   height: calc(100vh - 38px);
   min-height: 0;
   display: grid;
+  position: relative;                              /* ← add */
   grid-template-columns:
     var(--scene-width, 250px)
-    6px
-    1fr;
+    1fr;                                           /* ← remove the 6px middle column */
 }
 
 .scene-panel {
@@ -491,6 +501,7 @@ select:focus {
   font-size: 26px;
   line-height: 1.15;
   letter-spacing: 0;
+  width: fit-content;
 }
 
 .project-heading p {
@@ -499,6 +510,16 @@ select:focus {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+
+  /* hide by default, reveal on hover */
+  opacity: 0;
+  max-height: 0;
+  transition: opacity 0.2s ease, max-height 0.2s ease;
+}
+
+.project-heading h1:hover ~ p {
+  opacity: 1;
+  max-height: 2em;
 }
 
 .top-actions,
@@ -629,37 +650,33 @@ select:focus {
 .resource-list {
   min-height: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 10px;
-  padding: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 160px));
+  justify-content: start;
+  gap: 8px;
+  padding: 10px;
   overflow-y: auto;
   align-content: start;
 }
 
 .resource-item {
-  min-width: auto;
-  min-height: 155px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 6px;
+  gap: 5px;
   border: 1px solid transparent;
   border-radius: 8px;
-  background: var(--panel);
   overflow: hidden;
+  background: var(--panel);
+  cursor: pointer;
 }
 
 .resource-item.active {
   border-color: var(--gold);
 }
 
-/* thumbnail container — holds the preview button + action overlay */
 .resource-thumb {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  border-radius: 6px;
-  overflow: hidden;
   background: #050607;
   flex-shrink: 0;
 }
@@ -684,29 +701,36 @@ select:focus {
   display: block;
 }
 
-/* action buttons — invisible overlay, fades in on card hover */
 .resource-buttons {
   position: absolute;
-  inset: 0;
+  top: 6px;
+  right: 6px;
   display: flex;
-  align-items: flex-end;
-  gap: 5px;
-  padding: 6px;
-  background: rgba(0, 0, 0, 0);
+  gap: 4px;
   opacity: 0;
-  transition: opacity .15s, background .15s;
+  transition: opacity .15s;
 }
 
 .resource-item:hover .resource-buttons {
   opacity: 1;
-  background: rgba(0, 0, 0, .58);
 }
 
-.resource-buttons button {
-  flex: 1;
-  font-size: 11px;
-  min-height: 26px;
-  padding: 4px 6px;
+.resource-buttons .icon-button {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: rgba(0, 0, 0, .65);
+  border: 1px solid rgba(255, 255, 255, .1);
+  backdrop-filter: blur(4px);
+}
+
+.resource-name {
+  padding: 0 8px 6px;
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .resource-meta {
@@ -870,23 +894,24 @@ select:focus {
   background: #0b0d10;
   border-bottom: 1px solid var(--line);
   border-radius: 10px 10px 0 0;
-  -webkit-app-region: drag;  /* Make the title bar draggable */
   user-select: none;
-  padding: 0 8px;
+  padding: 0 0 0 8px;
+  -webkit-app-region: drag;
 }
+
 
 .title-bar-left {
   display: flex;
   align-items: center;
   gap: 4px;
-  -webkit-app-region: no-drag;  /* Allow interaction with buttons */
+  -webkit-app-region: drag;  /* Allow interaction with buttons */
 }
 
 .title-bar-center {
   display: flex;
   align-items: center;
   justify-content: center;
-  -webkit-app-region: drag;
+  -webkit-app-region: drag;  /* Explicitly draggable */
 }
 
 .title-text {
@@ -897,28 +922,35 @@ select:focus {
 
 .title-bar-right {
   display: flex;
-  align-items: center;
-  gap: 4px;
+  align-items: stretch;   /* buttons fill full height */
+  align-self: stretch;
+  gap: 0;                 /* no gap, like native controls */
   justify-content: flex-end;
-  -webkit-app-region: no-drag;
+  -webkit-app-region: drag;
 }
 
 .window-control {
-  width: 32px;
-  height: 28px;
+  width: 46px;
   display: grid;
   place-items: center;
   background: transparent;
   border: none;
-  border-radius: 6px;
+  border-radius: 0px;       /* no radius on min/max */
+  min-height: unset;
   color: var(--muted);
   cursor: pointer;
-  transition: all 0.15s;
+  transition: background .15s, color .15s;
+  -webkit-app-region: no-drag;
 }
+
 
 .window-control:hover {
   background: var(--panel-2);
   color: var(--text);
+}
+
+.window-control.close {
+  border-radius: 0px;  /* only top-right, matches window corner */
 }
 
 .window-control.close:hover {
@@ -943,7 +975,7 @@ select:focus {
 
 /* Make sure the app has a border-radius */
 html, body {
-  border-radius: 10px;
+  border-radius: 0px;
   overflow: hidden;
 }
 
@@ -952,22 +984,7 @@ body {
 }
 
 #app {
-  border-radius: 10px;
+  border-radius: 0px;
   overflow: hidden;
   background: var(--bg);
-}
-
-/* Improve title bar drag experience */
-.title-bar {
-  cursor: grab;
-}
-
-.title-bar:active {
-  cursor: grabbing;
-}
-
-/* Ensure buttons don't interfere with dragging */
-.title-bar button,
-.title-bar .menu-item {
-  cursor: pointer;
 }

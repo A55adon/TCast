@@ -20,15 +20,6 @@ if errorlevel 1 (
     exit /b 1
 )
 
-where cargo >nul 2>&1
-if errorlevel 1 (
-    echo  [ERROR] Rust/Cargo is not installed or not in PATH.
-    echo          Download it from https://rustup.rs/
-    echo.
-    pause
-    exit /b 1
-)
-
 :: ── Check if already installed ────────────────────────────────────────────────
 
 set "REG_KEY=HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\TCast"
@@ -94,22 +85,42 @@ if errorlevel 1 (
 
 :: ── Build ─────────────────────────────────────────────────────────────────────
 
-echo.
-echo  Building TCast (this may take a few minutes)...
-pushd "!INSTALL_DIR!\tcast-rust"
-cargo build --release
-if errorlevel 1 (
-    popd
-    echo.
-    echo  [ERROR] Build failed. Check the output above for details.
-    pause
-    exit /b 1
-)
-popd
-
 set "EXE_PATH=!INSTALL_DIR!\tcast-rust\target\release\tcast-rust.exe"
+
+if exist "!EXE_PATH!" (
+    echo.
+    echo  Found prebuilt executable:
+    echo    !EXE_PATH!
+    echo  Skipping Rust build.
+) else (
+    where cargo >nul 2>&1
+    if errorlevel 1 (
+        echo.
+        echo  [ERROR] No prebuilt executable was found and Rust/Cargo is not installed.
+        echo          Expected: !EXE_PATH!
+        echo          Download Rust from https://rustup.rs/ or publish a prebuilt exe in the repo.
+        echo.
+        pause
+        exit /b 1
+    )
+
+    echo.
+    echo  No prebuilt executable found.
+    echo  Building TCast (this may take a few minutes)...
+    pushd "!INSTALL_DIR!\tcast-rust"
+    cargo build --release
+    if errorlevel 1 (
+        popd
+        echo.
+        echo  [ERROR] Build failed. Check the output above for details.
+        pause
+        exit /b 1
+    )
+    popd
+)
+
 if not exist "!EXE_PATH!" (
-    echo  [ERROR] Executable not found after build: !EXE_PATH!
+    echo  [ERROR] Executable not found: !EXE_PATH!
     pause
     exit /b 1
 )

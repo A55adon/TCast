@@ -1,0 +1,2 @@
+cargo:rustc-link-search=native=C:\Users\simon\Desktop\Code\TCast\tcast-rust\target\release\build\webview2-com-sys-eac85e493fa763df\out\x64
+cargo:rustc-link-lib=advapi32

@@ -113,6 +113,8 @@ if not exist "!EXE_PATH!" (
     pause
     exit /b 1
 )
+set "ICON_PATH=!INSTALL_DIR!\assets\t-cast-favicon.ico"
+if not exist "!ICON_PATH!" set "ICON_PATH=!EXE_PATH!"
 
 :: ── Copy helper scripts into install dir ─────────────────────────────────────
 
@@ -126,8 +128,9 @@ set "START_MENU=%APPDATA%\Microsoft\Windows\Start Menu\Programs"
 powershell -NoProfile -Command ^
   "$s=(New-Object -COM WScript.Shell).CreateShortcut('%START_MENU%\TCast.lnk');" ^
   "$s.TargetPath='!EXE_PATH!';" ^
-  "$s.WorkingDirectory='!INSTALL_DIR!\tcast-rust\target\release';" ^
+  "$s.WorkingDirectory='!INSTALL_DIR!';" ^
   "$s.Description='TCast';" ^
+  "$s.IconLocation='!ICON_PATH!,0';" ^
   "$s.Save()"
 echo  Start Menu shortcut created.
 
@@ -139,8 +142,9 @@ if /i "!DESKTOP!"=="Y" (
     powershell -NoProfile -Command ^
       "$s=(New-Object -COM WScript.Shell).CreateShortcut([Environment]::GetFolderPath('Desktop')+'\TCast.lnk');" ^
       "$s.TargetPath='!EXE_PATH!';" ^
-      "$s.WorkingDirectory='!INSTALL_DIR!\tcast-rust\target\release';" ^
+      "$s.WorkingDirectory='!INSTALL_DIR!';" ^
       "$s.Description='TCast';" ^
+      "$s.IconLocation='!ICON_PATH!,0';" ^
       "$s.Save()"
     echo  Desktop shortcut created.
 )
@@ -157,9 +161,14 @@ reg add "%REG_KEY%" /v DisplayVersion    /t REG_SZ    /d "!VERSION!"            
 reg add "%REG_KEY%" /v Publisher         /t REG_SZ    /d "A55adon"                          /f >nul
 reg add "%REG_KEY%" /v InstallLocation   /t REG_SZ    /d "!INSTALL_DIR!"                    /f >nul
 reg add "%REG_KEY%" /v UninstallString   /t REG_SZ    /d "cmd /c \"!UNINSTALL_CMD!\""       /f >nul
-reg add "%REG_KEY%" /v DisplayIcon       /t REG_SZ    /d "!EXE_PATH!"                       /f >nul
+reg add "%REG_KEY%" /v DisplayIcon       /t REG_SZ    /d "!ICON_PATH!"                      /f >nul
 reg add "%REG_KEY%" /v NoModify          /t REG_DWORD /d 1                                  /f >nul
 reg add "%REG_KEY%" /v NoRepair          /t REG_DWORD /d 1                                  /f >nul
+
+reg add "HKCU\Software\Classes\.tct" /ve /d "TCast.Project" /f >nul
+reg add "HKCU\Software\Classes\TCast.Project" /ve /d "TCast Project" /f >nul
+reg add "HKCU\Software\Classes\TCast.Project\DefaultIcon" /ve /d "!ICON_PATH!" /f >nul
+reg add "HKCU\Software\Classes\TCast.Project\shell\open\command" /ve /d "\"!EXE_PATH!\" \"%%1\"" /f >nul
 
 :: ── Done ─────────────────────────────────────────────────────────────────────
 

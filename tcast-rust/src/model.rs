@@ -9,9 +9,28 @@ pub struct SaveData {
     pub name: String,
     #[serde(rename = "projectorCount")]
     pub projector_amount: usize,
+    #[serde(rename = "projectorSettings", default)]
+    pub projector_settings: Vec<ProjectorSettings>,
     pub description: String,
     pub path: PathBuf,
     pub version: String,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct ProjectorSettings {
+    #[serde(default = "default_projector_aspect")]
+    pub aspect: String,
+    #[serde(default)]
+    pub rotation: u16,
+}
+
+impl Default for ProjectorSettings {
+    fn default() -> Self {
+        Self {
+            aspect: default_projector_aspect(),
+            rotation: 0,
+        }
+    }
 }
 
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
@@ -95,6 +114,7 @@ pub struct AppSnapshot {
     pub save_data: Option<SaveData>,
     pub scenes: Vec<SceneData>,
     pub resources: Vec<ResourceView>,
+    pub projection_specs: Option<Vec<ProjectionSpec>>,
     pub active_scene_index: usize,
     pub active_resource_id: Option<i32>,
     pub default_saves_path: String,
@@ -114,6 +134,8 @@ pub struct ProjectionSpec {
     pub is_split: bool,
     pub start: f32,
     pub end: f32,
+    pub aspect: String,
+    pub rotation: u16,
 }
 
 #[derive(Debug, Deserialize)]
@@ -170,4 +192,33 @@ pub fn normalized_ext(path: &Path) -> String {
         .and_then(|value| value.to_str())
         .unwrap_or_default()
         .to_ascii_lowercase()
+}
+
+pub fn default_projector_aspect() -> String {
+    "16:9".to_string()
+}
+
+pub fn normalize_projector_aspect(aspect: &str) -> String {
+    match aspect.trim() {
+        "16:10" => "16:10".to_string(),
+        "4:3" => "4:3".to_string(),
+        _ => default_projector_aspect(),
+    }
+}
+
+pub fn normalize_projector_rotation(rotation: u16) -> u16 {
+    match rotation % 360 {
+        45..=134 => 90,
+        135..=224 => 180,
+        225..=314 => 270,
+        _ => 0,
+    }
+}
+
+pub fn projector_aspect_value(aspect: &str) -> f32 {
+    match normalize_projector_aspect(aspect).as_str() {
+        "16:10" => 16.0 / 10.0,
+        "4:3" => 4.0 / 3.0,
+        _ => 16.0 / 9.0,
+    }
 }

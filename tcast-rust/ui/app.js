@@ -8,6 +8,9 @@ const appState = {
   nextId: 1,
 };
 
+const PROJECTOR_ASPECTS = ["16:9", "16:10", "4:3"];
+const PROJECTOR_ROTATIONS = [0, 90, 180, 270];
+
 function invoke(command, payload = {}) {
   const id = String(appState.nextId++);
   const message = JSON.stringify({ id, command, payload });
@@ -62,11 +65,57 @@ function shortPath(path) {
   return parts.slice(-3).join("/");
 }
 
+function appAsset(name) {
+  return window.__TCastAssets?.[name] || "";
+}
+
+function projectorSettings(index) {
+  const settings = appState.snapshot?.save_data?.projectorSettings?.[index]
+      || appState.snapshot?.save_data?.projector_settings?.[index]
+      || {};
+  const aspect = PROJECTOR_ASPECTS.includes(settings.aspect) ? settings.aspect : "16:9";
+  const rotation = PROJECTOR_ROTATIONS.includes(Number(settings.rotation)) ? Number(settings.rotation) : 0;
+  return { aspect, rotation };
+}
+
+function aspectValue(aspect) {
+  if (aspect === "16:10") return 16 / 10;
+  if (aspect === "4:3") return 4 / 3;
+  return 16 / 9;
+}
+
+function effectiveAspectValue(settings) {
+  const base = aspectValue(settings.aspect);
+  return settings.rotation % 180 === 90 ? 1 / base : base;
+}
+
+function effectiveAspectCss(settings) {
+  const [w, h] = settings.aspect.split(":").map(Number);
+  if (settings.rotation % 180 === 90) return `${h} / ${w}`;
+  return `${w} / ${h}`;
+}
+
+function projectorRotatorStyle(settings) {
+  const base = aspectValue(settings.aspect);
+  const quarter = settings.rotation % 180 === 90;
+  const width = quarter ? `${base * 100}%` : "100%";
+  const height = quarter ? `${100 / base}%` : "100%";
+  return `width:${width};height:${height};transform:translate(-50%, -50%) rotate(${settings.rotation}deg);`;
+}
+
 function showToast(message, type = "info") {
   const wrap = ensureToastWrap();
   const toast = document.createElement("button");
   toast.className = `toast ${type}`;
-  toast.textContent = message;
+  toast.type = "button";
+  toast.innerHTML = `
+    <span class="toast-mark">${type === "error" ? "!" : "i"}</span>
+    <span class="toast-body">
+      <span class="toast-title">${type === "error" ? "Fehler" : "TCast"}</span>
+      <span class="toast-message">${h(message)}</span>
+    </span>
+    <span class="toast-dismiss">×</span>
+  `;
   toast.addEventListener("click", () => toast.remove());
   wrap.appendChild(toast);
   setTimeout(() => toast.remove(), 7000);
@@ -173,7 +222,7 @@ function renderStartup() {
       <main class="startup">
         <div class="startup-panel">
           <section class="brand-block">
-            <div class="brand-name">TCast</div>
+            <img class="brand-logo" src="${h(appAsset("logo"))}" alt="TCast" />
             <div class="brand-subtitle">TCast ist eine moderne Theater- und Projektionsoftware zur Steuerung von Beamern, Szenen und Medieninhalten. Mehrere Projektoren können live synchron verwaltet und einzelnen Szenen zugewiesen werden. Bilder, Videos und Effekte lassen sich per Drag-and-drop organisieren und steuern.</div>
             <div class="brand-copyright">© Simon Wagner & Felix Eckinger</div>
           </section>
@@ -310,9 +359,10 @@ function renderMenu() {
 
       <div class="menu-item">Debugging
         <div class="dropdown">
-          <button data-diagnostic="project">Project Data</button>
+          <button data-diagnostic="overview">Overview</button>
+          <button data-diagnostic="project">Project</button>
           <button data-diagnostic="projection">Projection</button>
-          <button data-diagnostic="log">Log</button>
+          <button data-diagnostic="log">Logs</button>
           <button data-diagnostic="resources">Resources</button>
           <button data-diagnostic="scene">Scenes</button>
         </div>
@@ -493,6 +543,7 @@ function computeProjectorViews() {
         isSplit: groupLength > 1,
         start: groupLength > 1 ? offset / groupLength : 0,
         end: groupLength > 1 ? (offset + 1) / groupLength : 1,
+        settings: projectorSettings(index),
       };
     }
     i += groupLength;
@@ -516,33 +567,43 @@ function renderProjectors() {
 
 function renderProjector(view) {
   const resource = resourceForSource(view.source);
-  const srcUrl = sourceToUrl(view.source);
+  const srcUrl = sourceToUrl(view.preview || view.source);
   const isVideo = resource?.is_video || /\.(mp4|avi|mov|mkv|flv|webm)$/i.test(view.source);
+  const settings = view.settings || projectorSettings(view.index);
+  const aspectOptions = PROJECTOR_ASPECTS.map(aspect => `
+    <option value="${aspect}" ${settings.aspect === aspect ? "selected" : ""}>${aspect}</option>
+  `).join("");
   let mediaHtml = '';
   if (srcUrl) {
-    if (view.isSplit) {
-      const span = Math.max(0.0001, view.end - view.start);
-      const width = 100 / span;
-      const left = -view.start / span * 100;
-      mediaHtml = isVideo
-          ? `<video src="${h(srcUrl)}" muted loop playsinline style="width:${width}%; left:${left}%;"></video>`
-          : `<img src="${h(srcUrl)}" alt="" style="width:${width}%; left:${left}%;" />`;
-    } else {
-      mediaHtml = isVideo
-          ? `<video src="${h(srcUrl)}" muted loop playsinline></video>`
-          : `<img src="${h(srcUrl)}" alt="" />`;
-    }
+    const span = view.isSplit && isVideo ? Math.max(0.0001, view.end - view.start) : 1;
+    const width = 100 / span;
+    const left = -view.start / span * 100;
+    const sizing = `width:${width}%; left:${left}%;`;
+    const media = isVideo
+        ? `<video src="${h(srcUrl)}" muted loop playsinline style="${sizing}"></video>`
+        : `<img src="${h(srcUrl)}" alt="" style="${sizing}" />`;
+    mediaHtml = `<div class="projector-rotator" style="${projectorRotatorStyle(settings)}">${media}</div>`;
   } else {
     mediaHtml = `<div class="projector-empty">Kein Bild</div>`;
   }
   return `
-    <button class="projector" data-projector="${view.index}">
-      <div class="projector-media">
+    <div class="projector" data-projector="${view.index}" style="aspect-ratio:${effectiveAspectCss(settings)}">
+      <button type="button" class="projector-media projector-select" data-projector="${view.index}" title="Ressource auswählen">
         ${mediaHtml}
+      </button>
+      <div class="projector-controls">
+        <select class="projector-aspect" data-projector="${view.index}" title="Format">${aspectOptions}</select>
+        <button type="button" class="projector-rotate" data-projector="${view.index}" title="Drehen">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12a9 9 0 1 1-2.64-6.36"/>
+            <path d="M21 3v6h-6"/>
+          </svg>
+          <span>${settings.rotation}°</span>
+        </button>
       </div>
-      <div class="projector-label">Beamer ${view.index + 1}${view.isSplit ? ` · ${Math.round(view.start * 100)}-${Math.round(view.end * 100)}%` : ""}</div>
+      <div class="projector-label">Beamer ${view.index + 1} · ${h(settings.aspect)}${settings.rotation ? ` · ${settings.rotation}°` : ""}${view.isSplit ? ` · ${Math.round(view.start * 100)}-${Math.round(view.end * 100)}%` : ""}</div>
       <div class="projector-source">${h(resource?.name || shortPath(view.source) || "Ressource auswählen")}</div>
-    </button>
+    </div>
   `;
 }
 
@@ -664,28 +725,174 @@ function renderResourcePicker() {
 
 function renderDiagnostics() {
   const snap = appState.snapshot;
-  const logs = snap.logs || [];
+  if (!snap) return '';
+
+  const save = snap.save_data || {};
+  const scenes = snap.scenes || [];
+  const resources = snap.resources || [];
+  const count = Math.max(1, Math.min(6, save.projectorCount || save.projector_amount || 1));
+  const activeScene = scenes[snap.active_scene_index] || {};
+  const activeSources = Array.from({ length: count }, (_, i) => activeScene.sources?.[i] || "");
+  const settings = Array.from({ length: count }, (_, i) => projectorSettings(i));
+  const tabs = [
+    ["overview", "Overview"],
+    ["project", "Project"],
+    ["projection", "Projection"],
+    ["log", "Logs"],
+    ["resources", "Resources"],
+    ["scene", "Scenes"],
+  ];
+
+  let body = '';
+  switch (appState.diagnostics) {
+    case 'overview':
+      body = `
+        <div class="diag-grid">
+          <div class="stat-grid">
+            <div class="stat-card"><span>Projectors</span><strong>${count}</strong></div>
+            <div class="stat-card"><span>Scenes</span><strong>${scenes.length}</strong></div>
+            <div class="stat-card"><span>Resources</span><strong>${resources.length}</strong></div>
+            <div class="stat-card"><span>Assigned</span><strong>${activeSources.filter(Boolean).length}/${count}</strong></div>
+          </div>
+          <div class="diag-section">
+            <h3>Current State</h3>
+            <div class="diag-kv">
+              <span>Project</span><strong>${h(save.projectName || save.name || "Untitled")}</strong>
+              <span>Active scene</span><strong>${h(activeScene.sceneName || activeScene.name || "None")}</strong>
+              <span>Projection</span><strong class="${snap.projection_active ? "status-on" : "status-off"}">${snap.projection_active ? "Running" : "Stopped"}</strong>
+              <span>Path</span><strong title="${h(snap.current_project_path)}">${h(shortPath(snap.current_project_path))}</strong>
+            </div>
+          </div>
+          <div class="diag-section">
+            <h3>Projector Formats</h3>
+            <div class="projector-debug-list">
+              ${settings.map((item, index) => `
+                <div class="projector-debug">
+                  <strong>Beamer ${index + 1}</strong>
+                  <span>${h(item.aspect)} · ${item.rotation}° · ${effectiveAspectValue(item).toFixed(3)}:1</span>
+                  <small>${h(shortPath(activeSources[index]) || "No source")}</small>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        </div>`;
+      break;
+
+    case 'project':
+      body = `
+        <div class="diag-section">
+          <h3>Project Data</h3>
+          <div class="diag-kv">
+            <span>Name</span><strong>${h(save.projectName || save.name)}</strong>
+            <span>Description</span><strong>${h(save.description || "")}</strong>
+            <span>Version</span><strong>${h(save.version || "unknown")}</strong>
+            <span>Folder</span><strong title="${h(snap.current_project_path)}">${h(shortPath(snap.current_project_path))}</strong>
+          </div>
+          <pre class="diag-code">${h(JSON.stringify({
+        save_data: snap.save_data,
+        current_project_path: snap.current_project_path,
+        version: snap.save_data?.version
+      }, null, 2))}</pre>
+        </div>`;
+      break;
+
+    case 'projection':
+      body = `
+        <div class="diag-section">
+          <h3>Projection</h3>
+          ${snap.projection_specs && snap.projection_specs.length
+          ? snap.projection_specs.map(spec => `
+              <div class="proj-spec">
+                <strong>${h(spec.label)}</strong>
+                <div class="diag-kv compact">
+                  <span>Resource</span><strong>${h(spec.resource_name)}</strong>
+                  <span>Format</span><strong>${h(spec.aspect || "16:9")} · ${Number(spec.rotation || 0)}°</strong>
+                  <span>Media</span><strong>${spec.is_video ? "Video" : "Image"}</strong>
+                  <span>Split</span><strong>${spec.is_split ? `${Math.round(spec.start*100)}-${Math.round(spec.end*100)}%` : "No"}</strong>
+                  <span>Source</span><strong title="${h(spec.source_path)}">${h(shortPath(spec.source_path))}</strong>
+                </div>
+              </div>`).join('')
+          : '<div class="empty-state tight">No active projection. Start projection to inspect generated specs.</div>'}
+        </div>`;
+      break;
+
+    case 'log':
+      body = `
+        <div class="diag-section">
+          <h3>Recent Log</h3>
+          <div class="logs">
+            ${(snap.logs || []).slice().reverse().map(line => `
+              <div class="log-line ${h(line.level)}">
+                <span>${h(line.level)}</span>
+                <strong>${h(line.message)}</strong>
+              </div>`).join('')}
+          </div>
+        </div>`;
+      break;
+
+    case 'resources':
+      body = `
+        <div class="diag-section">
+          <h3>Resources</h3>
+          <table class="diag-table">
+            <tr><th>ID</th><th>Name</th><th>Type</th><th>Thumb</th><th>Status</th></tr>
+            ${resources.map(r => `
+              <tr>
+                <td>${r.id}</td>
+                <td>${h(r.name)}</td>
+                <td>${r.is_video ? 'video' : 'image'}</td>
+                <td>${r.thumbnail_id >= 0 ? r.thumbnail_id : "source"}</td>
+                <td>${r.missing ? 'Missing' : 'OK'}</td>
+              </tr>`).join('')}
+          </table>
+          <pre class="diag-code">${h(JSON.stringify(resources.map(r => ({
+            id: r.id,
+            name: r.name,
+            path: r.path,
+            preview: r.preview_url,
+            video: r.is_video,
+            missing: r.missing,
+          })), null, 2))}</pre>
+        </div>`;
+      break;
+
+    case 'scene':
+      body = `
+        <div class="diag-section">
+          <h3>Scenes</h3>
+          ${scenes.map((scene, idx) => `
+            <div class="scene-detail">
+              <strong>${idx + 1}. ${h(scene.sceneName || scene.name)}</strong>
+              <div class="diag-kv compact">
+                <span>Sources</span><strong>${(scene.sources || []).filter(Boolean).length}/${count}</strong>
+                <span>Connections</span><strong>${h(JSON.stringify(scene.connections || []))}</strong>
+              </div>
+              <pre class="diag-code">${h(JSON.stringify({
+                sources: scene.sources,
+                split_sources: scene.splitSources || scene.split_sources,
+                connections: scene.connections,
+              }, null, 2))}</pre>
+            </div>`).join('')}
+        </div>`;
+      break;
+
+    default:
+      body = `<p>Unknown diagnostic.</p>`;
+  }
+
   return `
     <aside class="drawer">
       <div class="resource-header">
-        <div class="section-title">Diagnose</div>
+        <div class="section-title">Debug</div>
         <button id="diagnostics-close">Schließen</button>
       </div>
+      <div class="diag-tabs">
+        ${tabs.map(([id, label]) => `
+          <button data-diagnostic="${id}" class="${appState.diagnostics === id ? "active" : ""}">${label}</button>
+        `).join("")}
+      </div>
       <div class="drawer-body">
-        <div class="diag-grid">
-          <div class="diag-pre">${h(JSON.stringify({
-            project: snap.save_data,
-            current_project_path: snap.current_project_path,
-            active_scene_index: snap.active_scene_index,
-            active_resource_id: snap.active_resource_id,
-            projection_active: snap.projection_active,
-            scenes: snap.scenes?.length || 0,
-            resources: snap.resources?.length || 0,
-          }, null, 2))}</div>
-          <div class="logs">
-            ${logs.slice().reverse().map(line => `<div class="log-line ${h(line.level)}">${h(line.message)}</div>`).join("")}
-          </div>
-        </div>
+        ${body}
       </div>
     </aside>
   `;
@@ -832,9 +1039,10 @@ function renderTitleBar() {
           </div>
           <div class="menu-item">Debugging
             <div class="dropdown">
-              <button data-diagnostic="project">Project Data</button>
+              <button data-diagnostic="overview">Overview</button>
+              <button data-diagnostic="project">Project</button>
               <button data-diagnostic="projection">Projection</button>
-              <button data-diagnostic="log">Log</button>
+              <button data-diagnostic="log">Logs</button>
               <button data-diagnostic="resources">Resources</button>
               <button data-diagnostic="scene">Scenes</button>
             </div>
@@ -843,6 +1051,7 @@ function renderTitleBar() {
       </div>
       
       <div class="title-bar-center" title="Drag to move window">
+        <img class="title-icon" src="${h(appAsset("favicon"))}" alt="" />
         <span class="title-text">TCast</span>
       </div>
       
@@ -927,10 +1136,6 @@ function bindWorkspace() {
 
   document.querySelectorAll(".projector").forEach(button => {
     const projectorIndex = Number(button.dataset.projector);
-    button.addEventListener("click", () => {
-      appState.modal = { type: "picker", projectorIndex };
-      render();
-    });
     button.addEventListener("dragover", event => {
       event.preventDefault();
       button.classList.add("drag-over");
@@ -943,6 +1148,38 @@ function bindWorkspace() {
       if (!Number.isNaN(resourceId)) {
         run("assign_resource", { projectorIndex, resourceId });
       }
+    });
+  });
+
+  document.querySelectorAll(".projector-select").forEach(button => {
+    button.addEventListener("click", () => {
+      appState.modal = { type: "picker", projectorIndex: Number(button.dataset.projector) };
+      render();
+    });
+  });
+
+  document.querySelectorAll(".projector-aspect").forEach(select => {
+    select.addEventListener("change", () => {
+      const projectorIndex = Number(select.dataset.projector);
+      const current = projectorSettings(projectorIndex);
+      run("set_projector_format", {
+        projectorIndex,
+        aspect: select.value,
+        rotation: current.rotation,
+      }, { message: `Beamer ${projectorIndex + 1}: ${select.value}` });
+    });
+  });
+
+  document.querySelectorAll(".projector-rotate").forEach(button => {
+    button.addEventListener("click", () => {
+      const projectorIndex = Number(button.dataset.projector);
+      const current = projectorSettings(projectorIndex);
+      const nextRotation = (current.rotation + 90) % 360;
+      run("set_projector_format", {
+        projectorIndex,
+        aspect: current.aspect,
+        rotation: nextRotation,
+      }, { message: `Beamer ${projectorIndex + 1}: ${nextRotation}°` });
     });
   });
 

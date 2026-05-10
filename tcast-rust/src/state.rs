@@ -1,15 +1,18 @@
 use crate::archive;
 use crate::media;
 use crate::model::{
-    APP_VERSION, AppSnapshot, LogEntry, ProjectEntry, ProjectionSpec, Resource, ResourceManager,
-    ResourceView, SaveData, SceneData, SceneManager, SplitInfo, file_url, is_image_path,
-    is_video_path,
+    APP_VERSION, AppSnapshot, LogEntry, ProjectEntry, ProjectionSpec, ProjectorSettings, Resource,
+    ResourceManager, ResourceView, SaveData, SceneData, SceneManager, SplitInfo, file_url,
+    is_image_path, is_video_path, normalize_projector_aspect, normalize_projector_rotation,
+    projector_aspect_value,
 };
 use anyhow::{Context, Result, anyhow, bail};
+use chrono::Local;
 use serde::Deserialize;
 use serde_json::{Value, json};
 use std::cmp::{max, min};
-use std::fs;
+use std::fs::{self, OpenOptions};
+use std::io::Write;
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
@@ -18,10 +21,19 @@ struct ProjectorCountPayload {
     count: usize,
 }
 
+#[derive(Debug, Deserialize)]
+struct ProjectorFormatPayload {
+    #[serde(rename = "projectorIndex")]
+    projector_index: usize,
+    aspect: String,
+    rotation: u16,
+}
+
 pub struct AppState {
     repo_root: PathBuf,
     default_saves_dir: PathBuf,
     current_project_path: Option<PathBuf>,
+    projection_specs: Option<Vec<ProjectionSpec>>,
     save_data: Option<SaveData>,
     scenes: Vec<SceneData>,
     resources: ResourceManager,
@@ -29,20 +41,45 @@ pub struct AppState {
     active_resource_id: Option<i32>,
     logs: Vec<LogEntry>,
     projection_active: bool,
-
 }
 
 impl AppState {
     pub fn new() -> Result<Self> {
         let cwd = std::env::current_dir().context("reading current directory")?;
-        let repo_root = if cwd.file_name().and_then(|value| value.to_str()) == Some("tcast-rust") {
-            cwd.parent().unwrap_or(&cwd).to_path_buf()
+        let cwd_root = detect_repo_root(&cwd);
+        let repo_root = if cwd_root.join("tcast-rust").exists() || cwd_root.join("assets").exists()
+        {
+            cwd_root
         } else {
-            cwd
+            std::env::current_exe()
+                .ok()
+                .and_then(|path| path.parent().map(detect_repo_root))
+                .unwrap_or(cwd_root)
         };
         let default_saves_dir = repo_root.join("saves").join("folderSaves");
         fs::create_dir_all(&default_saves_dir)
             .with_context(|| format!("creating {}", default_saves_dir.display()))?;
+
+        let logs_dir = repo_root.join("logs");
+        fs::create_dir_all(&logs_dir)
+            .with_context(|| format!("creating {}", logs_dir.display()))?;
+        // Delete logs older than 1 month
+        if let Ok(entries) = fs::read_dir(&logs_dir) {
+            let now = std::time::SystemTime::now();
+            for entry in entries.flatten() {
+                if entry.file_type().map(|t| t.is_file()).unwrap_or(false) {
+                    if let Ok(metadata) = entry.metadata() {
+                        if let Ok(modified) = metadata.modified() {
+                            if now.duration_since(modified).unwrap_or_default().as_secs()
+                                > 30 * 24 * 3600
+                            {
+                                let _ = fs::remove_file(entry.path());
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         let mut state = Self {
             repo_root,
@@ -50,6 +87,7 @@ impl AppState {
             current_project_path: None,
             save_data: None,
             scenes: Vec::new(),
+            projection_specs: None,
             resources: ResourceManager::default(),
             active_scene_index: 0,
             active_resource_id: None,
@@ -57,7 +95,20 @@ impl AppState {
             projection_active: false,
         };
 
-        if let Some(recent) = state.read_recent_path()? {
+        state.log_info(format!(
+            "Initialized state with repo root {} and saves folder {}",
+            state.repo_root.display(),
+            state.default_saves_dir.display()
+        ));
+
+        if let Some(startup_path) = std::env::args().nth(1).map(PathBuf::from) {
+            if let Err(error) = state.load_startup_path(&startup_path) {
+                state.log_error(format!(
+                    "Could not open startup path {}: {error:#}",
+                    startup_path.display()
+                ));
+            }
+        } else if let Some(recent) = state.read_recent_path()? {
             if recent.exists() {
                 if let Err(error) = state.load_project(&recent) {
                     state.log_error(format!("Could not load recent project: {error:#}"));
@@ -74,9 +125,38 @@ impl AppState {
             bail!("no project loaded");
         };
         save_data.projector_amount = count;
+        self.ensure_projector_settings();
         self.ensure_scene_lengths();
         self.save_project()?;
         self.log_info(format!("Changed projector count to {}", count));
+        Ok(())
+    }
+
+    fn set_projector_format(&mut self, index: usize, aspect: String, rotation: u16) -> Result<()> {
+        self.require_project()?;
+        let count = self.projector_count();
+        if index >= count {
+            bail!("projector index out of range");
+        }
+
+        self.ensure_projector_settings();
+        let normalized_aspect = normalize_projector_aspect(&aspect);
+        let normalized_rotation = normalize_projector_rotation(rotation);
+        let Some(save_data) = &mut self.save_data else {
+            bail!("no project loaded");
+        };
+        save_data.projector_settings[index] = ProjectorSettings {
+            aspect: normalized_aspect.clone(),
+            rotation: normalized_rotation,
+        };
+        self.regenerate_split_sources()?;
+        self.save_project()?;
+        self.log_info(format!(
+            "Set projector {} to {} rotated {} degrees",
+            index + 1,
+            normalized_aspect,
+            normalized_rotation
+        ));
         Ok(())
     }
 
@@ -199,6 +279,15 @@ impl AppState {
                 self.set_projector_count(payload.count)?;
                 Ok(json!(self.snapshot()))
             }
+            "set_projector_format" => {
+                let payload: ProjectorFormatPayload = serde_json::from_value(payload)?;
+                self.set_projector_format(
+                    payload.projector_index,
+                    payload.aspect,
+                    payload.rotation,
+                )?;
+                Ok(json!(self.snapshot()))
+            }
             other => bail!("unknown command: {other}"),
         }
     }
@@ -211,6 +300,7 @@ impl AppState {
                 .map(|path| path.to_string_lossy().to_string()),
             save_data: self.save_data.clone(),
             scenes: self.scenes.clone(),
+            projection_specs: self.projection_specs.clone(),
             resources: self.resource_views(),
             active_scene_index: self.active_scene_index,
             active_resource_id: self.active_resource_id,
@@ -228,6 +318,7 @@ impl AppState {
 
         let scene = self.active_scene()?;
         let mut specs = Vec::new();
+
         for index in 0..self.projector_count() {
             let Some(split) = scene.split_info.get(index) else {
                 continue;
@@ -238,6 +329,7 @@ impl AppState {
             let Some(resource) = self.resource_by_id(split.resource_id).cloned() else {
                 continue;
             };
+            let settings = self.projector_settings_for(index);
             specs.push(ProjectionSpec {
                 index,
                 label: format!("Projector {}", index + 1),
@@ -248,11 +340,27 @@ impl AppState {
                 is_split: split.is_split,
                 start: split.start,
                 end: split.end,
+                aspect: settings.aspect,
+                rotation: settings.rotation,
             });
         }
 
+        // Store AFTER the vector is fully populated
+        self.projection_specs = Some(specs.clone());
+
         self.log_info(format!("Prepared {} projector outputs", specs.len()));
+        for spec in &specs {
+            self.log_debug(format!(
+                "{} -> {} [{} rotation {} split {:.3}-{:.3}]",
+                spec.label, spec.resource_name, spec.aspect, spec.rotation, spec.start, spec.end
+            ));
+        }
         Ok(specs)
+    }
+
+    pub fn stop_projection(&mut self) {
+        self.projection_specs = None; // ← clear
+        self.set_projection_active(false);
     }
 
     pub fn set_projection_active(&mut self, active: bool) {
@@ -261,6 +369,10 @@ impl AppState {
 
     pub fn log_info(&mut self, message: impl Into<String>) {
         self.push_log("info", message.into());
+    }
+
+    pub fn log_debug(&mut self, message: impl Into<String>) {
+        self.push_log("debug", message.into());
     }
 
     pub fn log_error(&mut self, message: impl Into<String>) {
@@ -292,6 +404,7 @@ impl AppState {
         self.save_data = Some(SaveData {
             name: payload.name.clone(),
             projector_amount,
+            projector_settings: vec![ProjectorSettings::default(); projector_amount],
             description: payload.description,
             path: base_path,
             version: APP_VERSION.to_string(),
@@ -343,12 +456,19 @@ impl AppState {
         self.resources = resources;
         self.active_scene_index = 0;
         self.active_resource_id = None;
+        self.ensure_projector_settings();
         self.ensure_scene_lengths();
         self.remove_missing_resources()?;
         self.regenerate_split_sources()?;
         self.save_project()?;
         self.write_recent_path(&project_path)?;
-        self.log_info(format!("Loaded project {}", project_path.display()));
+        self.log_info(format!(
+            "Loaded project {} with {} scenes, {} resources, and {} projectors",
+            project_path.display(),
+            self.scenes.len(),
+            self.resource_views().len(),
+            self.projector_count()
+        ));
         Ok(())
     }
 
@@ -369,6 +489,7 @@ impl AppState {
             },
         )?;
         write_json(&project_path.join("resourceData.json"), &self.resources)?;
+        self.log_debug(format!("Saved project data to {}", project_path.display()));
         Ok(())
     }
 
@@ -423,6 +544,27 @@ impl AppState {
         Ok(imported)
     }
 
+    fn load_startup_path(&mut self, path: &Path) -> Result<()> {
+        let path = normalize_path(path);
+        if path.is_file()
+            && path
+                .extension()
+                .and_then(|value| value.to_str())
+                .is_some_and(|ext| ext.eq_ignore_ascii_case("tct"))
+        {
+            let imported = archive::import_project(&path, &self.default_saves_dir)?;
+            self.log_info(format!(
+                "Imported startup archive {} to {}",
+                path.display(),
+                imported.display()
+            ));
+            self.load_project(&imported)?;
+        } else {
+            self.load_project(&path)?;
+        }
+        Ok(())
+    }
+
     fn delete_project(&mut self, path: &Path) -> Result<()> {
         let path = normalize_path(path);
         //if !path.starts_with(&self.default_saves_dir) {
@@ -465,6 +607,7 @@ impl AppState {
         });
         self.active_scene_index = self.scenes.len() - 1;
         self.save_project()?;
+        self.log_info(format!("Added scene {}", self.active_scene_index + 1));
         Ok(())
     }
 
@@ -474,6 +617,7 @@ impl AppState {
         }
         self.active_scene_index = index;
         self.regenerate_split_sources()?;
+        self.log_debug(format!("Selected scene {}", index + 1));
         Ok(())
     }
 
@@ -484,7 +628,9 @@ impl AppState {
             .get_mut(index)
             .ok_or_else(|| anyhow!("scene index out of range"))?;
         scene.name = name;
+        let new_name = scene.name.clone();
         self.save_project()?;
+        self.log_info(format!("Renamed scene {} to {}", index + 1, new_name));
         Ok(())
     }
 
@@ -506,6 +652,7 @@ impl AppState {
         self.active_scene_index = min(self.active_scene_index, self.scenes.len() - 1);
         self.regenerate_split_sources()?;
         self.save_project()?;
+        self.log_info(format!("Deleted scene {}", index + 1));
         Ok(())
     }
 
@@ -527,6 +674,11 @@ impl AppState {
         self.scenes.insert(index + 1, duplicate);
         self.active_scene_index = index + 1;
         self.save_project()?;
+        self.log_info(format!(
+            "Duplicated scene {} to {}",
+            index + 1,
+            self.active_scene_index + 1
+        ));
         Ok(())
     }
 
@@ -544,6 +696,7 @@ impl AppState {
             self.scenes.swap(current, target);
             self.active_scene_index = target;
             self.save_project()?;
+            self.log_info(format!("Moved scene {} to {}", current + 1, target + 1));
         }
         Ok(())
     }
@@ -559,6 +712,7 @@ impl AppState {
         }];
         self.active_scene_index = 0;
         self.save_project()?;
+        self.log_info("Cleared scenes and recreated default scene");
         Ok(())
     }
 
@@ -589,6 +743,7 @@ impl AppState {
         }
 
         self.save_project()?;
+        self.log_info(format!("Imported {} resources", paths.len()));
         Ok(())
     }
 
@@ -628,7 +783,13 @@ impl AppState {
             bail!("unsupported resource type: {}", source.display());
         }
 
-        self.log_info(format!("Imported resource {}", resource.name));
+        self.log_info(format!(
+            "Imported resource '{}' as {} id {} at {}",
+            resource.name,
+            if resource.is_video { "video" } else { "image" },
+            resource.id,
+            resource.path.display()
+        ));
         self.resources.resources.push(resource);
         Ok(())
     }
@@ -641,8 +802,11 @@ impl AppState {
             .iter_mut()
             .find(|resource| resource.id == id)
             .ok_or_else(|| anyhow!("resource not found"))?;
+        let old_name = resource.name.clone();
         resource.name = name;
+        let new_name = resource.name.clone();
         self.save_project()?;
+        self.log_info(format!("Renamed resource '{}' to '{}'", old_name, new_name));
         Ok(())
     }
 
@@ -685,6 +849,7 @@ impl AppState {
 
         self.regenerate_split_sources()?;
         self.save_project()?;
+        self.log_info(format!("Deleted resource '{}'", resource.name));
         Ok(())
     }
 
@@ -719,6 +884,13 @@ impl AppState {
 
         self.regenerate_split_sources()?;
         self.save_project()?;
+        self.log_info(format!(
+            "Assigned {} to projector {}",
+            resource_id
+                .map(|id| format!("resource id {id}"))
+                .unwrap_or_else(|| "nothing".to_string()),
+            projector_index + 1
+        ));
         Ok(())
     }
 
@@ -742,6 +914,16 @@ impl AppState {
         scene.connections[index] = i32::from(connected);
         self.regenerate_split_sources()?;
         self.save_project()?;
+        self.log_info(format!(
+            "{} projectors {} and {}",
+            if connected {
+                "Connected"
+            } else {
+                "Disconnected"
+            },
+            index + 1,
+            index + 2
+        ));
         Ok(())
     }
 
@@ -778,12 +960,14 @@ impl AppState {
             }
 
             if left_source.is_empty() {
-                scene.split_info[group_start] = SplitInfo {
-                    resource_id: -1,
-                    start: 0.0,
-                    end: 1.0,
-                    is_split: false,
-                };
+                for offset in 0..group_len {
+                    scene.split_info[group_start + offset] = SplitInfo {
+                        resource_id: -1,
+                        start: 0.0,
+                        end: 1.0,
+                        is_split: false,
+                    };
+                }
                 projector += group_len;
                 continue;
             }
@@ -799,11 +983,15 @@ impl AppState {
                     let mut preview = left_source.clone();
 
                     if is_image_path(&source_path) && source_path.exists() {
+                        let settings = self.projector_settings_for(target);
+                        let target_aspect = projector_aspect_value(&settings.aspect);
                         let out = split_dir.join(format!(
                             "scene_{}_proj_{}_{}.png",
                             active_index, group_start, target
                         ));
-                        if let Err(error) = media::crop_image_part(start, end, &source_path, &out) {
+                        if let Err(error) =
+                            media::crop_image_part(start, end, &source_path, &out, target_aspect)
+                        {
                             self.log_error(format!("Could not create split preview: {error:#}"));
                         } else {
                             preview = out.to_string_lossy().to_string();
@@ -832,6 +1020,11 @@ impl AppState {
         }
 
         self.scenes[active_index] = scene;
+        self.log_debug(format!(
+            "Regenerated split previews for scene {} with {} projectors",
+            active_index + 1,
+            count
+        ));
         Ok(())
     }
 
@@ -909,7 +1102,33 @@ impl AppState {
         Ok(())
     }
 
+    fn ensure_projector_settings(&mut self) {
+        let count = self
+            .save_data
+            .as_ref()
+            .map(|data| data.projector_amount.clamp(1, 6))
+            .unwrap_or(1);
+        if let Some(save_data) = &mut self.save_data {
+            save_data
+                .projector_settings
+                .resize_with(count, ProjectorSettings::default);
+            for settings in &mut save_data.projector_settings {
+                settings.aspect = normalize_projector_aspect(&settings.aspect);
+                settings.rotation = normalize_projector_rotation(settings.rotation);
+            }
+        }
+    }
+
+    fn projector_settings_for(&self, index: usize) -> ProjectorSettings {
+        self.save_data
+            .as_ref()
+            .and_then(|data| data.projector_settings.get(index))
+            .cloned()
+            .unwrap_or_default()
+    }
+
     fn ensure_scene_lengths(&mut self) {
+        self.ensure_projector_settings();
         let count = max(1, self.projector_count());
         if self.scenes.is_empty() && self.save_data.is_some() {
             self.scenes.push(SceneData {
@@ -1110,17 +1329,33 @@ impl AppState {
     }
 
     fn push_log(&mut self, level: &str, message: String) {
-        if level == "error" {
-            tracing::error!("{message}");
-        } else {
-            tracing::info!("{message}");
+        match level {
+            "error" => tracing::error!("{message}"),
+            "debug" => tracing::debug!("{message}"),
+            _ => tracing::info!("{message}"),
         }
+
+        // In-memory log
         self.logs.push(LogEntry {
             level: level.to_string(),
-            message,
+            message: message.clone(),
         });
         if self.logs.len() > 200 {
             self.logs.remove(0);
+        }
+
+        // File log (append)
+        let logs_dir = self.repo_root.join("logs");
+        let log_file = logs_dir.join(format!("tcast_{}.log", Local::now().format("%Y-%m-%d")));
+        if let Ok(mut file) = OpenOptions::new().create(true).append(true).open(&log_file) {
+            let timestamp = Local::now().format("%Y-%m-%d %H:%M:%S");
+            let _ = writeln!(
+                file,
+                "[{}] [{}] {}",
+                timestamp,
+                level.to_uppercase(),
+                message
+            );
         }
     }
 }
@@ -1226,6 +1461,39 @@ fn normalize_path(path: &Path) -> PathBuf {
         }
         Err(_) => path.to_path_buf(),
     }
+}
+
+fn detect_repo_root(cwd: &Path) -> PathBuf {
+    if cwd.file_name().and_then(|value| value.to_str()) == Some("tcast-rust") {
+        return cwd.parent().unwrap_or(cwd).to_path_buf();
+    }
+
+    let is_build_output = cwd
+        .file_name()
+        .and_then(|value| value.to_str())
+        .is_some_and(|name| matches!(name, "debug" | "release"))
+        && cwd
+            .parent()
+            .and_then(|path| path.file_name())
+            .and_then(|value| value.to_str())
+            == Some("target")
+        && cwd
+            .parent()
+            .and_then(|path| path.parent())
+            .and_then(|path| path.file_name())
+            .and_then(|value| value.to_str())
+            == Some("tcast-rust");
+
+    if is_build_output {
+        return cwd
+            .parent()
+            .and_then(|path| path.parent())
+            .and_then(|path| path.parent())
+            .unwrap_or(cwd)
+            .to_path_buf();
+    }
+
+    cwd.to_path_buf()
 }
 
 fn paths_equal(left: &Path, right: &Path) -> bool {

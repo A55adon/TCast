@@ -22,7 +22,13 @@ pub fn convert_image_to_png(src: &Path, dst: &Path) -> Result<()> {
     Ok(())
 }
 
-pub fn crop_image_part(start: f32, end: f32, src: &Path, dst: &Path) -> Result<()> {
+pub fn crop_image_part(
+    start: f32,
+    end: f32,
+    src: &Path,
+    dst: &Path,
+    target_aspect: f32,
+) -> Result<()> {
     if !(0.0..1.0).contains(&start) && start != 0.0 {
         return Err(anyhow!("split start must be between 0 and 1"));
     }
@@ -59,7 +65,8 @@ pub fn crop_image_part(start: f32, end: f32, src: &Path, dst: &Path) -> Result<(
         return Err(anyhow!("split crop width is zero"));
     }
 
-    let target_height = ((crop_width as f32) * 9.0 / 16.0).round().max(1.0) as u32;
+    let target_aspect = target_aspect.clamp(0.1, 10.0);
+    let target_height = ((crop_width as f32) / target_aspect).round().max(1.0) as u32;
     let crop_height = target_height.min(height);
     let y0 = height.saturating_sub(crop_height) / 2;
 

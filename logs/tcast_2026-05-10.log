@@ -1,0 +1,99 @@
+[2026-05-10 19:35:58] [INFO] Loaded project C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 19:36:27] [INFO] Prepared 6 projector outputs
+[2026-05-10 19:36:34] [INFO] Stopped projector outputs
+[2026-05-10 19:37:09] [INFO] Prepared 6 projector outputs
+[2026-05-10 19:37:37] [INFO] Stopped projector outputs
+[2026-05-10 19:37:40] [INFO] Stopped projector outputs
+[2026-05-10 19:44:24] [INFO] Loaded project C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 19:47:10] [INFO] Exported C:\Users\simon\Desktop\Code\TCast\Sample Project.tct
+[2026-05-10 19:47:44] [ERROR] export cancelled
+[2026-05-10 19:47:44] [INFO] Stopped projector outputs
+[2026-05-10 19:47:44] [INFO] Stopped projector outputs
+[2026-05-10 19:47:44] [INFO] Stopped projector outputs
+[2026-05-10 19:47:44] [INFO] Stopped projector outputs
+[2026-05-10 19:47:44] [INFO] Closed project
+[2026-05-10 19:47:44] [INFO] Closed project
+[2026-05-10 19:47:44] [INFO] Closed project
+[2026-05-10 19:47:44] [INFO] Closed project
+[2026-05-10 19:47:50] [INFO] Loaded project C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 19:48:02] [INFO] Exported C:\Users\simon\Desktop\Code\TCast\Sample Project.tct
+[2026-05-10 19:48:12] [INFO] Exported C:\Users\simon\Desktop\Code\TCast\Sample Project.tct
+[2026-05-10 19:48:43] [INFO] Prepared 6 projector outputs
+[2026-05-10 19:48:46] [INFO] Stopped projector outputs
+[2026-05-10 19:48:49] [INFO] Stopped projector outputs
+[2026-05-10 20:18:30] [INFO] Initialized state with repo root C:\Users\simon\Desktop\Code\TCast and saves folder C:\Users\simon\Desktop\Code\TCast\saves\folderSaves
+[2026-05-10 20:18:30] [DEBUG] Regenerated split previews for scene 1 with 6 projectors
+[2026-05-10 20:18:30] [DEBUG] Saved project data to C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 20:18:30] [INFO] Loaded project C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project with 5 scenes, 206 resources, and 6 projectors
+[2026-05-10 20:18:31] [DEBUG] IPC command 'boot' with payload {}
+[2026-05-10 20:18:46] [DEBUG] IPC command 'maximize_window' with payload {}
+[2026-05-10 20:18:49] [DEBUG] IPC command 'maximize_window' with payload {}
+[2026-05-10 20:19:00] [DEBUG] IPC command 'export_project' with payload {}
+[2026-05-10 20:19:00] [DEBUG] Saved project data to C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 20:19:10] [INFO] Exported C:\Users\simon\Downloads\Sample Project.tct
+[2026-05-10 20:19:10] [DEBUG] IPC command 'export_project' with payload {}
+[2026-05-10 20:19:10] [DEBUG] Saved project data to C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 20:19:20] [INFO] Exported C:\Users\simon\Downloads\Sample Project.tct
+[2026-05-10 20:19:27] [DEBUG] IPC command 'set_projector_format' with payload {"aspect":"16:9","projectorIndex":1,"rotation":90}
+[2026-05-10 20:19:27] [DEBUG] Regenerated split previews for scene 1 with 6 projectors
+[2026-05-10 20:19:27] [DEBUG] Saved project data to C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 20:19:27] [INFO] Set projector 2 to 16:9 rotated 90 degrees
+[2026-05-10 20:19:28] [DEBUG] IPC command 'set_projector_format' with payload {"aspect":"16:9","projectorIndex":1,"rotation":180}
+[2026-05-10 20:19:28] [DEBUG] Regenerated split previews for scene 1 with 6 projectors
+[2026-05-10 20:19:28] [DEBUG] Saved project data to C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 20:19:28] [INFO] Set projector 2 to 16:9 rotated 180 degrees
+[2026-05-10 20:19:29] [DEBUG] IPC command 'set_projector_format' with payload {"aspect":"16:9","projectorIndex":1,"rotation":270}
+[2026-05-10 20:19:29] [DEBUG] Regenerated split previews for scene 1 with 6 projectors
+[2026-05-10 20:19:29] [DEBUG] Saved project data to C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 20:19:29] [INFO] Set projector 2 to 16:9 rotated 270 degrees
+[2026-05-10 20:19:30] [DEBUG] IPC command 'set_projector_format' with payload {"aspect":"16:9","projectorIndex":1,"rotation":0}
+[2026-05-10 20:19:30] [DEBUG] Regenerated split previews for scene 1 with 6 projectors
+[2026-05-10 20:19:30] [DEBUG] Saved project data to C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 20:19:30] [INFO] Set projector 2 to 16:9 rotated 0 degrees
+[2026-05-10 20:19:32] [DEBUG] IPC command 'assign_resource' with payload {"projectorIndex":1,"resourceId":3}
+[2026-05-10 20:19:32] [DEBUG] Regenerated split previews for scene 1 with 6 projectors
+[2026-05-10 20:19:32] [DEBUG] Saved project data to C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 20:19:32] [INFO] Assigned resource id 3 to projector 2
+[2026-05-10 20:19:34] [DEBUG] IPC command 'set_projector_format' with payload {"aspect":"16:10","projectorIndex":1,"rotation":0}
+[2026-05-10 20:19:34] [DEBUG] Regenerated split previews for scene 1 with 6 projectors
+[2026-05-10 20:19:34] [DEBUG] Saved project data to C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 20:19:34] [INFO] Set projector 2 to 16:10 rotated 0 degrees
+[2026-05-10 20:19:36] [DEBUG] IPC command 'set_projector_format' with payload {"aspect":"4:3","projectorIndex":1,"rotation":0}
+[2026-05-10 20:19:36] [DEBUG] Regenerated split previews for scene 1 with 6 projectors
+[2026-05-10 20:19:36] [DEBUG] Saved project data to C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 20:19:36] [INFO] Set projector 2 to 4:3 rotated 0 degrees
+[2026-05-10 20:19:37] [DEBUG] IPC command 'set_projector_format' with payload {"aspect":"16:10","projectorIndex":1,"rotation":0}
+[2026-05-10 20:19:37] [DEBUG] Regenerated split previews for scene 1 with 6 projectors
+[2026-05-10 20:19:37] [DEBUG] Saved project data to C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 20:19:37] [INFO] Set projector 2 to 16:10 rotated 0 degrees
+[2026-05-10 20:19:38] [DEBUG] IPC command 'set_projector_format' with payload {"aspect":"16:9","projectorIndex":1,"rotation":0}
+[2026-05-10 20:19:38] [DEBUG] Regenerated split previews for scene 1 with 6 projectors
+[2026-05-10 20:19:38] [DEBUG] Saved project data to C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 20:19:38] [INFO] Set projector 2 to 16:9 rotated 0 degrees
+[2026-05-10 20:19:43] [DEBUG] IPC command 'assign_resource' with payload {"projectorIndex":1,"resourceId":22}
+[2026-05-10 20:19:43] [DEBUG] Regenerated split previews for scene 1 with 6 projectors
+[2026-05-10 20:19:43] [DEBUG] Saved project data to C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 20:19:43] [INFO] Assigned resource id 22 to projector 2
+[2026-05-10 20:19:49] [DEBUG] IPC command 'assign_resource' with payload {"projectorIndex":1,"resourceId":22}
+[2026-05-10 20:19:49] [DEBUG] Regenerated split previews for scene 1 with 6 projectors
+[2026-05-10 20:19:49] [DEBUG] Saved project data to C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 20:19:49] [INFO] Assigned resource id 22 to projector 2
+[2026-05-10 20:20:42] [DEBUG] IPC command 'stop_projection' with payload {}
+[2026-05-10 20:20:42] [INFO] Stopped projector outputs
+[2026-05-10 20:20:42] [DEBUG] IPC command 'close_window' with payload {}
+[2026-05-10 20:21:20] [INFO] Initialized state with repo root C:\Users\simon\Desktop\Code\TCast and saves folder C:\Users\simon\Desktop\Code\TCast\saves\folderSaves
+[2026-05-10 20:21:20] [DEBUG] Regenerated split previews for scene 1 with 6 projectors
+[2026-05-10 20:21:20] [DEBUG] Saved project data to C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 20:21:20] [INFO] Loaded project C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project with 5 scenes, 206 resources, and 6 projectors
+[2026-05-10 20:21:21] [DEBUG] IPC command 'boot' with payload {}
+[2026-05-10 20:21:24] [DEBUG] IPC command 'stop_projection' with payload {}
+[2026-05-10 20:21:24] [INFO] Stopped projector outputs
+[2026-05-10 20:21:24] [DEBUG] IPC command 'stop_projection' with payload {}
+[2026-05-10 20:21:24] [INFO] Stopped projector outputs
+[2026-05-10 20:21:24] [DEBUG] IPC command 'close_project' with payload {}
+[2026-05-10 20:21:24] [INFO] Closed project
+[2026-05-10 20:21:24] [DEBUG] IPC command 'close_project' with payload {}
+[2026-05-10 20:21:24] [INFO] Closed project
+[2026-05-10 20:21:28] [DEBUG] IPC command 'stop_projection' with payload {}
+[2026-05-10 20:21:28] [INFO] Stopped projector outputs
+[2026-05-10 20:21:28] [DEBUG] IPC command 'close_window' with payload {}

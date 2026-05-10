@@ -57,6 +57,8 @@ if exist "!DESKTOP!" (
 :: ── Remove registry entry ─────────────────────────────────────────────────────
 
 reg delete "%REG_KEY%" /f >nul 2>&1
+reg delete "HKCU\Software\Classes\.tct" /f >nul 2>&1
+reg delete "HKCU\Software\Classes\TCast.Project" /f >nul 2>&1
 echo  Removed registry entry.
 
 :: ── Schedule install directory for deletion after exit ───────────────────────

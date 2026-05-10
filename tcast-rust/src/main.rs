@@ -6,16 +6,15 @@ mod ui;
 
 use anyhow::{Context, Result};
 use model::{IpcMessage, IpcResponse, ProjectionSpec};
+use percent_encoding::percent_decode_str;
 use serde_json::json;
 use state::AppState;
 use tao::dpi::LogicalSize;
 use tao::event::{Event, WindowEvent};
 use tao::event_loop::{ControlFlow, EventLoopBuilder, EventLoopWindowTarget};
-use tao::window::{Fullscreen, Window, WindowBuilder};
+use tao::window::{Fullscreen, Icon, Window, WindowBuilder};
 use tracing_subscriber::EnvFilter;
 use wry::{WebView, WebViewBuilder};
-use percent_encoding::percent_decode_str;
-use serde::Deserialize;
 
 #[cfg(target_os = "windows")]
 use wry::WebViewBuilderExtWindows;
@@ -25,14 +24,12 @@ use tao::platform::windows::WindowExtWindows;
 
 #[cfg(target_os = "windows")]
 mod windows_utils {
-    use windows::Win32::UI::WindowsAndMessaging::{
-        SetWindowLongPtrW, GetWindowLongPtrW, GWL_STYLE, GWL_EXSTYLE,
-        WS_THICKFRAME, WS_CAPTION, WS_SYSMENU,
-        WS_MAXIMIZEBOX, WS_MINIMIZEBOX,
-        WS_EX_APPWINDOW, WS_EX_WINDOWEDGE,
-        SetWindowPos, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SWP_FRAMECHANGED
-    };
     use windows::Win32::Foundation::HWND;
+    use windows::Win32::UI::WindowsAndMessaging::{
+        GWL_EXSTYLE, GWL_STYLE, GetWindowLongPtrW, SWP_FRAMECHANGED, SWP_NOMOVE, SWP_NOSIZE,
+        SWP_NOZORDER, SetWindowLongPtrW, SetWindowPos, WS_CAPTION, WS_EX_APPWINDOW,
+        WS_EX_WINDOWEDGE, WS_MAXIMIZEBOX, WS_MINIMIZEBOX, WS_SYSMENU, WS_THICKFRAME,
+    };
 
     pub fn enable_snap(hwnd: isize) {
         unsafe {
@@ -48,18 +45,20 @@ mod windows_utils {
                 | (WS_MINIMIZEBOX.0 as isize);
 
             // Add extended styles
-            ex_style |= (WS_EX_APPWINDOW.0 as isize)
-                | (WS_EX_WINDOWEDGE.0 as isize);
+            ex_style |= (WS_EX_APPWINDOW.0 as isize) | (WS_EX_WINDOWEDGE.0 as isize);
 
             SetWindowLongPtrW(hwnd, GWL_STYLE, style);
             SetWindowLongPtrW(hwnd, GWL_EXSTYLE, ex_style);
 
             // Force window to update its frame
-            SetWindowPos(
+            let _ = SetWindowPos(
                 hwnd,
                 None,
-                0, 0, 0, 0,
-                SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED
+                0,
+                0,
+                0,
+                0,
+                SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED,
             );
         }
     }
@@ -75,19 +74,47 @@ struct ProjectionWindow {
     _webview: WebView,
 }
 
+const APP_ICON_PNG: &[u8] = include_bytes!("../../assets/t-cast-favicon.png");
+
 fn mime_for_path(path: &str) -> &'static str {
     let path = path.to_lowercase();
-    if path.ends_with(".html") || path.ends_with(".htm") { return "text/html"; }
-    if path.ends_with(".css")  { return "text/css"; }
-    if path.ends_with(".js")   { return "text/javascript"; }
-    if path.ends_with(".png")  { return "image/png"; }
-    if path.ends_with(".jpg") || path.ends_with(".jpeg") { return "image/jpeg"; }
-    if path.ends_with(".gif")  { return "image/gif"; }
-    if path.ends_with(".webp") { return "image/webp"; }
-    if path.ends_with(".mp4")  { return "video/mp4"; }
-    if path.ends_with(".webm") { return "video/webm"; }
-    if path.ends_with(".mov")  { return "video/quicktime"; }
+    if path.ends_with(".html") || path.ends_with(".htm") {
+        return "text/html";
+    }
+    if path.ends_with(".css") {
+        return "text/css";
+    }
+    if path.ends_with(".js") {
+        return "text/javascript";
+    }
+    if path.ends_with(".png") {
+        return "image/png";
+    }
+    if path.ends_with(".jpg") || path.ends_with(".jpeg") {
+        return "image/jpeg";
+    }
+    if path.ends_with(".gif") {
+        return "image/gif";
+    }
+    if path.ends_with(".webp") {
+        return "image/webp";
+    }
+    if path.ends_with(".mp4") {
+        return "video/mp4";
+    }
+    if path.ends_with(".webm") {
+        return "video/webm";
+    }
+    if path.ends_with(".mov") {
+        return "video/quicktime";
+    }
     "application/octet-stream"
+}
+
+fn app_window_icon() -> Option<Icon> {
+    let image = image::load_from_memory(APP_ICON_PNG).ok()?.into_rgba8();
+    let (width, height) = image.dimensions();
+    Icon::from_rgba(image.into_raw(), width, height).ok()
 }
 
 /// Extracts the file path from a custom protocol URI.
@@ -96,7 +123,10 @@ fn extract_path_from_uri(uri: &str) -> String {
 
     let path = if let Some(rest) = decoded.strip_prefix("asset://") {
         rest.to_string()
-    } else if let Some(rest) = decoded.strip_prefix("https://").or_else(|| decoded.strip_prefix("http://")) {
+    } else if let Some(rest) = decoded
+        .strip_prefix("https://")
+        .or_else(|| decoded.strip_prefix("http://"))
+    {
         let slash = match rest.find('/') {
             Some(pos) => pos,
             None => return String::new(),
@@ -136,12 +166,16 @@ fn main() -> Result<()> {
     let event_loop = EventLoopBuilder::<UserEvent>::with_user_event().build();
     let proxy = event_loop.create_proxy();
 
-    let control_window = WindowBuilder::new()
+    let mut control_window_builder = WindowBuilder::new()
         .with_title("TCast")
         .with_inner_size(LogicalSize::new(1280.0, 820.0))
         .with_min_inner_size(LogicalSize::new(960.0, 620.0))
         .with_decorations(false)
-        .with_transparent(false)
+        .with_transparent(false);
+    if let Some(icon) = app_window_icon() {
+        control_window_builder = control_window_builder.with_window_icon(Some(icon));
+    }
+    let control_window = control_window_builder
         .build(&event_loop)
         .context("creating control window")?;
     let control_window_id = control_window.id();
@@ -260,14 +294,6 @@ fn main() -> Result<()> {
     });
 }
 
-#[derive(Debug, Deserialize)]
-struct MoveWindowPayload {
-    #[serde(rename = "deltaX")]
-    delta_x: i32,
-    #[serde(rename = "deltaY")]
-    delta_y: i32,
-}
-
 fn process_ipc(
     raw: String,
     target: &EventLoopWindowTarget<UserEvent>,
@@ -285,14 +311,24 @@ fn process_ipc(
         }
     };
 
+    if !matches!(message.command.as_str(), "snapshot" | "get_window_state") {
+        app_state.log_debug(format!(
+            "IPC command '{}' with payload {}",
+            message.command,
+            summarize_json(&message.payload)
+        ));
+    }
+
     let result = match message.command.as_str() {
         "start_projection" => {
             projection_windows.clear();
             match app_state.prepare_projection() {
                 Ok(specs) => match create_projection_windows(target, &specs) {
                     Ok(windows) => {
+                        let opened = windows.len();
                         *projection_windows = windows;
                         app_state.set_projection_active(!projection_windows.is_empty());
+                        app_state.log_info(format!("Opened {opened} projector windows"));
                         Ok(json!(app_state.snapshot()))
                     }
                     Err(error) => Err(error),
@@ -302,7 +338,7 @@ fn process_ipc(
         }
         "stop_projection" => {
             projection_windows.clear();
-            app_state.set_projection_active(false);
+            app_state.stop_projection(); // ← use the new method
             app_state.log_info("Stopped projector outputs");
             Ok(json!(app_state.snapshot()))
         }
@@ -328,7 +364,7 @@ fn process_ipc(
             std::process::exit(0);
         }
         "move_window" => {
-            control_window.drag_window();
+            let _ = control_window.drag_window();
             Ok(json!({ "action": "dragging" }))
         }
         command => {
@@ -392,8 +428,11 @@ fn create_projection_windows(
     for (idx, spec) in specs.iter().enumerate() {
         let monitor_idx = idx + 1;
         if monitor_idx >= ordered_monitors.len() {
-            println!("No monitor available for projector '{}' (only {} monitors)",
-                     spec.label, ordered_monitors.len());
+            println!(
+                "No monitor available for projector '{}' (only {} monitors)",
+                spec.label,
+                ordered_monitors.len()
+            );
             continue;
         }
         let monitor = &ordered_monitors[monitor_idx];
@@ -401,14 +440,18 @@ fn create_projection_windows(
 
         let fullscreen = Fullscreen::Borderless(Some(monitor.clone()));
 
-        let window = WindowBuilder::new()
+        let mut window_builder = WindowBuilder::new()
             .with_title(format!("TCast {}", spec.label))
             .with_decorations(false)
             .with_resizable(false)
             .with_focused(false)
             .with_focusable(false)
             .with_inner_size(LogicalSize::new(1280.0, 720.0))
-            .with_fullscreen(Some(fullscreen))
+            .with_fullscreen(Some(fullscreen));
+        if let Some(icon) = app_window_icon() {
+            window_builder = window_builder.with_window_icon(Some(icon));
+        }
+        let window = window_builder
             .build(target)
             .with_context(|| format!("creating {}", spec.label))?;
 
@@ -484,6 +527,16 @@ fn send_response(webview: &WebView, response: &IpcResponse) -> Result<()> {
     let script = format!("window.__TCast && window.__TCast.receive({response_json});");
     webview.evaluate_script(&script)?;
     Ok(())
+}
+
+fn summarize_json(value: &serde_json::Value) -> String {
+    let raw = serde_json::to_string(value).unwrap_or_else(|_| "<unserializable>".to_string());
+    const LIMIT: usize = 420;
+    if raw.len() > LIMIT {
+        format!("{}...", &raw[..LIMIT])
+    } else {
+        raw
+    }
 }
 
 fn init_logging() {

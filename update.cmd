@@ -86,12 +86,22 @@ if errorlevel 1 (
 )
 popd
 
+set "EXE_PATH=!INSTALL_DIR!\tcast-rust\target\release\tcast-rust.exe"
+set "ICON_PATH=!INSTALL_DIR!\assets\t-cast-favicon.ico"
+if not exist "!ICON_PATH!" set "ICON_PATH=!EXE_PATH!"
+
 :: ── Update version in registry ────────────────────────────────────────────────
 
 for /f "tokens=*" %%V in ('git -C "!INSTALL_DIR!" describe --tags --always 2^>nul') do set "VERSION=%%V"
 if not "!VERSION!"=="" (
     reg add "%REG_KEY%" /v DisplayVersion /t REG_SZ /d "!VERSION!" /f >nul
 )
+reg add "%REG_KEY%" /v DisplayIcon /t REG_SZ /d "!ICON_PATH!" /f >nul
+
+reg add "HKCU\Software\Classes\.tct" /ve /d "TCast.Project" /f >nul
+reg add "HKCU\Software\Classes\TCast.Project" /ve /d "TCast Project" /f >nul
+reg add "HKCU\Software\Classes\TCast.Project\DefaultIcon" /ve /d "!ICON_PATH!" /f >nul
+reg add "HKCU\Software\Classes\TCast.Project\shell\open\command" /ve /d "\"!EXE_PATH!\" \"%%1\"" /f >nul
 
 :: ── Done ─────────────────────────────────────────────────────────────────────
 

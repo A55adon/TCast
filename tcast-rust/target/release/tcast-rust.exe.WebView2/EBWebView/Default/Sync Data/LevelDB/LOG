@@ -1,3 +1,3 @@
-2026/05/10-21:40:43.818 4410 Reusing MANIFEST C:\Users\simon\Desktop\Code\TCast\tcast-rust\target\release\tcast-rust.exe.WebView2\EBWebView\Default\Sync Data\LevelDB/MANIFEST-000001
-2026/05/10-21:40:43.820 4410 Recovering log #3
-2026/05/10-21:40:43.821 4410 Reusing old log C:\Users\simon\Desktop\Code\TCast\tcast-rust\target\release\tcast-rust.exe.WebView2\EBWebView\Default\Sync Data\LevelDB/000003.log 
+2026/05/10-22:06:06.028 2a8c Reusing MANIFEST C:\Users\simon\Desktop\Code\TCast\tcast-rust\target\release\tcast-rust.exe.WebView2\EBWebView\Default\Sync Data\LevelDB/MANIFEST-000001
+2026/05/10-22:06:06.030 2a8c Recovering log #3
+2026/05/10-22:06:06.030 2a8c Reusing old log C:\Users\simon\Desktop\Code\TCast\tcast-rust\target\release\tcast-rust.exe.WebView2\EBWebView\Default\Sync Data\LevelDB/000003.log 

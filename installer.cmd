@@ -40,6 +40,7 @@ if defined EXISTING_PATH (
     if "!ACTION!"=="1" (
         echo.
         echo  Updating TCast...
+        copy /y "%~dp0update.cmd" "%EXISTING_PATH%\update.cmd" >nul 2>&1
         call "%EXISTING_PATH%\update.cmd"
         echo.
         echo  Update complete.

@@ -1,2 +1,3 @@
-2026/05/10-00:35:16.714 7c18 Creating DB C:\Users\simon\Desktop\Code\TCast\tcast-rust\target\release\tcast-rust.exe.WebView2\EBWebView\Default\shared_proto_db since it was missing.
-2026/05/10-00:35:16.784 7c18 Reusing MANIFEST C:\Users\simon\Desktop\Code\TCast\tcast-rust\target\release\tcast-rust.exe.WebView2\EBWebView\Default\shared_proto_db/MANIFEST-000001
+2026/05/10-21:58:29.140 7b90 Reusing MANIFEST C:\Users\simon\Desktop\Code\TCast\tcast-rust\target\release\tcast-rust.exe.WebView2\EBWebView\Default\shared_proto_db/MANIFEST-000001
+2026/05/10-21:58:29.142 7b90 Recovering log #3
+2026/05/10-21:58:29.143 7b90 Reusing old log C:\Users\simon\Desktop\Code\TCast\tcast-rust\target\release\tcast-rust.exe.WebView2\EBWebView\Default\shared_proto_db/000003.log 

@@ -1,2 +1,3 @@
-2026/05/10-00:35:16.541 95b8 Creating DB C:\Users\simon\Desktop\Code\TCast\tcast-rust\target\release\tcast-rust.exe.WebView2\EBWebView\Default\Sync Data\LevelDB since it was missing.
-2026/05/10-00:35:16.616 95b8 Reusing MANIFEST C:\Users\simon\Desktop\Code\TCast\tcast-rust\target\release\tcast-rust.exe.WebView2\EBWebView\Default\Sync Data\LevelDB/MANIFEST-000001
+2026/05/10-21:58:29.085 2044 Reusing MANIFEST C:\Users\simon\Desktop\Code\TCast\tcast-rust\target\release\tcast-rust.exe.WebView2\EBWebView\Default\Sync Data\LevelDB/MANIFEST-000001
+2026/05/10-21:58:29.086 2044 Recovering log #3
+2026/05/10-21:58:29.086 2044 Reusing old log C:\Users\simon\Desktop\Code\TCast\tcast-rust\target\release\tcast-rust.exe.WebView2\EBWebView\Default\Sync Data\LevelDB/000003.log 

@@ -114,7 +114,12 @@ function showToast(message, type = "info") {
       <span class="toast-title">${type === "error" ? "Fehler" : "TCast"}</span>
       <span class="toast-message">${h(message)}</span>
     </span>
-    <span class="toast-dismiss">×</span>
+    <span class="toast-dismiss" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18"/>
+        <path d="m6 6 12 12"/>
+      </svg>
+    </span>
   `;
   toast.addEventListener("click", () => toast.remove());
   wrap.appendChild(toast);

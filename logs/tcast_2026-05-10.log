@@ -97,3 +97,55 @@
 [2026-05-10 20:21:28] [DEBUG] IPC command 'stop_projection' with payload {}
 [2026-05-10 20:21:28] [INFO] Stopped projector outputs
 [2026-05-10 20:21:28] [DEBUG] IPC command 'close_window' with payload {}
+[2026-05-10 20:28:41] [INFO] Initialized state with repo root C:\Users\simon\Desktop\Code\TCast and saves folder C:\Users\simon\Desktop\Code\TCast\saves\folderSaves
+[2026-05-10 20:28:41] [DEBUG] Regenerated split previews for scene 1 with 6 projectors
+[2026-05-10 20:28:41] [DEBUG] Saved project data to C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 20:28:41] [INFO] Loaded project C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project with 5 scenes, 206 resources, and 6 projectors
+[2026-05-10 20:28:42] [DEBUG] IPC command 'boot' with payload {}
+[2026-05-10 20:29:23] [DEBUG] IPC command 'maximize_window' with payload {}
+[2026-05-10 20:29:32] [DEBUG] IPC command 'stop_projection' with payload {}
+[2026-05-10 20:29:32] [INFO] Stopped projector outputs
+[2026-05-10 20:29:32] [DEBUG] IPC command 'close_window' with payload {}
+[2026-05-10 20:30:39] [INFO] Initialized state with repo root C:\Users\simon\Desktop\Code\TCast and saves folder C:\Users\simon\Desktop\Code\TCast\saves\folderSaves
+[2026-05-10 20:30:39] [DEBUG] Regenerated split previews for scene 1 with 6 projectors
+[2026-05-10 20:30:39] [DEBUG] Saved project data to C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 20:30:39] [INFO] Loaded project C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project with 5 scenes, 206 resources, and 6 projectors
+[2026-05-10 20:30:40] [DEBUG] IPC command 'boot' with payload {}
+[2026-05-10 20:31:34] [DEBUG] IPC command 'maximize_window' with payload {}
+[2026-05-10 20:32:00] [DEBUG] IPC command 'stop_projection' with payload {}
+[2026-05-10 20:32:00] [INFO] Stopped projector outputs
+[2026-05-10 20:32:00] [DEBUG] IPC command 'stop_projection' with payload {}
+[2026-05-10 20:32:00] [INFO] Stopped projector outputs
+[2026-05-10 20:32:00] [DEBUG] IPC command 'close_project' with payload {}
+[2026-05-10 20:32:00] [INFO] Closed project
+[2026-05-10 20:32:00] [DEBUG] IPC command 'close_project' with payload {}
+[2026-05-10 20:32:00] [INFO] Closed project
+[2026-05-10 20:32:02] [DEBUG] IPC command 'load_project' with payload {"path":"C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\Sample Project"}
+[2026-05-10 20:32:03] [DEBUG] Regenerated split previews for scene 1 with 6 projectors
+[2026-05-10 20:32:03] [DEBUG] Saved project data to C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 20:32:03] [INFO] Loaded project C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project with 5 scenes, 206 resources, and 6 projectors
+[2026-05-10 20:32:06] [DEBUG] IPC command 'stop_projection' with payload {}
+[2026-05-10 20:32:06] [INFO] Stopped projector outputs
+[2026-05-10 20:32:06] [DEBUG] IPC command 'close_window' with payload {}
+[2026-05-10 20:34:47] [INFO] Initialized state with repo root C:\Users\simon\Desktop\Code\TCast and saves folder C:\Users\simon\Desktop\Code\TCast\saves\folderSaves
+[2026-05-10 20:34:47] [DEBUG] Regenerated split previews for scene 1 with 6 projectors
+[2026-05-10 20:34:47] [DEBUG] Saved project data to C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 20:34:47] [INFO] Loaded project C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project with 5 scenes, 206 resources, and 6 projectors
+[2026-05-10 20:34:48] [DEBUG] IPC command 'boot' with payload {}
+[2026-05-10 20:34:50] [DEBUG] IPC command 'maximize_window' with payload {}
+[2026-05-10 20:34:51] [DEBUG] IPC command 'start_projection' with payload {}
+[2026-05-10 20:34:51] [DEBUG] Regenerated split previews for scene 1 with 6 projectors
+[2026-05-10 20:34:51] [DEBUG] Saved project data to C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 20:34:51] [INFO] Prepared 6 projector outputs
+[2026-05-10 20:34:51] [DEBUG] Projector 1 -> FHD-1920x1080-Gamma-Lines-Gray-Blue [16:9 rotation 0 split 0.000-1.000]
+[2026-05-10 20:34:51] [DEBUG] Projector 2 -> FHD-1920x1080-Gamma-Lines-Gray-Green [16:9 rotation 0 split 0.000-1.000]
+[2026-05-10 20:34:51] [DEBUG] Projector 3 -> FHD-1920x1080-Gamma-Lines-Gray-Red [16:9 rotation 0 split 0.000-1.000]
+[2026-05-10 20:34:51] [DEBUG] Projector 4 -> FHD-1920x1080-Check-Composite [16:9 rotation 0 split 0.000-1.000]
+[2026-05-10 20:34:51] [DEBUG] Projector 5 -> FHD-1920x1080-Geometry-Checkers-Log [16:9 rotation 0 split 0.000-1.000]
+[2026-05-10 20:34:51] [DEBUG] Projector 6 -> FHD-1920x1080-Check-Resolution-Star [16:9 rotation 0 split 0.000-1.000]
+[2026-05-10 20:34:51] [INFO] Opened 1 projector windows
+[2026-05-10 20:34:53] [DEBUG] IPC command 'stop_projection' with payload {}
+[2026-05-10 20:34:53] [INFO] Stopped projector outputs
+[2026-05-10 20:34:54] [DEBUG] IPC command 'stop_projection' with payload {}
+[2026-05-10 20:34:54] [INFO] Stopped projector outputs
+[2026-05-10 20:34:55] [DEBUG] IPC command 'close_window' with payload {}

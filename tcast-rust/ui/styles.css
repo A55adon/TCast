@@ -551,7 +551,7 @@ select:focus {
 .projector {
   flex: 1 0 190px;
   min-width: 190px;
-  max-width: 520px;
+/*max-width: 520px;*/
   position: relative;
   overflow: hidden;
   border-radius: 8px;
@@ -1078,11 +1078,11 @@ select:focus {
 
 .toast {
   display: grid;
-  grid-template-columns: 26px 1fr auto;
+  grid-template-columns: 26px minmax(0, 1fr) 24px;
   gap: 10px;
   align-items: center;
   text-align: left;
-  padding: 10px;
+  padding: 10px 9px 10px 10px;
   background: rgba(24, 27, 31, .96);
   border: 1px solid var(--line);
   border-left: 3px solid var(--blue);
@@ -1125,8 +1125,26 @@ select:focus {
 }
 
 .toast-dismiss {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  align-self: start;
+  margin-top: -1px;
+  border-radius: 5px;
   color: var(--soft);
-  font-size: 16px;
+  transition: background .15s, color .15s;
+}
+
+.toast-dismiss svg {
+  width: 15px;
+  height: 15px;
+  display: block;
+}
+
+.toast:hover .toast-dismiss {
+  background: rgba(255, 255, 255, .07);
+  color: var(--text);
 }
 
 .toast.error {

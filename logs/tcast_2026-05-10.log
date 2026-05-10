@@ -167,3 +167,23 @@
 [2026-05-10 20:46:54] [DEBUG] IPC command 'stop_projection' with payload {}
 [2026-05-10 20:46:54] [INFO] Stopped projector outputs
 [2026-05-10 20:46:54] [DEBUG] IPC command 'close_window' with payload {}
+[2026-05-10 21:40:43] [INFO] Initialized state with repo root C:\Users\simon\Desktop\Code\TCast and saves folder C:\Users\simon\Desktop\Code\TCast\saves\folderSaves
+[2026-05-10 21:40:43] [DEBUG] Regenerated split previews for scene 1 with 6 projectors
+[2026-05-10 21:40:43] [DEBUG] Saved project data to C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 21:40:43] [INFO] Loaded project C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project with 5 scenes, 206 resources, and 6 projectors
+[2026-05-10 21:40:44] [DEBUG] IPC command 'boot' with payload {}
+[2026-05-10 21:40:58] [DEBUG] IPC command 'stop_projection' with payload {}
+[2026-05-10 21:40:58] [INFO] Stopped projector outputs
+[2026-05-10 21:40:58] [DEBUG] IPC command 'stop_projection' with payload {}
+[2026-05-10 21:40:58] [INFO] Stopped projector outputs
+[2026-05-10 21:40:58] [DEBUG] IPC command 'close_project' with payload {}
+[2026-05-10 21:40:58] [INFO] Closed project
+[2026-05-10 21:40:58] [DEBUG] IPC command 'close_project' with payload {}
+[2026-05-10 21:40:58] [INFO] Closed project
+[2026-05-10 21:41:05] [DEBUG] IPC command 'load_project' with payload {"path":"C:\\Users\\simon\\Desktop\\Code\\TCast\\saves\\folderSaves\\Sample Project"}
+[2026-05-10 21:41:05] [DEBUG] Regenerated split previews for scene 1 with 6 projectors
+[2026-05-10 21:41:05] [DEBUG] Saved project data to C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project
+[2026-05-10 21:41:05] [INFO] Loaded project C:\Users\simon\Desktop\Code\TCast\saves\folderSaves\Sample Project with 5 scenes, 206 resources, and 6 projectors
+[2026-05-10 21:41:26] [DEBUG] IPC command 'stop_projection' with payload {}
+[2026-05-10 21:41:26] [INFO] Stopped projector outputs
+[2026-05-10 21:41:26] [DEBUG] IPC command 'close_window' with payload {}
